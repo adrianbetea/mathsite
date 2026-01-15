@@ -6,10 +6,12 @@ import { BrowserRouter, Routes, Route, Outlet, useParams } from "react-router-do
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { HreflangTags } from "./components/HreflangTags";
 import { LanguageRedirect } from "./components/LanguageRedirect";
+import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import MatrixCalculator from "./pages/MatrixCalculator";
 import CalculusCalculator from "./pages/CalculusCalculator";
 import PolynomialCalculator from "./pages/PolynomialCalculator";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +23,7 @@ const LanguageLayout = () => {
     <LanguageProvider languageFromUrl={lang}>
       <HreflangTags />
       <Outlet />
+      <Footer />
     </LanguageProvider>
   );
 };
@@ -39,6 +42,7 @@ const App = () => (
               <Route path="matrix" element={<MatrixCalculator />} />
               <Route path="calculus" element={<CalculusCalculator />} />
               <Route path="polynomials" element={<PolynomialCalculator />} />
+              <Route path="privacy" element={<PrivacyPolicy />} />
               <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="*" element={<NotFound />} />

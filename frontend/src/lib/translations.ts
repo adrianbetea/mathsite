@@ -6,6 +6,9 @@ export const translations = {
       calculus: "Calculus",
       polynomials: "Polynomials",
     },
+    footer: {
+      privacyPolicy: "Privacy Policy",
+    },
     matrixCalculator: {
       title: "Matrix Calculator",
       subtitle: "Perform advanced matrix operations with flexible NxM matrices",
@@ -173,7 +176,7 @@ export const translations = {
       },
     },
     home: {
-      title: "Welcome to MathHub",
+      title: "MathHub",
       subtitle: "Your comprehensive mathematical toolkit",
       description: "Explore powerful calculators for matrices, calculus, and polynomials. Perfect for students, educators, and professionals.",
       features: "Features",
@@ -280,6 +283,9 @@ export const translations = {
       matrix: "Matriz",
       calculus: "Cálculo",
       polynomials: "Polinomios",
+    },
+    footer: {
+      privacyPolicy: "Política de privacidad",
     },
     matrixCalculator: {
       title: "Calculadora de Matrices",
@@ -448,7 +454,7 @@ export const translations = {
       },
     },
     home: {
-      title: "Bienvenido a MathHub",
+      title: "MathHub",
       subtitle: "Tu conjunto completo de herramientas matemáticas",
       description: "Explora potentes calculadoras para matrices, cálculo y polinomios. Perfecto para estudiantes, educadores y profesionales.",
       features: "Características",
@@ -555,6 +561,9 @@ export const translations = {
       matrix: "Matrice",
       calculus: "Calcul",
       polynomials: "Polynômes",
+    },
+    footer: {
+      privacyPolicy: "Politique de confidentialité",
     },
     matrixCalculator: {
       title: "Calculatrice de Matrices",
@@ -723,7 +732,7 @@ export const translations = {
       },
     },
     home: {
-      title: "Bienvenue sur MathHub",
+      title: "MathHub",
       subtitle: "Votre boîte à outils mathématiques complète",
       description: "Explorez des calculatrices puissantes pour les matrices, le calcul et les polynômes. Parfait pour les étudiants, les éducateurs et les professionnels.",
       features: "Fonctionnalités",
@@ -830,6 +839,9 @@ export const translations = {
       matrix: "Matrix",
       calculus: "Analysis",
       polynomials: "Polynome",
+    },
+    footer: {
+      privacyPolicy: "Datenschutzerklärung",
     },
     matrixCalculator: {
       title: "Matrixrechner",
@@ -998,7 +1010,7 @@ export const translations = {
       },
     },
     home: {
-      title: "Willkommen bei MathHub",
+      title: "MathHub",
       subtitle: "Ihr umfassendes mathematisches Toolkit",
       description: "Entdecken Sie leistungsstarke Rechner für Matrizen, Analysis und Polynome. Perfekt für Studenten, Lehrer und Fachleute.",
       features: "Funktionen",
@@ -1105,6 +1117,9 @@ export const translations = {
       matrix: "Macierz",
       calculus: "Rachunek",
       polynomials: "Wielomiany",
+    },
+    footer: {
+      privacyPolicy: "Polityka prywatności",
     },
     matrixCalculator: {
       title: "Kalkulator Macierzy",
@@ -1270,7 +1285,7 @@ export const translations = {
       },
     },
     home: {
-      title: "Witamy w MathHub",
+      title: "MathHub",
       subtitle: "Twój kompleksowy zestaw narzędzi matematycznych",
       description: "Odkryj potężne kalkulatory do macierzy, rachunku i wielomianów. Idealny dla studentów, nauczycieli i profesjonalistów.",
       features: "Funkcje",
@@ -1377,6 +1392,9 @@ export const translations = {
       matrix: "Matrice",
       calculus: "Analiză",
       polynomials: "Polinoame",
+    },
+    footer: {
+      privacyPolicy: "Politica de confidențialitate",
     },
     matrixCalculator: {
       title: "Calculator de Matrice",
@@ -1542,7 +1560,7 @@ export const translations = {
       },
     },
     home: {
-      title: "Bun venit la MathHub",
+      title: "MathHub",
       subtitle: "Setul tău complet de instrumente matematice",
       description: "Explorează calculatoare puternice pentru matrice, analiză și polinoame. Perfect pentru studenți, educatori și profesioniști.",
       features: "Caracteristici",

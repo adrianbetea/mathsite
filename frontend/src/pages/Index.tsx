@@ -34,14 +34,13 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      <main className="container mx-auto px-4 py-6">
+      <main className="container mx-auto px-4 pt-8 pb-6">
         {/* Hero Section */}
-        <div className="text-center mb-6 animate-slide-up">
-          <h1 className="text-4xl md:text-5xl font-bold mb-1">
-            <span className="text-gradient">{t.home.title.split(' ').slice(2).join(' ')}</span>
-            <br />
-            <span className="text-foreground">{t.home.subtitle}</span>
+        <div className="text-center mb-4 animate-slide-up">
+          <h1 className="text-4xl md:text-5xl font-bold">
+            <span className="text-gradient">{t.home.title}</span>
           </h1>
+          <p className="text-foreground text-lg md:text-xl">{t.home.subtitle}</p>
         </div>
 
         {/* Daily Challenge */}
