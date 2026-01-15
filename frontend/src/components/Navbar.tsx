@@ -14,14 +14,14 @@ const languages = [
 
 const Navbar = () => {
   const location = useLocation();
-  const { language, setLanguage, t } = useLanguage();
+  const { language, languageCode, setLanguage, t } = useLanguage();
   const [langMenuOpen, setLangMenuOpen] = useState(false);
 
   const links = [
-    { to: "/", label: t.nav.home, icon: Home },
-    { to: "/matrix", label: t.nav.matrix, icon: Grid3X3 },
-    { to: "/calculus", label: t.nav.calculus, icon: FunctionSquare },
-    { to: "/polynomials", label: t.nav.polynomials, icon: Calculator },
+    { to: `/${languageCode}`, label: t.nav.home, icon: Home },
+    { to: `/${languageCode}/matrix`, label: t.nav.matrix, icon: Grid3X3 },
+    { to: `/${languageCode}/calculus`, label: t.nav.calculus, icon: FunctionSquare },
+    { to: `/${languageCode}/polynomials`, label: t.nav.polynomials, icon: Calculator },
   ];
 
   const currentLanguage = languages.find((l) => l.code === language) || languages[0];
@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 w-full bg-background border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to={`/${languageCode}`} className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-lg">∑</span>
             </div>

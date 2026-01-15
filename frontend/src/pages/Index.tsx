@@ -5,27 +5,27 @@ import DailyChallenge from "@/components/DailyChallenge";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
-  const { t } = useLanguage();
+  const { languageCode, t } = useLanguage();
   const calculators = [
     {
       title: t.nav.matrix + " Calculator",
       description: t.home.feature1Desc,
       icon: Grid3X3,
-      to: "/matrix",
+      to: `/${languageCode}/matrix`,
       color: "from-primary/10 to-primary/5",
     },
     {
       title: t.nav.calculus + " Calculator",
       description: t.home.feature2Desc,
       icon: FunctionSquare,
-      to: "/calculus",
+      to: `/${languageCode}/calculus`,
       color: "from-accent/10 to-accent/5",
     },
     {
       title: t.nav.polynomials + " Calculator",
       description: t.home.feature3Desc,
       icon: Calculator,
-      to: "/polynomials",
+      to: `/${languageCode}/polynomials`,
       color: "from-success/10 to-success/5",
     },
   ];
