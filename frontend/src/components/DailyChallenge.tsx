@@ -461,25 +461,27 @@ const DailyChallenge = () => {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-2xl p-2 bg-card border-2 border-border transition-all duration-300 shadow-sm">
+    <div className="relative overflow-hidden rounded-xl sm:rounded-2xl p-2 sm:p-3 bg-card border-2 border-border transition-all duration-300 shadow-sm">
 
       <div className="relative z-10">
-        <div className="flex items-center justify-between mb-1 flex-wrap gap-1.5">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2">
           <div className="flex items-center gap-2">
             <Trophy className="w-5 h-5 text-primary" />
             <span className="text-sm font-medium text-primary">{text.dailyChallenge}</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-muted-foreground">{text.typeLabel}</span>
-            <select
-              value={challengeType}
-              onChange={(event) => setChallengeType(event.target.value as ChallengeType)}
-              className="text-xs px-2 py-1 rounded-full border border-border bg-background text-foreground"
-            >
-              <option value="matrix">{challengeLabels.matrix}</option>
-              <option value="calculus">{challengeLabels.calculus}</option>
-              <option value="polynomials">{challengeLabels.polynomials}</option>
-            </select>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-muted-foreground">{text.typeLabel}</span>
+              <select
+                value={challengeType}
+                onChange={(event) => setChallengeType(event.target.value as ChallengeType)}
+                className="text-xs px-2 py-1 rounded-full border border-border bg-background text-foreground"
+              >
+                <option value="matrix">{challengeLabels.matrix}</option>
+                <option value="calculus">{challengeLabels.calculus}</option>
+                <option value="polynomials">{challengeLabels.polynomials}</option>
+              </select>
+            </div>
             <span className={`text-xs px-2 py-1 rounded-full font-medium ${difficultyColor}`}>
               {difficultyText}
             </span>
@@ -490,31 +492,31 @@ const DailyChallenge = () => {
           </div>
         </div>
 
-        <div className="mb-1.5">
-          <div className="flex items-center gap-2 mb-2">
-            <Target className="w-4 h-4 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">{translation.title}</h3>
+        <div className="mb-2">
+          <div className="flex items-center gap-2 mb-1.5">
+            <Target className="w-4 h-4 text-primary flex-shrink-0" />
+            <h3 className="text-base sm:text-lg font-semibold text-foreground">{translation.title}</h3>
           </div>
-          <p className="text-sm text-muted-foreground">{translation.description}</p>
+          <p className="text-xs sm:text-sm text-muted-foreground">{translation.description}</p>
         </div>
 
         <div className="space-y-1 bg-muted rounded-lg p-2 border border-border">
           {exercise.type === "matrix" && (
             <>
-              <div className="flex flex-wrap items-start gap-3">
-                <div className="min-w-[220px]">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-start gap-2 sm:gap-3">
+                <div className="min-w-0 sm:min-w-[220px] flex-1 sm:flex-none">
                   <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{text.matrixA}:</span>
                   <div
-                    className="mt-1 bg-background p-3 rounded border border-border overflow-x-auto text-center"
+                    className="mt-1 bg-background p-2 sm:p-3 rounded border border-border overflow-x-auto text-center text-sm sm:text-base"
                     dangerouslySetInnerHTML={renderLatex(`A = ${matrixToLatex(exercise.data.matrixA)}`)}
                   />
                 </div>
 
                 {exercise.data.scalar !== undefined && (
-                  <div className="min-w-[140px]">
+                  <div className="min-w-0 sm:min-w-[140px]">
                     <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{text.scalar}:</span>
                     <div
-                      className="mt-1 bg-background px-3 py-2 rounded border border-border text-center"
+                      className="mt-1 bg-background px-2 sm:px-3 py-2 rounded border border-border text-center"
                       dangerouslySetInnerHTML={renderLatex(`s = ${exercise.data.scalar}`)}
                     />
                   </div>
@@ -525,7 +527,7 @@ const DailyChallenge = () => {
                 <div>
                   <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{text.matrixB}:</span>
                   <div
-                    className="mt-1 bg-background p-3 rounded border border-border overflow-x-auto text-center"
+                    className="mt-1 bg-background p-2 sm:p-3 rounded border border-border overflow-x-auto text-center text-sm sm:text-base"
                     dangerouslySetInnerHTML={renderLatex(`B = ${matrixToLatex(exercise.data.matrixB)}`)}
                   />
                 </div>
@@ -537,7 +539,7 @@ const DailyChallenge = () => {
             <div>
               <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{text.polynomial}:</span>
               <div
-                className="mt-1 bg-background p-3 rounded border border-border overflow-x-auto text-center"
+                className="mt-1 bg-background p-2 sm:p-3 rounded border border-border overflow-x-auto text-center text-sm sm:text-base"
                 dangerouslySetInnerHTML={renderLatex(`f(x) = ${exercise.data.expression}`)}
               />
               {exercise.data.evaluationPoint !== undefined && (
@@ -552,7 +554,7 @@ const DailyChallenge = () => {
             <div>
               <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{text.calculus}:</span>
               <div
-                className="mt-1 bg-background p-3 rounded border border-border overflow-x-auto text-center"
+                className="mt-1 bg-background p-2 sm:p-3 rounded border border-border overflow-x-auto text-center text-sm sm:text-base"
                 dangerouslySetInnerHTML={renderLatex(`f(x) = ${exercise.data.expression}`)}
               />
             </div>
@@ -591,26 +593,26 @@ const DailyChallenge = () => {
               }}
             />
           )}
-          <div className="mt-1.5 flex items-center gap-2">
+          <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-2">
             <button
               onClick={checkAnswer}
-              className="px-4 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="w-full sm:w-auto px-4 py-2.5 sm:py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
             >
               {text.checkAnswer}
             </button>
             {answerStatus === "correct" && (
-              <span className="text-sm font-medium text-green-600">{text.correctAnswer}</span>
+              <span className="text-sm font-medium text-green-600 text-center sm:text-left">{text.correctAnswer}</span>
             )}
             {answerStatus === "wrong" && (
-              <span className="text-sm font-medium text-red-600">{text.wrongAnswer}</span>
+              <span className="text-sm font-medium text-red-600 text-center sm:text-left">{text.wrongAnswer}</span>
             )}
           </div>
         </div>
 
-        <div className="mt-2 flex gap-2">
+        <div className="mt-3 flex gap-2">
           <button
             onClick={() => setShowHint(!showHint)}
-            className="flex-1 px-4 py-2 text-sm bg-muted hover:bg-muted/80 text-foreground rounded-lg transition-colors flex items-center justify-center gap-2"
+            className="flex-1 px-4 py-2.5 sm:py-2 text-sm bg-muted hover:bg-muted/80 text-foreground rounded-lg transition-colors flex items-center justify-center gap-2"
           >
             <Lightbulb className="w-4 h-4" />
             {showHint ? text.hideHint : text.showHint}

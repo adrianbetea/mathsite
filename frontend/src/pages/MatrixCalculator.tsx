@@ -676,20 +676,20 @@ const MatrixCalculator = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-12">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold text-foreground mb-2 animate-fade-in text-center">{t.matrixCalculator.title}</h1>
-          <p className="text-muted-foreground mb-8 animate-fade-in text-center">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2 animate-fade-in text-center">{t.matrixCalculator.title}</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 animate-fade-in text-center">
             {t.matrixCalculator.subtitle}
           </p>
 
           {/* Matrix Size Controls */}
-          <div className="flex items-start gap-4 mb-6">
-            <div className={`grid gap-6 flex-1 ${showMatrixC ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 mb-6">
+            <div className={`grid gap-4 sm:gap-6 flex-1 ${showMatrixC ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2'}`}>
             {/* Matrix A Size */}
             <div className="calculator-card animate-slide-up">
               <label className="text-sm font-medium text-muted-foreground mb-2 block">{t.matrixCalculator.matrixASize}</label>
-              <div className="flex gap-2 items-center">
+              <div className="flex flex-wrap gap-2 items-center">
                 <input
                   type="number"
                   min="1"
@@ -697,7 +697,7 @@ const MatrixCalculator = () => {
                   value={rowsA}
                   onChange={(e) => updateMatrixASize(parseInt(e.target.value) || 1, colsA)}
                   onFocus={(e) => e.target.select()}
-                  className="w-20 px-3 py-2 bg-secondary border border-border rounded-lg text-center"
+                  className="w-16 sm:w-20 px-2 sm:px-3 py-2 bg-secondary border border-border rounded-lg text-center text-sm"
                   placeholder={t.matrixCalculator.rows}
                 />
                 <span className="text-muted-foreground">×</span>
@@ -708,15 +708,15 @@ const MatrixCalculator = () => {
                   value={colsA}
                   onChange={(e) => updateMatrixASize(rowsA, parseInt(e.target.value) || 1)}
                   onFocus={(e) => e.target.select()}
-                  className="w-20 px-3 py-2 bg-secondary border border-border rounded-lg text-center"
+                  className="w-16 sm:w-20 px-2 sm:px-3 py-2 bg-secondary border border-border rounded-lg text-center text-sm"
                   placeholder={t.matrixCalculator.cols}
                 />
-                <div className="flex gap-1 ml-2">
+                <div className="flex gap-1 ml-auto sm:ml-2">
                   {[2, 3].map((s) => (
                     <button
                       key={s}
                       onClick={() => updateMatrixASize(s, s)}
-                      className="px-3 py-1 text-xs rounded bg-secondary hover:bg-secondary/80 transition-all"
+                      className="px-2 sm:px-3 py-1 text-xs rounded bg-secondary hover:bg-secondary/80 transition-all"
                     >
                       {s}×{s}
                     </button>
@@ -728,7 +728,7 @@ const MatrixCalculator = () => {
             {/* Matrix B Size */}
             <div className="calculator-card animate-slide-up">
               <label className="text-sm font-medium text-muted-foreground mb-2 block">{t.matrixCalculator.matrixBSize}</label>
-              <div className="flex gap-2 items-center">
+              <div className="flex flex-wrap gap-2 items-center">
                 <input
                   type="number"
                   min="1"
@@ -736,7 +736,7 @@ const MatrixCalculator = () => {
                   value={rowsB}
                   onChange={(e) => updateMatrixBSize(parseInt(e.target.value) || 1, colsB)}
                   onFocus={(e) => e.target.select()}
-                  className="w-20 px-3 py-2 bg-secondary border border-border rounded-lg text-center"
+                  className="w-16 sm:w-20 px-2 sm:px-3 py-2 bg-secondary border border-border rounded-lg text-center text-sm"
                   placeholder={t.matrixCalculator.rows}
                 />
                 <span className="text-muted-foreground">×</span>
@@ -747,15 +747,15 @@ const MatrixCalculator = () => {
                   value={colsB}
                   onChange={(e) => updateMatrixBSize(rowsB, parseInt(e.target.value) || 1)}
                   onFocus={(e) => e.target.select()}
-                  className="w-20 px-3 py-2 bg-secondary border border-border rounded-lg text-center"
+                  className="w-16 sm:w-20 px-2 sm:px-3 py-2 bg-secondary border border-border rounded-lg text-center text-sm"
                   placeholder={t.matrixCalculator.cols}
                 />
-                <div className="flex gap-1 ml-2">
+                <div className="flex gap-1 ml-auto sm:ml-2">
                   {[2, 3].map((s) => (
                     <button
                       key={s}
                       onClick={() => updateMatrixBSize(s, s)}
-                      className="px-3 py-1 text-xs rounded bg-secondary hover:bg-secondary/80 transition-all"
+                      className="px-2 sm:px-3 py-1 text-xs rounded bg-secondary hover:bg-secondary/80 transition-all"
                     >
                       {s}×{s}
                     </button>
@@ -767,7 +767,7 @@ const MatrixCalculator = () => {
             {/* Matrix C Size */}
             {showMatrixC && (
               <div className="calculator-card animate-slide-up">
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
                   <label className="text-sm font-medium text-muted-foreground">Matrix C Size</label>
                   <button
                     onClick={() => setShowMatrixC(false)}
@@ -776,7 +776,7 @@ const MatrixCalculator = () => {
                     Remove Matrix C
                   </button>
                 </div>
-                <div className="flex gap-2 items-center">
+                <div className="flex flex-wrap gap-2 items-center">
                   <input
                     type="number"
                     min="1"
@@ -784,7 +784,7 @@ const MatrixCalculator = () => {
                     value={rowsC}
                     onChange={(e) => updateMatrixCSize(parseInt(e.target.value) || 1, colsC)}
                     onFocus={(e) => e.target.select()}
-                    className="w-20 px-3 py-2 bg-secondary border border-border rounded-lg text-center"
+                    className="w-16 sm:w-20 px-2 sm:px-3 py-2 bg-secondary border border-border rounded-lg text-center text-sm"
                     placeholder="Rows"
                   />
                   <span className="text-muted-foreground">×</span>
@@ -795,15 +795,15 @@ const MatrixCalculator = () => {
                     value={colsC}
                     onChange={(e) => updateMatrixCSize(rowsC, parseInt(e.target.value) || 1)}
                     onFocus={(e) => e.target.select()}
-                    className="w-20 px-3 py-2 bg-secondary border border-border rounded-lg text-center"
+                    className="w-16 sm:w-20 px-2 sm:px-3 py-2 bg-secondary border border-border rounded-lg text-center text-sm"
                     placeholder="Cols"
                   />
-                  <div className="flex gap-1 ml-2">
+                  <div className="flex gap-1 ml-auto sm:ml-2">
                     {[2, 3].map((s) => (
                       <button
                         key={s}
                         onClick={() => updateMatrixCSize(s, s)}
-                        className="px-3 py-1 text-xs rounded bg-secondary hover:bg-secondary/80 transition-all"
+                        className="px-2 sm:px-3 py-1 text-xs rounded bg-secondary hover:bg-secondary/80 transition-all"
                       >
                         {s}×{s}
                       </button>
@@ -816,7 +816,7 @@ const MatrixCalculator = () => {
           {!showMatrixC && (
             <button
               onClick={() => setShowMatrixC(true)}
-              className="btn-primary text-sm px-4 py-2 whitespace-nowrap animate-slide-up"
+              className="btn-primary text-sm px-4 py-2 whitespace-nowrap animate-slide-up w-full sm:w-auto"
             >
               + {t.matrixCalculator.addThirdMatrix}
             </button>
@@ -824,7 +824,7 @@ const MatrixCalculator = () => {
         </div>
 
           {/* Matrix Inputs */}
-          <div className={`grid gap-6 mb-8 ${showMatrixC ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+          <div className={`grid gap-4 sm:gap-6 mb-6 sm:mb-8 ${showMatrixC ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2'}`}>
             <div className="calculator-card animate-slide-up" style={{ animationDelay: "100ms" }}>
               <MatrixInput rows={rowsA} cols={colsA} value={matrixA} onChange={setMatrixA} label={t.matrixCalculator.matrixA} />
               <button
@@ -857,7 +857,7 @@ const MatrixCalculator = () => {
           </div>
 
           {/* Operations */}
-          <div className="calculator-card mb-8 animate-slide-up" style={{ animationDelay: "300ms" }}>
+          <div className="calculator-card mb-6 sm:mb-8 animate-slide-up" style={{ animationDelay: "300ms" }}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-muted-foreground">{t.matrixCalculator.operations}</h3>
               <button
@@ -873,7 +873,7 @@ const MatrixCalculator = () => {
             {/* Two Matrix Operations */}
             <div className="mb-4">
               <h4 className="text-xs text-muted-foreground/70 mb-2">Two Matrix Operations</h4>
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <button onClick={() => calculate("add")} className="btn-secondary text-xs py-2">
                   A + B (Sum)
                 </button>
@@ -907,7 +907,7 @@ const MatrixCalculator = () => {
             {/* Single Matrix Operations */}
             <div className="mb-4">
               <h4 className="text-xs text-muted-foreground/70 mb-2">Single Matrix Operations (Matrix A)</h4>
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
                 <button onClick={() => calculate("transpose")} className="btn-primary text-xs py-2">
                   Aᵀ (Transpose)
                 </button>
@@ -929,11 +929,11 @@ const MatrixCalculator = () => {
             {/* Determinant Section */}
             <div className="mb-4">
               <h4 className="text-xs text-muted-foreground/70 mb-2">Determinant</h4>
-              <div className="flex gap-2 items-start">
+              <div className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-start">
                 <button onClick={() => calculate("determinant")} className="btn-primary text-xs py-2 px-4 whitespace-nowrap">
                   det(A)
                 </button>
-                <div className="flex-1 max-w-xs">
+                <div className="flex-1">
                   <select 
                     value={determinantMethod} 
                     onChange={(e) => setDeterminantMethod(e.target.value)}

@@ -104,34 +104,40 @@ const MatrixInput = ({ rows, cols, value, onChange, label }: MatrixInputProps) =
     e.target.select();
   };
 
-  // Dynamically adjust input width based on number of columns
-  const inputWidth = cols <= 3 ? "w-16" : cols <= 5 ? "w-14" : "w-12";
+  // Dynamically adjust input width based on number of columns and screen size
+  const getInputClasses = () => {
+    if (cols <= 3) return "w-12 sm:w-16 h-9 sm:h-10 text-xs sm:text-sm";
+    if (cols <= 5) return "w-10 sm:w-14 h-8 sm:h-10 text-xs sm:text-sm";
+    return "w-9 sm:w-12 h-8 sm:h-10 text-xs";
+  };
 
   return (
     <div className="space-y-3">
       {label && <label className="text-sm font-medium text-muted-foreground block">{label}</label>}
-      <div className="inline-flex items-center justify-center w-full">
-        <div className="grid gap-1" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
-          {value.map((row, ri) =>
-            row.map((cell, ci) => (
-              <input
-                key={`${ri}-${ci}`}
-                ref={(el) => {
-                  if (!inputRefs.current[ri]) inputRefs.current[ri] = [];
-                  inputRefs.current[ri][ci] = el;
-                }}
-                type="number"
-                step="any"
-                value={cell === 0 ? '' : cell}
-                placeholder="0"
-                onChange={(e) => handleCellChange(ri, ci, e.target.value)}
-                onKeyDown={(e) => handleKeyDown(e, ri, ci)}
-                onPaste={(e) => handlePaste(e, ri, ci)}
-                onFocus={handleFocus}
-                className={`${inputWidth} h-10 text-center font-mono text-sm bg-secondary/50 border border-border rounded focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all`}
-              />
-            ))
-          )}
+      <div className="overflow-x-auto pb-2">
+        <div className="inline-flex items-center justify-center min-w-full">
+          <div className="grid gap-1" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
+            {value.map((row, ri) =>
+              row.map((cell, ci) => (
+                <input
+                  key={`${ri}-${ci}`}
+                  ref={(el) => {
+                    if (!inputRefs.current[ri]) inputRefs.current[ri] = [];
+                    inputRefs.current[ri][ci] = el;
+                  }}
+                  type="number"
+                  step="any"
+                  value={cell === 0 ? '' : cell}
+                  placeholder="0"
+                  onChange={(e) => handleCellChange(ri, ci, e.target.value)}
+                  onKeyDown={(e) => handleKeyDown(e, ri, ci)}
+                  onPaste={(e) => handlePaste(e, ri, ci)}
+                  onFocus={handleFocus}
+                  className={`${getInputClasses()} text-center font-mono bg-secondary/50 border border-border rounded focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all`}
+                />
+              ))
+            )}
+          </div>
         </div>
       </div>
     </div>

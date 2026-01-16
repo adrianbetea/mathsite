@@ -191,15 +191,15 @@ const CalculusCalculator = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-12">
         <div className="max-w-[722px] mx-auto">
-          <h1 className="text-3xl font-bold text-foreground mb-2 animate-fade-in">{t.calculusCalculator.title}</h1>
-          <p className="text-muted-foreground mb-8 animate-fade-in">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2 animate-fade-in">{t.calculusCalculator.title}</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 animate-fade-in">
             {t.calculusCalculator.subtitle}
           </p>
 
           {/* Input Section */}
-          <div className="calculator-card mb-6 animate-slide-up">
+          <div className="calculator-card mb-4 sm:mb-6 animate-slide-up">
             <label className="text-sm font-medium text-muted-foreground mb-2 block">
               {t.calculusCalculator.enterFunction}
             </label>
@@ -207,31 +207,31 @@ const CalculusCalculator = () => {
               type="text"
               value={expression}
               onChange={(e) => setExpression(e.target.value)}
-              className="math-input w-full mb-4"
+              className="math-input w-full mb-4 text-sm sm:text-base"
               placeholder="e.g., x^3 + 2x - 1"
             />
 
-            <div className="flex gap-3">
-              <button onClick={handleDerivative} className="btn-primary flex-1">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+              <button onClick={handleDerivative} className="btn-primary flex-1 py-3 sm:py-2">
                 {t.calculusCalculator.derivative}
               </button>
-              <button onClick={handleIntegral} className="btn-accent flex-1">
+              <button onClick={handleIntegral} className="btn-accent flex-1 py-3 sm:py-2">
                 {t.calculusCalculator.integral}
               </button>
             </div>
           </div>
 
           {/* Quick Examples */}
-          <div className="calculator-card mb-6 animate-slide-up" style={{ animationDelay: "100ms" }}>
+          <div className="calculator-card mb-4 sm:mb-6 animate-slide-up" style={{ animationDelay: "100ms" }}>
             <h3 className="text-sm font-medium text-muted-foreground mb-3">{t.calculusCalculator.quickExamples}</h3>
             <div className="flex flex-wrap gap-2">
               {examples.map((ex) => (
                 <button
                   key={ex.expr}
                   onClick={() => setExpression(ex.expr)}
-                  className="px-3 py-1.5 text-sm bg-secondary hover:bg-secondary/80 rounded-lg transition-colors flex items-center gap-1"
+                  className="px-2 sm:px-3 py-1.5 text-xs sm:text-sm bg-secondary hover:bg-secondary/80 rounded-lg transition-colors flex items-center gap-1"
                 >
-                  <span className="text-muted-foreground">{t.calculusCalculator[ex.label.toLowerCase() as keyof typeof t.calculusCalculator]}:</span>
+                  <span className="text-muted-foreground hidden sm:inline">{t.calculusCalculator[ex.label.toLowerCase() as keyof typeof t.calculusCalculator]}:</span>
                   <span className="font-mono">{ex.expr}</span>
                 </button>
               ))}
@@ -240,10 +240,10 @@ const CalculusCalculator = () => {
 
           {/* Result */}
           {result && (
-            <div className="math-display animate-scale-in">
+            <div className="math-display animate-scale-in overflow-x-auto">
               <div className="text-sm text-muted-foreground mb-2">{result.type}</div>
               <div 
-                className="text-xl"
+                className="text-lg sm:text-xl"
                 dangerouslySetInnerHTML={{ __html: renderMath(result.value) }}
               />
             </div>
@@ -254,20 +254,20 @@ const CalculusCalculator = () => {
             <div className="mt-4">
               <button
                 onClick={() => setShowSteps(!showSteps)}
-                className="btn-primary text-sm px-4 py-2"
+                className="btn-primary text-sm px-4 py-2 w-full sm:w-auto"
               >
                 {showSteps ? t.calculusCalculator.hideSteps : t.calculusCalculator.showSteps}
               </button>
               
               {/* Steps Dropdown */}
               {showSteps && (
-                <div className="mt-4 p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up">
+                <div className="mt-4 p-3 sm:p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up overflow-x-auto">
                   <h3 className="text-sm font-semibold text-foreground mb-2">{t.calculusCalculator.detailedSteps}</h3>
                   <div className="space-y-2">
                     {generateSteps(currentOperation.type, currentOperation.expr).map((step, i) => (
                       <div 
                         key={i} 
-                        className="text-sm bg-secondary/30 px-3 py-2 rounded-lg"
+                        className="text-xs sm:text-sm bg-secondary/30 px-2 sm:px-3 py-2 rounded-lg overflow-x-auto"
                         dangerouslySetInnerHTML={{ __html: renderMath(step) }}
                       />
                     ))}
@@ -278,23 +278,23 @@ const CalculusCalculator = () => {
           )}
 
           {/* Help Section */}
-          <div className="mt-8 p-6 bg-secondary/30 rounded-xl animate-slide-up" style={{ animationDelay: "200ms" }}>
+          <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-secondary/30 rounded-xl animate-slide-up" style={{ animationDelay: "200ms" }}>
             <h3 className="text-sm font-semibold text-foreground mb-3">{t.calculusCalculator.syntaxGuide}</h3>
-            <ul className="text-sm text-muted-foreground space-y-2">
-              <li className="flex items-center gap-2">
-                <ArrowRight className="w-4 h-4 text-primary" />
+            <ul className="text-xs sm:text-sm text-muted-foreground space-y-2">
+              <li className="flex items-start sm:items-center gap-2">
+                <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 mt-0.5 sm:mt-0" />
                 <span>{t.calculusCalculator.powers} <code className="font-mono bg-secondary px-1.5 py-0.5 rounded">x^2</code> or <code className="font-mono bg-secondary px-1.5 py-0.5 rounded">x^3</code></span>
               </li>
-              <li className="flex items-center gap-2">
-                <ArrowRight className="w-4 h-4 text-primary" />
+              <li className="flex items-start sm:items-center gap-2">
+                <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 mt-0.5 sm:mt-0" />
                 <span>{t.calculusCalculator.trig} <code className="font-mono bg-secondary px-1.5 py-0.5 rounded">sin(x)</code>, <code className="font-mono bg-secondary px-1.5 py-0.5 rounded">cos(x)</code>, <code className="font-mono bg-secondary px-1.5 py-0.5 rounded">tan(x)</code></span>
               </li>
-              <li className="flex items-center gap-2">
-                <ArrowRight className="w-4 h-4 text-primary" />
+              <li className="flex items-start sm:items-center gap-2">
+                <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 mt-0.5 sm:mt-0" />
                 <span>{t.calculusCalculator.exp} <code className="font-mono bg-secondary px-1.5 py-0.5 rounded">e^x</code></span>
               </li>
-              <li className="flex items-center gap-2">
-                <ArrowRight className="w-4 h-4 text-primary" />
+              <li className="flex items-start sm:items-center gap-2">
+                <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 mt-0.5 sm:mt-0" />
                 <span>{t.calculusCalculator.logarithm} <code className="font-mono bg-secondary px-1.5 py-0.5 rounded">ln(x)</code></span>
               </li>
             </ul>

@@ -1018,7 +1018,7 @@ const PolynomialCalculator = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      <main className="container mx-auto px-4 pt-0 pb-4">
+      <main className="container mx-auto px-3 sm:px-4 pt-0 pb-4">
         <div className="max-w-7xl mx-auto">
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
@@ -1033,7 +1033,7 @@ const PolynomialCalculator = () => {
                   type="text"
                   value={polyA}
                   onChange={(e) => setPolyA(e.target.value)}
-                  className="math-input w-full mb-2"
+                  className="math-input w-full mb-2 text-sm sm:text-base"
                   placeholder="e.g., x^2 - 5x + 6"
                 />
 
@@ -1044,7 +1044,7 @@ const PolynomialCalculator = () => {
                   type="text"
                   value={polyB}
                   onChange={(e) => setPolyB(e.target.value)}
-                  className="math-input w-full"
+                  className="math-input w-full text-sm sm:text-base"
                   placeholder="e.g., x + 2"
                 />
               </div>
@@ -1074,7 +1074,7 @@ const PolynomialCalculator = () => {
               <div className="calculator-card animate-slide-up" style={{ animationDelay: "100ms" }}>
                 <h3 className="text-sm font-medium text-muted-foreground mb-2">{t.polynomialCalculator.operationsOn}</h3>
 
-                <div className="grid grid-cols-[auto_1fr] gap-2 mb-2">
+                <div className="flex flex-col sm:grid sm:grid-cols-[auto_1fr] gap-2 mb-2">
                   <button onClick={() => handleOperation("roots")} className="btn-primary px-3 py-2 text-sm whitespace-nowrap">
                     {t.polynomialCalculator.findRoots}
                   </button>
@@ -1083,40 +1083,40 @@ const PolynomialCalculator = () => {
                       type="number"
                       value={evalX}
                       onChange={(e) => setEvalX(e.target.value)}
-                      className="w-32 px-2 py-2 bg-secondary border border-border rounded-lg text-center font-mono"
+                      className="w-24 sm:w-32 px-2 py-2 bg-secondary border border-border rounded-lg text-center font-mono text-sm"
                       placeholder="x"
                     />
-                    <button onClick={() => handleOperation("evaluate")} className="btn-primary flex-1">
+                    <button onClick={() => handleOperation("evaluate")} className="btn-primary flex-1 text-sm">
                       {t.polynomialCalculator.evaluate}
                     </button>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-2 mb-2">
-                  <button onClick={() => handleOperation("factor")} className="btn-secondary">
+                  <button onClick={() => handleOperation("factor")} className="btn-secondary text-sm py-2">
                     {t.polynomialCalculator.factor}
                   </button>
                 </div>
 
                 <h3 className="text-sm font-medium text-muted-foreground mb-2">{t.polynomialCalculator.operationsWith}</h3>
-                <div className="grid grid-cols-3 gap-3">
-                  <button onClick={() => handleOperation("add")} className="btn-secondary">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                  <button onClick={() => handleOperation("add")} className="btn-secondary text-xs sm:text-sm py-2">
                     {t.polynomialCalculator.add}
                   </button>
-                  <button onClick={() => handleOperation("subtract")} className="btn-secondary">
+                  <button onClick={() => handleOperation("subtract")} className="btn-secondary text-xs sm:text-sm py-2">
                     {t.polynomialCalculator.subtract}
                   </button>
-                  <button onClick={() => handleOperation("multiply")} className="btn-accent">
+                  <button onClick={() => handleOperation("multiply")} className="btn-accent text-xs sm:text-sm py-2">
                     {t.polynomialCalculator.multiply}
                   </button>
                 </div>
               </div>
 
               {/* Result */}
-              {error && <div className="result-error animate-scale-in">{error}</div>}
+              {error && <div className="result-error animate-scale-in text-sm">{error}</div>}
 
               {result && (
-                <div className="math-display animate-scale-in">
+                <div className="math-display animate-scale-in overflow-x-auto">
                   <div className="text-sm text-muted-foreground mb-2">
                     {result.titleKey === "rootsOf" && t.polynomialCalculator.rootsOf}
                     {result.titleKey === "evaluate" && `P(${result.x})`}
@@ -1126,7 +1126,7 @@ const PolynomialCalculator = () => {
                     {result.titleKey === "factor" && t.polynomialCalculator.factor}
                   </div>
                   <div 
-                    className="text-xl font-mono mb-4"
+                    className="text-lg sm:text-xl font-mono mb-4"
                     dangerouslySetInnerHTML={{ __html: renderLatex(result.value) }}
                   />
                 </div>
@@ -1137,14 +1137,14 @@ const PolynomialCalculator = () => {
                 <div className="mt-4">
                   <button
                     onClick={() => setShowSteps(!showSteps)}
-                    className="btn-primary text-sm px-4 py-2"
+                    className="btn-primary text-sm px-4 py-2 w-full sm:w-auto"
                   >
                     {showSteps ? t.polynomialCalculator.hideSteps : t.polynomialCalculator.showSteps}
                   </button>
                   
                   {/* Steps Dropdown */}
                   {showSteps && (
-                    <div className="mt-4 p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up">
+                    <div className="mt-4 p-3 sm:p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up overflow-x-auto">
                       <h3 className="text-sm font-semibold text-foreground mb-2">{t.polynomialCalculator.detailedSteps}</h3>
                       <div className="space-y-2">
                         {generateSteps(
@@ -1155,7 +1155,7 @@ const PolynomialCalculator = () => {
                         ).map((step, i) => (
                           <div 
                             key={i} 
-                            className="text-sm bg-secondary/30 px-3 py-2 rounded-lg"
+                            className="text-xs sm:text-sm bg-secondary/30 px-2 sm:px-3 py-2 rounded-lg overflow-x-auto"
                             dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
                           />
                         ))}
@@ -1168,7 +1168,7 @@ const PolynomialCalculator = () => {
             </div>
 
             {/* Right Side - Plot Container */}
-            <div className="calculator-card animate-slide-up p-2 overflow-hidden flex flex-col h-[750px] sticky top-4">
+            <div className="calculator-card animate-slide-up p-2 overflow-hidden flex flex-col h-[400px] sm:h-[500px] lg:h-[750px] lg:sticky lg:top-4">
               {renderPlot()}
             </div>
           </div>

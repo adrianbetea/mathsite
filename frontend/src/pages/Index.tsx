@@ -34,13 +34,13 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      <main className="container mx-auto px-4 pt-8 pb-6">
+      <main className="container mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-6">
         {/* Hero Section */}
         <div className="text-center mb-4 animate-slide-up">
-          <h1 className="text-4xl md:text-5xl font-bold">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             <span className="text-gradient">{t.home.title}</span>
           </h1>
-          <p className="text-foreground text-lg md:text-xl">{t.home.subtitle}</p>
+          <p className="text-foreground text-base sm:text-lg md:text-xl">{t.home.subtitle}</p>
         </div>
 
         {/* Daily Challenge */}
@@ -49,7 +49,7 @@ const Index = () => {
         </div>
 
         {/* Calculator Cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
           {calculators.map((calc, index) => {
             const Icon = calc.icon;
             return (
@@ -59,12 +59,12 @@ const Index = () => {
                 className="calculator-card group animate-slide-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${calc.color} flex items-center justify-center mb-4`}>
-                  <Icon className="w-6 h-6 text-foreground" />
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${calc.color} flex items-center justify-center mb-3 sm:mb-4`}>
+                  <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{calc.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{calc.description}</p>
-                <div className="flex items-center text-sm font-medium text-primary group-hover:gap-2 transition-all">
+                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">{calc.title}</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">{calc.description}</p>
+                <div className="flex items-center text-xs sm:text-sm font-medium text-primary group-hover:gap-2 transition-all">
                   <span>Open Calculator</span>
                   <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
