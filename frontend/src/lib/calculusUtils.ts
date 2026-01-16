@@ -1,409 +1,253 @@
-export interface Term {
-  coefficient: number;
-  power: number;
+type PyodideInterface = {
+  loadPackage: (name: string) => Promise<void>;
+  runPython: (code: string) => void;
+  globals: {
+    get: (name: string) => any;
+  };
+};
+
+/**
+ * Calculate the derivative of an expression using math.js
+ * @param expression - The mathematical expression to differentiate
+ * @param variable - The variable to differentiate with respect to (default: 'x')
+ * @returns Object containing the derivative string and LaTeX representation
+ */
+export async function advancedDerivative(expression: string, variable: string = 'x'): Promise<{ 
+  result: string; 
+  latex: string;
+}> {
+  try {
+    const [resultStr, latexStr] = await runSympy('derivative', normalizeExpression(expression), variable);
+    return {
+      result: resultStr,
+      latex: latexStr
+    };
+  } catch (error) {
+    console.error('Derivative error:', error);
+    return {
+      result: 'Error computing derivative',
+      latex: '\\text{Error computing derivative}'
+    };
+  }
 }
 
-export const parsePolynomial = (expr: string): Term[] => {
-  const terms: Term[] = [];
-  // Remove spaces and handle parentheses
-  let cleaned = expr.replace(/\s/g, "");
-  
-  // Handle division after parentheses: (x^n)/m -> coefficient = 1/m
-  cleaned = cleaned.replace(/\(([^)]+)\)\/(\d+\.?\d*)/g, (match, inside, divisor) => {
-    // Extract coefficient and x part from inside parentheses
-    if (inside.includes("x")) {
-      const parts = inside.match(/^([+-]?\d*\.?\d*)x(\^(\d+\.?\d*))?$/);
-      if (parts) {
-        const coef = parts[1] === "" || parts[1] === "+" ? 1 : parts[1] === "-" ? -1 : parseFloat(parts[1]);
-        const power = parts[3] ? parts[3] : "1";
-        const newCoef = coef / parseFloat(divisor);
-        return `${newCoef}x${parts[2] || ""}`;
-      }
-    }
-    return match;
-  });
-  
-  // Remove any remaining parentheses
-  cleaned = cleaned.replace(/[()]/g, "");
-  
-  // Split by + and - while keeping the operators
-  cleaned = cleaned.replace(/-/g, "+-");
-  const parts = cleaned.split("+").filter((p) => p);
-
-  for (const part of parts) {
-    if (part.includes("x")) {
-      let beforeX = part.split("x")[0];
-      let afterX = part.split("x")[1] || "";
-      
-      let coefficient = 1;
-      
-      // Parse coefficient (before x)
-      if (beforeX === "" || beforeX === "+") {
-        coefficient = 1;
-      } else if (beforeX === "-") {
-        coefficient = -1;
-      } else if (beforeX.includes("/")) {
-        const [num, den] = beforeX.split("/");
-        coefficient = parseFloat(num || "1") / parseFloat(den);
-      } else {
-        coefficient = parseFloat(beforeX);
-      }
-      
-      // Parse power and any division after it
-      let power = 1;
-      if (afterX.startsWith("^")) {
-        // Extract just the power number (before any /)
-        const powerMatch = afterX.match(/^\^(\d+\.?\d*)/);
-        if (powerMatch) {
-          power = parseFloat(powerMatch[1]);
-          // Check if there's a division after the power
-          const restAfterPower = afterX.slice(powerMatch[0].length);
-          if (restAfterPower.startsWith("/")) {
-            const divisor = parseFloat(restAfterPower.slice(1));
-            if (!isNaN(divisor)) {
-              coefficient = coefficient / divisor;
-            }
-          }
-        }
-      } else if (afterX.startsWith("/")) {
-        // x/2 case - division applies to coefficient
-        const divisor = parseFloat(afterX.slice(1));
-        if (!isNaN(divisor)) {
-          coefficient = coefficient / divisor;
-        }
-      }
-      
-      if (!isNaN(coefficient) && !isNaN(power)) {
-        terms.push({ coefficient, power });
-      }
-    } else {
-      // Constant term
-      let constant: number;
-      if (part.includes("/")) {
-        const [num, den] = part.split("/");
-        constant = parseFloat(num) / parseFloat(den);
-      } else {
-        constant = parseFloat(part);
-      }
-      if (!isNaN(constant)) {
-        terms.push({ coefficient: constant, power: 0 });
-      }
-    }
+/**
+ * Calculate the symbolic integral of an expression
+ * Note: math.js doesn't have built-in integration, so we use pattern matching
+ * for common integrals
+ * @param expression - The mathematical expression to integrate
+ * @param variable - The variable to integrate with respect to (default: 'x')
+ * @returns Object containing the integral string and LaTeX representation
+ */
+export async function symbolicIntegral(expression: string, variable: string = 'x'): Promise<{
+  result: string;
+  latex: string;
+}> {
+  try {
+    const [resultStr, latexStr] = await runSympy('integral', normalizeExpression(expression), variable);
+    return {
+      result: `${resultStr} + C`,
+      latex: `${latexStr} + C`
+    };
+  } catch (error) {
+    console.error('Integral error:', error);
+    return {
+      result: 'Error computing integral',
+      latex: '\\text{Error computing integral}'
+    };
   }
+}
 
-  return terms;
+type SympyOperation = 'derivative' | 'integral';
+
+const normalizeExpression = (expr: string): string => {
+  return expr
+    .replace(/\u2212/g, '-')
+    .replace(/\u00D7/g, '*')
+    .replace(/√\s*\(([^)]+)\)/g, 'sqrt($1)')
+    .replace(/√\s*([a-zA-Z0-9]+)/g, 'sqrt($1)')
+    // Convert root(x,n) to x**(1/n) for SymPy
+    .replace(/root\(([^,]+),\s*([^)]+)\)/gi, '($1)**(1/($2))')
+    .replace(/root\(([^,]+),\s*\)/gi, 'sqrt($1)');
 };
 
-export const derivative = (terms: Term[]): Term[] => {
-  return terms
-    .filter((t) => t.power !== 0)
-    .map((t) => ({
-      coefficient: t.coefficient * t.power,
-      power: t.power - 1,
-    }));
-};
+let pyodidePromise: Promise<PyodideInterface> | null = null;
+let sympyReady = false;
+const PYODIDE_INDEX_URL = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/';
 
-export const integral = (terms: Term[]): Term[] => {
-  return terms.map((t) => ({
-    coefficient: t.coefficient / (t.power + 1),
-    power: t.power + 1,
-  }));
-};
+const SYMPY_PYTHON = `
+import sympy as sp
+from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application, convert_xor
 
-export const formatTerms = (terms: Term[], includeConstant = false): string => {
-  if (terms.length === 0) return "0";
+_transformations = standard_transformations + (implicit_multiplication_application, convert_xor)
 
-  const parts = terms
-    .sort((a, b) => b.power - a.power)
-    .map((t, i) => {
-      let str = "";
-      const coef = t.coefficient;
-      const isFirstTerm = i === 0;
+def _parse(expr, var):
+    sym = sp.symbols(var)
+    local_dict = {var: sym, 'e': sp.E, 'pi': sp.pi}
+    return parse_expr(expr, transformations=_transformations, local_dict=local_dict)
 
-      if (coef === 0) return "";
+def sympy_derivative(expr, var):
+    parsed = _parse(expr, var)
+    res = sp.simplify(sp.diff(parsed, sp.symbols(var)))
+    return str(res), sp.latex(res)
 
-      if (!isFirstTerm && coef > 0) str += " + ";
-      if (!isFirstTerm && coef < 0) str += " - ";
-      if (isFirstTerm && coef < 0) str += "-";
+def sympy_integral(expr, var):
+    parsed = _parse(expr, var)
+    res = sp.simplify(sp.integrate(parsed, sp.symbols(var)))
+    return str(res), sp.latex(res)
 
-      const absCoef = Math.abs(coef);
-      const coefStr = Number.isInteger(absCoef) ? absCoef.toString() : absCoef.toFixed(2);
+def sympy_definite_integral(expr, var, a, b):
+  parsed = _parse(expr, var)
+  res = sp.simplify(sp.integrate(parsed, (sp.symbols(var), a, b)))
+  return str(res), sp.latex(res)
 
-      if (t.power === 0) {
-        str += coefStr;
-      } else if (absCoef === 1) {
-        str += t.power === 1 ? "x" : `x^${t.power}`;
-      } else {
-        str += t.power === 1 ? `${coefStr}x` : `${coefStr}x^${t.power}`;
-      }
+def sympy_steps(expr, var, op):
+  sym = sp.symbols(var)
+  parsed = _parse(expr, var)
+  expanded = sp.expand(parsed)
+  terms = sp.Add.make_args(expanded) if isinstance(expanded, sp.Add) else (expanded,)
+  steps = []
+  if op == "derivative":
+    steps.append(r"f(%s) = %s" % (var, sp.latex(parsed)))
+    steps.append(r"\\frac{d}{d%s}[f(%s)] = \, ?" % (var, var))
+    for term in terms:
+      dterm = sp.simplify(sp.diff(term, sym))
+      steps.append(r"\\frac{d}{d%s}[ %s ] = %s" % (var, sp.latex(term), sp.latex(dterm)))
+    final = sp.simplify(sp.diff(parsed, sym))
+    steps.append(r"\\boxed{f'(%s) = %s}" % (var, sp.latex(final)))
+  else:
+    steps.append(r"f(%s) = %s" % (var, sp.latex(parsed)))
+    steps.append(r"\\int f(%s) \, d%s = \, ?" % (var, var))
+    for term in terms:
+      iterm = sp.simplify(sp.integrate(term, sym))
+      steps.append(r"\\int %s \, d%s = %s" % (sp.latex(term), var, sp.latex(iterm)))
+    final = sp.simplify(sp.integrate(parsed, sym))
+    steps.append(r"\\boxed{\\int f(%s) \, d%s = %s + C}" % (var, var, sp.latex(final)))
+  return steps
+`;
 
-      return str;
-    })
-    .filter((p) => p);
-
-  let result = parts.join("");
-  if (includeConstant) result += " + C";
-  return result || "0";
-};
-
-export const formatTermsLatex = (terms: Term[], includeConstant = false): string => {
-  if (terms.length === 0) return "0";
-
-  const parts = terms
-    .sort((a, b) => b.power - a.power)
-    .map((t, i) => {
-      let str = "";
-      const coef = t.coefficient;
-      const isFirstTerm = i === 0;
-
-      if (coef === 0) return "";
-
-      if (!isFirstTerm && coef > 0) str += " + ";
-      if (!isFirstTerm && coef < 0) str += " - ";
-      if (isFirstTerm && coef < 0) str += "-";
-
-      const absCoef = Math.abs(coef);
-      const coefStr = Number.isInteger(absCoef) ? absCoef.toString() : absCoef.toFixed(2);
-
-      if (t.power === 0) {
-        str += coefStr;
-      } else if (absCoef === 1) {
-        str += t.power === 1 ? "x" : `x^{${t.power}}`;
-      } else {
-        str += t.power === 1 ? `${coefStr}x` : `${coefStr}x^{${t.power}}`;
-      }
-
-      return str;
-    })
-    .filter((p) => p);
-
-  let result = parts.join("");
-  if (includeConstant) result += " + C";
-  return result || "0";
-};
-
-
-// Symbolic derivative for common functions
-export const symbolicDerivative = (expr: string): string => {
-  const cleaned = expr.replace(/\s/g, "");
-  
-  // Split by + and - while keeping the operators
-  const terms: string[] = [];
-  let currentTerm = "";
-  let inParens = 0;
-  
-  for (let i = 0; i < cleaned.length; i++) {
-    const char = cleaned[i];
-    if (char === '(') inParens++;
-    if (char === ')') inParens--;
-    
-    if ((char === '+' || char === '-') && inParens === 0 && i > 0) {
-      terms.push(currentTerm);
-      currentTerm = char === '-' ? '-' : '';
-    } else {
-      currentTerm += char;
-    }
+async function getPyodide(): Promise<PyodideInterface> {
+  if (!pyodidePromise) {
+    pyodidePromise = (async () => {
+      const mod = await import(/* @vite-ignore */ `${PYODIDE_INDEX_URL}pyodide.mjs`);
+      return mod.loadPyodide({ indexURL: PYODIDE_INDEX_URL });
+    })();
   }
-  if (currentTerm) terms.push(currentTerm);
-  
-  // Differentiate each term
-  const derivatives = terms.map(term => {
-    let t = term.trim();
-    
-    // Normalize x*number to number*x (handle commutativity)
-    t = t.replace(/x\*(\d+\.?\d*)/gi, (match, num) => `${num}*x`);
-    
-    const tLower = t.toLowerCase();
-    
-    // Handle reciprocal: n/x -> n*x^-1, derivative is -n/x^2
-    const reciprocalMatch = t.match(/^([+-]?\d*\.?\d*)\/x$/i);
-    if (reciprocalMatch) {
-      let coefStr = reciprocalMatch[1];
-      if (coefStr === '' || coefStr === '+') coefStr = '1';
-      if (coefStr === '-') coefStr = '-1';
-      const coef = parseFloat(coefStr);
-      return coef === 1 ? '-1/x^2' : coef === -1 ? '1/x^2' : `${-coef}/x^2`;
-    }
-    
-    // Trigonometric functions
-    if (tLower.includes('sin(x)')) {
-      const coef = extractCoefficient(t, 'sin(x)');
-      return coef === 1 ? 'cos(x)' : coef === -1 ? '-cos(x)' : `${coef}*cos(x)`;
-    }
-    if (tLower.includes('cos(x)')) {
-      const coef = extractCoefficient(t, 'cos(x)');
-      return coef === 1 ? '-sin(x)' : coef === -1 ? 'sin(x)' : `${-coef}*sin(x)`;
-    }
-    if (tLower.includes('tan(x)')) {
-      const coef = extractCoefficient(t, 'tan(x)');
-      return coef === 1 ? 'sec²(x)' : `${coef}*sec²(x)`;
-    }
-    
-    // Exponential and logarithm
-    if (tLower.includes('e^x')) {
-      const coef = extractCoefficient(t, 'e^x');
-      return coef === 1 ? 'e^x' : `${coef}*e^x`;
-    }
-    if (tLower.includes('ln(x)')) {
-      const coef = extractCoefficient(t, 'ln(x)');
-      return coef === 1 ? '1/x' : `${coef}/x`;
-    }
-    
-    // Polynomial terms
-    if (tLower.includes('x')) {
-      // Handle x^n or x with optional coefficient
-      const match = t.match(/^([+-]?\d*\.?\d*)\*?x(\^(\d+))?$/i);
-      if (match) {
-        let coef = match[1];
-        if (coef === '' || coef === '+') coef = '1';
-        if (coef === '-') coef = '-1';
-        const coefficient = parseFloat(coef);
-        const power = match[3] ? parseInt(match[3]) : 1;
-        
-        if (power === 1) {
-          return coefficient === 1 ? '1' : coefficient.toString();
-        } else {
-          const newCoef = coefficient * power;
-          const newPower = power - 1;
-          if (newPower === 1) {
-            return newCoef === 1 ? 'x' : `${newCoef}*x`;
-          } else {
-            return newCoef === 1 ? `x^${newPower}` : `${newCoef}*x^${newPower}`;
-          }
-        }
-      }
-    }
-    
-    // Constants have derivative 0
-    if (!isNaN(parseFloat(tLower))) {
-      return '0';
-    }
-    
-    return '0';
-  });
-  
-  // Combine like terms before filtering
-  const termMap = new Map<string, number>();
-  
-  derivatives.forEach(d => {
-    if (d === '0') return;
-    
-    // Parse derivative term to extract coefficient and base
-    let base = '';
-    let coef = 1;
-    
-    // Handle constant terms (just numbers)
-    if (!isNaN(parseFloat(d)) && !d.includes('x') && !d.includes('sin') && !d.includes('cos')) {
-      base = 'constant';
-      coef = parseFloat(d);
-    }
-    // Handle terms like "3*x^2", "x", "5*x"
-    else if (d.includes('x')) {
-      const match = d.match(/^([+-]?\d*\.?\d*)\*?x(\^(\d+))?$/);
-      if (match) {
-        let coefStr = match[1];
-        if (coefStr === '' || coefStr === '+') coefStr = '1';
-        if (coefStr === '-') coefStr = '-1';
-        coef = parseFloat(coefStr);
-        const power = match[3] || '1';
-        base = power === '1' ? 'x' : `x^${power}`;
-      } else {
-        base = d;
-        coef = 1;
-      }
-    }
-    // Handle trig functions like "cos(x)", "3*cos(x)", "-sin(x)"
-    else {
-      const sinMatch = d.match(/^([+-]?\d*\.?\d*)\*?sin\(x\)$/);
-      const cosMatch = d.match(/^([+-]?\d*\.?\d*)\*?cos\(x\)$/);
-      
-      if (sinMatch) {
-        let coefStr = sinMatch[1];
-        if (coefStr === '' || coefStr === '+') coefStr = '1';
-        if (coefStr === '-') coefStr = '-1';
-        coef = parseFloat(coefStr);
-        base = 'sin(x)';
-      } else if (cosMatch) {
-        let coefStr = cosMatch[1];
-        if (coefStr === '' || coefStr === '+') coefStr = '1';
-        if (coefStr === '-') coefStr = '-1';
-        coef = parseFloat(coefStr);
-        base = 'cos(x)';
-      } else {
-        base = d;
-        coef = 1;
-      }
-    }
-    
-    termMap.set(base, (termMap.get(base) || 0) + coef);
-  });
-  
-  // Convert map back to string
-  const result: string[] = [];
-  termMap.forEach((coef, base) => {
-    if (coef === 0) return;
-    
-    let termStr = '';
-    if (base === 'constant') {
-      termStr = coef.toString();
-    } else if (base === 'x' || base.startsWith('x^')) {
-      if (coef === 1) {
-        termStr = base;
-      } else if (coef === -1) {
-        termStr = '-' + base;
-      } else {
-        termStr = `${coef}*${base}`;
-      }
-    } else if (base === 'sin(x)' || base === 'cos(x)') {
-      if (coef === 1) {
-        termStr = base;
-      } else if (coef === -1) {
-        termStr = '-' + base;
-      } else {
-        termStr = `${coef}*${base}`;
-      }
-    } else {
-      termStr = coef === 1 ? base : `${coef}*${base}`;
-    }
-    
-    result.push(termStr);
-  });
-  
-  if (result.length === 0) return '0';
-  
-  return result.map((d, i) => {
-    if (i === 0) return d;
-    if (d.startsWith('-')) return ` - ${d.substring(1)}`;
-    return ` + ${d}`;
-  }).join('');
-};
+  return pyodidePromise;
+}
 
-// Helper function to extract coefficient from a term with a function
-const extractCoefficient = (term: string, func: string): number => {
-  const t = term.toLowerCase();
-  const idx = t.indexOf(func.toLowerCase());
-  if (idx === 0) return 1;
-  if (idx === 1 && t[0] === '-') return -1;
-  const coefStr = term.substring(0, idx).replace('*', '').trim();
-  if (!coefStr || coefStr === '+') return 1;
-  if (coefStr === '-') return -1;
-  return parseFloat(coefStr) || 1;
-};
+async function ensureSympy(pyodide: PyodideInterface): Promise<void> {
+  if (sympyReady) return;
+  await pyodide.loadPackage('sympy');
+  pyodide.runPython(SYMPY_PYTHON);
+  sympyReady = true;
+}
 
-export const symbolicIntegral = (expr: string): string => {
-  const cleaned = expr.trim().toLowerCase();
-
-  // Handle common functions
-  if (cleaned === "sin(x)" || cleaned === "sinx") return "-cos(x) + C";
-  if (cleaned === "cos(x)" || cleaned === "cosx") return "sin(x) + C";
-  if (cleaned === "e^x" || cleaned === "exp(x)") return "e^x + C";
-  if (cleaned === "1/x") return "ln|x| + C";
-
-  // Try polynomial parsing
-  const terms = parsePolynomial(expr);
-  if (terms.length > 0) {
-    return formatTerms(integral(terms), true);
+async function runSympy(operation: SympyOperation, expression: string, variable: string): Promise<[string, string]> {
+  const pyodide = await getPyodide();
+  await ensureSympy(pyodide);
+  const fnName = operation === 'derivative' ? 'sympy_derivative' : 'sympy_integral';
+  const fn = pyodide.globals.get(fnName);
+  try {
+    const result = fn(expression, variable);
+    const [resultStr, latexStr] = result.toJs();
+    result.destroy?.();
+    return [String(resultStr), String(latexStr)];
+  } finally {
+    fn.destroy?.();
   }
+}
 
-  return "Unable to compute";
-};
+export async function sympySteps(
+  expression: string,
+  variable: string = 'x',
+  operation: SympyOperation
+): Promise<string[]> {
+  try {
+    const pyodide = await getPyodide();
+    await ensureSympy(pyodide);
+    const fn = pyodide.globals.get('sympy_steps');
+    try {
+      const result = fn(normalizeExpression(expression), variable, operation);
+      const steps = result.toJs();
+      result.destroy?.();
+      return Array.isArray(steps) ? steps.map((s) => String(s)) : [];
+    } finally {
+      fn.destroy?.();
+    }
+  } catch (error) {
+    console.error('Steps error:', error);
+    return ['\\text{Error generating steps}'];
+  }
+}
+
+export async function definiteIntegral(
+  expression: string,
+  lower: number,
+  upper: number,
+  variable: string = 'x'
+): Promise<{ result: string; latex: string }> {
+  try {
+    const pyodide = await getPyodide();
+    await ensureSympy(pyodide);
+    const fn = pyodide.globals.get('sympy_definite_integral');
+    try {
+      const result = fn(normalizeExpression(expression), variable, lower, upper);
+      const [resultStr, latexStr] = result.toJs();
+      result.destroy?.();
+      return { result: String(resultStr), latex: String(latexStr) };
+    } finally {
+      fn.destroy?.();
+    }
+  } catch (error) {
+    console.error('Definite integral error:', error);
+    return {
+      result: 'Error computing definite integral',
+      latex: '\\text{Error computing definite integral}'
+    };
+  }
+}
+
+/**
+ * Helper to convert a fraction decimal to a nice fraction string
+ */
+export function toFraction(decimal: number, tolerance: number = 1e-10): string {
+  if (Number.isInteger(decimal)) {
+    return decimal.toString();
+  }
+  
+  const sign = decimal < 0 ? -1 : 1;
+  decimal = Math.abs(decimal);
+  
+  // Use continued fraction algorithm
+  let h1 = 1, h2 = 0;
+  let k1 = 0, k2 = 1;
+  let b = decimal;
+  
+  while (Math.abs(decimal - h1 / k1) > tolerance && k1 < 10000) {
+    const a = Math.floor(b);
+    const h = a * h1 + h2;
+    const k = a * k1 + k2;
+    
+    h2 = h1; h1 = h;
+    k2 = k1; k1 = k;
+    
+    if (b - a < tolerance) break;
+    b = 1 / (b - a);
+  }
+  
+  if (k1 === 1) {
+    return (sign * h1).toString();
+  }
+  
+  const num = sign * h1;
+  const den = k1;
+  
+  return `${num}/${den}`;
+}
+
+// Legacy exports for backward compatibility
+export async function basicDerivative(expression: string): Promise<string> {
+  const result = await advancedDerivative(expression);
+  return result.result;
+}

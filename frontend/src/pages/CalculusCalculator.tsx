@@ -1,38 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
-import { symbolicDerivative, symbolicIntegral } from "@/lib/calculusUtils";
+import MathKeyboard from "@/components/MathKeyboard";
+import { advancedDerivative, definiteIntegral, symbolicIntegral, sympySteps } from "@/lib/calculusUtils";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import katex from "katex";
 
-const renderMath = (expr: string): string => {
+// Helper function to render LaTeX directly
+const renderLatex = (latex: string, displayMode: boolean = false): string => {
   try {
-    // Convert common notation to LaTeX
-    let latex = expr
-      .replace(/\*/g, "\\cdot ") // multiplication
-      .replace(/\^/g, "") // remove ^ for processing
-      .replace(/(\d+\.?\d*)\\cdot(\w)/g, "$1$2") // coefficient notation
-      .replace(/(\w+)(\d+)/g, "$1^{$2}") // powers with braces
-      .replace(/\/\(x\d+\)/g, (match) => {
-        const power = match.match(/\d+/)?.[0];
-        return `\\frac{1}{x^{${power}}}`;
-      })
-      .replace(/(\d+\.?\d*)\/x(\d+)/g, (match, num, power) => `\\frac{${num}}{x^{${power}}}`)
-      .replace(/(\d+\.?\d*)\/x/g, (match, num) => `\\frac{${num}}{x}`)
-      .replace(/1\/x/g, "\\frac{1}{x}")
-      .replace(/sin\(x\)/g, "\\sin(x)")
-      .replace(/cos\(x\)/g, "\\cos(x)")
-      .replace(/tan\(x\)/g, "\\tan(x)")
-      .replace(/ln\(x\)/g, "\\ln(x)")
-      .replace(/(^|[^a-zA-Z\\])ex(?=[^a-zA-Z]|$)/g, "$1e^{x}");
-    
     return katex.renderToString(latex, {
       throwOnError: false,
-      displayMode: false,
+      displayMode: displayMode,
     });
-  } catch (e) {
-    return expr;
+  } catch {
+    return latex;
   }
+};
+
+// Helper function to convert expression to LaTeX for preview
+const expressionToLatex = (expr: string): string => {
+  let latex = expr
+    .replace(/\s+/g, '')
+    // Add implicit multiplication for display: 2x -> 2x (keep as is for display)
+    .replace(/(\d)([a-zA-Z])/g, '$1$2');
+  
+  // Handle powers: ^n -> ^{n} and ^(expr) -> ^{expr}
+  latex = latex.replace(/\^\(([^)]+)\)/gi, '^{$1}');
+  latex = latex.replace(/\^(-?\d+\.?\d*)/gi, '^{$1}');
+  
+  // Trig and log functions
+  latex = latex.replace(/sin\(/gi, '\\sin(');
+  latex = latex.replace(/cos\(/gi, '\\cos(');
+  latex = latex.replace(/tan\(/gi, '\\tan(');
+  latex = latex.replace(/ln\(/gi, '\\ln(');
+  latex = latex.replace(/log\(/gi, '\\log(');
+  
+  // Handle sqrt
+  latex = latex.replace(/sqrt\(([^)]+)\)/gi, '\\sqrt{$1}');
+  latex = latex.replace(/√\s*\(([^)]+)\)/g, '\\sqrt{$1}');
+  latex = latex.replace(/√\s*([a-zA-Z0-9]+)/g, '\\sqrt{$1}');
+  
+  // Handle multiplication
+  latex = latex.replace(/\*/g, ' \\cdot ');
+  
+  return latex;
 };
 
 const CalculusCalculator = () => {
@@ -40,152 +52,154 @@ const CalculusCalculator = () => {
   const [expression, setExpression] = useState("x^3 + 2x^2 - 5x + 3");
   const [result, setResult] = useState<{ type: string; value: string } | null>(null);
   const [showSteps, setShowSteps] = useState(false);
-  const [currentOperation, setCurrentOperation] = useState<{ type: 'derivative' | 'integral'; expr: string } | null>(null);
+  const [currentOperation, setCurrentOperation] = useState<{ type: 'derivative' | 'integral' | 'definiteIntegral'; expr: string; lower?: number; upper?: number } | null>(null);
+  const [steps, setSteps] = useState<string[]>([]);
+  const [isComputing, setIsComputing] = useState(false);
+  const [stepsLoading, setStepsLoading] = useState(false);
+  const [lowerLimit, setLowerLimit] = useState(0);
+  const [upperLimit, setUpperLimit] = useState(1);
 
-  const generateSteps = (type: 'derivative' | 'integral', expr: string): string[] => {
-    const steps: string[] = [];
+  const generateSteps = async (type: 'derivative' | 'integral' | 'definiteIntegral', expr: string, lower?: number, upper?: number): Promise<string[]> => {
     const cleaned = expr.replace(/\s/g, '');
+    const hasSum = /.+[+-].+/.test(cleaned.slice(1));
+    const parts = cleaned.split('*');
+    const hasProduct = parts.length > 1 && parts.filter((p) => p.includes('x')).length >= 2;
+    const divParts = cleaned.split('/');
+    const hasQuotient = divParts.length > 1 && divParts[0]?.includes('x') && divParts[1]?.includes('x');
+    const hasChain = (() => {
+      const fnRegex = /(sin|cos|tan|ln|log|exp|sqrt)\(([^()]+)\)/gi;
+      let match: RegExpExecArray | null;
+      while ((match = fnRegex.exec(cleaned))) {
+        const arg = match[2];
+        if (arg.includes('x') && arg !== 'x') return true;
+      }
+      return /\([^)]+x[^)]*\)\^\(?[^)]+\)?/.test(cleaned);
+    })();
 
-    if (type === 'derivative') {
-      steps.push(`f(x) = ${expr}`);
-      steps.push(`\\frac{d}{dx}[f(x)] = \\, ?`);
-      steps.push(`\\underline{\\text{${t.calculusCalculator.diffRules}}}`);
+    const rules = t.calculusCalculator.steps;
+    const steps: string[] = [];
 
-      // Check for specific patterns
-      if (cleaned.includes('sin(x)')) {
-        const coefMatch = cleaned.match(/^([+-]?\d*\.?\d*)\*?sin\(x\)/i);
-        if (coefMatch) {
-          const coef = coefMatch[1] === '' || coefMatch[1] === '+' ? '1' : coefMatch[1] === '-' ? '-1' : coefMatch[1];
-          steps.push(`\\frac{d}{dx}[\\sin(x)] = \\cos(x)`);
-          if (coef !== '1') {
-            steps.push(`\\frac{d}{dx}[${coef}\\sin(x)] = ${coef}\\cos(x)`);
-          }
-        }
-      }
-      if (cleaned.includes('cos(x)')) {
-        const coefMatch = cleaned.match(/^([+-]?\d*\.?\d*)\*?cos\(x\)/i);
-        if (coefMatch) {
-          const coef = coefMatch[1] === '' || coefMatch[1] === '+' ? '1' : coefMatch[1] === '-' ? '-1' : coefMatch[1];
-          steps.push(`\\frac{d}{dx}[\\cos(x)] = -\\sin(x)`);
-          if (coef !== '1') {
-            steps.push(`\\frac{d}{dx}[${coef}\\cos(x)] = ${-parseFloat(coef)}\\sin(x)`);
-          }
-        }
-      }
-      if (cleaned.includes('e^x')) {
-        steps.push(`\\frac{d}{dx}[e^{x}] = e^{x}`);
-      }
-      if (cleaned.includes('ln(x)')) {
-        steps.push(`\\frac{d}{dx}[\\ln(x)] = \\frac{1}{x}`);
-      }
+    steps.push(type === 'derivative' ? rules.diffHeader : rules.intHeader);
+    steps.push(
+      type === 'derivative'
+        ? `\\underline{\\text{${t.calculusCalculator.diffRules}}}`
+        : `\\underline{\\text{${t.calculusCalculator.intRules}}}`
+    );
 
-      // Handle polynomial terms
-      const polyMatch = cleaned.match(/x(\^(\d+))?/);
-      if (polyMatch) {
-        steps.push(`\\frac{d}{dx}[x^{n}] = nx^{n-1}`);
-        
-        // Break down term by term for polynomials
-        const terms = expr.split(/(?=[+-])/).filter(t => t.trim());
-        terms.forEach(term => {
-          const trimmed = term.trim();
-          if (trimmed.includes('x')) {
-            const match = trimmed.match(/([+-]?\d*\.?\d*)\*?x(\^(\d+))?/);
-            if (match) {
-              let coef = match[1];
-              if (coef === '' || coef === '+') coef = '1';
-              if (coef === '-') coef = '-1';
-              const power = match[3] ? match[3] : '1';
-              const powNum = parseInt(power);
-              
-              if (powNum > 1) {
-                const newCoef = parseFloat(coef) * powNum;
-                const newPow = powNum - 1;
-                steps.push(`\\frac{d}{dx}[${coef}x^{${power}}] = ${coef} \\cdot ${power} \\cdot x^{${powNum-1}} = ${newCoef}x^{${newPow}}`);
-              } else if (powNum === 1) {
-                steps.push(`\\frac{d}{dx}[${coef}x] = ${coef}`);
-              }
-            }
-          } else if (!isNaN(parseFloat(trimmed))) {
-            steps.push(`\\frac{d}{dx}[${trimmed}] = 0`);
-          }
-        });
-      }
+    if (hasSum) steps.push(rules.linearity);
+    steps.push(type === 'derivative' ? rules.powerRule : rules.powerRuleInt);
+    if (hasProduct && type === 'derivative') steps.push(rules.productRule);
+    if (hasQuotient && type === 'derivative') steps.push(rules.quotientRule);
+    if (hasChain) steps.push(type === 'derivative' ? rules.chainRule : rules.substitution);
+    steps.push(rules.termByTerm);
 
-      const result = symbolicDerivative(expr);
-      steps.push(`\\boxed{f'(x) = ${result}}`);
-    } else {
-      // Integral
-      steps.push(`f(x) = ${expr}`);
-      steps.push(`\\int f(x) \\, dx = \\, ?`);
-      steps.push(`\\underline{\\text{${t.calculusCalculator.intRules}}}`);
-
-      if (cleaned.includes('sin(x)')) {
-        steps.push(`\\int \\sin(x) \\, dx = -\\cos(x) + C`);
-      }
-      if (cleaned.includes('cos(x)')) {
-        steps.push(`\\int \\cos(x) \\, dx = \\sin(x) + C`);
-      }
-      if (cleaned.includes('e^x')) {
-        steps.push(`\\int e^{x} \\, dx = e^{x} + C`);
-      }
-      if (cleaned.includes('1/x')) {
-        steps.push(`\\int \\frac{1}{x} \\, dx = \\ln|x| + C`);
-      }
-
-      const polyMatch = cleaned.match(/x(\^(\d+))?/);
-      if (polyMatch) {
-        steps.push(`\\int x^{n} \\, dx = \\frac{x^{n+1}}{n+1} + C`);
-        
-        const terms = expr.split(/(?=[+-])/).filter(t => t.trim());
-        terms.forEach(term => {
-          const trimmed = term.trim();
-          if (trimmed.includes('x')) {
-            const match = trimmed.match(/([+-]?\d*\.?\d*)\*?x(\^(\d+))?/);
-            if (match) {
-              let coef = match[1];
-              if (coef === '' || coef === '+') coef = '1';
-              if (coef === '-') coef = '-1';
-              const power = match[3] ? match[3] : '1';
-              const powNum = parseInt(power);
-              const newPow = powNum + 1;
-              const newCoef = (parseFloat(coef) / newPow).toFixed(4);
-              
-              steps.push(`\\int ${coef}x^{${power}} \\, dx = ${coef} \\cdot \\frac{x^{${newPow}}}{${newPow}} = ${newCoef}x^{${newPow}}`);
-            }
-          } else if (!isNaN(parseFloat(trimmed))) {
-            steps.push(`\\int ${trimmed} \\, dx = ${trimmed}x`);
-          }
-        });
-      }
-
-      const result = symbolicIntegral(expr);
-      steps.push(`\\boxed{\\int f(x) \\, dx = ${result} + C}`);
+    const sympy = await sympySteps(expr, 'x', type === 'derivative' ? 'derivative' : 'integral');
+    const combined = [...steps, ...sympy];
+    if (type === 'definiteIntegral' && typeof lower === 'number' && typeof upper === 'number') {
+      const definite = await definiteIntegral(expr, lower, upper);
+      combined.push(`\\boxed{\\int_{${lower}}^{${upper}} f(x) \, dx = ${definite.latex}}`);
     }
-
-    return steps;
+    return combined;
   };
 
-  const handleDerivative = () => {
-    const deriv = symbolicDerivative(expression);
-    setResult({ type: "Derivative", value: `d/dx (${expression}) = ${deriv}` });
-    setCurrentOperation({ type: 'derivative', expr: expression });
-    setShowSteps(false);
+  const handleDerivative = async () => {
+    if (!expression.trim()) {
+      setResult({ type: "Error", value: `\\text{${t.calculusCalculator.noExpression}}` });
+      setCurrentOperation(null);
+      setShowSteps(false);
+      return;
+    }
+    setIsComputing(true);
+    try {
+      const deriv = await advancedDerivative(expression);
+      setResult({ type: "Derivative", value: `\\frac{d}{dx}\\left(${expressionToLatex(expression)}\\right) = ${deriv.latex}` });
+      setCurrentOperation({ type: 'derivative', expr: expression });
+      setShowSteps(false);
+    } finally {
+      setIsComputing(false);
+    }
   };
 
-  const handleIntegral = () => {
-    const integ = symbolicIntegral(expression);
-    setResult({ type: "Integral", value: `∫ (${expression}) dx = ${integ}` });
-    setCurrentOperation({ type: 'integral', expr: expression });
-    setShowSteps(false);
+  const handleIntegral = async () => {
+    if (!expression.trim()) {
+      setResult({ type: "Error", value: `\\text{${t.calculusCalculator.noExpression}}` });
+      setCurrentOperation(null);
+      setShowSteps(false);
+      return;
+    }
+    setIsComputing(true);
+    try {
+      const integ = await symbolicIntegral(expression);
+      setResult({ type: "Integral", value: `\\int \\left(${expressionToLatex(expression)}\\right) dx = ${integ.latex}` });
+      setCurrentOperation({ type: 'integral', expr: expression });
+      setShowSteps(false);
+    } finally {
+      setIsComputing(false);
+    }
   };
+
+  const handleDefiniteIntegral = async () => {
+    if (!expression.trim()) {
+      setResult({ type: "Error", value: `\\text{${t.calculusCalculator.noExpression}}` });
+      setCurrentOperation(null);
+      setShowSteps(false);
+      return;
+    }
+    const lower = Number(lowerLimit);
+    const upper = Number(upperLimit);
+    if (!Number.isFinite(lower) || !Number.isFinite(upper)) {
+      setResult({ type: "Integral", value: `\\text{${t.calculusCalculator.invalidLimits}}` });
+      setCurrentOperation(null);
+      setShowSteps(false);
+      return;
+    }
+    setIsComputing(true);
+    try {
+      const integ = await definiteIntegral(expression, lower, upper);
+      setResult({ type: "Integral", value: `\\int_{${lower}}^{${upper}} \\left(${expressionToLatex(expression)}\\right) dx = ${integ.latex}` });
+      setCurrentOperation({ type: 'definiteIntegral', expr: expression, lower, upper });
+      setShowSteps(false);
+    } finally {
+      setIsComputing(false);
+    }
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+    const run = async () => {
+      if (!showSteps || !currentOperation) {
+        setSteps([]);
+        return;
+      }
+      setStepsLoading(true);
+      try {
+        const nextSteps = await generateSteps(currentOperation.type, currentOperation.expr, currentOperation.lower, currentOperation.upper);
+        if (!cancelled) {
+          setSteps(nextSteps);
+        }
+      } catch {
+        if (!cancelled) {
+          setSteps(["\\text{Error generating steps}"]);
+        }
+      } finally {
+        if (!cancelled) {
+          setStepsLoading(false);
+        }
+      }
+    };
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [showSteps, currentOperation, t]);
 
   const examples = [
-    { expr: "x^3 + 2x^2 - 5x + 3", label: "Polynomial" },
-    { expr: "sin(x)", label: "Sine" },
-    { expr: "cos(x)", label: "Cosine" },
-    { expr: "e^x", label: "Exponential" },
-    { expr: "1/x", label: "Reciprocal" },
-  ];
+    { expr: "x^3 + 2x^2 - 5x + 3", labelKey: "polynomial" },
+    { expr: "sin(x)", labelKey: "sine" },
+    { expr: "cos(x)", labelKey: "cosine" },
+    { expr: "e^x", labelKey: "exponential" },
+    { expr: "1/x", labelKey: "reciprocal" },
+  ] as const;
 
   return (
     <div className="min-h-screen">
@@ -200,23 +214,43 @@ const CalculusCalculator = () => {
 
           {/* Input Section */}
           <div className="calculator-card mb-4 sm:mb-6 animate-slide-up">
-            <label className="text-sm font-medium text-muted-foreground mb-2 block">
+            <label className="text-sm font-medium text-muted-foreground mb-3 block">
               {t.calculusCalculator.enterFunction}
             </label>
-            <input
-              type="text"
+            
+            {/* Math Keyboard with LaTeX preview */}
+            <MathKeyboard
               value={expression}
-              onChange={(e) => setExpression(e.target.value)}
-              className="math-input w-full mb-4 text-sm sm:text-base"
+              onChange={setExpression}
               placeholder="e.g., x^3 + 2x - 1"
             />
 
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-              <button onClick={handleDerivative} className="btn-primary flex-1 py-3 sm:py-2">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4">
+              <button onClick={handleDerivative} className="btn-primary flex-1 py-3 sm:py-2" disabled={isComputing}>
                 {t.calculusCalculator.derivative}
               </button>
-              <button onClick={handleIntegral} className="btn-accent flex-1 py-3 sm:py-2">
+              <button onClick={handleIntegral} className="btn-accent flex-1 py-3 sm:py-2" disabled={isComputing}>
                 {t.calculusCalculator.integral}
+              </button>
+            </div>
+
+            <div className="mt-3 grid grid-cols-1 sm:grid-cols-[110px_110px_auto] gap-2 sm:gap-3 items-center">
+              <input
+                type="number"
+                value={lowerLimit}
+                onChange={(e) => setLowerLimit(Number(e.target.value))}
+                className="math-input w-full text-xs sm:text-sm h-9"
+                placeholder={t.calculusCalculator.lowerLimit}
+              />
+              <input
+                type="number"
+                value={upperLimit}
+                onChange={(e) => setUpperLimit(Number(e.target.value))}
+                className="math-input w-full text-xs sm:text-sm h-9"
+                placeholder={t.calculusCalculator.upperLimit}
+              />
+              <button onClick={handleDefiniteIntegral} className="btn-accent w-full sm:w-auto py-3 sm:py-2 text-sm sm:text-base text-white" disabled={isComputing}>
+                ∫ {t.calculusCalculator.definiteIntegral}
               </button>
             </div>
           </div>
@@ -231,7 +265,7 @@ const CalculusCalculator = () => {
                   onClick={() => setExpression(ex.expr)}
                   className="px-2 sm:px-3 py-1.5 text-xs sm:text-sm bg-secondary hover:bg-secondary/80 rounded-lg transition-colors flex items-center gap-1"
                 >
-                  <span className="text-muted-foreground hidden sm:inline">{t.calculusCalculator[ex.label.toLowerCase() as keyof typeof t.calculusCalculator]}:</span>
+                  <span className="text-muted-foreground hidden sm:inline">{t.calculusCalculator[ex.labelKey]}:</span>
                   <span className="font-mono">{ex.expr}</span>
                 </button>
               ))}
@@ -244,7 +278,7 @@ const CalculusCalculator = () => {
               <div className="text-sm text-muted-foreground mb-2">{result.type}</div>
               <div 
                 className="text-lg sm:text-xl"
-                dangerouslySetInnerHTML={{ __html: renderMath(result.value) }}
+                dangerouslySetInnerHTML={{ __html: renderLatex(result.value, true) }}
               />
             </div>
           )}
@@ -264,11 +298,14 @@ const CalculusCalculator = () => {
                 <div className="mt-4 p-3 sm:p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up overflow-x-auto">
                   <h3 className="text-sm font-semibold text-foreground mb-2">{t.calculusCalculator.detailedSteps}</h3>
                   <div className="space-y-2">
-                    {generateSteps(currentOperation.type, currentOperation.expr).map((step, i) => (
+                    {stepsLoading && (
+                      <div className="text-xs sm:text-sm text-muted-foreground">Loading...</div>
+                    )}
+                    {!stepsLoading && steps.map((step, i) => (
                       <div 
                         key={i} 
                         className="text-xs sm:text-sm bg-secondary/30 px-2 sm:px-3 py-2 rounded-lg overflow-x-auto"
-                        dangerouslySetInnerHTML={{ __html: renderMath(step) }}
+                        dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
                       />
                     ))}
                   </div>

@@ -1,10 +1,89 @@
-import { Term, parsePolynomial, formatTerms } from "./calculusUtils";
+import { parse, simplify } from 'mathjs';
+
+// Term type for polynomial representation
+export interface Term {
+  coefficient: number;
+  power: number;
+}
 
 export interface Root {
   real: number;
   imaginary: number;
   isComplex: boolean;
 }
+
+// Parse a polynomial string into terms
+export const parsePolynomial = (expr: string): Term[] => {
+  const terms: Term[] = [];
+  
+  // Clean up the expression
+  let cleanExpr = expr
+    .replace(/\s+/g, '')
+    .replace(/(\d)([a-zA-Z])/g, '$1*$2')  // 2x -> 2*x
+    .replace(/([a-zA-Z])(\d)/g, '$1^$2')  // x2 -> x^2 (assuming it means x^2)
+    .replace(/\)\(/g, ')*(')
+    .replace(/([a-zA-Z])(\()/g, '$1*(');
+
+  // Split by + and - while keeping the sign
+  const termStrings = cleanExpr.split(/(?=[+-])/);
+  
+  for (const termStr of termStrings) {
+    const trimmed = termStr.trim();
+    if (!trimmed) continue;
+    
+    // Match patterns like: 3*x^2, -2*x, x^3, 5, -x
+    const match = trimmed.match(/^([+-]?\d*\.?\d*)\*?x(?:\^([+-]?\d+))?$|^([+-]?\d+\.?\d*)$/i);
+    
+    if (match) {
+      if (match[3] !== undefined) {
+        // Constant term
+        terms.push({ coefficient: parseFloat(match[3]), power: 0 });
+      } else {
+        // Term with x
+        let coef = match[1];
+        if (coef === '' || coef === '+') coef = '1';
+        if (coef === '-') coef = '-1';
+        const power = match[2] ? parseInt(match[2]) : 1;
+        terms.push({ coefficient: parseFloat(coef), power });
+      }
+    }
+  }
+  
+  return terms;
+};
+
+// Format terms back to a string
+export const formatTerms = (terms: Term[]): string => {
+  if (terms.length === 0) return '0';
+  
+  const sorted = [...terms].sort((a, b) => b.power - a.power);
+  
+  return sorted.map((term, index) => {
+    const { coefficient, power } = term;
+    if (coefficient === 0) return '';
+    
+    let result = '';
+    
+    // Handle sign
+    if (index > 0) {
+      result += coefficient >= 0 ? ' + ' : ' - ';
+    } else if (coefficient < 0) {
+      result += '-';
+    }
+    
+    const absCoef = Math.abs(coefficient);
+    
+    if (power === 0) {
+      result += absCoef;
+    } else if (absCoef === 1) {
+      result += power === 1 ? 'x' : `x^${power}`;
+    } else {
+      result += power === 1 ? `${absCoef}x` : `${absCoef}x^${power}`;
+    }
+    
+    return result;
+  }).filter(s => s).join('') || '0';
+};
 
 export const evaluatePolynomial = (terms: Term[], x: number): number => {
   return terms.reduce((sum, term) => sum + term.coefficient * Math.pow(x, term.power), 0);
@@ -26,27 +105,19 @@ const newtonRaphson = (terms: Term[], initialGuess: number, maxIterations = 100)
     const fx = evaluatePolynomial(terms, x);
     const fpx = evaluateDerivative(terms, x);
     
-    // Check if derivative is too small (avoid division by zero)
-    if (Math.abs(fpx) < 1e-12) {
-      return null;
-    }
+    if (Math.abs(fpx) < 1e-12) return null;
     
     const xNew = x - fx / fpx;
     
-    // Check for convergence
     if (Math.abs(xNew - x) < 1e-10 && Math.abs(fx) < 1e-10) {
       return xNew;
     }
     
     x = xNew;
     
-    // Check if we've diverged
-    if (!isFinite(x) || Math.abs(x) > 1e10) {
-      return null;
-    }
+    if (!isFinite(x) || Math.abs(x) > 1e10) return null;
   }
   
-  // Verify the solution
   if (Math.abs(evaluatePolynomial(terms, x)) < 1e-6) {
     return x;
   }
@@ -134,7 +205,6 @@ export const findRoots = (terms: Term[]): Root[] | string => {
   const roots: Root[] = [];
   let remainingTerms = [...simplified];
   
-  // Try to find roots starting from various initial guesses
   const initialGuesses = [-10, -5, -2, -1, 0, 1, 2, 5, 10, -0.5, 0.5];
   const maxRoots = maxPower;
   
@@ -144,16 +214,13 @@ export const findRoots = (terms: Term[]): Root[] | string => {
     const root = newtonRaphson(remainingTerms, guess);
     
     if (root !== null) {
-      // Check if this root is new (not already found)
       const isDuplicate = roots.some(r => Math.abs(r.real - root) < 1e-6);
       
       if (!isDuplicate) {
         roots.push({ real: root, imaginary: 0, isComplex: false });
         
-        // Deflate polynomial by dividing out this factor
         remainingTerms = divideByLinearFactor(remainingTerms, root);
         
-        // If reduced to quadratic, use quadratic formula for remaining roots
         const maxRemainingPower = Math.max(...remainingTerms.map(t => t.power));
         if (maxRemainingPower === 2) {
           const a = remainingTerms.find(t => t.power === 2)?.coefficient || 0;
@@ -175,7 +242,6 @@ export const findRoots = (terms: Term[]): Root[] | string => {
           break;
         }
         
-        // If reduced to linear
         if (maxRemainingPower === 1) {
           const a = remainingTerms.find(t => t.power === 1)?.coefficient || 0;
           const b = remainingTerms.find(t => t.power === 0)?.coefficient || 0;
@@ -199,18 +265,15 @@ export const findRoots = (terms: Term[]): Root[] | string => {
 const simplifySquareRoot = (value: number): string => {
   const absValue = Math.abs(value);
   
-  // Check if it's close to an integer
   if (Math.abs(absValue - Math.round(absValue)) < 1e-10) {
     const intValue = Math.round(absValue);
     return value < 0 ? `-${intValue}` : `${intValue}`;
   }
   
-  // Try to represent as a simple fraction
   const tolerance = 1e-6;
   for (let denominator = 2; denominator <= 20; denominator++) {
     const numerator = Math.round(value * denominator);
     if (Math.abs(value - numerator / denominator) < tolerance) {
-      // Simplify the fraction
       const gcd = (a: number, b: number): number => b === 0 ? Math.abs(a) : gcd(b, a % b);
       const divisor = gcd(numerator, denominator);
       const simplifiedNum = numerator / divisor;
@@ -223,26 +286,40 @@ const simplifySquareRoot = (value: number): string => {
     }
   }
   
-  // Try to express as a*sqrt(b) where b has no perfect square factors
-  const squared = absValue * absValue;
-  
-  // Check common patterns for square roots
-  for (let factor = 2; factor <= 100; factor++) {
-    const underRoot = squared / (factor * factor);
-    if (Math.abs(underRoot - Math.round(underRoot)) < 1e-8) {
-      const perfectSquare = Math.round(underRoot);
-      if (perfectSquare > 1) {
-        const sign = value < 0 ? '-' : '';
-        if (factor === 1) {
-          return `${sign}\\sqrt{${perfectSquare}}`;
-        }
-        return `${sign}${factor}\\sqrt{${perfectSquare}}`;
-      }
-    }
-  }
-  
-  // Fallback to decimal without trailing zeros
   return parseFloat(value.toFixed(4)).toString();
+};
+
+// Format terms to LaTeX
+export const formatTermsLatex = (terms: Term[]): string => {
+  if (terms.length === 0) return '0';
+  
+  const sorted = [...terms].sort((a, b) => b.power - a.power);
+  
+  return sorted.map((term, index) => {
+    const { coefficient, power } = term;
+    if (coefficient === 0) return '';
+    
+    let result = '';
+    
+    // Handle sign
+    if (index > 0) {
+      result += coefficient >= 0 ? ' + ' : ' - ';
+    } else if (coefficient < 0) {
+      result += '-';
+    }
+    
+    const absCoef = Math.abs(coefficient);
+    
+    if (power === 0) {
+      result += absCoef;
+    } else if (absCoef === 1) {
+      result += power === 1 ? 'x' : `x^{${power}}`;
+    } else {
+      result += power === 1 ? `${absCoef}x` : `${absCoef}x^{${power}}`;
+    }
+    
+    return result;
+  }).filter(s => s).join('') || '0';
 };
 
 export const formatRootsLatex = (roots: Root[] | string): string => {
@@ -252,16 +329,13 @@ export const formatRootsLatex = (roots: Root[] | string): string => {
     if (!root.isComplex) {
       const value = Math.abs(root.real) < 1e-10 ? 0 : root.real;
       
-      // Check if it's an integer
       if (Number.isInteger(value)) {
         return `x = ${value}`;
       }
       
-      // Try to simplify as radical
       const simplified = simplifySquareRoot(value);
       return `x = ${simplified}`;
     } else {
-      // Complex root: a + bi
       const real = Math.abs(root.real) < 1e-10 ? 0 : root.real;
       const imag = Math.abs(root.imaginary) < 1e-10 ? 0 : root.imaginary;
       
@@ -314,4 +388,34 @@ export const multiplyPolynomials = (a: Term[], b: Term[]): Term[] => {
 export const formatRoots = (roots: number[] | string): string => {
   if (typeof roots === "string") return roots;
   return roots.map((r) => `x = ${Number.isInteger(r) ? r : r.toFixed(4)}`).join(", ");
+};
+
+// Polynomial derivative using math.js
+export const polynomialDerivative = (expr: string): string => {
+  try {
+    const terms = parsePolynomial(expr);
+    const derivTerms = terms
+      .filter(t => t.power > 0)
+      .map(t => ({ 
+        coefficient: t.coefficient * t.power, 
+        power: t.power - 1 
+      }));
+    return formatTerms(derivTerms);
+  } catch {
+    return 'Error';
+  }
+};
+
+// Polynomial integral
+export const polynomialIntegral = (expr: string): string => {
+  try {
+    const terms = parsePolynomial(expr);
+    const integralTerms = terms.map(t => ({ 
+      coefficient: t.coefficient / (t.power + 1), 
+      power: t.power + 1 
+    }));
+    return formatTerms(integralTerms) + ' + C';
+  } catch {
+    return 'Error';
+  }
 };

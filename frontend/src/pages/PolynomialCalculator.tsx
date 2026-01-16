@@ -1,8 +1,12 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import Navbar from "@/components/Navbar";
-import { parsePolynomial, formatTerms, formatTermsLatex, Term } from "@/lib/calculusUtils";
+import MathKeyboard from "@/components/MathKeyboard";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
+  parsePolynomial,
+  formatTerms,
+  formatTermsLatex,
+  Term,
   evaluatePolynomial,
   findRoots,
   addPolynomials,
@@ -1026,19 +1030,17 @@ const PolynomialCalculator = () => {
             <div className="space-y-3">
               {/* Polynomial Input */}
               <div className="calculator-card animate-slide-up">
-                <label className="text-sm font-medium text-muted-foreground mb-2 block">
-                  Polynomial P(x)
+                <label className="text-sm font-medium text-muted-foreground mb-3 block">
+                  {t.polynomialCalculator.polyP}
                 </label>
-                <input
-                  type="text"
+                <MathKeyboard
                   value={polyA}
-                  onChange={(e) => setPolyA(e.target.value)}
-                  className="math-input w-full mb-2 text-sm sm:text-base"
+                  onChange={setPolyA}
                   placeholder="e.g., x^2 - 5x + 6"
                 />
 
-                <label className="text-sm font-medium text-muted-foreground mb-2 block">
-                  Polynomial Q(x) <span className="text-xs">(for operations)</span>
+                <label className="text-sm font-medium text-muted-foreground mb-2 mt-4 block">
+                  {t.polynomialCalculator.polyQ} <span className="text-xs">{t.polynomialCalculator.forOperations}</span>
                 </label>
                 <input
                   type="text"
@@ -1119,7 +1121,7 @@ const PolynomialCalculator = () => {
                 <div className="math-display animate-scale-in overflow-x-auto">
                   <div className="text-sm text-muted-foreground mb-2">
                     {result.titleKey === "rootsOf" && t.polynomialCalculator.rootsOf}
-                    {result.titleKey === "evaluate" && `P(${result.x})`}
+                    {result.titleKey === "evaluate" && t.polynomialCalculator.evaluate}
                     {result.titleKey === "add" && "P(x) + Q(x)"}
                     {result.titleKey === "subtract" && "P(x) - Q(x)"}
                     {result.titleKey === "multiply" && "P(x) × Q(x)"}
