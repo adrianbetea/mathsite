@@ -109,7 +109,7 @@ const MatrixInput = ({ rows, cols, value, onChange, label }: MatrixInputProps) =
 
   return (
     <div className="space-y-3">
-      {label && <label className="text-sm font-medium text-muted-foreground block">{label}:</label>}
+      {label && <label className="text-sm font-medium text-muted-foreground block">{label}</label>}
       <div className="inline-flex items-center justify-center w-full">
         <div className="grid gap-1" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
           {value.map((row, ri) =>

@@ -5,8 +5,9 @@ import { getDailyExercise, type MatrixExercise } from "../lib/matrixExercises";
 import { getDailyPolynomialExercise, type PolynomialExercise } from "../lib/polynomialExercises";
 import { getDailyCalculusExercise, type CalculusExercise } from "../lib/calculusExercises";
 import { Textarea } from "@/components/ui/textarea";
+import MatrixInput from "@/components/MatrixInput";
 import katex from "katex";
-import { add, subtract, scalarMultiply, multiply, transpose, determinant, trace, rank, hadamardProduct, inverse } from "../lib/matrixUtils";
+import { add, subtract, scalarMultiply, multiply, transpose, determinant, trace, rank, hadamardProduct, inverse, createMatrix } from "../lib/matrixUtils";
 
 const getDifficultyColor = (difficulty: string) => {
   switch (difficulty) {
@@ -39,11 +40,32 @@ const DailyChallenge = () => {
   const [challengeType, setChallengeType] = useState<ChallengeType>("matrix");
   const [exercise, setExercise] = useState<DailyExercise | null>(null);
   const [answer, setAnswer] = useState("");
+  const [matrixAnswer, setMatrixAnswer] = useState<number[][]>([]);
   const [answerStatus, setAnswerStatus] = useState<"idle" | "correct" | "wrong">("idle");
 
   const buildMatrixTemplate = (rows: number, cols: number): string => {
     const matrix = Array.from({ length: rows }, () => Array.from({ length: cols }, () => 0));
-    return matrix.map(row => `[${row.join(" ")}]`).join("\n");
+    return matrix.map(row => `(${row.join(" ")})`).join("\n");
+  };
+
+  const getExpectedMatrixShape = (data: MatrixExercise): { rows: number; cols: number } | null => {
+    const rows = data.matrixA.length;
+    const cols = data.matrixA[0].length;
+
+    switch (data.operation) {
+      case "add":
+      case "subtract":
+      case "hadamard":
+      case "scalarMult":
+      case "inverse":
+        return { rows, cols };
+      case "matrixMult":
+        return data.matrixB ? { rows, cols: data.matrixB[0].length } : null;
+      case "transpose":
+        return { rows: cols, cols: rows };
+      default:
+        return null;
+    }
   };
 
   const getMatrixAnswerTemplateForExercise = (data: MatrixExercise): string => {
@@ -70,8 +92,15 @@ const DailyChallenge = () => {
     if (challengeType === "matrix") {
       const dailyExercise = getDailyExercise();
       setExercise({ type: "matrix", data: dailyExercise });
-      const template = getMatrixAnswerTemplateForExercise(dailyExercise);
-      setAnswer(template);
+      const expectedShape = getExpectedMatrixShape(dailyExercise);
+      if (expectedShape) {
+        setMatrixAnswer(createMatrix(expectedShape.rows, expectedShape.cols));
+        setAnswer("");
+      } else {
+        const template = getMatrixAnswerTemplateForExercise(dailyExercise);
+        setAnswer(template);
+        setMatrixAnswer([]);
+      }
       setAnswerStatus("idle");
       return;
     }
@@ -232,13 +261,6 @@ const DailyChallenge = () => {
     calculus: text.calculus,
   };
 
-  const tryItText =
-    challengeType === "matrix"
-      ? text.tryMatrix
-      : challengeType === "polynomials"
-        ? text.tryPolynomials
-        : text.tryCalculus;
-
   const matrixToLatex = (matrix: number[][]) => {
     const rows = matrix.map(row => row.join(" & ")).join(" \\\\ ");
     return `\\begin{bmatrix} ${rows} \\end{bmatrix}`;
@@ -255,22 +277,6 @@ const DailyChallenge = () => {
     } catch {
       return { __html: latex };
     }
-  };
-
-  const parseMatrixInput = (input: string): number[][] | null => {
-    const cleaned = input
-      .replace(/\]\s*\[/g, ";")
-      .replace(/[\[\]]/g, "")
-      .replace(/\n/g, ";")
-      .trim();
-
-    if (!cleaned) return null;
-
-    const rows = cleaned.split(";").map(row => row.trim()).filter(Boolean);
-    const matrix = rows.map(row => row.split(/[ ,]+/).map(value => Number(value)).filter(value => !Number.isNaN(value)));
-
-    if (!matrix.length || matrix.some(row => row.length !== matrix[0].length || row.length === 0)) return null;
-    return matrix;
   };
 
   const matricesEqual = (a: number[][], b: number[][], tolerance = 1e-6): boolean => {
@@ -370,12 +376,11 @@ const DailyChallenge = () => {
       }
 
       if (Array.isArray(expected)) {
-        const parsed = parseMatrixInput(answer);
-        if (!parsed) {
+        if (!matrixAnswer.length) {
           setAnswerStatus("wrong");
           return;
         }
-        setAnswerStatus(matricesEqual(parsed, expected) ? "correct" : "wrong");
+        setAnswerStatus(matricesEqual(matrixAnswer, expected) ? "correct" : "wrong");
         return;
       }
 
@@ -556,21 +561,36 @@ const DailyChallenge = () => {
 
         <div className="mt-2">
           <label className="block text-xs font-medium text-muted-foreground mb-1.5">{text.answerLabel}</label>
-          <Textarea
-            value={answer}
-            onChange={(event) => {
-              setAnswerStatus("idle");
-              setAnswer(event.target.value);
-            }}
-            placeholder={text.answerPlaceholder}
-            rows={exercise.type === "matrix" ? 4 : 2}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                event.preventDefault();
-                checkAnswer();
-              }
-            }}
-          />
+          {exercise.type === "matrix" && getExpectedMatrixShape(exercise.data) ? (
+            <div className="bg-background p-2 rounded border border-border">
+              <MatrixInput
+                rows={getExpectedMatrixShape(exercise.data)!.rows}
+                cols={getExpectedMatrixShape(exercise.data)!.cols}
+                value={matrixAnswer}
+                onChange={(value) => {
+                  setAnswerStatus("idle");
+                  setMatrixAnswer(value);
+                }}
+                label=""
+              />
+            </div>
+          ) : (
+            <Textarea
+              value={answer}
+              onChange={(event) => {
+                setAnswerStatus("idle");
+                setAnswer(event.target.value);
+              }}
+              placeholder={text.answerPlaceholder}
+              rows={exercise.type === "matrix" ? 4 : 2}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  checkAnswer();
+                }
+              }}
+            />
+          )}
           <div className="mt-1.5 flex items-center gap-2">
             <button
               onClick={checkAnswer}
@@ -606,9 +626,6 @@ const DailyChallenge = () => {
           </div>
         )}
 
-        <p className="mt-2 text-xs text-center text-muted-foreground italic">
-          {tryItText}
-        </p>
       </div>
     </div>
   );

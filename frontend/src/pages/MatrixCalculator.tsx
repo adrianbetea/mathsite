@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import MatrixInput from "@/components/MatrixInput";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -303,7 +303,7 @@ const MatrixCalculator = () => {
         case "add": {
           const sum = add(matrixA, matrixB);
           if (sum) {
-            setResult(`Matrix Addition: Adding corresponding elements from each matrix.\n\nA + B =\n${formatMatrix(sum)}`);
+            setResult(`${t.matrixCalculator.matrixAdditionDescription}\n\nA + B =\n${formatMatrix(sum)}`);
             setCurrentOperation({
               type: "add",
               matrices: [matrixA, matrixB],
@@ -662,6 +662,12 @@ const MatrixCalculator = () => {
         return generateThreeMatrixMultiplicationSteps(matrixA, matrixB, matrixC, result2!, result!, t);
       default:
         return "";
+    }
+  }, [currentOperation, t]);
+
+  useEffect(() => {
+    if (currentOperation?.type === "add" && currentOperation.result) {
+      setResult(`${t.matrixCalculator.matrixAdditionDescription}\n\nA + B =\n${formatMatrix(currentOperation.result)}`);
     }
   }, [currentOperation, t]);
 
@@ -1137,7 +1143,7 @@ const MatrixCalculator = () => {
                   {/* Steps Dropdown */}
                   {showSteps && (
                     <div className="mt-4 p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up">
-                      <h3 className="text-sm font-semibold text-foreground mb-2">Detailed Steps:</h3>
+                      <h3 className="text-sm font-semibold text-foreground mb-2">{t.matrixCalculator.detailedStepsLabel}</h3>
                       <div className="text-sm" dangerouslySetInnerHTML={{ __html: steps }} />
                     </div>
                   )}

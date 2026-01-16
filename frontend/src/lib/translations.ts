@@ -57,6 +57,8 @@ export const translations = {
       result: "Result",
       showSteps: "Show Steps",
       hideSteps: "Hide Steps",
+      detailedStepsLabel: "Detailed Steps:",
+      matrixAdditionDescription: "Matrix Addition: Adding corresponding elements from each matrix.",
       error: "Error",
       // Common terms used in step explanations
       definition: "Definition",
@@ -335,6 +337,8 @@ export const translations = {
       result: "Resultado",
       showSteps: "Mostrar Pasos",
       hideSteps: "Ocultar Pasos",
+      detailedStepsLabel: "Pasos detallados:",
+      matrixAdditionDescription: "Suma de matrices: sumando los elementos correspondientes de cada matriz.",
       error: "Error",
       // Common terms used in step explanations
       definition: "Definición",
@@ -613,6 +617,8 @@ export const translations = {
       result: "Résultat",
       showSteps: "Afficher les Étapes",
       hideSteps: "Masquer les Étapes",
+      detailedStepsLabel: "Étapes détaillées :",
+      matrixAdditionDescription: "Addition de matrices : addition des éléments correspondants de chaque matrice.",
       error: "Erreur",
       // Common terms used in step explanations
       definition: "Définition",
@@ -891,6 +897,8 @@ export const translations = {
       result: "Ergebnis",
       showSteps: "Schritte Anzeigen",
       hideSteps: "Schritte Ausblenden",
+      detailedStepsLabel: "Detaillierte Schritte:",
+      matrixAdditionDescription: "Matrixaddition: Entsprechende Elemente jeder Matrix addieren.",
       error: "Fehler",
       // Common terms used in step explanations
       definition: "Definition",
@@ -1169,6 +1177,8 @@ export const translations = {
       result: "Wynik",
       showSteps: "Pokaż Kroki",
       hideSteps: "Ukryj Kroki",
+      detailedStepsLabel: "Szczegółowe kroki:",
+      matrixAdditionDescription: "Dodawanie macierzy: dodawanie odpowiadających elementów każdej macierzy.",
       error: "Błąd",
       // Common terms used in step explanations
       definition: "Definicja",
@@ -1444,6 +1454,8 @@ export const translations = {
       result: "Rezultat",
       showSteps: "Arată Pașii",
       hideSteps: "Ascunde Pașii",
+      detailedStepsLabel: "Pași detaliați:",
+      matrixAdditionDescription: "Adunarea matricilor: se adună elementele corespunzătoare din fiecare matrice.",
       error: "Eroare",
       // Common terms used in step explanations
       definition: "Definiție",

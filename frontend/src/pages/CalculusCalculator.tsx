@@ -24,7 +24,7 @@ const renderMath = (expr: string): string => {
       .replace(/cos\(x\)/g, "\\cos(x)")
       .replace(/tan\(x\)/g, "\\tan(x)")
       .replace(/ln\(x\)/g, "\\ln(x)")
-      .replace(/ex/g, "e^{x}");
+      .replace(/(^|[^a-zA-Z\\])ex(?=[^a-zA-Z]|$)/g, "$1e^{x}");
     
     return katex.renderToString(latex, {
       throwOnError: false,
@@ -49,7 +49,7 @@ const CalculusCalculator = () => {
     if (type === 'derivative') {
       steps.push(`f(x) = ${expr}`);
       steps.push(`\\frac{d}{dx}[f(x)] = \\, ?`);
-      steps.push(`\\underline{${t.calculusCalculator.diffRules}}`);
+      steps.push(`\\underline{\\text{${t.calculusCalculator.diffRules}}}`);
 
       // Check for specific patterns
       if (cleaned.includes('sin(x)')) {
@@ -117,7 +117,7 @@ const CalculusCalculator = () => {
       // Integral
       steps.push(`f(x) = ${expr}`);
       steps.push(`\\int f(x) \\, dx = \\, ?`);
-      steps.push(`\\underline{${t.calculusCalculator.intRules}}`);
+      steps.push(`\\underline{\\text{${t.calculusCalculator.intRules}}}`);
 
       if (cleaned.includes('sin(x)')) {
         steps.push(`\\int \\sin(x) \\, dx = -\\cos(x) + C`);

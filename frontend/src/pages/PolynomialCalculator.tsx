@@ -261,6 +261,8 @@ const PolynomialCalculator = () => {
     const showXAxis = viewMinY <= 0 && viewMaxY >= 0;
     const showYAxis = viewMinX <= 0 && viewMaxX >= 0;
 
+    const labelFontSize = Math.min(36, Math.max(12, 16 * Math.sqrt(zoomLevel)));
+
     // Mouse handlers
     const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -506,8 +508,8 @@ const PolynomialCalculator = () => {
                     />
                     <text
                       x={x}
-                      y={y + 20}
-                      fontSize="11"
+                      y={y + 28}
+                      fontSize={labelFontSize}
                       fill="rgb(239, 68, 68)"
                       textAnchor="middle"
                       fontWeight="bold"
@@ -533,9 +535,9 @@ const PolynomialCalculator = () => {
                 strokeWidth="2"
               />
               <text
-                x={yAxisX + 15}
+                x={yAxisX + 22}
                 y={scaleY(yIntercept) + 5}
-                fontSize="11"
+                fontSize={labelFontSize}
                 fill="rgb(34, 197, 94)"
                 fontWeight="bold"
               >
