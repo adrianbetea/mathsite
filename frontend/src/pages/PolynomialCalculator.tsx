@@ -56,6 +56,8 @@ const PolynomialCalculator = () => {
   const [error, setError] = useState("");
   const [showSteps, setShowSteps] = useState(false);
   const [currentOperation, setCurrentOperation] = useState<{ op: string; termsA: Term[]; termsB?: Term[]; x?: number } | null>(null);
+  const [isComputing, setIsComputing] = useState(false);
+  const [computingOp, setComputingOp] = useState<string | null>(null);
   const [plotData, setPlotData] = useState<{ x: number; y: number }[]>([]);
   const [hoverPoint, setHoverPoint] = useState<{ x: number; y: number } | null>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -925,7 +927,11 @@ const PolynomialCalculator = () => {
     setError("");
     setResult(null);
     setShowSteps(false);
+    setIsComputing(true);
+    setComputingOp(op);
 
+    // Use setTimeout to allow UI to update before computation
+    setTimeout(() => {
     try {
       const termsA = parsePolynomial(polyA);
       const termsB = parsePolynomial(polyB);
@@ -1015,7 +1021,11 @@ const PolynomialCalculator = () => {
       }
     } catch (e) {
       setError("An error occurred. Check your input format.");
+    } finally {
+      setIsComputing(false);
+      setComputingOp(null);
     }
+    }, 50);
   };
 
   return (
@@ -1117,7 +1127,29 @@ const PolynomialCalculator = () => {
               {/* Result */}
               {error && <div className="result-error animate-scale-in text-sm">{error}</div>}
 
-              {result && (
+              {/* Loading State */}
+              {isComputing && (
+                <div className="math-display animate-scale-in overflow-x-auto">
+                  <div className="text-sm text-muted-foreground mb-2">
+                    {computingOp === "roots" && t.polynomialCalculator.rootsOf}
+                    {computingOp === "evaluate" && t.polynomialCalculator.evaluate}
+                    {computingOp === "add" && "P(x) + Q(x)"}
+                    {computingOp === "subtract" && "P(x) - Q(x)"}
+                    {computingOp === "multiply" && "P(x) × Q(x)"}
+                    {computingOp === "factor" && t.polynomialCalculator.factor}
+                  </div>
+                  <div className="flex items-center gap-3 py-4">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    </div>
+                    <span className="text-muted-foreground text-sm">Computing...</span>
+                  </div>
+                </div>
+              )}
+
+              {!isComputing && result && (
                 <div className="math-display animate-scale-in overflow-x-auto">
                   <div className="text-sm text-muted-foreground mb-2">
                     {result.titleKey === "rootsOf" && t.polynomialCalculator.rootsOf}
@@ -1135,7 +1167,7 @@ const PolynomialCalculator = () => {
               )}
 
               {/* Show Steps Button */}
-              {result && currentOperation && (
+              {!isComputing && result && currentOperation && (
                 <div className="mt-4">
                   <button
                     onClick={() => setShowSteps(!showSteps)}

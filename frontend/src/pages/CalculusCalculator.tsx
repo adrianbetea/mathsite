@@ -41,6 +41,10 @@ const expressionToLatex = (expr: string): string => {
   latex = latex.replace(/√\s*\(([^)]+)\)/g, '\\sqrt{$1}');
   latex = latex.replace(/√\s*([a-zA-Z0-9]+)/g, '\\sqrt{$1}');
   
+  // Handle root(expr, n) -> nth root
+  latex = latex.replace(/root\(([^,]+),\s*2\)/gi, '\\sqrt{$1}');
+  latex = latex.replace(/root\(([^,]+),\s*(\d+)\)/gi, '\\sqrt[$2]{$1}');
+  
   // Handle multiplication
   latex = latex.replace(/\*/g, ' \\cdot ');
   
@@ -272,8 +276,23 @@ const CalculusCalculator = () => {
             </div>
           </div>
 
+          {/* Loading State */}
+          {isComputing && (
+            <div className="math-display animate-scale-in overflow-x-auto">
+              <div className="text-sm text-muted-foreground mb-2">{t.calculusCalculator.derivativeResult}</div>
+              <div className="flex items-center gap-3 py-4">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                </div>
+                <span className="text-muted-foreground text-sm">Computing...</span>
+              </div>
+            </div>
+          )}
+
           {/* Result */}
-          {result && (
+          {!isComputing && result && (
             <div className="math-display animate-scale-in overflow-x-auto">
               <div className="text-sm text-muted-foreground mb-2">{result.type}</div>
               <div 
@@ -284,7 +303,7 @@ const CalculusCalculator = () => {
           )}
 
           {/* Show Steps Button */}
-          {result && currentOperation && (
+          {!isComputing && result && currentOperation && (
             <div className="mt-4">
               <button
                 onClick={() => setShowSteps(!showSteps)}

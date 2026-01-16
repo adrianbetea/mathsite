@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Calculator, FunctionSquare, Grid3X3, Home, Globe, ChevronDown, Menu, X } from "lucide-react";
+import { Calculator, FunctionSquare, Grid3X3, Home, Globe, ChevronDown, Menu, X, Sun, Moon } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useTheme } from "../contexts/ThemeContext";
 
 const languages = [
   { code: "en" as const, label: "English", flag: "🇺🇸" },
@@ -15,6 +16,7 @@ const languages = [
 const Navbar = () => {
   const location = useLocation();
   const { language, languageCode, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -109,10 +111,40 @@ const Navbar = () => {
                 </>
               )}
             </div>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="relative flex items-center w-14 h-8 px-1 bg-secondary/50 hover:bg-secondary rounded-full transition-all"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              <Sun className={`absolute left-1.5 w-4 h-4 transition-all ${theme === "light" ? "text-yellow-500 opacity-100" : "text-muted-foreground opacity-50"}`} />
+              <Moon className={`absolute right-1.5 w-4 h-4 transition-all ${theme === "dark" ? "text-blue-400 opacity-100" : "text-muted-foreground opacity-50"}`} />
+              <span 
+                className={`w-5 h-5 bg-foreground rounded-full shadow-md transition-all duration-300 ${
+                  theme === "dark" ? "translate-x-6" : "translate-x-0"
+                }`}
+              />
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-2">
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="relative flex items-center w-12 h-7 px-0.5 bg-secondary/50 hover:bg-secondary rounded-full transition-all"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              <Sun className={`absolute left-1 w-3.5 h-3.5 transition-all ${theme === "light" ? "text-yellow-500 opacity-100" : "text-muted-foreground opacity-50"}`} />
+              <Moon className={`absolute right-1 w-3.5 h-3.5 transition-all ${theme === "dark" ? "text-blue-400 opacity-100" : "text-muted-foreground opacity-50"}`} />
+              <span 
+                className={`w-4 h-4 bg-foreground rounded-full shadow-md transition-all duration-300 ${
+                  theme === "dark" ? "translate-x-5" : "translate-x-0.5"
+                }`}
+              />
+            </button>
+
             {/* Mobile Language Selector */}
             <div className="relative">
               <button

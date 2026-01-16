@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Outlet, useParams } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { HreflangTags } from "./components/HreflangTags";
 import { LanguageRedirect } from "./components/LanguageRedirect";
 import Footer from "./components/Footer";
@@ -30,8 +31,9 @@ const LanguageLayout = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <div className="min-h-screen bg-background">
+    <ThemeProvider>
+      <TooltipProvider>
+        <div className="min-h-screen bg-background">
         <Toaster />
         <Sonner />
         <BrowserRouter>
@@ -47,9 +49,10 @@ const App = () => (
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </div>
-    </TooltipProvider>
+          </BrowserRouter>
+        </div>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

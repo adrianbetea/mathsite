@@ -251,6 +251,8 @@ const MatrixCalculator = () => {
   } | null>(null);
   const [showSteps, setShowSteps] = useState(false);
   const [error, setError] = useState<string>("");
+  const [isComputing, setIsComputing] = useState(false);
+  const [computingOp, setComputingOp] = useState<string | null>(null);
 
   const updateMatrixASize = (rows: number, cols: number) => {
     setRowsA(rows);
@@ -297,7 +299,11 @@ const MatrixCalculator = () => {
     setResult("");
     setCurrentOperation(null);
     setShowSteps(false);
+    setIsComputing(true);
+    setComputingOp(operation);
 
+    // Use setTimeout to allow UI to update before computation
+    setTimeout(() => {
     try {
       switch (operation) {
         case "add": {
@@ -605,7 +611,11 @@ const MatrixCalculator = () => {
       }
     } catch (e) {
       setError("An error occurred during calculation: " + (e as Error).message);
+    } finally {
+      setIsComputing(false);
+      setComputingOp(null);
     }
+    }, 50);
   };
 
   // Generate steps dynamically based on currentOperation and language
@@ -1013,8 +1023,25 @@ const MatrixCalculator = () => {
             )}
           </div>
 
+          {/* Loading State */}
+          {isComputing && (
+            <div className="math-display animate-scale-in">
+              <div className="text-sm text-muted-foreground mb-2">
+                {t.matrixCalculator.result}
+              </div>
+              <div className="flex items-center gap-3 py-4">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                </div>
+                <span className="text-muted-foreground text-sm">Computing...</span>
+              </div>
+            </div>
+          )}
+
           {/* Result */}
-          {(result || error) && (
+          {!isComputing && (result || error) && (
             <div
               className={`animate-scale-in ${error ? "result-error" : "math-display"}`}
             >
