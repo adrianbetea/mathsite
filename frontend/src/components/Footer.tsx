@@ -14,6 +14,15 @@ const Footer = () => {
           {t.footer.privacyPolicy}
         </Link>
         <div className="text-xs text-muted-foreground">
+          Contact us at{" "}
+          <a 
+            href="mailto:math.hub.support@gmail.com" 
+            className="text-primary hover:underline"
+          >
+            math.hub.support@gmail.com
+          </a>
+        </div>
+        <div className="text-xs text-muted-foreground">
           © 2026 MathHub. All rights reserved.
         </div>
       </div>
