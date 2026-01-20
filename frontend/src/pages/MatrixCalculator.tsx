@@ -51,6 +51,7 @@ import {
   matrixExponential,
   powerIteration,
   formatMatrix,
+  formatNumberDisplay,
 } from "@/lib/matrixUtils";
 
 // Convert matrix to LaTeX format for KaTeX rendering
@@ -58,7 +59,13 @@ const matrixToLatex = (matrix: number[][]): string => {
   const rows = matrix.map(row => 
     row.map(val => {
       const num = Number(val);
-      return Number.isInteger(num) ? num.toString() : num.toFixed(4);
+      // Check if it's close to an integer
+      const rounded = Math.round(num);
+      if (Math.abs(num - rounded) < 1e-10) {
+        return rounded.toString();
+      }
+      // Remove trailing zeros
+      return parseFloat(num.toFixed(6)).toString();
     }).join(" & ")
   ).join(" \\\\ ");
   
@@ -386,7 +393,7 @@ const MatrixCalculator = () => {
         case "determinant": {
           const det = determinant(matrixA);
           if (det !== null) {
-            setResult(`Determinant: A scalar value that represents the scaling factor of the linear transformation.\nIf det = 0, the matrix is singular (not invertible).\n\ndet(A) = ${det.toFixed(6)}`);
+            setResult(`Determinant: A scalar value that represents the scaling factor of the linear transformation.\nIf det = 0, the matrix is singular (not invertible).\n\ndet(A) = ${formatNumberDisplay(det)}`);
             setCurrentOperation({
               type: "determinant",
               matrices: [matrixA],
@@ -421,7 +428,7 @@ const MatrixCalculator = () => {
         case "trace": {
           const tr = trace(matrixA);
           if (tr !== null) {
-            setResult(`Trace: The sum of the elements on the main diagonal.\nEquals the sum of eigenvalues and is invariant under similarity transformations.\n\ntr(A) = ${tr.toFixed(6)}`);
+            setResult(`Trace: The sum of the elements on the main diagonal.\nEquals the sum of eigenvalues and is invariant under similarity transformations.\n\ntr(A) = ${formatNumberDisplay(tr)}`);
             setCurrentOperation({
               type: "trace",
               matrices: [matrixA],
@@ -445,7 +452,7 @@ const MatrixCalculator = () => {
         case "eigenvalue": {
           const eigen = powerIteration(matrixA);
           if (eigen) {
-            setResult(`Eigenvalue & Eigenvector: If Av = λv, then λ is an eigenvalue and v is an eigenvector.\nShows the scaling factor and direction that remain unchanged by the transformation.\n\nDominant Eigenvalue: λ = ${eigen.eigenvalue.toFixed(6)}\nCorresponding Eigenvector: v = [${eigen.eigenvector.map(v => v.toFixed(4)).join(", ")}]`);
+            setResult(`Eigenvalue & Eigenvector: If Av = λv, then λ is an eigenvalue and v is an eigenvector.\nShows the scaling factor and direction that remain unchanged by the transformation.\n\nDominant Eigenvalue: λ = ${formatNumberDisplay(eigen.eigenvalue)}\nCorresponding Eigenvector: v = [${eigen.eigenvector.map(v => formatNumberDisplay(v)).join(", ")}]`);
             setCurrentOperation({
               type: "eigenvalue",
               matrices: [matrixA],
@@ -459,7 +466,7 @@ const MatrixCalculator = () => {
         }
         case "frobenius": {
           const norm = frobeniusNorm(matrixA);
-          setResult(`Frobenius Norm: The square root of the sum of all squared elements.\nAlso called the Euclidean norm or Hilbert-Schmidt norm.\n\n$||A||_F = ${norm.toFixed(6)}$`);
+          setResult(`Frobenius Norm: The square root of the sum of all squared elements.\nAlso called the Euclidean norm or Hilbert-Schmidt norm.\n\n$||A||_F = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "frobenius",
             matrices: [matrixA],
@@ -469,7 +476,7 @@ const MatrixCalculator = () => {
         }
         case "max": {
           const norm = maxNorm(matrixA);
-          setResult(`Max Norm: The maximum absolute value among all elements in the matrix.\nAlso called the element-wise infinity norm.\n\n$||A||_{\\text{max}} = ${norm.toFixed(6)}$`);
+          setResult(`Max Norm: The maximum absolute value among all elements in the matrix.\nAlso called the element-wise infinity norm.\n\n$||A||_{\\text{max}} = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "max",
             matrices: [matrixA],
@@ -479,7 +486,7 @@ const MatrixCalculator = () => {
         }
         case "one": {
           const norm = oneNorm(matrixA);
-          setResult(`1-Norm: The maximum absolute column sum.\nUsed to measure sensitivity in numerical computations.\n\n$||A||_1 = ${norm.toFixed(6)}$`);
+          setResult(`1-Norm: The maximum absolute column sum.\nUsed to measure sensitivity in numerical computations.\n\n$||A||_1 = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "one",
             matrices: [matrixA],
@@ -489,7 +496,7 @@ const MatrixCalculator = () => {
         }
         case "infinity": {
           const norm = infinityNorm(matrixA);
-          setResult(`∞-Norm: The maximum absolute row sum.\nRepresents the maximum output for unit inputs.\n\n$||A||_{\\infty} = ${norm.toFixed(6)}$`);
+          setResult(`∞-Norm: The maximum absolute row sum.\nRepresents the maximum output for unit inputs.\n\n$||A||_{\\infty} = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "infinity",
             matrices: [matrixA],

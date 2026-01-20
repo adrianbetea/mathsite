@@ -79,6 +79,9 @@ export const LanguageProvider = ({
     // Save preference to localStorage
     localStorage.setItem('preferredLanguage', newLangCode);
     
+    // Also save to cookie for Cloudflare middleware to read
+    document.cookie = `preferredLanguage=${newLangCode};path=/;max-age=31536000;SameSite=Lax`;
+    
     // Navigate to the same page but with new language
     const currentPath = location.pathname;
     const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}(-[a-z]{2})?/, '') || '';

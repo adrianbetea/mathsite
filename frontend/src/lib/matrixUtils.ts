@@ -26,9 +26,88 @@ export const createMatrix = (rows: number, cols: number, defaultValue = 0): Matr
     .map(() => Array(cols).fill(defaultValue));
 };
 
+/**
+ * Format a number for display - shows integers without decimals,
+ * and decimals only when necessary (removing trailing zeros)
+ */
+export const formatNumberDisplay = (num: number): string => {
+  // Check if it's very close to an integer (handle floating point errors)
+  const rounded = Math.round(num);
+  if (Math.abs(num - rounded) < 1e-10) {
+    return rounded.toString();
+  }
+  
+  // Try to represent as a simple fraction
+  const fraction = toFraction(num);
+  if (fraction) {
+    return fraction;
+  }
+  
+  // Otherwise show up to 6 decimal places, removing trailing zeros
+  const fixed = num.toFixed(6);
+  return parseFloat(fixed).toString();
+};
+
+/**
+ * Convert a decimal to a fraction string if it's a simple fraction
+ * Returns null if it can't be represented as a simple fraction
+ */
+const toFraction = (num: number): string | null => {
+  const tolerance = 1e-10;
+  const maxDenominator = 1000;
+  
+  const sign = num < 0 ? -1 : 1;
+  const absNum = Math.abs(num);
+  
+  // Check if it's close to an integer
+  if (Math.abs(absNum - Math.round(absNum)) < tolerance) {
+    return null; // Will be handled as integer
+  }
+  
+  // Use continued fractions algorithm to find best rational approximation
+  let bestNumerator = Math.round(absNum);
+  let bestDenominator = 1;
+  let bestError = Math.abs(absNum - bestNumerator);
+  
+  let x = absNum;
+  let a = Math.floor(x);
+  let h1 = 1, h2 = 0, k1 = 0, k2 = 1;
+  
+  for (let i = 0; i < 100; i++) {
+    const h = a * h1 + h2;
+    const k = a * k1 + k2;
+    
+    if (k > maxDenominator) break;
+    
+    const error = Math.abs(absNum - h / k);
+    if (error < bestError) {
+      bestNumerator = h;
+      bestDenominator = k;
+      bestError = error;
+    }
+    
+    if (error < tolerance) break;
+    
+    if (Math.abs(x - a) < tolerance) break;
+    x = 1 / (x - a);
+    a = Math.floor(x);
+    h2 = h1; h1 = h;
+    k2 = k1; k1 = k;
+  }
+  
+  // Only return fraction if error is very small and denominator > 1
+  if (bestError < tolerance && bestDenominator > 1 && bestDenominator <= 100) {
+    const finalNumerator = bestNumerator * sign;
+    return `${finalNumerator}/${bestDenominator}`;
+  }
+  
+  return null;
+};
+
 export const formatMatrix = (mat: MatrixData): string => {
-  const maxLen = Math.max(...mat.flat().map(v => v.toFixed(4).length));
-  return mat.map((row) => `(${row.map((v) => v.toFixed(4).padStart(maxLen)).join(", ")})`).join("\n");
+  const formatted = mat.map(row => row.map(v => formatNumberDisplay(v)));
+  const maxLen = Math.max(...formatted.flat().map(s => s.length));
+  return formatted.map((row) => `(${row.map((v) => v.padStart(maxLen)).join(", ")})`).join("\n");
 };
 
 export const copyMatrix = (mat: MatrixData): MatrixData => {
