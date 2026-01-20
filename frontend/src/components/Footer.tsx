@@ -16,10 +16,10 @@ const Footer = () => {
         <div className="text-xs text-muted-foreground">
           Contact us at{" "}
           <a 
-            href="mailto:math.hub.support@gmail.com" 
+            href="mailto:mathhub.app@gmail.com" 
             className="text-primary hover:underline"
           >
-            math.hub.support@gmail.com
+            mathhub.app@gmail.com
           </a>
         </div>
         <div className="text-xs text-muted-foreground">
