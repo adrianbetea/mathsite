@@ -785,12 +785,12 @@ const MatrixCalculator = () => {
             {showMatrixC && (
               <div className="calculator-card animate-slide-up">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
-                  <label className="text-sm font-medium text-muted-foreground">Matrix C Size</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t.matrixCalculator.matrixCSize}</label>
                   <button
                     onClick={() => setShowMatrixC(false)}
                     className="text-xs px-3 py-1 rounded bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-all"
                   >
-                    Remove Matrix C
+                    {t.matrixCalculator.removeMatrixC}
                   </button>
                 </div>
                 <div className="flex flex-wrap gap-2 items-center">
@@ -802,7 +802,7 @@ const MatrixCalculator = () => {
                     onChange={(e) => updateMatrixCSize(parseInt(e.target.value) || 1, colsC)}
                     onFocus={(e) => e.target.select()}
                     className="w-16 sm:w-20 px-2 sm:px-3 py-2 bg-secondary border border-border rounded-lg text-center text-sm"
-                    placeholder="Rows"
+                    placeholder={t.matrixCalculator.rows}
                   />
                   <span className="text-muted-foreground">×</span>
                   <input
@@ -813,7 +813,7 @@ const MatrixCalculator = () => {
                     onChange={(e) => updateMatrixCSize(rowsC, parseInt(e.target.value) || 1)}
                     onFocus={(e) => e.target.select()}
                     className="w-16 sm:w-20 px-2 sm:px-3 py-2 bg-secondary border border-border rounded-lg text-center text-sm"
-                    placeholder="Cols"
+                    placeholder={t.matrixCalculator.cols}
                   />
                   <div className="flex gap-1 ml-auto sm:ml-2">
                     {[2, 3].map((s) => (
@@ -881,7 +881,7 @@ const MatrixCalculator = () => {
                 onClick={() => setShowOperations(!showOperations)}
                 className="text-xs px-3 py-1 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
               >
-                {showOperations ? "Hide" : "Show"}
+                {showOperations ? t.matrixCalculator.hide : t.matrixCalculator.show}
               </button>
             </div>
 
@@ -889,19 +889,19 @@ const MatrixCalculator = () => {
               <>
             {/* Two Matrix Operations */}
             <div className="mb-4">
-              <h4 className="text-xs text-muted-foreground/70 mb-2">Two Matrix Operations</h4>
+              <h4 className="text-xs text-muted-foreground/70 mb-2">{t.matrixCalculator.twoMatrixOps}</h4>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <button onClick={() => calculate("add")} className="btn-secondary text-xs py-2">
-                  A + B (Sum)
+                  A + B ({t.matrixCalculator.sum})
                 </button>
                 <button onClick={() => calculate("subtract")} className="btn-secondary text-xs py-2">
-                  A - B (Difference)
+                  A - B ({t.matrixCalculator.difference})
                 </button>
                 <button onClick={() => calculate("multiply")} className="btn-accent text-xs py-2">
-                  A × B (Product)
+                  A × B ({t.matrixCalculator.product})
                 </button>
                 <button onClick={() => calculate("hadamard")} className="btn-accent text-xs py-2">
-                  A ⊙ B (Hadamard)
+                  A ⊙ B ({t.matrixCalculator.hadamardSimple})
                 </button>
               </div>
             </div>
@@ -909,13 +909,13 @@ const MatrixCalculator = () => {
             {/* Three Matrix Operations */}
             {showMatrixC && (
               <div className="mb-4">
-                <h4 className="text-xs text-muted-foreground/70 mb-2">Three Matrix Operations</h4>
+                <h4 className="text-xs text-muted-foreground/70 mb-2">{t.matrixCalculator.threeMatrix}</h4>
                 <div className="grid grid-cols-2 gap-2">
                   <button onClick={() => calculate("addThree")} className="btn-secondary text-xs py-2">
-                    A + B + C (Sum)
+                    A + B + C ({t.matrixCalculator.sum})
                   </button>
                   <button onClick={() => calculate("multiplyThree")} className="btn-accent text-xs py-2">
-                    A × B × C (Product)
+                    A × B × C ({t.matrixCalculator.product})
                   </button>
                 </div>
               </div>
@@ -923,29 +923,29 @@ const MatrixCalculator = () => {
 
             {/* Single Matrix Operations */}
             <div className="mb-4">
-              <h4 className="text-xs text-muted-foreground/70 mb-2">Single Matrix Operations (Matrix A)</h4>
+              <h4 className="text-xs text-muted-foreground/70 mb-2">{t.matrixCalculator.singleMatrixOps}</h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
                 <button onClick={() => calculate("transpose")} className="btn-primary text-xs py-2">
-                  Aᵀ (Transpose)
+                  Aᵀ ({t.matrixCalculator.transpose})
                 </button>
                 <button onClick={() => calculate("inverse")} className="btn-primary text-xs py-2">
-                  A⁻¹ (Inverse)
+                  A⁻¹ ({t.matrixCalculator.inverse})
                 </button>
                 <button onClick={() => calculate("trace")} className="btn-primary text-xs py-2">
-                  tr(A) (Trace)
+                  tr(A) ({t.matrixCalculator.trace})
                 </button>
                 <button onClick={() => calculate("rank")} className="btn-primary text-xs py-2">
-                  rank(A)
+                  rank(A) ({t.matrixCalculator.rank})
                 </button>
                 <button onClick={() => calculate("eigenvalue")} className="btn-primary text-xs py-2">
-                  λ (Eigenvalue)
+                  λ ({t.matrixCalculator.eigenvalue})
                 </button>
               </div>
             </div>
 
             {/* Determinant Section */}
             <div className="mb-4">
-              <h4 className="text-xs text-muted-foreground/70 mb-2">Determinant</h4>
+              <h4 className="text-xs text-muted-foreground/70 mb-2">{t.matrixCalculator.determinant}</h4>
               <div className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-start">
                 <button onClick={() => calculate("determinant")} className="btn-primary text-xs py-2 px-4 whitespace-nowrap">
                   det(A)
@@ -956,14 +956,14 @@ const MatrixCalculator = () => {
                     onChange={(e) => setDeterminantMethod(e.target.value)}
                     className="w-full px-3 py-2 bg-secondary border border-border rounded-lg text-xs"
                   >
-                    <option value="cofactor">Expand along column</option>
-                    <option value="cofactorRow">Expand along row</option>
-                    <option value="columnZeros">Get zeros in column</option>
-                    <option value="rowZeros">Get zeros in row</option>
-                    <option value="gaussian">Gaussian elimination</option>
-                    <option value="triangle">Triangle's rule</option>
-                    <option value="sarrus">Rule of Sarrus</option>
-                    <option value="leibniz">Leibniz formula</option>
+                    <option value="cofactor">{t.matrixCalculator.expandColumn}</option>
+                    <option value="cofactorRow">{t.matrixCalculator.expandRow}</option>
+                    <option value="columnZeros">{t.matrixCalculator.zerosInColumn}</option>
+                    <option value="rowZeros">{t.matrixCalculator.zerosInRow}</option>
+                    <option value="gaussian">{t.matrixCalculator.gaussian}</option>
+                    <option value="triangle">{t.matrixCalculator.triangleRule}</option>
+                    <option value="sarrus">{t.matrixCalculator.sarrusRule}</option>
+                    <option value="leibniz">{t.matrixCalculator.leibnizFormula}</option>
                   </select>
                 </div>
               </div>
@@ -971,48 +971,48 @@ const MatrixCalculator = () => {
 
             {/* Norms */}
             <div className="mb-4">
-              <h4 className="text-xs text-muted-foreground/70 mb-2">Norms</h4>
+              <h4 className="text-xs text-muted-foreground/70 mb-2">{t.matrixCalculator.norms}</h4>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <button onClick={() => calculate("frobenius")} className="btn-secondary text-xs py-2">
-                  Frobenius
+                  {t.matrixCalculator.frobenius}
                 </button>
                 <button onClick={() => calculate("max")} className="btn-secondary text-xs py-2">
-                  Max Norm
+                  {t.matrixCalculator.max}
                 </button>
                 <button onClick={() => calculate("one")} className="btn-secondary text-xs py-2">
-                  1-Norm
+                  {t.matrixCalculator.one}
                 </button>
                 <button onClick={() => calculate("infinity")} className="btn-secondary text-xs py-2">
-                  ∞-Norm
+                  {t.matrixCalculator.infinity}
                 </button>
               </div>
             </div>
 
             {/* Decompositions */}
             <div className="mb-4">
-              <h4 className="text-xs text-muted-foreground/70 mb-2">Decompositions & Advanced</h4>
+              <h4 className="text-xs text-muted-foreground/70 mb-2">{t.matrixCalculator.decompositionsAdvanced}</h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
                 <button onClick={() => calculate("lu")} className="btn-accent text-xs py-2">
-                  LU Decomposition
+                  {t.matrixCalculator.lu}
                 </button>
                 <button onClick={() => calculate("qr")} className="btn-accent text-xs py-2">
-                  QR Decomposition
+                  {t.matrixCalculator.qr}
                 </button>
                 <button onClick={() => calculate("svd")} className="btn-accent text-xs py-2">
-                  SVD (Singular Value)
+                  SVD ({t.matrixCalculator.singularValue})
                 </button>
                 <button onClick={() => calculate("exponential")} className="btn-accent text-xs py-2">
-                  Matrix Exponential
+                  {t.matrixCalculator.exponential}
                 </button>
                 <button onClick={() => calculate("gaussian")} className="btn-accent text-xs py-2">
-                  Gaussian Elimination
+                  {t.matrixCalculator.gaussian}
                 </button>
               </div>
             </div>
 
             {/* Scalar Multiplication */}
             <div>
-              <h4 className="text-xs text-muted-foreground/70 mb-2">Scalar Multiplication</h4>
+              <h4 className="text-xs text-muted-foreground/70 mb-2">{t.matrixCalculator.scalarMultiplication}</h4>
               <div className="flex gap-2">
                 <input
                   type="number"
@@ -1022,7 +1022,7 @@ const MatrixCalculator = () => {
                   placeholder="scalar"
                 />
                 <button onClick={() => calculate("scalar")} className="btn-secondary text-xs py-2 flex-1">
-                  k × A (Scalar Mult.)
+                  k × A ({t.matrixCalculator.scalarMult})
                 </button>
               </div>
             </div>
@@ -1042,7 +1042,7 @@ const MatrixCalculator = () => {
                   <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
                   <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                 </div>
-                <span className="text-muted-foreground text-sm">Computing...</span>
+                <span className="text-muted-foreground text-sm">{t.matrixCalculator.computing}</span>
               </div>
             </div>
           )}
