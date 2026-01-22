@@ -3,9 +3,24 @@ import { Calculator, FunctionSquare, Grid3X3, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import DailyChallenge from "@/components/DailyChallenge";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useEffect } from "react";
 
 const Index = () => {
   const { languageCode, t } = useLanguage();
+
+  // 1. THIS ACTIVATES THE ADS
+  // We use useEffect to "push" the ads after the page loads
+  // 1. THIS ACTIVATES THE ADS
+  useEffect(() => {
+    try {
+      // FIX: We cast 'window' to 'any' so TypeScript stops complaining
+      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+    } catch (e) {
+      console.error("AdSense error:", e);
+    }
+  }, []);
+
   const calculators = [
     {
       title: t.nav.matrix + " Calculator",
@@ -31,7 +46,53 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      {/* Left Ad - Changed 'lg' to 'xl' to prevent covering content */}
+      <div
+        style={{
+          position: "fixed",
+          top: 80,
+          left: 0,
+          zIndex: 40, // Lower z-index so it doesn't cover dropdowns
+          width: 160,
+          height: 600, // Fixed height is better for skyscrapers
+          display: "flex",
+          alignItems: "start",
+          justifyContent: "center",
+        }}
+        className="hidden xl:flex"
+      >
+        <ins
+          className="adsbygoogle"
+          style={{ display: "inline-block", width: "160px", height: "600px" }}
+          data-ad-client="ca-pub-2857464889504106"
+          data-ad-slot="8826467849"
+        ></ins>
+      </div>
+
+      {/* Right Ad - Changed 'lg' to 'xl' */}
+      <div
+        style={{
+          position: "fixed",
+          top: 80,
+          right: 0,
+          zIndex: 40,
+          width: 160,
+          height: 600,
+          display: "flex",
+          alignItems: "start",
+          justifyContent: "center",
+        }}
+        className="hidden xl:flex"
+      >
+        <ins
+          className="adsbygoogle"
+          style={{ display: "inline-block", width: "160px", height: "600px" }}
+          data-ad-client="ca-pub-2857464889504106"
+          data-ad-slot="8826467849"
+        ></ins>
+      </div>
+
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-6">
