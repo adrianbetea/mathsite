@@ -330,7 +330,7 @@ const MatrixCalculator = () => {
         case "subtract": {
           const diff = subtract(matrixA, matrixB);
           if (diff) {
-            setResult(`Matrix Subtraction: Subtracting corresponding elements of matrix B from matrix A.\n\nA - B =\n${formatMatrix(diff)}`);
+            setResult(`${t.matrixCalculator.matrixSubtractionDescription}\n\nA - B =\n${formatMatrix(diff)}`);
             setCurrentOperation({
               type: "subtract",
               matrices: [matrixA, matrixB],
@@ -343,7 +343,7 @@ const MatrixCalculator = () => {
         }
         case "scalar": {
           const scaled = scalarMultiply(matrixA, scalar);
-          setResult(`Scalar Multiplication: Multiplying every element of the matrix by the scalar value ${scalar}.\n\n${scalar} × A =\n${formatMatrix(scaled)}`);
+          setResult(`${t.matrixCalculator.matrixScalarMultiplicationDescription}\n\n${scalar} × A =\n${formatMatrix(scaled)}`);
           setCurrentOperation({
             type: "scalar",
             matrices: [matrixA],
@@ -355,7 +355,7 @@ const MatrixCalculator = () => {
         case "multiply": {
           const mult = multiply(matrixA, matrixB);
           if (mult) {
-            setResult(`Matrix Multiplication: Computing dot product of rows of A with columns of B.\nNote: A must have same number of columns as B has rows.\n\nA × B =\n${formatMatrix(mult)}`);
+            setResult(`${t.matrixCalculator.matrixMultiplicationDescription}\n\nA × B =\n${formatMatrix(mult)}`);
             setCurrentOperation({
               type: "multiply",
               matrices: [matrixA, matrixB],
@@ -369,7 +369,7 @@ const MatrixCalculator = () => {
         case "hadamard": {
           const had = hadamardProduct(matrixA, matrixB);
           if (had) {
-            setResult(`Hadamard Product (Element-wise): Multiplying corresponding elements of each matrix.\nAlso known as the Schur product.\n\nA ⊙ B =\n${formatMatrix(had)}`);
+            setResult(`${t.matrixCalculator.matrixElementWiseMultiplicationDescription}\n\nA ⊙ B =\n${formatMatrix(had)}`);
             setCurrentOperation({
               type: "hadamard",
               matrices: [matrixA, matrixB],
@@ -382,7 +382,7 @@ const MatrixCalculator = () => {
         }
         case "transpose": {
           const trans = transpose(matrixA);
-          setResult(`Transpose: Flipping the matrix over its diagonal, converting rows to columns and vice versa.\n\nAᵀ =\n${formatMatrix(trans)}`);
+          setResult(`${t.matrixCalculator.matrixTransposeDescription}\n\nAᵀ =\n${formatMatrix(trans)}`);
           setCurrentOperation({
             type: "transpose",
             matrices: [matrixA],
@@ -393,7 +393,7 @@ const MatrixCalculator = () => {
         case "determinant": {
           const det = determinant(matrixA);
           if (det !== null) {
-            setResult(`Determinant: A scalar value that represents the scaling factor of the linear transformation.\nIf det = 0, the matrix is singular (not invertible).\n\ndet(A) = ${formatNumberDisplay(det)}`);
+            setResult(`${t.matrixCalculator.matrixDeterminantDescription}\nIf det = 0, the matrix is singular (not invertible).\n\ndet(A) = ${formatNumberDisplay(det)}`);
             setCurrentOperation({
               type: "determinant",
               matrices: [matrixA],
@@ -401,20 +401,20 @@ const MatrixCalculator = () => {
               method: determinantMethod
             });
           } else {
-            setError("Determinant is only defined for square matrices.");
+            setError(t.matrixCalculator.matrixDeterminantDescription + " is only defined for square matrices.");
           }
           break;
         }
         case "inverse": {
           // Check if matrix is square first
           if (matrixA.length !== matrixA[0].length) {
-            setError("Matrix inverse is only defined for square matrices (n×n).");
+            setError(t.matrixCalculator.matrixInverseDescription + " is only defined for square matrices (n×n).");
             break;
           }
           
           const inv = inverse(matrixA);
           if (inv) {
-            setResult(`Inverse: The matrix A⁻¹ such that A × A⁻¹ = I (identity matrix).\nUsed to solve linear equations: if AX = B, then X = A⁻¹B.\n\nA⁻¹ =\n${formatMatrix(inv)}`);
+            setResult(`${t.matrixCalculator.matrixInverseDescription}\nUsed to solve linear equations: if AX = B, then X = A⁻¹B.\n\nA⁻¹ =\n${formatMatrix(inv)}`);
             setCurrentOperation({
               type: "inverse",
               matrices: [matrixA],
@@ -428,7 +428,7 @@ const MatrixCalculator = () => {
         case "trace": {
           const tr = trace(matrixA);
           if (tr !== null) {
-            setResult(`Trace: The sum of the elements on the main diagonal.\nEquals the sum of eigenvalues and is invariant under similarity transformations.\n\ntr(A) = ${formatNumberDisplay(tr)}`);
+            setResult(`${t.matrixCalculator.matrixTraceDescription}\nEquals the sum of eigenvalues and is invariant under similarity transformations.\n\ntr(A) = ${formatNumberDisplay(tr)}`);
             setCurrentOperation({
               type: "trace",
               matrices: [matrixA],
@@ -441,7 +441,7 @@ const MatrixCalculator = () => {
         }
         case "rank": {
           const r = rank(matrixA);
-          setResult(`Rank: The dimension of the vector space spanned by the matrix's columns (or rows).\nRepresents the number of linearly independent rows/columns.\n\nrank(A) = ${r}`);
+          setResult(`${t.matrixCalculator.matrixRankDescription}\nRepresents the number of linearly independent rows/columns.\n\nrank(A) = ${r}`);
           setCurrentOperation({
             type: "rank",
             matrices: [matrixA],
@@ -452,7 +452,7 @@ const MatrixCalculator = () => {
         case "eigenvalue": {
           const eigen = powerIteration(matrixA);
           if (eigen) {
-            setResult(`Eigenvalue & Eigenvector: If Av = λv, then λ is an eigenvalue and v is an eigenvector.\nShows the scaling factor and direction that remain unchanged by the transformation.\n\nDominant Eigenvalue: λ = ${formatNumberDisplay(eigen.eigenvalue)}\nCorresponding Eigenvector: v = [${eigen.eigenvector.map(v => formatNumberDisplay(v)).join(", ")}]`);
+            setResult(`${t.matrixCalculator.matrixEigenvalueDescription}\nShows the scaling factor and direction that remain unchanged by the transformation.\n\nDominant Eigenvalue: λ = ${formatNumberDisplay(eigen.eigenvalue)}\nCorresponding Eigenvector: v = [${eigen.eigenvector.map(v => formatNumberDisplay(v)).join(", ")}]`);
             setCurrentOperation({
               type: "eigenvalue",
               matrices: [matrixA],
@@ -466,7 +466,7 @@ const MatrixCalculator = () => {
         }
         case "frobenius": {
           const norm = frobeniusNorm(matrixA);
-          setResult(`Frobenius Norm: The square root of the sum of all squared elements.\nAlso called the Euclidean norm or Hilbert-Schmidt norm.\n\n$||A||_F = ${formatNumberDisplay(norm)}$`);
+          setResult(`${t.matrixCalculator.matrixForbeniusNormDescription}\n\n$||A||_F = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "frobenius",
             matrices: [matrixA],
@@ -476,7 +476,7 @@ const MatrixCalculator = () => {
         }
         case "max": {
           const norm = maxNorm(matrixA);
-          setResult(`Max Norm: The maximum absolute value among all elements in the matrix.\nAlso called the element-wise infinity norm.\n\n$||A||_{\\text{max}} = ${formatNumberDisplay(norm)}$`);
+          setResult(`${t.matrixCalculator.matrixMaxNormDescription}\n\n\n$||A||_{\\text{max}} = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "max",
             matrices: [matrixA],
@@ -486,7 +486,7 @@ const MatrixCalculator = () => {
         }
         case "one": {
           const norm = oneNorm(matrixA);
-          setResult(`1-Norm: The maximum absolute column sum.\nUsed to measure sensitivity in numerical computations.\n\n$||A||_1 = ${formatNumberDisplay(norm)}$`);
+          setResult(`${t.matrixCalculator.matrixOneNormDescription}\n\n$||A||_1 = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "one",
             matrices: [matrixA],
@@ -496,7 +496,7 @@ const MatrixCalculator = () => {
         }
         case "infinity": {
           const norm = infinityNorm(matrixA);
-          setResult(`∞-Norm: The maximum absolute row sum.\nRepresents the maximum output for unit inputs.\n\n$||A||_{\\infty} = ${formatNumberDisplay(norm)}$`);
+          setResult(`${t.matrixCalculator.matrixInfinityNormDescription}\n\n$||A||_{\\infty} = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "infinity",
             matrices: [matrixA],
@@ -507,7 +507,7 @@ const MatrixCalculator = () => {
         case "lu": {
           const lu = luDecomposition(matrixA);
           if (lu) {
-            setResult(`LU Decomposition: Factorizes A into A = LU where L is lower triangular and U is upper triangular.\nUseful for solving systems of linear equations efficiently.\n\nL (Lower Triangular) =\n${formatMatrix(lu.L)}\n\nU (Upper Triangular) =\n${formatMatrix(lu.U)}`);
+            setResult(`${t.matrixCalculator.matrixLUDecompositionDescription}\n\nL (Lower Triangular) =\n${formatMatrix(lu.L)}\n\nU (Upper Triangular) =\n${formatMatrix(lu.U)}`);
             setCurrentOperation({
               type: "lu",
               matrices: [matrixA],
@@ -522,7 +522,7 @@ const MatrixCalculator = () => {
         case "qr": {
           const qr = qrDecomposition(matrixA);
           if (qr) {
-            setResult(`QR Decomposition: Factorizes A into A = QR where Q is orthogonal and R is upper triangular.\nUsed in eigenvalue algorithms and solving least squares problems.\n\nQ (Orthogonal) =\n${formatMatrix(qr.Q)}\n\nR (Upper Triangular) =\n${formatMatrix(qr.R)}`);
+            setResult(`${t.matrixCalculator.matrixQRDecompositionDescription}\n\nQ (Orthogonal) =\n${formatMatrix(qr.Q)}\n\nR (Upper Triangular) =\n${formatMatrix(qr.R)}`);
             setCurrentOperation({
               type: "qr",
               matrices: [matrixA],
@@ -537,7 +537,7 @@ const MatrixCalculator = () => {
         case "svd": {
           const svdResult = svd(matrixA);
           if (svdResult) {
-            setResult(`Singular Value Decomposition (SVD): Factorizes A into A = USVᵀ.\nReveals the geometric structure of the matrix and is used in data compression and analysis.\n\nU =\n${formatMatrix(svdResult.U)}\n\nS (Singular Values) =\n${formatMatrix(svdResult.S)}\n\nV =\n${formatMatrix(svdResult.V)}\n\nNote: This is a simplified implementation.`);
+            setResult(`${t.matrixCalculator.matrixSVDDescription}\n\nU =\n${formatMatrix(svdResult.U)}\n\nS (Singular Values) =\n${formatMatrix(svdResult.S)}\n\nV =\n${formatMatrix(svdResult.V)}\n\nNote: This is a simplified implementation.`);
             setCurrentOperation({
               type: "svd",
               matrices: [matrixA],
@@ -553,7 +553,7 @@ const MatrixCalculator = () => {
         case "exponential": {
           const exp = matrixExponential(matrixA, 15);
           if (exp) {
-            setResult(`Matrix Exponential: e^A computed using Taylor series.\nUsed in solving systems of differential equations and quantum mechanics.\n\nexp(A) =\n${formatMatrix(exp)}\n\n(Computed using 15 terms of Taylor series)`);
+            setResult(`${t.matrixCalculator.matrixExponentialDescription}\n\nexp(A) =\n${formatMatrix(exp)}\n\n(Computed using 15 terms of Taylor series)`);
             setCurrentOperation({
               type: "exponential",
               matrices: [matrixA],
@@ -567,7 +567,7 @@ const MatrixCalculator = () => {
         }
         case "gaussian": {
           const gauss = gaussianElimination(matrixA);
-          setResult(`Gaussian Elimination: Row reduction to convert matrix into row echelon form.\nUsed to solve linear systems and find matrix rank.\n\nRow Echelon Form:\n${formatMatrix(gauss.result)}`);
+          setResult(`${t.matrixCalculator.matrixGaussianEliminationDescription}\n\nRow Echelon Form:\n${formatMatrix(gauss.result)}`);
           setCurrentOperation({
             type: "gaussian",
             matrices: [matrixA],
@@ -584,7 +584,7 @@ const MatrixCalculator = () => {
           }
           const sumABC = add(sumAB, matrixC);
           if (sumABC) {
-            setResult(`Three-Matrix Addition: Adding corresponding elements from all three matrices.\n\nA + B + C =\n${formatMatrix(sumABC)}`);
+            setResult(`${t.matrixCalculator.matrixAddThreeDescription}\n\nA + B + C =\n${formatMatrix(sumABC)}`);
             setCurrentOperation({
               type: "addThree",
               matrices: [matrixA, matrixB, matrixC],
@@ -603,7 +603,7 @@ const MatrixCalculator = () => {
           }
           const multABC = multiply(multAB, matrixC);
           if (multABC) {
-            setResult(`Three-Matrix Multiplication: Computing (A × B) × C.\nAssociative property allows different groupings to give the same result.\n\nA × B × C =\n${formatMatrix(multABC)}`);
+            setResult(`${t.matrixCalculator.matrixMultiplyThreeDescription}\n\nA × B × C =\n${formatMatrix(multABC)}`);
             setCurrentOperation({
               type: "multiplyThree",
               matrices: [matrixA, matrixB, matrixC],

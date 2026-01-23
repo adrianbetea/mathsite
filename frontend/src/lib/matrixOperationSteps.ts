@@ -82,8 +82,8 @@ export function generateTransposeSteps(matrix: number[][], t?: any): string {
   let steps = `<div class="latex-steps" style="line-height: 2;">`;
   steps += `<p class="text-lg font-semibold mb-3">${texts.transpose || 'Matrix Transpose'}</p>`;
   
-  steps += `<p class="mt-3"><strong>${texts.definition || 'Definition'}:</strong> ${texts.transposeSwapRowsCols || 'The transpose A<sup>T</sup> is obtained by swapping rows and columns'}.</p>`;
-  steps += `<p class="mt-2">If A is m×n, then A<sup>T</sup> is n×m ${texts.where || 'where'} (A<sup>T</sup>)<sub>ij</sub> = A<sub>ji</sub></p>`;
+  steps += `<p class="mt-3"><strong>${texts.definition || 'Definition'}:</strong> ${texts.transposeSwapRowsCols || `The transpose A<sup>T</sup> ${texts.is} obtained by swapping rows and columns`}.</p>`;
+  steps += `<p class="mt-2">If A ${texts.is } m×n, then A<sup>T</sup> ${texts.is} n×m ${texts.where || 'where'} (A<sup>T</sup>)<sub>ij</sub> = A<sub>ji</sub></p>`;
   
   steps += `<p class="mt-4"><strong>${texts.original || 'Original'} ${texts.matrixA || 'Matrix A'} (${m}×${n}):</strong></p>`;
   steps += katex.renderToString(`A = ${matrixToLatex(matrix)}`, { displayMode: true });
@@ -1274,8 +1274,8 @@ export function generateLUDecompositionSteps(matrix: number[][], L: number[][], 
   
   steps += `<p class="mt-2">${texts.where || 'Where'}:</p>`;
   steps += `<ul class="list-disc list-inside ml-4 space-y-1">`;
-  steps += `<li>L ${texts.isLowerTriangular || 'is lower triangular'} (${texts.zerosAboveDiag || 'zeros above diagonal'})</li>`;
-  steps += `<li>U ${texts.isUpperTriangular || 'is upper triangular'} (${texts.zerosBelowDiag || 'zeros below diagonal'})</li>`;
+  steps += `<li>L ${texts.is || 'is'} ${texts.lowerTriangular || 'lower triangular'} (${texts.zerosAboveDiag || 'zeros above diagonal'})</li>`;
+  steps += `<li>U ${texts.is || 'is'} ${texts.upperTriangular || 'upper triangular'} (${texts.zerosBelowDiag || 'zeros below diagonal'})</li>`;
   steps += `<li>L ${texts.hasOnesOnDiag || 'has 1\'s on its diagonal'} (${texts.doolittleMethod || 'Doolittle\'s method'})</li>`;
   steps += `</ul>`;
   
@@ -1357,8 +1357,8 @@ export function generateQRDecompositionSteps(matrix: number[][], Q: number[][], 
   
   steps += `<p class="mt-2">${texts.where || 'Where'}:</p>`;
   steps += `<ul class="list-disc list-inside ml-4 space-y-1">`;
-  steps += `<li>Q ${texts.isOrthogonal || 'is orthogonal'}: Q<sup>T</sup>Q = I (${texts.columnsOrthonormal || 'columns are orthonormal'})</li>`;
-  steps += `<li>R ${texts.isUpperTriangular || 'is upper triangular'} (${texts.zerosBelowDiag || 'zeros below diagonal'})</li>`;
+  steps += `<li>Q ${texts.is || 'is'} ${texts.orthogonal || 'orthogonal'}: Q<sup>T</sup>Q = I (${texts.columnsOrthonormal || 'columns are orthonormal'})</li>`;
+  steps += `<li>R ${texts.is || 'is'} ${texts.upperTriangular || 'upper triangular'} (${texts.zerosBelowDiag || 'zeros below diagonal'})</li>`;
   steps += `</ul>`;
   
   steps += `<p class="mt-4"><strong>${texts.original || 'Original'} ${texts.matrixA || 'Matrix A'} (${m}×${n}):</strong></p>`;
@@ -1380,7 +1380,7 @@ export function generateQRDecompositionSteps(matrix: number[][], Q: number[][], 
   // Show first vector normalization
   steps += `<div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded">`;
   steps += `<p class="font-semibold">Vector 1:</p>`;
-  steps += `<p class="mt-2 text-sm">First column a<sub>1</sub> is simply normalized:</p>`;
+  steps += `<p class="mt-2 text-sm">First column a<sub>1</sub> ${texts.is || 'is'} simply normalized:</p>`;
   steps += katex.renderToString(
     `\\mathbf{u}_1 = \\mathbf{a}_1`,
     { displayMode: true }
@@ -1439,7 +1439,7 @@ export function generateQRDecompositionSteps(matrix: number[][], Q: number[][], 
   steps += `<p class="mt-4"><strong>${texts.resultLabel || 'Result'}: Q (${texts.orthogonalMatrix || 'Orthogonal Matrix'})</strong></p>`;
   steps += katex.renderToString(`Q = ${matrixToLatex(Q)}`, { displayMode: true });
   
-  steps += `<p class="mt-4"><strong>${texts.verification || 'Verification'}: Q ${texts.isOrthogonal || 'is orthogonal'}</strong></p>`;
+  steps += `<p class="mt-4"><strong>${texts.verification || 'Verification'}: Q ${texts.is || 'is'} ${texts.orthogonal || 'orthogonal'}</strong></p>`;
   steps += `<p class="mt-2 text-sm">${texts.checkQTransposeQ || 'Check Q<sup>T</sup>Q = I (columns are orthonormal)'}:</p>`;
   steps += `<ul class="list-disc list-inside ml-4 space-y-1 text-sm">`;
   steps += `<li>${texts.eachColumnNorm1 || 'Each column has norm 1'}: ||q<sub>j</sub>|| = 1</li>`;
@@ -1477,9 +1477,9 @@ export function generateSVDSteps(matrix: number[][], U: number[][], S: number[][
   
   steps += `<p class="mt-2">${texts.where || 'Where'}:</p>`;
   steps += `<ul class="list-disc list-inside ml-4 space-y-1">`;
-  steps += `<li>U ${texts.isMxMOrthogonal || 'is an m×m orthogonal matrix'} (${texts.leftSingularVectors || 'left singular vectors'})</li>`;
-  steps += `<li>Σ ${texts.isMxNDiagonal || 'is an m×n diagonal matrix'} (${texts.singularValues || 'singular values'})</li>`;
-  steps += `<li>V ${texts.isNxNOrthogonal || 'is an n×n orthogonal matrix'} (${texts.rightSingularVectors || 'right singular vectors'})</li>`;
+  steps += `<li>U ${texts.is || 'is'} ${texts.mxMOrthogonal || 'an m×m orthogonal matrix'} (${texts.leftSingularVectors || 'left singular vectors'})</li>`;
+  steps += `<li>Σ ${texts.is || 'is'} ${texts.mxNDiagonal || 'an m×n diagonal matrix'} (${texts.singularValues || 'singular values'})</li>`;
+  steps += `<li>V ${texts.is || 'is'} ${texts.nxNOrthogonal || 'an n×n orthogonal matrix'} (${texts.rightSingularVectors || 'right singular vectors'})</li>`;
   steps += `</ul>`;
   
   steps += `<p class="mt-4"><strong>${texts.original || 'Original'} ${texts.matrixA || 'Matrix A'} (${m}×${n}):</strong></p>`;
