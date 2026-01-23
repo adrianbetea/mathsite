@@ -1,3 +1,4 @@
+// src/App.tsx (Updated)
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { HreflangTags } from "./components/HreflangTags";
 import { LanguageRedirect } from "./components/LanguageRedirect";
+import { DynamicMeta } from "./components/DynamicMeta"; // <--- IMPORT THIS
 import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import MatrixCalculator from "./pages/MatrixCalculator";
@@ -22,6 +24,9 @@ const LanguageLayout = () => {
 
   return (
     <LanguageProvider languageFromUrl={lang}>
+      {/* This component will now detect the URL and update the Google title */}
+      <DynamicMeta /> 
+      
       <HreflangTags />
       <Outlet />
       <Footer />
