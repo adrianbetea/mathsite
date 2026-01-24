@@ -596,15 +596,21 @@ const DailyChallenge = () => {
           <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-2">
             <button
               onClick={checkAnswer}
-              className="w-full sm:w-auto px-4 py-2.5 sm:py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="w-full sm:w-48 px-4 py-2.5 sm:py-2 rounded-lg flex justify-center items-center text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer"
             >
               {text.checkAnswer}
             </button>
+
             {answerStatus === "correct" && (
-              <span className="text-sm font-medium text-green-600 text-center sm:text-left">{text.correctAnswer}</span>
+              <span className="text-sm font-medium text-green-600 text-center sm:text-left animate-in fade-in">
+                {text.correctAnswer}
+              </span>
             )}
+
             {answerStatus === "wrong" && (
-              <span className="text-sm font-medium text-red-600 text-center sm:text-left">{text.wrongAnswer}</span>
+              <span className="text-sm font-medium text-red-600 text-center sm:text-left animate-in fade-in">
+                {text.wrongAnswer}
+              </span>
             )}
           </div>
         </div>
