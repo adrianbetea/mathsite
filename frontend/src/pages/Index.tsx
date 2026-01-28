@@ -8,25 +8,6 @@ import { useEffect } from "react";
 const Index = () => {
   const { languageCode, t } = useLanguage();
 
-  // 1. THIS ACTIVATES THE ADS
-  useEffect(() => {
-    try {
-      // FIX: Only push ads if the screen is wide enough for the side banners (PC)
-      // or if you have other ad slots.
-      // For now, we push twice for the two side ads if on desktop.
-      if (window.innerWidth >= 1536) { 
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-      }
-      
-      // Note: For mobile anchor ads, you typically enable "Auto Ads" in your 
-      // Google AdSense dashboard, or place the specific <amp-auto-ads> or script 
-      // in your index.html. They don't usually need a manual .push({}) here.
-    } catch (e) {
-      console.error("AdSense error:", e);
-    }
-  }, []);
-
   const calculators = [
     {
       title: t.nav.matrix + " Calculator",
@@ -53,57 +34,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
-      
-      {/* LEFT AD SKYSCRAPER
-        - "hidden 2xl:flex": Only visible on screens > 1536px
-        - "pointer-events-none": The CONTAINER won't block clicks if transparent
-      */}
-      <div
-        style={{
-          position: "fixed",
-          top: 80,
-          left: 0,
-          zIndex: 40, 
-          width: 160,
-          height: 600,
-          alignItems: "start",
-          justifyContent: "center",
-        }}
-        className="hidden 2xl:flex pointer-events-none"
-      >
-        {/* "pointer-events-auto": The AD ITSELF is clickable */}
-        <ins
-          className="adsbygoogle pointer-events-auto"
-          style={{ display: "inline-block", width: "160px", height: "600px" }}
-          data-ad-client="ca-pub-2857464889504106"
-          data-ad-slot="8826467849"
-        ></ins>
-      </div>
-
-      {/* RIGHT AD SKYSCRAPER 
-        - "hidden 2xl:flex": Only visible on screens > 1536px
-      */}
-      <div
-        style={{
-          position: "fixed",
-          top: 80,
-          right: 0,
-          zIndex: 40,
-          width: 160,
-          height: 600,
-          alignItems: "start",
-          justifyContent: "center",
-        }}
-        className="hidden 2xl:flex pointer-events-none"
-      >
-        <ins
-          className="adsbygoogle pointer-events-auto"
-          style={{ display: "inline-block", width: "160px", height: "600px" }}
-          data-ad-client="ca-pub-2857464889504106"
-          data-ad-slot="8826467849"
-        ></ins>
-      </div>
-
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-6">
