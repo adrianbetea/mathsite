@@ -1,4 +1,4 @@
-// src/App.tsx (Updated)
+// src/App.tsx (Final Corrected Version)
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,9 +6,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Outlet, useParams } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { HreflangTags } from "./components/HreflangTags";
+
+// 1. REMOVED: import { HreflangTags } from "./components/HreflangTags"; 
 import { LanguageRedirect } from "./components/LanguageRedirect";
-import { DynamicMeta } from "./components/DynamicMeta"; // <--- IMPORT THIS
+import { DynamicMeta } from "./components/DynamicMeta"; 
 import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import MatrixCalculator from "./pages/MatrixCalculator";
@@ -24,10 +25,11 @@ const LanguageLayout = () => {
 
   return (
     <LanguageProvider languageFromUrl={lang}>
-      {/* This component will now detect the URL and update the Google title */}
+      {/* DynamicMeta handles Titles, Descriptions, Canonicals, and Hreflang tags all in one */}
       <DynamicMeta /> 
       
-      <HreflangTags />
+      {/* 2. REMOVED: <HreflangTags /> */}
+      
       <Outlet />
       <Footer />
     </LanguageProvider>
