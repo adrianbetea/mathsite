@@ -53,6 +53,7 @@ import {
   formatMatrix,
   formatNumberDisplay,
 } from "@/lib/matrixUtils";
+import MatrixInfoSection from "@/components/MatrixInfoSection";
 
 // Convert matrix to LaTeX format for KaTeX rendering
 const matrixToLatex = (matrix: number[][]): string => {
@@ -1187,7 +1188,11 @@ const MatrixCalculator = () => {
           )}
         </div>
       </main>
+
+      <MatrixInfoSection />
     </div>
+
+    
   );
 };
 

@@ -17,6 +17,7 @@ import {
 } from "@/lib/polynomialUtils";
 import katex from "katex";
 import "katex/dist/katex.min.css";
+import PolynomialsInfoSection from "@/components/PolynomialsInfoSection";
 
 // Helper function to format numbers intelligently
 const formatNumber = (num: number, maxDecimals: number = 4): string => {
@@ -1208,6 +1209,7 @@ const PolynomialCalculator = () => {
           </div>
         </div>
       </main>
+      <PolynomialsInfoSection />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import DailyChallenge from "@/components/DailyChallenge";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
+import IndexDescriptionSection from "@/components/IndexDescriptionSection";
 
 const Index = () => {
   const { languageCode, t } = useLanguage();
@@ -74,6 +75,8 @@ const Index = () => {
             );
           })}
         </div>
+
+        <IndexDescriptionSection />
       </main>
     </div>
   );

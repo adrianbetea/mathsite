@@ -5,6 +5,7 @@ import { advancedDerivative, definiteIntegral, symbolicIntegral, sympySteps } fr
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import katex from "katex";
+import CalculusInfoSection from "@/components/CalculusInfoSection";
 
 // Helper function to render LaTeX directly
 const renderLatex = (latex: string, displayMode: boolean = false): string => {
@@ -357,6 +358,8 @@ const CalculusCalculator = () => {
           </div>
         </div>
       </main>
+
+      <CalculusInfoSection />
     </div>
   );
 };
