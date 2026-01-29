@@ -59,20 +59,36 @@ const PolynomialCalculator = () => {
   const [currentOperation, setCurrentOperation] = useState<{ op: string; termsA: Term[]; termsB?: Term[]; x?: number } | null>(null);
   const [isComputing, setIsComputing] = useState(false);
   const [computingOp, setComputingOp] = useState<string | null>(null);
+  
+  // Plot State
   const [plotData, setPlotData] = useState<{ x: number; y: number }[]>([]);
   const [hoverPoint, setHoverPoint] = useState<{ x: number; y: number } | null>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  
+  // --- MOBILE FIX: Ref to track pinch distance ---
+  const lastTouchDistance = useRef<number | null>(null);
+
   const plotContainerRef = useRef<HTMLDivElement>(null);
   const [plotContainerEl, setPlotContainerEl] = useState<HTMLDivElement | null>(null);
 
   // Prevent sticky dragging
   useEffect(() => {
     const handleGlobalMouseUp = () => setIsDragging(false);
+    // --- MOBILE FIX: Handle global touch end ---
+    const handleGlobalTouchEnd = () => {
+      setIsDragging(false);
+      lastTouchDistance.current = null;
+    };
+
     window.addEventListener('mouseup', handleGlobalMouseUp);
-    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
+    window.addEventListener('touchend', handleGlobalTouchEnd);
+    return () => {
+      window.removeEventListener('mouseup', handleGlobalMouseUp);
+      window.removeEventListener('touchend', handleGlobalTouchEnd);
+    };
   }, []);
 
   // Zoom only when hovering the SVG; allow page scroll elsewhere.
@@ -85,7 +101,7 @@ const PolynomialCalculator = () => {
       e.preventDefault();
       e.stopPropagation();
       const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-      setZoomLevel(prev => Math.min(50, prev * zoomFactor));
+      setZoomLevel(prev => Math.min(50, Math.max(0.1, prev * zoomFactor)));
     };
 
     plotContainerEl.addEventListener('wheel', handleWheel, { passive: false });
@@ -270,7 +286,7 @@ const PolynomialCalculator = () => {
 
     const labelFontSize = Math.min(36, Math.max(12, 16 * Math.sqrt(zoomLevel)));
 
-    // Mouse handlers
+    // Mouse handlers (Desktop)
     const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
       const rect = e.currentTarget.getBoundingClientRect();
       const svgX = ((e.clientX - rect.left) / rect.width) * width;
@@ -311,6 +327,67 @@ const PolynomialCalculator = () => {
       }
     };
 
+    // --- TOUCH HANDLERS (Mobile) ---
+    const getTouchDistance = (touches: React.TouchList) => {
+        return Math.hypot(
+          touches[0].clientX - touches[1].clientX,
+          touches[0].clientY - touches[1].clientY
+        );
+      };
+  
+      const handleTouchStart = (e: React.TouchEvent<SVGSVGElement>) => {
+        if (e.touches.length === 1) {
+          // Single touch - start panning
+          setIsDragging(true);
+          setDragStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+          
+          // Also update hover point for touch
+          const rect = e.currentTarget.getBoundingClientRect();
+          const svgX = ((e.touches[0].clientX - rect.left) / rect.width) * width;
+          const x = unscaleX(svgX);
+          const y = evaluatePolynomial(terms, x);
+          setHoverPoint({ x, y });
+        } else if (e.touches.length === 2) {
+          // Two touches - start pinch zoom
+          setIsDragging(false); // Stop panning if we are zooming
+          lastTouchDistance.current = getTouchDistance(e.touches);
+        }
+      };
+  
+      const handleTouchMove = (e: React.TouchEvent<SVGSVGElement>) => {
+        // touch-action: none on the container prevents scroll
+  
+        if (e.touches.length === 1 && isDragging) {
+          // Handle Panning
+          const dx = e.touches[0].clientX - dragStart.x;
+          const dy = e.touches[0].clientY - dragStart.y;
+          const rect = e.currentTarget.getBoundingClientRect();
+          
+          const scaleFactorX = rangeX / rect.width;
+          const scaleFactorY = rangeY / rect.height;
+  
+          setPanOffset({
+            x: panOffset.x - dx * scaleFactorX,
+            y: panOffset.y + dy * scaleFactorY
+          });
+          setDragStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+  
+          // Update hover point
+          const svgX = ((e.touches[0].clientX - rect.left) / rect.width) * width;
+          const x = unscaleX(svgX);
+          const y = evaluatePolynomial(terms, x);
+          setHoverPoint({ x, y });
+  
+        } else if (e.touches.length === 2 && lastTouchDistance.current !== null) {
+          // Handle Pinch Zoom
+          const newDist = getTouchDistance(e.touches);
+          const scaleRatio = newDist / lastTouchDistance.current;
+          
+          setZoomLevel(prev => Math.min(50, Math.max(0.1, prev * scaleRatio)));
+          lastTouchDistance.current = newDist;
+        }
+      };
+
     const handleClick = (e: React.MouseEvent<SVGSVGElement>) => {
       if (hoverPoint) {
         setEvalX(hoverPoint.x.toFixed(2));
@@ -328,7 +405,7 @@ const PolynomialCalculator = () => {
           plotContainerRef.current = node;
           setPlotContainerEl(node);
         }}
-        className="relative w-full h-full min-h-[580px] select-none overflow-hidden"
+        className="relative w-full h-full min-h-[580px] select-none overflow-hidden touch-none" // ADDED touch-none
       >
         <svg 
           width="100%" 
@@ -336,10 +413,17 @@ const PolynomialCalculator = () => {
           viewBox={`0 0 ${width} ${height}`}
           preserveAspectRatio="xMidYMid meet"
           className="text-foreground cursor-crosshair select-none"
+          style={{ touchAction: 'none' }} // ADDED touch-action: none
+          // Mouse
           onMouseMove={(e) => { handleMouseMove(e); if (isDragging) handleMouseDrag(e); }}
           onMouseDown={handleMouseDown}
           onMouseLeave={() => { setHoverPoint(null); setIsDragging(false); }}
           onClick={handleClick}
+          // Touch
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={() => { setIsDragging(false); lastTouchDistance.current = null; }}
+          onTouchCancel={() => { setIsDragging(false); lastTouchDistance.current = null; }}
         >
           {/* Clip path to keep everything within bounds */}
           <defs>
@@ -604,7 +688,7 @@ const PolynomialCalculator = () => {
         </svg>
 
         {/* Polynomial equation - fixed position */}
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-background/95 border border-border rounded-lg px-4 py-2 shadow-lg backdrop-blur-sm">
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-background/95 border border-border rounded-lg px-4 py-2 shadow-lg backdrop-blur-sm pointer-events-none">
           <div className="text-sm font-semibold">
             P(x) = <span className="font-mono text-primary">{polyA}</span>
           </div>
@@ -612,7 +696,7 @@ const PolynomialCalculator = () => {
 
         {/* Hover info tooltip */}
         {hoverPoint && (
-          <div className="absolute top-4 right-4 bg-background/95 border border-border rounded-lg px-4 py-2 shadow-lg backdrop-blur-sm">
+          <div className="absolute top-4 right-4 bg-background/95 border border-border rounded-lg px-4 py-2 shadow-lg backdrop-blur-sm pointer-events-none">
             <div className="text-xs font-mono space-y-1">
               <div className="text-purple-500 font-semibold">{t.polynomialCalculator.hoverPoint}</div>
               <div>x = {formatNumber(hoverPoint.x, 2)}</div>
@@ -644,7 +728,7 @@ const PolynomialCalculator = () => {
               {t.polynomialCalculator.reset}
             </button>
           </div>
-          <div className="text-[10px] text-muted-foreground mt-2 space-y-0.5">
+          <div className="text-[10px] text-muted-foreground mt-2 space-y-0.5 hidden lg:block">
             <div>🖱️ {t.polynomialCalculator.dragToPan}</div>
             <div>🔍 {t.polynomialCalculator.scrollToZoom}</div>
           </div>
@@ -904,9 +988,9 @@ const PolynomialCalculator = () => {
           products.push(`${coeffStr}${xPart}`);
           
           const termAStr = termA.power === 0 ? `${termA.coefficient}` : 
-                          (termA.power === 1 ? `${termA.coefficient}x` : `${termA.coefficient}x^{${termA.power}}`);
+                           (termA.power === 1 ? `${termA.coefficient}x` : `${termA.coefficient}x^{${termA.power}}`);
           const termBStr = termB.power === 0 ? `${termB.coefficient}` : 
-                          (termB.power === 1 ? `${termB.coefficient}x` : `${termB.coefficient}x^{${termB.power}}`);
+                           (termB.power === 1 ? `${termB.coefficient}x` : `${termB.coefficient}x^{${termB.power}}`);
           steps.push(`(${termAStr})(${termBStr}) = ${coeff}x^{${power}}`);
         }
       }
