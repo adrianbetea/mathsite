@@ -1,4 +1,4 @@
-// src/App.tsx (Final Corrected Version)
+// src/App.tsx
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route, Outlet, useParams } from "react-router-do
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
-// 1. REMOVED: import { HreflangTags } from "./components/HreflangTags"; 
 import { LanguageRedirect } from "./components/LanguageRedirect";
 import { DynamicMeta } from "./components/DynamicMeta"; 
 import Footer from "./components/Footer";
@@ -20,16 +19,20 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// 1. DEFINE YOUR VALID LANGUAGES HERE
+const VALID_LANGUAGES = ["en-us", "ro", "es", "fr", "de", "pl"]; 
+
 const LanguageLayout = () => {
   const { lang } = useParams<{ lang?: string }>();
 
+  // 2. CRITICAL FIX: If the URL is something like /random_garbage, show 404!
+  if (lang && !VALID_LANGUAGES.includes(lang)) {
+    return <NotFound />;
+  }
+
   return (
     <LanguageProvider languageFromUrl={lang}>
-      {/* DynamicMeta handles Titles, Descriptions, Canonicals, and Hreflang tags all in one */}
       <DynamicMeta /> 
-      
-      {/* 2. REMOVED: <HreflangTags /> */}
-      
       <Outlet />
       <Footer />
     </LanguageProvider>
@@ -45,15 +48,22 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            {/* Redirect root / to default language */}
             <Route path="/" element={<LanguageRedirect />} />
+            
+            {/* Language Routes */}
             <Route path="/:lang" element={<LanguageLayout />}>
               <Route index element={<Index />} />
               <Route path="matrix" element={<MatrixCalculator />} />
               <Route path="calculus" element={<CalculusCalculator />} />
               <Route path="polynomials" element={<PolynomialCalculator />} />
               <Route path="privacy" element={<PrivacyPolicy />} />
+              
+              {/* Catch /en-us/garbage */}
               <Route path="*" element={<NotFound />} />
             </Route>
+
+            {/* Catch /garbage (This catches URLs that don't match the language pattern) */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           </BrowserRouter>
