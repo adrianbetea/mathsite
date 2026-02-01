@@ -260,12 +260,18 @@ const buildBeginnerExercises = (): PolynomialExercise[] => {
     }
 
     if (opIndex === 1) {
+      // Create expression with like terms that actually need simplification
+      const coef1 = a;
+      const coef2 = (i % 3) + 2;
+      const coef3 = b + 2;
+      const coef4 = (i % 4) - 1;
       const expression = formatSum([
-        formatPolynomial([{ coef: a, power: 2 }]),
-        formatPolynomial([{ coef: -a + 1, power: 2 }]),
-        formatPolynomial([{ coef: b + 2, power: 1 }]),
-        formatPolynomial([{ coef: -1, power: 1 }]),
+        formatPolynomial([{ coef: coef1, power: 2 }]),
+        formatPolynomial([{ coef: coef2, power: 2 }]),
+        formatPolynomial([{ coef: coef3, power: 1 }]),
+        formatPolynomial([{ coef: coef4, power: 1 }]),
         formatPolynomial([{ coef: c, power: 0 }]),
+        formatPolynomial([{ coef: (i % 3) - 1, power: 0 }]),
       ]);
       exercises.push({
         id: i + 1,
@@ -363,11 +369,17 @@ const buildIntermediateExercises = (): PolynomialExercise[] => {
     }
 
     if (pattern === 3) {
+      // Ensure we have like terms to simplify
+      const coef1 = a;
+      const coef2 = (i % 3) + 1;
+      const coef3 = b;
+      const coef4 = (i % 4) + 2;
       const expression = formatSum([
-        formatPolynomial([{ coef: a, power: 3 }]),
-        formatPolynomial([{ coef: -2, power: 3 }]),
-        formatPolynomial([{ coef: b, power: 2 }]),
-        formatPolynomial([{ coef: 4, power: 1 }]),
+        formatPolynomial([{ coef: coef1, power: 3 }]),
+        formatPolynomial([{ coef: coef2, power: 3 }]),
+        formatPolynomial([{ coef: coef3, power: 2 }]),
+        formatPolynomial([{ coef: (i % 5) - 2, power: 2 }]),
+        formatPolynomial([{ coef: coef4, power: 1 }]),
         formatPolynomial([{ coef: c, power: 0 }]),
       ]);
       exercises.push({
@@ -456,12 +468,20 @@ const buildAdvancedExercises = (): PolynomialExercise[] => {
       continue;
     }
 
+    // Ensure like terms for simplification
+    const coef1 = a;
+    const coef2 = (i % 3) + 1;
+    const coef3 = b;
+    const coef4 = (i % 4) + 1;
+    const coef5 = c;
+    const coef6 = (i % 5) - 2;
     const expression = formatSum([
-      formatPolynomial([{ coef: a, power: 4 }]),
-      formatPolynomial([{ coef: -2, power: 4 }]),
-      formatPolynomial([{ coef: b, power: 3 }]),
-      formatPolynomial([{ coef: c, power: 2 }]),
-      formatPolynomial([{ coef: -c, power: 2 }]),
+      formatPolynomial([{ coef: coef1, power: 4 }]),
+      formatPolynomial([{ coef: coef2, power: 4 }]),
+      formatPolynomial([{ coef: coef3, power: 3 }]),
+      formatPolynomial([{ coef: coef4, power: 2 }]),
+      formatPolynomial([{ coef: coef5, power: 2 }]),
+      formatPolynomial([{ coef: coef6, power: 2 }]),
       formatPolynomial([{ coef: 5, power: 0 }]),
     ]);
     exercises.push({
