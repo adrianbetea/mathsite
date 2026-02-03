@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Calculator, FunctionSquare, Grid3X3, ArrowRight } from "lucide-react";
+import { Calculator, FunctionSquare, Grid3X3, ArrowRight, BookOpen } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import DailyChallenge from "@/components/DailyChallenge";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -31,6 +31,13 @@ const Index = () => {
       to: `/${languageCode}/polynomials`,
       color: "from-success/10 to-success/5",
     },
+    {
+      title: t.nav.learning,
+      description: "Interactive examples and comprehensive learning resources",
+      icon: BookOpen,
+      to: `/${languageCode}/learning`,
+      color: "from-orange-500/10 to-orange-500/5",
+    },
   ];
 
   return (
@@ -52,7 +59,7 @@ const Index = () => {
         </div>
 
         {/* Calculator Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
           {calculators.map((calc, index) => {
             const Icon = calc.icon;
             return (

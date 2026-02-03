@@ -133,7 +133,7 @@ const MatrixInput = ({ rows, cols, value, onChange, label }: MatrixInputProps) =
                   onKeyDown={(e) => handleKeyDown(e, ri, ci)}
                   onPaste={(e) => handlePaste(e, ri, ci)}
                   onFocus={handleFocus}
-                  className={`${getInputClasses()} text-center font-mono bg-secondary/50 border border-border rounded focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all`}
+                  className={`${getInputClasses()} text-center font-mono bg-secondary/50 border border-border rounded focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                 />
               ))
             )}

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useMemo, useCallback, ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { translations } from '../lib/translations';
+import { translations } from '../lib/translations/translations';
 
 type Language = 'en' | 'es' | 'fr' | 'de' | 'pl' | 'ro';
 type LanguageCode = 'en-us' | 'es' | 'fr' | 'de' | 'pl' | 'ro';

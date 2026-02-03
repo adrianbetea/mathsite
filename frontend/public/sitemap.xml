@@ -28,6 +28,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mathhub.me/en-us/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/en-us/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/en-us/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/en-us/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mathhub.me/en-us/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -52,6 +72,26 @@
     <loc>https://mathhub.me/ro/polynomials</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mathhub.me/ro/privacy</loc>
@@ -80,6 +120,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mathhub.me/de/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mathhub.me/de/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -104,6 +164,26 @@
     <loc>https://mathhub.me/pl/polynomials</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mathhub.me/pl/privacy</loc>
@@ -132,6 +212,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mathhub.me/fr/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mathhub.me/fr/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -156,6 +256,26 @@
     <loc>https://mathhub.me/es/polynomials</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/es/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/es/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/es/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mathhub.me/es/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mathhub.me/es/privacy</loc>

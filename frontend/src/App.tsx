@@ -14,6 +14,10 @@ import Index from "./pages/Index";
 import MatrixCalculator from "./pages/MatrixCalculator";
 import CalculusCalculator from "./pages/CalculusCalculator";
 import PolynomialCalculator from "./pages/PolynomialCalculator";
+import LearningMaterials from "./pages/LearningMaterials";
+import LinearAlgebraLearning from "./pages/LinearAlgebraLearning";
+import CalculusLearning from "./pages/CalculusLearning";
+import PolynomialsLearning from "./pages/PolynomialsLearning";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
@@ -57,6 +61,10 @@ const App = () => (
               <Route path="matrix" element={<MatrixCalculator />} />
               <Route path="calculus" element={<CalculusCalculator />} />
               <Route path="polynomials" element={<PolynomialCalculator />} />
+              <Route path="learning" element={<LearningMaterials />} />
+              <Route path="learning/linear-algebra" element={<LinearAlgebraLearning />} />
+              <Route path="learning/calculus" element={<CalculusLearning />} />
+              <Route path="learning/polynomials" element={<PolynomialsLearning />} />
               <Route path="privacy" element={<PrivacyPolicy />} />
               
               {/* Catch /en-us/garbage */}
