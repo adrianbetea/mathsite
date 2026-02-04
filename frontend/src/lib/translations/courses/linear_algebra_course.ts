@@ -194,6 +194,13 @@ export const linearAlgebraCourse = {
                     }
                 }
             }
+        },
+        matrixInverse: {
+            title: "Matrix Inverse",
+            description: "Learn how to find the inverse of a matrix and its applications.",
+            lessons: {
+                // To be implemented
+            }
         }
     },
     es: {
