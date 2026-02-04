@@ -7,69 +7,10 @@ export const linearAlgebraLearningTranslations = {
     hero: {
       title: "Learn Linear Algebra Step by Step",
       description: "Comprehensive examples covering matrices, determinants, eigenvalues, and more",
-      badge: "50+ Examples"
+      badge: "20+ Examples"
     },
-
-    sections: {
-      matrices: {
-        title: "Matrix Basics",
-        description: "Understanding matrix operations",
-        icon: "⌈⌉",
-        topics: ["Matrix Notation", "Addition & Subtraction", "Scalar Multiplication", "Matrix Multiplication", "Transpose"]
-      },
-      determinants: {
-        title: "Determinants",
-        description: "Computing and understanding determinants",
-        icon: "| |",
-        topics: ["2×2 Determinants", "3×3 Determinants", "Cofactor Expansion", "Properties", "Applications"]
-      },
-      inverse: {
-        title: "Matrix Inverse",
-        description: "Finding inverse matrices",
-        icon: "⁻¹",
-        topics: ["Invertible Matrices", "Inverse Computation", "Adjugate Method", "Gauss-Jordan", "Properties"]
-      },
-      systems: {
-        title: "Systems of Equations",
-        description: "Solving linear systems",
-        icon: "=",
-        topics: ["Gaussian Elimination", "Matrix Form", "Reduced Row Echelon", "Rank", "Solutions"]
-      },
-      vectors: {
-        title: "Vector Spaces",
-        description: "Understanding vector spaces",
-        icon: "→",
-        topics: ["Vector Operations", "Linear Independence", "Basis & Dimension", "Subspaces", "Span"]
-      },
-      eigenvalues: {
-        title: "Eigenvalues & Eigenvectors",
-        description: "Computing and applying eigenvalues",
-        icon: "λ",
-        topics: ["Definition", "Characteristic Polynomial", "Computing Eigenvalues", "Eigenvectors", "Diagonalization"]
-      }
-    },
-
-    features: {
-      stepByStep: "Detailed step-by-step solutions with explanations",
-      visualizations: "Visual representations of matrix operations",
-      practice: "Practice problems with instant feedback"
-    },
-
-    comingSoon: "More examples coming soon!",
-    startLearning: "Start Learning"
-  },
-  
-  "en-us": {
-    title: "Linear Algebra",
-    subtitle: "Master matrices, vector spaces, and linear transformations",
-    backToLearning: "Back to Learning Materials",
-    
-    hero: {
-      title: "Learn Linear Algebra Step by Step",
-      description: "Comprehensive examples covering matrices, determinants, eigenvalues, and more",
-      badge: "50+ Examples"
-    },
-
+    topics_covered: "Topics Covered",
+    what_you_will_learn: "What You Will Learn",
     sections: {
       matrices: {
         title: "Matrix Basics",
@@ -123,11 +64,12 @@ export const linearAlgebraLearningTranslations = {
     title: "Algebră Liniară",
     subtitle: "Stăpânește matrici, spații vectoriale și transformări liniare",
     backToLearning: "Înapoi la Materiale de Învățare",
-    
+    topics_covered: "Subiecte Acoperite",
+    what_you_will_learn: "Ce Vei Învăța",
     hero: {
       title: "Învață Algebră Liniară Pas cu Pas",
       description: "Exemple cuprinzătoare acoperind matrici, determinanți, valori proprii și multe altele",
-      badge: "50+ Exemple"
+      badge: "20+ Exemple"
     },
 
     sections: {
@@ -183,11 +125,12 @@ export const linearAlgebraLearningTranslations = {
     title: "Álgebra Lineal",
     subtitle: "Domina matrices, espacios vectoriales y transformaciones lineales",
     backToLearning: "Volver a Materiales de Aprendizaje",
-    
+    topics_covered: "Temas Cubiertos",
+    what_you_will_learn: "Lo Que Aprenderás",
     hero: {
       title: "Aprende Álgebra Lineal Paso a Paso",
       description: "Ejemplos completos que cubren matrices, determinantes, valores propios y más",
-      badge: "50+ Ejemplos"
+      badge: "20+ Ejemplos"
     },
 
     sections: {
@@ -243,11 +186,12 @@ export const linearAlgebraLearningTranslations = {
     title: "Algèbre Linéaire",
     subtitle: "Maîtrisez les matrices, espaces vectoriels et transformations linéaires",
     backToLearning: "Retour aux Matériaux d'Apprentissage",
-    
+    topics_covered: "Sujets Couverts",
+    what_you_will_learn: "Ce Que Vous Apprendrez",
     hero: {
       title: "Apprenez l'Algèbre Linéaire Étape par Étape",
       description: "Exemples complets couvrant les matrices, déterminants, valeurs propres et plus",
-      badge: "50+ Exemples"
+      badge: "20+ Exemples"
     },
 
     sections: {
@@ -303,11 +247,12 @@ export const linearAlgebraLearningTranslations = {
     title: "Lineare Algebra",
     subtitle: "Meistern Sie Matrizen, Vektorräume und lineare Transformationen",
     backToLearning: "Zurück zu Lernmaterialien",
-    
+    topics_covered: "Abgedeckte Themen",
+    what_you_will_learn: "Was Sie Lernen Werden",
     hero: {
       title: "Lernen Sie Lineare Algebra Schritt für Schritt",
       description: "Umfassende Beispiele zu Matrizen, Determinanten, Eigenwerten und mehr",
-      badge: "50+ Beispiele"
+      badge: "20+ Beispiele"
     },
 
     sections: {
@@ -363,11 +308,12 @@ export const linearAlgebraLearningTranslations = {
     title: "Algebra Liniowa",
     subtitle: "Opanuj macierze, przestrzenie wektorowe i przekształcenia liniowe",
     backToLearning: "Powrót do Materiałów Edukacyjnych",
-    
+    topics_covered: "Omówione Tematy",
+    what_you_will_learn: "Czego się nauczysz",
     hero: {
       title: "Ucz Się Algebry Liniowej Krok po Kroku",
       description: "Kompleksowe przykłady obejmujące macierze, wyznaczniki, wartości własne i więcej",
-      badge: "50+ Przykładów"
+      badge: "20+ Przykładów"
     },
 
     sections: {

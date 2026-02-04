@@ -12,7 +12,7 @@ export const learningTranslations = {
         description: "Examples covering matrices, vector spaces, eigenvalues, and more",
         topics: "Topics: Matrices, Determinants, Vector Spaces, Linear Transformations, Eigenvalues & Eigenvectors",
         level: "Intermediate",
-        materials: "50+ Examples"
+        materials: "20+ Examples"
       },
       calculus: {
         title: "Calculus Fundamentals",
@@ -69,7 +69,7 @@ export const learningTranslations = {
         description: "Ejemplos que cubren matrices, espacios vectoriales, valores propios y más",
         topics: "Temas: Matrices, Determinantes, Espacios Vectoriales, Transformaciones Lineales, Valores y Vectores Propios",
         level: "Intermedio",
-        materials: "50+ Ejemplos"
+        materials: "20+ Ejemplos"
       },
       calculus: {
         title: "Fundamentos de Cálculo",
@@ -126,7 +126,7 @@ export const learningTranslations = {
         description: "Exemples couvrant les matrices, espaces vectoriels, valeurs propres et plus",
         topics: "Sujets: Matrices, Déterminants, Espaces Vectoriels, Transformations Linéaires, Valeurs et Vecteurs Propres",
         level: "Intermédiaire",
-        materials: "50+ Exemples"
+        materials: "20+ Exemples"
       },
       calculus: {
         title: "Fondamentaux du Calcul",
@@ -183,7 +183,7 @@ export const learningTranslations = {
         description: "Beispiele zu Matrizen, Vektorräumen, Eigenwerten und mehr",
         topics: "Themen: Matrizen, Determinanten, Vektorräume, Lineare Transformationen, Eigenwerte & Eigenvektoren",
         level: "Mittelstufe",
-        materials: "50+ Beispiele"
+        materials: "20+ Beispiele"
       },
       calculus: {
         title: "Grundlagen der Analysis",
@@ -240,7 +240,7 @@ export const learningTranslations = {
         description: "Przykłady obejmujące macierze, przestrzenie wektorowe, wartości własne i więcej",
         topics: "Tematy: Macierze, Wyznaczniki, Przestrzenie Wektorowe, Przekształcenia Liniowe, Wartości i Wektory Własne",
         level: "Średniozaawansowany",
-        materials: "50+ Przykładów"
+        materials: "20+ Przykładów"
       },
       calculus: {
         title: "Podstawy Rachunku",
@@ -297,7 +297,7 @@ export const learningTranslations = {
         description: "Exemple care acoperă matrice, spații vectoriale, valori proprii și multe altele",
         topics: "Subiecte: Matrice, Determinanți, Spații Vectoriale, Transformări Liniare, Valori și Vectori Proprii",
         level: "Intermediar",
-        materials: "50+ Exemple"
+        materials: "20+ Exemple"
       },
       calculus: {
         title: "Fundamentele Analizei",
