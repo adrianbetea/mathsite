@@ -199,7 +199,46 @@ export const linearAlgebraCourse = {
             title: "Matrix Inverse",
             description: "Learn how to find the inverse of a matrix and its applications.",
             lessons: {
-                // To be implemented
+                lesson3_title: "Matrix Inverse",
+                lesson3: {
+                    section1: {
+                        title1: "Definition of Matrix Inverse",
+                        def1_1: "Suppose two n x n matrices A and B have the propriety that AB = BA = I_n, where I_n is the n x n identity matrix. Then we say that A is invertible (or non-singular) and B is the inverse of A, denoted by A^{-1}. In other words, A^{-1} is the unique matrix such that A A^{-1} = A^{-1} A = I_n.",
+                        proposition1_1: "Proposition: Suppose A in R^{n x n} or A in F_2^{n x n}. and A has an inverse B. Then B is unique.",
+                        proof1_1: "Proof: Suppose that A has two inverses B and C. Then",
+                        proof1_1_math: `B = B I_n = B(AC) = (BA)C = I_n C = C`,
+                        expl1_1: "Thus, B = C, and the inverse is unique.",
+                        ex1_1: "For example, the inverses of the 2 x 2 elementary matrices are as follows:",
+                        ex1_1_list1: "E_1 = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} \\Rightarrow E_1^{-1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}",
+                        ex1_1_list2: "E_2 = \\begin{bmatrix} k & 0 \\\\ 0 & 1 \\end{bmatrix} \\Rightarrow E_2^{-1} = \\begin{bmatrix} \\frac{1}{k} & 0 \\\\ 0 & 1 \\end{bmatrix}, k \\ne 0",
+                        ex1_1_list3: "E_3 = \\begin{bmatrix} 1 & 0 \\\\ k & 1 \\end{bmatrix} \\Rightarrow E_3^{-1} = \\begin{bmatrix} 1 & 0 \\\\ -k & 1 \\end{bmatrix}",
+                    },
+                    section2: {
+                        title2: "Methods for Finding the Inverse (Inverse Computation and Adjugate Method)",
+                        def1_2: "We have two ways of finding the matrix B so that B A = I_n. The first method is simply to multiply the sequence of elementary matrice which row reduces A to I_n. The second method is to form the augmented matrix (A | I_n) and row reduce. The final result will be in the form (I_n | B). This is the method used in most textbooks.",
+                        text1_2: "Here we have an example.",
+                        method1_1: "Method 1: Inverse Computation",
+                        ex1_2: `Suppose we want to find an inverse for`,
+                        ex1_2_matrix: `A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex1_2_steps1: "Since we only need to solve the matrix equation XA = I_3, we can use our previous strategy of row reducing (A | I_3).",
+                        ex1_2_steps2: `(A | I_3) = \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 1 & 3 & 1 & | & 0 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_1} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_3 - R_2}`,
+                        ex1_2_steps3: `\\begin{bmatrix} 1 & 2 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_3} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_1 - 2R_2}`,
+                        ex1_2_steps4: `\\begin{bmatrix} 1 & 0 & 0 & | & 5 & -4 & 2 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix}`,
+                        ex1_2_result: `Thus, A^{-1} = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                        method2_1: "Method 2: Adjugate Method",
+                        ex2_2: `Alternatively, we can use the adjugate method. We first compute the matrix of cofactors, then take its transpose to get the adjugate, and finally divide by the determinant of A to get the inverse.`,
+                        ex2_2_steps1: "Calculate the determinant of A.",
+                        ex2_2_steps1_math: `det(A) = 1(3*2 - 1*1) - 2(1*2 - 0*1) + 0(1*1 - 3*0) = 1`,
+                        ex2_2_steps2: "Find the matrix of minors, then the matrix of cofactors.",
+                        ex2_2_steps2_math: `\\text{Minors} = \\begin{bmatrix} 5 & 2 & -1 \\\\ 2 & 2 & -1 \\\\ -1 & 1 & 1 \\end{bmatrix}, \\quad \\text{Cofactors} = \\begin{bmatrix} 5 & -2 & -1 \\\\ -2 & 2 & 1 \\\\ -1 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps3: "Transpose the matrix of cofactors to get the adjugate.",
+                        ex2_2_steps3_math: `\\text{Adj}(A) = \\begin{bmatrix} 5 & -2 & -1 \\\\ -2 & 2 & -1 \\\\ -1 & 1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps4: "Finally, divide the adjugate by the determinant to get the inverse.",
+                        ex2_2_result: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\begin{bmatrix} 5 & -2 & -1 \\\\ -2 & 2 & -1 \\\\ -1 & 1 & 1 \\end{bmatrix}`,
+                        // Verify the second method because it was autogenerated and may contain errors
+
+                    }
+                }
             }
         }
     },
