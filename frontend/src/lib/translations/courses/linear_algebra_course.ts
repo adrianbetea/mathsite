@@ -55,7 +55,7 @@ export const linearAlgebraCourse = {
                     },
                     example_section: {
                         title_ex: "Examples with Step-by-Step Solutions",
-                        
+
                         // Example 1: Scalar Multiplication & Subtraction
                         example1: {
                             title: "1. Linear Combination of Matrices",
@@ -135,7 +135,7 @@ export const linearAlgebraCourse = {
                         def2_3_formula: `det(A) = \\sum_{i=1}^{n} (-1)^{i+j} a_{ij} det(A_{ij})`,
                         def2_3_explanation: `This is the Laplace expansion along the i-th row, where A_{ij} is the (n-1) x (n-1) matrix obtained by deleting the i-th row and j-th column from A.`,
                         ex1_3: "For example, for the matrix A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 4 & 5 \\\\ 1 & 0 & 6 \\end{bmatrix} expanding along the first row gives ",
-                        ex1_3_end:"det(A) = 1 * C_{11} + 2 * C_{12} + 3 * C_{13} = 1 * det\\begin{bmatrix}4 & 5 \\\\ 0 & 6\\end{bmatrix} - 2 * det\\begin{bmatrix}0 & 5 \\\\ 1 & 6\\end{bmatrix} + 3 * det\\begin{bmatrix}0 & 4 \\\\ 1 & 0\\end{bmatrix} = 24 + 10 - 12 = 22.",
+                        ex1_3_end: "det(A) = 1 * C_{11} + 2 * C_{12} + 3 * C_{13} = 1 * det\\begin{bmatrix}4 & 5 \\\\ 0 & 6\\end{bmatrix} - 2 * det\\begin{bmatrix}0 & 5 \\\\ 1 & 6\\end{bmatrix} + 3 * det\\begin{bmatrix}0 & 4 \\\\ 1 & 0\\end{bmatrix} = 24 + 10 - 12 = 22.",
                     },
                     section4: {
                         title4: "Properties of Determinants",
@@ -209,34 +209,305 @@ export const linearAlgebraCourse = {
                         proof1_1_math: `B = B I_n = B(AC) = (BA)C = I_n C = C`,
                         expl1_1: "Thus, B = C, and the inverse is unique.",
                         ex1_1: "For example, the inverses of the 2 x 2 elementary matrices are as follows:",
-                        ex1_1_list1: "E_1 = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} \\Rightarrow E_1^{-1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}",
-                        ex1_1_list2: "E_2 = \\begin{bmatrix} k & 0 \\\\ 0 & 1 \\end{bmatrix} \\Rightarrow E_2^{-1} = \\begin{bmatrix} \\frac{1}{k} & 0 \\\\ 0 & 1 \\end{bmatrix}, k \\ne 0",
-                        ex1_1_list3: "E_3 = \\begin{bmatrix} 1 & 0 \\\\ k & 1 \\end{bmatrix} \\Rightarrow E_3^{-1} = \\begin{bmatrix} 1 & 0 \\\\ -k & 1 \\end{bmatrix}",
+                        ex1_1_list1: `E_{1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} \\Rightarrow E_{1}^{-1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}`,
+                        ex1_1_list2: `E_{2} = \\begin{bmatrix} k & 0 \\\\ 0 & 1 \\end{bmatrix} \\Rightarrow E_{2}^{-1} = \\begin{bmatrix} \\frac{1}{k} & 0 \\\\ 0 & 1 \\end{bmatrix}, k \\ne 0`,
+                        ex1_1_list3: `E_{3} = \\begin{bmatrix} 1 & 0 \\\\ k & 1 \\end{bmatrix} \\Rightarrow E_{3}^{-1} = \\begin{bmatrix} 1 & 0 \\\\ -k & 1 \\end{bmatrix}`,
                     },
                     section2: {
-                        title2: "Methods for Finding the Inverse (Inverse Computation and Adjugate Method)",
+                        title2: "Method 1 for Finding the Inverse (Gauss-Jordan Elimination)",
                         def1_2: "We have two ways of finding the matrix B so that B A = I_n. The first method is simply to multiply the sequence of elementary matrice which row reduces A to I_n. The second method is to form the augmented matrix (A | I_n) and row reduce. The final result will be in the form (I_n | B). This is the method used in most textbooks.",
                         text1_2: "Here we have an example.",
-                        method1_1: "Method 1: Inverse Computation",
+                        method1_1: "Method 1: Gauss-Jordan Elimination or Row Reduction",
                         ex1_2: `Suppose we want to find an inverse for`,
                         ex1_2_matrix: `A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
                         ex1_2_steps1: "Since we only need to solve the matrix equation XA = I_3, we can use our previous strategy of row reducing (A | I_3).",
                         ex1_2_steps2: `(A | I_3) = \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 1 & 3 & 1 & | & 0 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_1} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_3 - R_2}`,
                         ex1_2_steps3: `\\begin{bmatrix} 1 & 2 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_3} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_1 - 2R_2}`,
                         ex1_2_steps4: `\\begin{bmatrix} 1 & 0 & 0 & | & 5 & -4 & 2 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix}`,
-                        ex1_2_result: `Thus, A^{-1} = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                        ex1_2_result: `\\text{Thus, } A^{-1} = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section3: {
+                        title2: "Method 2 for Finding the Inverse (Adjugate Method)",
                         method2_1: "Method 2: Adjugate Method",
                         ex2_2: `Alternatively, we can use the adjugate method. We first compute the matrix of cofactors, then take its transpose to get the adjugate, and finally divide by the determinant of A to get the inverse.`,
+                        ex2_2_matrix: `\\text{For } A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
                         ex2_2_steps1: "Calculate the determinant of A.",
                         ex2_2_steps1_math: `det(A) = 1(3*2 - 1*1) - 2(1*2 - 0*1) + 0(1*1 - 3*0) = 1`,
                         ex2_2_steps2: "Find the matrix of minors, then the matrix of cofactors.",
-                        ex2_2_steps2_math: `\\text{Minors} = \\begin{bmatrix} 5 & 2 & -1 \\\\ 2 & 2 & -1 \\\\ -1 & 1 & 1 \\end{bmatrix}, \\quad \\text{Cofactors} = \\begin{bmatrix} 5 & -2 & -1 \\\\ -2 & 2 & 1 \\\\ -1 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps2_desc: "The minor M_{ij} of an element a_ij is defined as the determinant of the submatrix that remains after removing the i-th row and j-th column from A. The cofactor C_{ij} is then given by C_{ij} = (-1)^{i+j} M_{ij}.",
+                        ex2_2_steps2_math: `M_{11} = det \\begin{bmatrix} 3 & 1 \\\\ 1 & 2 \\end{bmatrix} = 5, \\quad C_{11} = (-1)^{1+1} M_{11} = 5`,
+                        ex2_2_steps2_math2: `M_{12} = det \\begin{bmatrix} 1 & 1 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{12} = (-1)^{1+2} M_{12} = -2`,
+                        ex2_2_steps2_math3: `M_{13} = det \\begin{bmatrix} 1 & 3 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{13} = (-1)^{1+3} M_{13} = 1`,
+                        ex2_2_steps2_math4: `M_{21} = det \\begin{bmatrix} 2 & 0 \\\\ 1 & 2 \\end{bmatrix} = 4, \\quad C_{21} = (-1)^{2+1} M_{21} = -4`,
+                        ex2_2_steps2_math5: `M_{22} = det \\begin{bmatrix} 1 & 0 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{22} = (-1)^{2+2} M_{22} = 2`,
+                        ex2_2_steps2_math6: `M_{23} = det \\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{23} = (-1)^{2+3} M_{23} = -1`,
+                        ex2_2_steps2_math7: `M_{31} = det \\begin{bmatrix} 2 & 0 \\\\ 3 & 1 \\end{bmatrix} = 2, \\quad C_{31} = (-1)^{3+1} M_{31} = 2`,
+                        ex2_2_steps2_math8: `M_{32} = det \\begin{bmatrix} 1 & 0 \\\\ 1 & 1 \\end{bmatrix} = 1, \\quad C_{32} = (-1)^{3+2} M_{32} = -1`,
+                        ex2_2_steps2_math9: `M_{33} = det \\begin{bmatrix} 1 & 2 \\\\ 1 & 3 \\end{bmatrix} = 1, \\quad C_{33} = (-1)^{3+3} M_{33} = 1`,
+                        ex2_2_steps2_matrix: `\\text{Matrix of Cofactors} = \\begin{bmatrix} 5 & -2 & 1 \\\\ -4 & 2 & -1 \\\\ 2 & -1 & 1 \\end{bmatrix}`,
                         ex2_2_steps3: "Transpose the matrix of cofactors to get the adjugate.",
-                        ex2_2_steps3_math: `\\text{Adj}(A) = \\begin{bmatrix} 5 & -2 & -1 \\\\ -2 & 2 & -1 \\\\ -1 & 1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps3_math: `\\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
                         ex2_2_steps4: "Finally, divide the adjugate by the determinant to get the inverse.",
-                        ex2_2_result: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\begin{bmatrix} 5 & -2 & -1 \\\\ -2 & 2 & -1 \\\\ -1 & 1 & 1 \\end{bmatrix}`,
-                        // Verify the second method because it was autogenerated and may contain errors
+                        ex2_2_result: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section4: {
+                        title4: "Proprieties of Invertible Matrices",
+                        description: "Key algebraic rules for working with invertible matrices.",
+                        prop1_title: "The Inverse of a Product (Sock-Shoe Rule)",
+                        prop1_desc: "The inverse of a product is the product of the inverses in reverse order. Think of it like putting on socks and shoes: to undo it, you must take off the shoes first, then the socks.",
+                        prop1_math: `(AB)^{-1} = B^{-1}A^{-1}`,
+                        prop2_title: "Inverse of an Inverse",
+                        prop2_desc: "Taking the inverse twice returns you to the original matrix.",
+                        prop2_math: `(A^{-1})^{-1} = A`,
+                        prop3_title: "Inverse of a Transpose",
+                        prop3_desc: "The order of operations between inversion and transposition does not matter.",
+                        prop3_math: `(A^T)^{-1} = (A^{-1})^T`,
+                        prop4_title: "Scalar Multiplication",
+                        prop4_desc: "If k is a non-zero scalar, the inverse scales by the reciprocal of k.",
+                        prop4_math: `(kA)^{-1} = \\frac{1}{k}A^{-1}`
+                    },
+                    section5: {
+                        title5: "Applications of Matrix Inverses (Solving Linear Systems)",
+                        description: "Matrix inverses can be used to solve systems of linear equations, among other applications.",
+                        app1_title: "Solving Linear Systems",
+                        app1_desc: "If A is an invertible matrix and \\mathbf{b} is a vector, the system of equations A\\mathbf{x} = \\mathbf{b} has the unique solution \\mathbf{x} = A^{-1}\\mathbf{b}.",
+                        ex1_5: 'For example, consider the system of equations:',
+                        ex1_5_equations: `\\begin{cases} 2x + 3y = 7 \\\\ 4x - y = 7 \\end{cases}`,
+                        ex1_5_matrix: `A = \\begin{bmatrix} 2 & 3 \\\\ 4 & -1 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix}`,
+                        ex1_5_solution: `First, we find the inverse of A, then multiply it by b to find the solution vector x.`,
+                        ex1_5_steps1: "Calculate the determinant of A.",
+                        ex1_5_steps1_math: `det(A) = (2)(-1) - (3)(4) = -2 - 12 = -14`,
+                        ex1_5_steps2: "Find the matrix of cofactors and then the adjugate.",
+                        ex1_5_steps2_math: `\\text{Adj}(A) = \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix}`,
+                        ex1_5_steps3: "Calculate the inverse of A.",
+                        ex1_5_steps3_math: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\frac{1}{-14} \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix}`,
+                        ex1_5_steps4: "Finally, multiply A^{-1} by b to find the solution vector x.",
+                        ex1_5_steps4_math: `\\begin{bmatrix} x \\\\ y \\end{bmatrix} = A^{-1}\\mathbf{b} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix} \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix} = \\begin{bmatrix} \\frac{7 + 21}{14} \\\\ \\frac{28 - 14}{14} \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 1 \\end{bmatrix}`,
+                        ex1_5_result: "Thus, the solution to the system of equations is x = 2 and y = 1."
+                    },
+                    example_section: {
+                        title_ex: "Examples with Step-by-Step Solutions",
+                        ex1: {
+                            ex1_title: "1. Gauss-Jordan Elimination (3x3)",
+                            ex1_problem: "Find the inverse of matrix A using row reduction:",
+                            ex1_matrix: `A = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & 2 & 3 \\end{bmatrix}`,
 
+                            ex1_step1_title: "Step 1: Form the Augmented Matrix [A | I]",
+                            ex1_step1_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 1 & 2 & 2 & 0 & 1 & 0 \\\\ 1 & 2 & 3 & 0 & 0 & 1 \\end{array} \\right]`,
+
+                            ex1_step2_title: "Step 2: Zeros below pivot 1 (Column 1)",
+                            ex1_step2_desc: "Perform R2 = R2 - R1 and R3 = R3 - R1.",
+                            ex1_step2_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 1 & 2 & -1 & 0 & 1 \\end{array} \\right]`,
+
+                            ex1_step3_title: "Step 3: Zeros below pivot 2 (Column 2)",
+                            ex1_step3_desc: "Perform R3 = R3 - R2.",
+                            ex1_step3_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+
+                            ex1_step4_title: "Step 4: Zeros above pivot 3 (Column 3)",
+                            ex1_step4_desc: "Perform R2 = R2 - R3 and R1 = R1 - R3.",
+                            ex1_step4_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 0 & 1 & 1 & -1 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+
+                            ex1_step5_title: "Step 5: Zeros above pivot 2 (Column 2)",
+                            ex1_step5_desc: "Perform R1 = R1 - R2. The left side is now the Identity matrix.",
+                            ex1_step5_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 0 & 0 & 2 & -1 & 0 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+
+                            ex1_result: `A^{-1} = \\begin{bmatrix} 2 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 1 \\end{bmatrix}`,
+                        },
+                        ex2: {
+                            ex2_title: "2. Adjugate Method (3x3)",
+                            ex2_problem: "Find the inverse of matrix B using the determinant and cofactors:",
+                            ex2_matrix: `B = \\begin{bmatrix} 1 & 0 & -1 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 2 \\end{bmatrix}`,
+
+                            ex2_step1_title: "Step 1: Calculate Determinant",
+                            ex2_step1_math: `\\det(B) = 1(2-0) - 0 + (-1)(2-1) = 2 - 1 = 1`,
+
+                            ex2_step2_title: "Step 2: Calculate Cofactors",
+                            ex2_step2_row1: `C_{11}=+(2), \\; C_{12}=-(-4)=4, \\; C_{13}=+(1)`,
+                            ex2_step2_row2: `C_{21}=-(-1)=1, \\; C_{22}=+(3), \\; C_{23}=-(-1)=1`,
+                            ex2_step2_row3: `C_{31}=+(1), \\; C_{32}=-( -2)=2, \\; C_{33}=+(1)`,
+                            ex2_step2_matrix: `C = \\begin{bmatrix} 2 & 4 & 1 \\\\ 1 & 3 & 1 \\\\ 1 & 2 & 1 \\end{bmatrix}`,
+
+                            ex2_step3_title: "Step 3: Transpose to get Adjugate",
+                            ex2_step3_math: `\\text{Adj}(B) = C^T = \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+
+                            ex2_result: `B^{-1} = \\frac{1}{1} \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                        },
+                        ex3: {
+                            ex3_title: "3. Solving a 3x3 Linear System",
+                            ex3_problem: "Solve the system Ax = b using the matrix inverse.",
+                            ex3_system: `\\begin{cases} x + 2y + z = 8 \\\\ 2x + 5y + 2z = 18 \\\\ x + 2y + 2z = 11 \\end{cases}`,
+
+                            ex3_step1_title: "Step 1: Identify A and b",
+                            ex3_step1_math: `A = \\begin{bmatrix} 1 & 2 & 1 \\\\ 2 & 5 & 2 \\\\ 1 & 2 & 2 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+
+                            ex3_step2_title: "Step 2: Find the Inverse of A",
+                            ex3_step2_desc: "Using the adjugate method (omitted for brevity, det(A)=1), we get:",
+                            ex3_step2_math: `A^{-1} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix}`,
+
+                            ex3_step3_title: "Step 3: Multiply x = A^{-1}b",
+                            ex3_step3_math: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix} \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+
+                            ex3_step4_title: "Step 4: Compute the Product",
+                            ex3_step4_x: `x = 6(8) - 2(18) - 1(11) = 48 - 36 - 11 = 1`,
+                            ex3_step4_y: `y = -2(8) + 1(18) + 0 = -16 + 18 = 2`,
+                            ex3_step4_z: `z = -1(8) + 0 + 1(11) = -8 + 11 = 3`,
+
+                            ex3_result: `\\text{Solution: } x=1, y=2, z=3`
+                        }
+                    }
+                }
+            }
+        },
+        linearEquations: {
+            title: "Systems of Linear Equations",
+            description: "Learn how to solve systems of linear equations using various methods.",
+            lessons: {
+                lesson4_title: "Solving Linear Equations",
+                lesson4: {
+                    section1: {
+                        title1: "Introduction to Linear Equation Systems",
+                        def1_1: "A system of linear equations is a collection of one or more linear equations involving the same set of variables (e.g., x, y, z). A solution to a linear system is an assignment of values to the variables that satisfies all equations simultaneously.",
+                        def1_2: "The simplest linear equation is the equation ax = b. The letter x is the variable, and a and b are fixed numbers. The solution to this equation is x = b/a, provided that a is not zero.",
+                        def1_3: "A general liear system consisting of m equations in n unknowns will look like:",
+                        def1_3_math: `\\begin{cases} a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = b_1 \\\\ a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = b_2 \\\\ \\vdots \\\\ a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m \\end{cases}`,
+                    },
+                    section2: {
+                        title2: "Solving Linear Systems with Gaussian Reduction (Homogenous System Case)",
+                        def2_1: "Gaussian reduction is an algorithmis procedure for finding the solution set of a linear system. The strategt in Gaussian reduction is to replace the original system with a sequence of equivalent systems until the final system is in reduced row echelon form.",
+                        subtitle2_1: "The Homogenous System Case",
+                        text2_1: "Solving a linear system Ax = b involves several steps. The first step is to solve the associated homogenous system.",
+                        def2_2: "A linear system Ax = b is called homogenous if b = 0. The solution set of a homogenous linear system Ax = 0 is called null space of A.",
+                        ex2_1: `Consider the homogenous linear system`,
+                        ex2_1_system: `\\begin{cases} x + 2y - z = 0 \\\\ 2x + 5y - 3z = 0 \\\\ x + 3y - 2z = 0 \\end{cases}`,
+                        ex2_1_desc: "Since the right side is all zeros, we form the augmented matrix [A | 0].",
+                        ex2_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 2 & 5 & -3 & 0 \\\\ 1 & 3 & -2 & 0 \\end{array} \\right]`,
+
+                        ex2_1_step1_title: "Row Reduction",
+                        ex2_1_step1_math: `\\xrightarrow{R_2-2R_1, R_3-R_1} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\end{array} \\right] \\xrightarrow{R_3-R_2} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+
+                        ex2_1_step2_title: "Solve for Variables",
+                        ex2_1_step2_desc: "The last row 0=0 indicates z is a free variable. Let z = t.",
+                        ex2_1_step2_math: `y - z = 0 \\Rightarrow y = t \\\\ x + 2y - z = 0 \\Rightarrow x + 2t - t = 0 \\Rightarrow x = -t`,
+
+                        ex2_1_result: `\\text{Solution: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix} \\text{ (This vector spans the Null Space)}`
+                    },
+                    section3: {
+                        title3: "Solving Linear Systems with Gaussian Reduction (Non-Homogenous System Case)",
+                        def3_1: "A system Ax - b with b \\ne 0 is called non-homogenous. A non-homogenous system requires that we use an augmented coefficient matrix (A | b).",
+                        ex3_1: "Consider the same system but equal to non-zero constants:",
+                        ex3_1_system: `\\begin{cases} x + 2y - z = 2 \\\\ 2x + 5y - 3z = 7 \\\\ x + 3y - 2z = 5 \\end{cases}`,
+                        ex3_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 2 \\\\ 2 & 5 & -3 & 7 \\\\ 1 & 3 & -2 & 5 \\end{array} \\right]`,
+                        ex3_1_step1: "Row reducing this matrix yields:",
+                        ex3_1_math: `\\left[ \\begin{array}{ccc|c} 1 & 0 & 1 & -4 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex3_1_result: `\\text{Solution: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\underbrace{t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix}}_{\\text{Homogeneous}} + \\underbrace{\\begin{bmatrix} -4 \\\\ 3 \\\\ 0 \\end{bmatrix}}_{\\text{Particular}}`
+                    },
+                    section4: {
+                        title4: "Reduced Row Echelon",
+                        title: "Reduced Row Echelon Form (RREF)",
+                        description: "Understanding the 'goal state' of row reduction and the difference between REF and RREF.",
+
+                        def_title: "What is RREF?",
+                        def_desc: "A matrix is in Reduced Row Echelon Form (RREF) if it satisfies four specific conditions. It is the most simplified version of a matrix possible.",
+
+                        cond_title: "The 4 Conditions",
+                        cond1: "1. Non-zero rows: All rows consisting entirely of zeros are at the bottom of the matrix.",
+                        cond2: "2. Leading 1s: The first non-zero entry in any non-zero row is a 1 (called a pivot).",
+                        cond3: "3. Staircase Pattern: Each leading 1 is to the right of the leading 1 in the row above it.",
+                        cond4: "4. Zeros in Columns: Each leading 1 is the only non-zero entry in its column (zeros above and below).",
+
+                        comparison_title: "REF vs. RREF",
+                        comparison_desc: "Many students confuse these two forms. Here is the difference:",
+
+                        ref_title: "Row Echelon Form (REF)",
+                        ref_desc: "Satisfies conditions 1, 2, and 3 only. Numbers above pivots can be non-zero.",
+                        ref_method: "Used in: Gaussian Elimination (requires back-substitution).",
+                        ref_ex: `\\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 5 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+
+                        rref_title: "Reduced Row Echelon Form (RREF)",
+                        rref_desc: "Satisfies all 4 conditions. Pivots are the ONLY non-zero entry in their columns.",
+                        rref_method: "Used in: Gauss-Jordan Elimination (gives the solution directly).",
+                        rref_ex: `\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+
+                        note_title: "Uniqueness Theorem",
+                        note_desc: "The Row Echelon Form (REF) of a matrix is NOT unique (different row operations can lead to different numbers above the pivots). However, the Reduced Row Echelon Form (RREF) IS unique. Every matrix has exactly one RREF."
+                    },
+                    example_section: {
+                        example_section: {
+                            title_ex: "Examples with Step-by-Step Solutions",
+
+                            // Example 1: Unique Solution (Gauss-Jordan)
+                            ex1: {
+                                title: "1. Unique Solution (Gauss-Jordan)",
+                                problem: "Solve the following system using Gauss-Jordan elimination:",
+                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+
+                                step1_title: "Step 1: Augmented Matrix",
+                                step1_desc: "Convert the system into an augmented matrix [A|b].",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+
+                                step2_title: "Step 2: Create Zeros Below Pivot 1",
+                                step2_desc: "Use the 1 in the top-left to eliminate the entries below it. (R2 = R2 - 2R1) and (R3 = R3 - 3R1).",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+
+                                step3_title: "Step 3: Create Pivot 2",
+                                step3_desc: "To make the math easier, let's scale R2 by 1/2 to get a leading 1, or subtract R2 from R3. Let's multiply R2 by 0.5.",
+                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+
+                                step4_title: "Step 4: Create Zeros Below Pivot 2",
+                                step4_desc: "Perform (R3 = R3 - 3R2).",
+                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+
+                                step5_title: "Step 5: Solve for variables (Back Substitution)",
+                                step5_desc: "From R3: -0.5z = -1.5 → z = 3. Substitute z back into R2, then x and y into R1.",
+                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+
+                                result_title: "Final Answer",
+                                result: `\\text{Solution: } x=1, y=2, z=3`
+                            },
+
+                            // Example 2: Infinite Solutions (Free Variables)
+                            ex2: {
+                                title: "2. Infinite Solutions (Free Variables)",
+                                problem: "Find the general solution to the system:",
+                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+
+                                step1_title: "Step 1: Row Reduction",
+                                step1_desc: "Form the augmented matrix and reduce.",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+
+                                step2_title: "Step 2: Identify Free Variables",
+                                step2_desc: "Rows 2 and 3 became all zeros. This means we have only one pivot (for x). The variables y and z do not have pivots, so they are FREE variables.",
+                                step2_math: `\\text{Let } y = s \\text{ and } z = t, \\text{ where } s,t \\in \\mathbb{R}.`,
+
+                                step3_title: "Step 3: Express Basic Variables",
+                                step3_desc: "Rewrite the first equation in terms of the free variables.",
+                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+
+                                result_title: "Final Answer (Parametric Form)",
+                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                            },
+
+                            // Example 3: No Solution (Inconsistent System)
+                            ex3: {
+                                title: "3. No Solution (Inconsistent System)",
+                                problem: "Determine the solution to the following system:",
+                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+
+                                step1_title: "Step 1: Form Augmented Matrix",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+
+                                step2_title: "Step 2: Row Operations",
+                                step2_desc: "Perform R2 = R2 - R1.",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+
+                                step3_title: "Step 3: Interpret Result",
+                                step3_desc: "Look closely at the second row. Translating this back into an equation gives us:",
+                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+
+                                result_title: "Final Conclusion",
+                                result: `Since 0 = 3 is a mathematical contradiction, the system is Inconsistent (No Solution). Geometrically, this represents parallel planes that never intersect.`
+                            }
+                        }
                     }
                 }
             }
@@ -295,7 +566,7 @@ export const linearAlgebraCourse = {
                     },
                     example_section: {
                         title_ex: "Ejemplos con Soluciones Paso a Paso",
-                        
+
                         example1: {
                             title: "1. Combinación Lineal de Matrices",
                             problem: `Dadas A = \\begin{bmatrix} 2 & -1 \\\\ 0 & 3 \\end{bmatrix} \\text{ y } B = \\begin{bmatrix} 1 & 4 \\\\ 5 & -2 \\end{bmatrix}, \\text{ encontrar } 2A - B.`,
@@ -431,6 +702,279 @@ export const linearAlgebraCourse = {
                 }
             }
         },
+        matrixInverse: {
+            title: "Inversa de una Matriz",
+            description: "Aprenda cómo encontrar la inversa de una matriz y sus aplicaciones.",
+            lessons: {
+                lesson3_title: "Inversa de una Matriz",
+                lesson3: {
+                    section1: {
+                        title1: "Definición de Matriz Inversa",
+                        def1_1: "Suponga que dos matrices A y B de n x n tienen la propiedad de que AB = BA = I_n, donde I_n es la matriz identidad de n x n. Entonces decimos que A es invertible (o no singular) y B es la inversa de A, denotada por A^{-1}. En otras palabras, A^{-1} es la única matriz tal que A A^{-1} = A^{-1} A = I_n.",
+                        proposition1_1: "Proposición: Suponga que A en R^{n x n} o A en F_2^{n x n} y A tiene una inversa B. Entonces B es única.",
+                        proof1_1: "Demostración: Suponga que A tiene dos inversas B y C. Entonces",
+                        proof1_1_math: `B = B I_n = B(AC) = (BA)C = I_n C = C`,
+                        expl1_1: "Por lo tanto, B = C, y la inversa es única.",
+                        ex1_1: "Por ejemplo, las inversas de las matrices elementales 2 x 2 son las siguientes:",
+                        ex1_1_list1: `E_{1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} \\Rightarrow E_{1}^{-1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}`,
+                        ex1_1_list2: `E_{2} = \\begin{bmatrix} k & 0 \\\\ 0 & 1 \\end{bmatrix} \\Rightarrow E_{2}^{-1} = \\begin{bmatrix} \\frac{1}{k} & 0 \\\\ 0 & 1 \\end{bmatrix}, k \\ne 0`,
+                        ex1_1_list3: `E_{3} = \\begin{bmatrix} 1 & 0 \\\\ k & 1 \\end{bmatrix} \\Rightarrow E_{3}^{-1} = \\begin{bmatrix} 1 & 0 \\\\ -k & 1 \\end{bmatrix}`,
+                    },
+                    section2: {
+                        title2: "Método 1 para Encontrar la Inversa (Eliminación de Gauss-Jordan)",
+                        def1_2: "Tenemos dos formas de encontrar la matriz B tal que B A = I_n. El primer método es simplemente multiplicar la secuencia de matrices elementales que reducen por filas A a I_n. El segundo método es formar la matriz aumentada (A | I_n) y reducir por filas. El resultado final estará en la forma (I_n | B). Este es el método usado en la mayoría de los libros de texto.",
+                        text1_2: "Aquí tenemos un ejemplo.",
+                        method1_1: "Método 1: Eliminación de Gauss-Jordan o Reducción por Filas",
+                        ex1_2: `Supongamos que queremos encontrar una inversa para`,
+                        ex1_2_matrix: `A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex1_2_steps1: "Como solo necesitamos resolver la ecuación matricial XA = I_3, podemos usar nuestra estrategia anterior de reducir por filas (A | I_3).",
+                        ex1_2_steps2: `(A | I_3) = \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 1 & 3 & 1 & | & 0 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_1} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_3 - R_2}`,
+                        ex1_2_steps3: `\\begin{bmatrix} 1 & 2 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_3} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_1 - 2R_2}`,
+                        ex1_2_steps4: `\\begin{bmatrix} 1 & 0 & 0 & | & 5 & -4 & 2 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix}`,
+                        ex1_2_result: `\\text{Por lo tanto, } A^{-1} = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section3: {
+                        title2: "Método 2 para Encontrar la Inversa (Método de la Adjunta)",
+                        method2_1: "Método 2: Método de la Adjunta",
+                        ex2_2: `Alternativamente, podemos usar el método de la adjunta. Primero calculamos la matriz de cofactores, luego tomamos su transpuesta para obtener la adjunta, y finalmente dividimos por el determinante de A para obtener la inversa.`,
+                        ex2_2_matrix: `\\text{Para } A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex2_2_steps1: "Calcular el determinante de A.",
+                        ex2_2_steps1_math: `det(A) = 1(3*2 - 1*1) - 2(1*2 - 0*1) + 0(1*1 - 3*0) = 1`,
+                        ex2_2_steps2: "Encontrar la matriz de menores, luego la matriz de cofactores.",
+                        ex2_2_steps2_desc: "El menor M_{ij} de un elemento a_ij se define como el determinante de la submatriz que queda después de eliminar la i-ésima fila y la j-ésima columna de A. El cofactor C_{ij} está dado por C_{ij} = (-1)^{i+j} M_{ij}.",
+                        ex2_2_steps2_math: `M_{11} = det \\begin{bmatrix} 3 & 1 \\\\ 1 & 2 \\end{bmatrix} = 5, \\quad C_{11} = (-1)^{1+1} M_{11} = 5`,
+                        ex2_2_steps2_math2: `M_{12} = det \\begin{bmatrix} 1 & 1 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{12} = (-1)^{1+2} M_{12} = -2`,
+                        ex2_2_steps2_math3: `M_{13} = det \\begin{bmatrix} 1 & 3 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{13} = (-1)^{1+3} M_{13} = 1`,
+                        ex2_2_steps2_math4: `M_{21} = det \\begin{bmatrix} 2 & 0 \\\\ 1 & 2 \\end{bmatrix} = 4, \\quad C_{21} = (-1)^{2+1} M_{21} = -4`,
+                        ex2_2_steps2_math5: `M_{22} = det \\begin{bmatrix} 1 & 0 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{22} = (-1)^{2+2} M_{22} = 2`,
+                        ex2_2_steps2_math6: `M_{23} = det \\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{23} = (-1)^{2+3} M_{23} = -1`,
+                        ex2_2_steps2_math7: `M_{31} = det \\begin{bmatrix} 2 & 0 \\\\ 3 & 1 \\end{bmatrix} = 2, \\quad C_{31} = (-1)^{3+1} M_{31} = 2`,
+                        ex2_2_steps2_math8: `M_{32} = det \\begin{bmatrix} 1 & 0 \\\\ 1 & 1 \\end{bmatrix} = 1, \\quad C_{32} = (-1)^{3+2} M_{32} = -1`,
+                        ex2_2_steps2_math9: `M_{33} = det \\begin{bmatrix} 1 & 2 \\\\ 1 & 3 \\end{bmatrix} = 1, \\quad C_{33} = (-1)^{3+3} M_{33} = 1`,
+                        ex2_2_steps2_matrix: `\\text{Matriz de Cofactores} = \\begin{bmatrix} 5 & -2 & 1 \\\\ -4 & 2 & -1 \\\\ 2 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps3: "Transponer la matriz de cofactores para obtener la adjunta.",
+                        ex2_2_steps3_math: `\\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps4: "Finalmente, dividir la adjunta por el determinante para obtener la inversa.",
+                        ex2_2_result: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section4: {
+                        title4: "Propiedades de las Matrices Invertibles",
+                        description: "Reglas algebraicas clave para trabajar con matrices invertibles.",
+                        prop1_title: "La Inversa de un Producto (Regla del Calcetín y el Zapato)",
+                        prop1_desc: "La inversa de un producto es el producto de las inversas en orden inverso. Piénselo como ponerse calcetines y zapatos: para deshacerlo, primero debe quitarse los zapatos, luego los calcetines.",
+                        prop1_math: `(AB)^{-1} = B^{-1}A^{-1}`,
+                        prop2_title: "Inversa de una Inversa",
+                        prop2_desc: "Tomar la inversa dos veces le devuelve a la matriz original.",
+                        prop2_math: `(A^{-1})^{-1} = A`,
+                        prop3_title: "Inversa de una Transpuesta",
+                        prop3_desc: "El orden de las operaciones entre inversión y transposición no importa.",
+                        prop3_math: `(A^T)^{-1} = (A^{-1})^T`,
+                        prop4_title: "Multiplicación Escalar",
+                        prop4_desc: "Si k es un escalar no nulo, la inversa se escala por el recíproco de k.",
+                        prop4_math: `(kA)^{-1} = \\frac{1}{k}A^{-1}`
+                    },
+                    section5: {
+                        title5: "Aplicaciones de Inversas (Resolución de Sistemas Lineales)",
+                        description: "Las inversas de matrices se pueden usar para resolver sistemas de ecuaciones lineales, entre otras aplicaciones.",
+                        app1_title: "Resolución de Sistemas Lineales",
+                        app1_desc: "Si A es una matriz invertible y \\mathbf{b} es un vector, el sistema de ecuaciones A\\mathbf{x} = \\mathbf{b} tiene la solución única \\mathbf{x} = A^{-1}\\mathbf{b}.",
+                        ex1_5: 'Por ejemplo, considere el sistema de ecuaciones:',
+                        ex1_5_equations: `\\begin{cases} 2x + 3y = 7 \\\\ 4x - y = 7 \\end{cases}`,
+                        ex1_5_matrix: `A = \\begin{bmatrix} 2 & 3 \\\\ 4 & -1 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix}`,
+                        ex1_5_solution: `Primero, encontramos la inversa de A, luego la multiplicamos por b para encontrar el vector solución x.`,
+                        ex1_5_steps1: "Calcular el determinante de A.",
+                        ex1_5_steps1_math: `det(A) = (2)(-1) - (3)(4) = -2 - 12 = -14`,
+                        ex1_5_steps2: "Encontrar la matriz de cofactores y luego la adjunta.",
+                        ex1_5_steps2_math: `\\text{Adj}(A) = \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix}`,
+                        ex1_5_steps3: "Calcular la inversa de A.",
+                        ex1_5_steps3_math: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\frac{1}{-14} \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix}`,
+                        ex1_5_steps4: "Finalmente, multiplicar A^{-1} por b para encontrar el vector solución x.",
+                        ex1_5_steps4_math: `\\begin{bmatrix} x \\\\ y \\end{bmatrix} = A^{-1}\\mathbf{b} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix} \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix} = \\begin{bmatrix} \\frac{7 + 21}{14} \\\\ \\frac{28 - 14}{14} \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 1 \\end{bmatrix}`,
+                        ex1_5_result: "Por lo tanto, la solución al sistema de ecuaciones es x = 2 e y = 1."
+                    },
+                    example_section: {
+                        title_ex: "Ejemplos con Soluciones Paso a Paso",
+                        ex1: {
+                            ex1_title: "1. Eliminación de Gauss-Jordan (3x3)",
+                            ex1_problem: "Encuentre la inversa de la matriz A usando reducción por filas:",
+                            ex1_matrix: `A = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & 2 & 3 \\end{bmatrix}`,
+                            ex1_step1_title: "Paso 1: Formar la Matriz Aumentada [A | I]",
+                            ex1_step1_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 1 & 2 & 2 & 0 & 1 & 0 \\\\ 1 & 2 & 3 & 0 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step2_title: "Paso 2: Ceros debajo del pivote 1 (Columna 1)",
+                            ex1_step2_desc: "Realizar R2 = R2 - R1 y R3 = R3 - R1.",
+                            ex1_step2_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 1 & 2 & -1 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step3_title: "Paso 3: Ceros debajo del pivote 2 (Columna 2)",
+                            ex1_step3_desc: "Realizar R3 = R3 - R2.",
+                            ex1_step3_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step4_title: "Paso 4: Ceros arriba del pivote 3 (Columna 3)",
+                            ex1_step4_desc: "Realizar R2 = R2 - R3 y R1 = R1 - R3.",
+                            ex1_step4_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 0 & 1 & 1 & -1 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step5_title: "Paso 5: Ceros arriba del pivote 2 (Columna 2)",
+                            ex1_step5_desc: "Realizar R1 = R1 - R2. El lado izquierdo ahora es la matriz Identidad.",
+                            ex1_step5_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 0 & 0 & 2 & -1 & 0 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_result: `A^{-1} = \\begin{bmatrix} 2 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 1 \\end{bmatrix}`,
+                        },
+                        ex2: {
+                            ex2_title: "2. Método de la Adjunta (3x3)",
+                            ex2_problem: "Encuentre la inversa de la matriz B usando el determinante y cofactores:",
+                            ex2_matrix: `B = \\begin{bmatrix} 1 & 0 & -1 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 2 \\end{bmatrix}`,
+                            ex2_step1_title: "Paso 1: Calcular Determinante",
+                            ex2_step1_math: `\\det(B) = 1(2-0) - 0 + (-1)(2-1) = 2 - 1 = 1`,
+                            ex2_step2_title: "Paso 2: Calcular Cofactores",
+                            ex2_step2_row1: `C_{11}=+(2), \\; C_{12}=-(-4)=4, \\; C_{13}=+(1)`,
+                            ex2_step2_row2: `C_{21}=-(-1)=1, \\; C_{22}=+(3), \\; C_{23}=-(-1)=1`,
+                            ex2_step2_row3: `C_{31}=+(1), \\; C_{32}=-( -2)=2, \\; C_{33}=+(1)`,
+                            ex2_step2_matrix: `C = \\begin{bmatrix} 2 & 4 & 1 \\\\ 1 & 3 & 1 \\\\ 1 & 2 & 1 \\end{bmatrix}`,
+                            ex2_step3_title: "Paso 3: Transponer para obtener la Adjunta",
+                            ex2_step3_math: `\\text{Adj}(B) = C^T = \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                            ex2_result: `B^{-1} = \\frac{1}{1} \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                        },
+                        ex3: {
+                            ex3_title: "3. Resolviendo un Sistema Lineal 3x3",
+                            ex3_problem: "Resuelva el sistema Ax = b usando la inversa de la matriz.",
+                            ex3_system: `\\begin{cases} x + 2y + z = 8 \\\\ 2x + 5y + 2z = 18 \\\\ x + 2y + 2z = 11 \\end{cases}`,
+                            ex3_step1_title: "Paso 1: Identificar A y b",
+                            ex3_step1_math: `A = \\begin{bmatrix} 1 & 2 & 1 \\\\ 2 & 5 & 2 \\\\ 1 & 2 & 2 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step2_title: "Paso 2: Encontrar la Inversa de A",
+                            ex3_step2_desc: "Usando el método de la adjunta (omitido por brevedad, det(A)=1), obtenemos:",
+                            ex3_step2_math: `A^{-1} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix}`,
+                            ex3_step3_title: "Paso 3: Multiplicar x = A^{-1}b",
+                            ex3_step3_math: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix} \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step4_title: "Paso 4: Calcular el Producto",
+                            ex3_step4_x: `x = 6(8) - 2(18) - 1(11) = 48 - 36 - 11 = 1`,
+                            ex3_step4_y: `y = -2(8) + 1(18) + 0 = -16 + 18 = 2`,
+                            ex3_step4_z: `z = -1(8) + 0 + 1(11) = -8 + 11 = 3`,
+                            ex3_result: `\\text{Solución: } x=1, y=2, z=3`
+                        }
+                    }
+                }
+            }
+        },
+        linearEquations: {
+            title: "Sistemas de Ecuaciones Lineales",
+            description: "Aprende a resolver sistemas de ecuaciones lineales utilizando varios métodos.",
+            lessons: {
+                lesson4_title: "Resolución de Ecuaciones Lineales",
+                lesson4: {
+                    section1: {
+                        title1: "Introducción a los Sistemas de Ecuaciones Lineales",
+                        def1_1: "Un sistema de ecuaciones lineales es un conjunto de una o más ecuaciones lineales que involucran el mismo conjunto de variables (por ejemplo, x, y, z). Una solución a un sistema lineal es una asignación de valores a las variables que satisface todas las ecuaciones simultáneamente.",
+                        def1_2: "La ecuación lineal más simple es la ecuación ax = b. La letra x es la variable, y a y b son números fijos. La solución a esta ecuación es x = b/a, siempre que a no sea cero.",
+                        def1_3: "Un sistema lineal general que consta de m ecuaciones con n incógnitas se verá así:",
+                        def1_3_math: `\\begin{cases} a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = b_1 \\\\ a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = b_2 \\\\ \\vdots \\\\ a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m \\end{cases}`,
+                    },
+                    section2: {
+                        title2: "Resolución de Sistemas Lineales con Reducción Gaussiana (Caso Homogéneo)",
+                        def2_1: "La reducción Gaussiana es un procedimiento algorítmico para encontrar el conjunto solución de un sistema lineal. La estrategia en la reducción Gaussiana es reemplazar el sistema original con una secuencia de sistemas equivalentes hasta que el sistema final esté en forma escalonada reducida por filas.",
+                        subtitle2_1: "El Caso del Sistema Homogéneo",
+                        text2_1: "Resolver un sistema lineal Ax = b implica varios pasos. El primer paso es resolver el sistema homogéneo asociado.",
+                        def2_2: "Un sistema lineal Ax = b se llama homogéneo si b = 0. El conjunto solución de un sistema lineal homogéneo Ax = 0 se llama espacio nulo de A.",
+                        ex2_1: `Considere el sistema lineal homogéneo`,
+                        ex2_1_system: `\\begin{cases} x + 2y - z = 0 \\\\ 2x + 5y - 3z = 0 \\\\ x + 3y - 2z = 0 \\end{cases}`,
+                        ex2_1_desc: "Dado que el lado derecho son todos ceros, formamos la matriz aumentada [A | 0].",
+                        ex2_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 2 & 5 & -3 & 0 \\\\ 1 & 3 & -2 & 0 \\end{array} \\right]`,
+                        ex2_1_step1_title: "Reducción por Filas",
+                        ex2_1_step1_math: `\\xrightarrow{R_2-2R_1, R_3-R_1} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\end{array} \\right] \\xrightarrow{R_3-R_2} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex2_1_step2_title: "Resolver para Variables",
+                        ex2_1_step2_desc: "La última fila 0=0 indica que z es una variable libre. Sea z = t.",
+                        ex2_1_step2_math: `y - z = 0 \\Rightarrow y = t \\\\ x + 2y - z = 0 \\Rightarrow x + 2t - t = 0 \\Rightarrow x = -t`,
+                        ex2_1_result: `\\text{Solución: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix} \\text{ (Este vector genera el Espacio Nulo)}`
+                    },
+                    section3: {
+                        title3: "Resolución de Sistemas Lineales con Reducción Gaussiana (Caso No Homogéneo)",
+                        def3_1: "Un sistema Ax = b con b \\ne 0 se llama no homogéneo. Un sistema no homogéneo requiere que usemos una matriz de coeficientes aumentada (A | b).",
+                        ex3_1: "Considere el mismo sistema pero igualado a constantes distintas de cero:",
+                        ex3_1_system: `\\begin{cases} x + 2y - z = 2 \\\\ 2x + 5y - 3z = 7 \\\\ x + 3y - 2z = 5 \\end{cases}`,
+                        ex3_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 2 \\\\ 2 & 5 & -3 & 7 \\\\ 1 & 3 & -2 & 5 \\end{array} \\right]`,
+                        ex3_1_step1: "Reduciendo por filas esta matriz se obtiene:",
+                        ex3_1_math: `\\left[ \\begin{array}{ccc|c} 1 & 0 & 1 & -4 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex3_1_result: `\\text{Solución: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\underbrace{t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix}}_{\\text{Homogénea}} + \\underbrace{\\begin{bmatrix} -4 \\\\ 3 \\\\ 0 \\end{bmatrix}}_{\\text{Particular}}`
+                    },
+                    section4: {
+                        title4: "Forma Escalonada Reducida",
+                        title: "Forma Escalonada Reducida por Filas (RREF)",
+                        description: "Entendiendo el 'estado objetivo' de la reducción por filas y la diferencia entre REF y RREF.",
+                        def_title: "¿Qué es RREF?",
+                        def_desc: "Una matriz está en Forma Escalonada Reducida por Filas (RREF) si satisface cuatro condiciones específicas. Es la versión más simplificada posible de una matriz.",
+                        cond_title: "Las 4 Condiciones",
+                        cond1: "1. Filas no nulas: Todas las filas que consisten enteramente de ceros están en la parte inferior de la matriz.",
+                        cond2: "2. Unos principales: La primera entrada distinta de cero en cualquier fila no nula es un 1 (llamado pivote).",
+                        cond3: "3. Patrón de escalera: Cada 1 principal está a la derecha del 1 principal en la fila superior.",
+                        cond4: "4. Ceros en Columnas: Cada 1 principal es la única entrada distinta de cero en su columna (ceros arriba y abajo).",
+                        comparison_title: "REF vs. RREF",
+                        comparison_desc: "Muchos estudiantes confunden estas dos formas. Aquí está la diferencia:",
+                        ref_title: "Forma Escalonada por Filas (REF)",
+                        ref_desc: "Satisface solo las condiciones 1, 2 y 3. Los números por encima de los pivotes pueden ser distintos de cero.",
+                        ref_method: "Usado en: Eliminación Gaussiana (requiere sustitución hacia atrás).",
+                        ref_ex: `\\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 5 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        rref_title: "Forma Escalonada Reducida por Filas (RREF)",
+                        rref_desc: "Satisface las 4 condiciones. Los pivotes son la ÚNICA entrada distinta de cero en sus columnas.",
+                        rref_method: "Usado en: Eliminación de Gauss-Jordan (da la solución directamente).",
+                        rref_ex: `\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        note_title: "Teorema de Unicidad",
+                        note_desc: "La Forma Escalonada por Filas (REF) de una matriz NO es única (diferentes operaciones de fila pueden llevar a diferentes números por encima de los pivotes). Sin embargo, la Forma Escalonada Reducida por Filas (RREF) ES única. Cada matriz tiene exactamente una RREF."
+                    },
+                    example_section: {
+                        example_section: {
+                            title_ex: "Ejemplos con Soluciones Paso a Paso",
+                            ex1: {
+                                title: "1. Solución Única (Gauss-Jordan)",
+                                problem: "Resuelva el siguiente sistema usando eliminación de Gauss-Jordan:",
+                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                                step1_title: "Paso 1: Matriz Aumentada",
+                                step1_desc: "Convierta el sistema en una matriz aumentada [A|b].",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                                step2_title: "Paso 2: Crear Ceros Debajo del Pivote 1",
+                                step2_desc: "Use el 1 en la parte superior izquierda para eliminar las entradas debajo de él. (R2 = R2 - 2R1) y (R3 = R3 - 3R1).",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                                step3_title: "Paso 3: Crear Pivote 2",
+                                step3_desc: "Para facilitar las matemáticas, escalemos R2 por 1/2 para obtener un 1 principal, o restemos R2 de R3. Multipliquemos R2 por 0.5.",
+                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                                step4_title: "Paso 4: Crear Ceros Debajo del Pivote 2",
+                                step4_desc: "Realice (R3 = R3 - 3R2).",
+                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                                step5_title: "Paso 5: Resolver para variables (Sustitución hacia atrás)",
+                                step5_desc: "De R3: -0.5z = -1.5 → z = 3. Sustituya z nuevamente en R2, luego x y y en R1.",
+                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                                result_title: "Respuesta Final",
+                                result: `\\text{Solución: } x=1, y=2, z=3`
+                            },
+                            ex2: {
+                                title: "2. Soluciones Infinitas (Variables Libres)",
+                                problem: "Encuentre la solución general al sistema:",
+                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                                step1_title: "Paso 1: Reducción por Filas",
+                                step1_desc: "Forme la matriz aumentada y reduzca.",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                                step2_title: "Paso 2: Identificar Variables Libres",
+                                step2_desc: "Las filas 2 y 3 se convirtieron en ceros. Esto significa que tenemos solo un pivote (para x). Las variables y y z no tienen pivotes, por lo que son variables LIBRES.",
+                                step2_math: `\\text{Sea } y = s \\text{ y } z = t, \\text{ donde } s,t \\in \\mathbb{R}.`,
+                                step3_title: "Paso 3: Expresar Variables Básicas",
+                                step3_desc: "Reescriba la primera ecuación en términos de las variables libres.",
+                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                                result_title: "Respuesta Final (Forma Paramétrica)",
+                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                            },
+                            ex3: {
+                                title: "3. Sin Solución (Sistema Inconsistente)",
+                                problem: "Determine la solución al siguiente sistema:",
+                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                                step1_title: "Paso 1: Formar Matriz Aumentada",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                                step2_title: "Paso 2: Operaciones de Fila",
+                                step2_desc: "Realice R2 = R2 - R1.",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                                step3_title: "Paso 3: Interpretar Resultado",
+                                step3_desc: "Mire de cerca la segunda fila. Traducir esto de nuevo en una ecuación nos da:",
+                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                                result_title: "Conclusión Final",
+                                result: `Dado que 0 = 3 es una contradicción matemática, el sistema es Inconsistente (Sin Solución). Geométricamente, esto representa planos paralelos que nunca se intersectan.`
+                            }
+                        }
+                    }
+                }
+            }
+        }
     },
     fr: {
         matrixBasics: {
@@ -485,7 +1029,7 @@ export const linearAlgebraCourse = {
                     },
                     example_section: {
                         title_ex: "Exemples avec Solutions Étape par Étape",
-                        
+
                         example1: {
                             title: "1. Combinaison Linéaire de Matrices",
                             problem: `Soient A = \\begin{bmatrix} 2 & -1 \\\\ 0 & 3 \\end{bmatrix} \\text{ et } B = \\begin{bmatrix} 1 & 4 \\\\ 5 & -2 \\end{bmatrix}, \\text{ trouver } 2A - B.`,
@@ -621,6 +1165,279 @@ export const linearAlgebraCourse = {
                 }
             }
         },
+        matrixInverse: {
+            title: "Inverse d'une Matrice",
+            description: "Apprenez à trouver l'inverse d'une matrice et ses applications.",
+            lessons: {
+                lesson3_title: "Inverse d'une Matrice",
+                lesson3: {
+                    section1: {
+                        title1: "Définition de l'Inverse d'une Matrice",
+                        def1_1: "Supposons que deux matrices A et B de taille n x n ont la propriété que AB = BA = I_n, où I_n est la matrice identité n x n. Alors nous disons que A est inversible (ou non singulière) et B est l'inverse de A, noté A^{-1}. En d'autres termes, A^{-1} est la matrice unique telle que A A^{-1} = A^{-1} A = I_n.",
+                        proposition1_1: "Proposition : Supposons que A dans R^{n x n} ou A dans F_2^{n x n} et que A a un inverse B. Alors B est unique.",
+                        proof1_1: "Preuve : Supposons que A a deux inverses B et C. Alors",
+                        proof1_1_math: `B = B I_n = B(AC) = (BA)C = I_n C = C`,
+                        expl1_1: "Ainsi, B = C, et l'inverse est unique.",
+                        ex1_1: "Par exemple, les inverses des matrices élémentaires 2 x 2 sont les suivants :",
+                        ex1_1_list1: `E_{1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} \\Rightarrow E_{1}^{-1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}`,
+                        ex1_1_list2: `E_{2} = \\begin{bmatrix} k & 0 \\\\ 0 & 1 \\end{bmatrix} \\Rightarrow E_{2}^{-1} = \\begin{bmatrix} \\frac{1}{k} & 0 \\\\ 0 & 1 \\end{bmatrix}, k \\ne 0`,
+                        ex1_1_list3: `E_{3} = \\begin{bmatrix} 1 & 0 \\\\ k & 1 \\end{bmatrix} \\Rightarrow E_{3}^{-1} = \\begin{bmatrix} 1 & 0 \\\\ -k & 1 \\end{bmatrix}`,
+                    },
+                    section2: {
+                        title2: "Méthode 1 pour Trouver l'Inverse (Élimination de Gauss-Jordan)",
+                        def1_2: "Nous avons deux façons de trouver la matrice B telle que B A = I_n. La première méthode consiste simplement à multiplier la séquence de matrices élémentaires qui réduisent A en I_n par des opérations sur les lignes. La deuxième méthode consiste à former la matrice augmentée (A | I_n) et à la réduire. Le résultat final sera sous la forme (I_n | B). C'est la méthode utilisée dans la plupart des manuels.",
+                        text1_2: "Voici un exemple.",
+                        method1_1: "Méthode 1 : Élimination de Gauss-Jordan ou Réduction de Lignes",
+                        ex1_2: `Supposons que nous voulons trouver un inverse pour`,
+                        ex1_2_matrix: `A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex1_2_steps1: "Comme nous avons seulement besoin de résoudre l'équation matricielle XA = I_3, nous pouvons utiliser notre stratégie précédente de réduction de lignes (A | I_3).",
+                        ex1_2_steps2: `(A | I_3) = \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 1 & 3 & 1 & | & 0 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_1} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_3 - R_2}`,
+                        ex1_2_steps3: `\\begin{bmatrix} 1 & 2 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_3} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_1 - 2R_2}`,
+                        ex1_2_steps4: `\\begin{bmatrix} 1 & 0 & 0 & | & 5 & -4 & 2 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix}`,
+                        ex1_2_result: `\\text{Ainsi, } A^{-1} = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section3: {
+                        title2: "Méthode 2 pour Trouver l'Inverse (Méthode de l'Adjointe)",
+                        method2_1: "Méthode 2 : Méthode de l'Adjointe",
+                        ex2_2: `Alternativement, nous pouvons utiliser la méthode de l'adjointe. Nous calculons d'abord la matrice des cofacteurs, puis prenons sa transposée pour obtenir l'adjointe, et enfin divisons par le déterminant de A pour obtenir l'inverse.`,
+                        ex2_2_matrix: `\\text{Pour } A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex2_2_steps1: "Calculer le déterminant de A.",
+                        ex2_2_steps1_math: `det(A) = 1(3*2 - 1*1) - 2(1*2 - 0*1) + 0(1*1 - 3*0) = 1`,
+                        ex2_2_steps2: "Trouver la matrice des mineurs, puis la matrice des cofacteurs.",
+                        ex2_2_steps2_desc: "Le mineur M_{ij} d'un élément a_ij est défini comme le déterminant de la sous-matrice qui reste après avoir supprimé la i-ème ligne et la j-ème colonne de A. Le cofacteur C_{ij} est alors donné par C_{ij} = (-1)^{i+j} M_{ij}.",
+                        ex2_2_steps2_math: `M_{11} = det \\begin{bmatrix} 3 & 1 \\\\ 1 & 2 \\end{bmatrix} = 5, \\quad C_{11} = (-1)^{1+1} M_{11} = 5`,
+                        ex2_2_steps2_math2: `M_{12} = det \\begin{bmatrix} 1 & 1 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{12} = (-1)^{1+2} M_{12} = -2`,
+                        ex2_2_steps2_math3: `M_{13} = det \\begin{bmatrix} 1 & 3 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{13} = (-1)^{1+3} M_{13} = 1`,
+                        ex2_2_steps2_math4: `M_{21} = det \\begin{bmatrix} 2 & 0 \\\\ 1 & 2 \\end{bmatrix} = 4, \\quad C_{21} = (-1)^{2+1} M_{21} = -4`,
+                        ex2_2_steps2_math5: `M_{22} = det \\begin{bmatrix} 1 & 0 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{22} = (-1)^{2+2} M_{22} = 2`,
+                        ex2_2_steps2_math6: `M_{23} = det \\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{23} = (-1)^{2+3} M_{23} = -1`,
+                        ex2_2_steps2_math7: `M_{31} = det \\begin{bmatrix} 2 & 0 \\\\ 3 & 1 \\end{bmatrix} = 2, \\quad C_{31} = (-1)^{3+1} M_{31} = 2`,
+                        ex2_2_steps2_math8: `M_{32} = det \\begin{bmatrix} 1 & 0 \\\\ 1 & 1 \\end{bmatrix} = 1, \\quad C_{32} = (-1)^{3+2} M_{32} = -1`,
+                        ex2_2_steps2_math9: `M_{33} = det \\begin{bmatrix} 1 & 2 \\\\ 1 & 3 \\end{bmatrix} = 1, \\quad C_{33} = (-1)^{3+3} M_{33} = 1`,
+                        ex2_2_steps2_matrix: `\\text{Matrice des Cofacteurs} = \\begin{bmatrix} 5 & -2 & 1 \\\\ -4 & 2 & -1 \\\\ 2 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps3: "Transposer la matrice des cofacteurs pour obtenir l'adjointe.",
+                        ex2_2_steps3_math: `\\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps4: "Enfin, diviser l'adjointe par le déterminant pour obtenir l'inverse.",
+                        ex2_2_result: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section4: {
+                        title4: "Propriétés des Matrices Inversibles",
+                        description: "Règles algébriques clés pour travailler avec des matrices inversibles.",
+                        prop1_title: "L'Inverse d'un Produit (Règle Chaussette-Chaussure)",
+                        prop1_desc: "L'inverse d'un produit est le produit des inverses dans l'ordre inverse. Pensez-y comme mettre des chaussettes et des chaussures : pour défaire cela, vous devez d'abord enlever les chaussures, puis les chaussettes.",
+                        prop1_math: `(AB)^{-1} = B^{-1}A^{-1}`,
+                        prop2_title: "Inverse d'un Inverse",
+                        prop2_desc: "Prendre l'inverse deux fois vous ramène à la matrice d'origine.",
+                        prop2_math: `(A^{-1})^{-1} = A`,
+                        prop3_title: "Inverse d'une Transposée",
+                        prop3_desc: "L'ordre des opérations entre l'inversion et la transposition n'a pas d'importance.",
+                        prop3_math: `(A^T)^{-1} = (A^{-1})^T`,
+                        prop4_title: "Multiplication Scalaire",
+                        prop4_desc: "Si k est un scalaire non nul, l'inverse est mis à l'échelle par l'inverse de k.",
+                        prop4_math: `(kA)^{-1} = \\frac{1}{k}A^{-1}`
+                    },
+                    section5: {
+                        title5: "Applications des Inverses (Résolution de Systèmes Linéaires)",
+                        description: "Les inverses de matrices peuvent être utilisés pour résoudre des systèmes d'équations linéaires, entre autres applications.",
+                        app1_title: "Résolution de Systèmes Linéaires",
+                        app1_desc: "Si A est une matrice inversible et \\mathbf{b} est un vecteur, le système d'équations A\\mathbf{x} = \\mathbf{b} a la solution unique \\mathbf{x} = A^{-1}\\mathbf{b}.",
+                        ex1_5: 'Par exemple, considérons le système d\'équations :',
+                        ex1_5_equations: `\\begin{cases} 2x + 3y = 7 \\\\ 4x - y = 7 \\end{cases}`,
+                        ex1_5_matrix: `A = \\begin{bmatrix} 2 & 3 \\\\ 4 & -1 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix}`,
+                        ex1_5_solution: `D'abord, nous trouvons l'inverse de A, puis nous le multiplions par b pour trouver le vecteur solution x.`,
+                        ex1_5_steps1: "Calculer le déterminant de A.",
+                        ex1_5_steps1_math: `det(A) = (2)(-1) - (3)(4) = -2 - 12 = -14`,
+                        ex1_5_steps2: "Trouver la matrice des cofacteurs et ensuite l'adjointe.",
+                        ex1_5_steps2_math: `\\text{Adj}(A) = \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix}`,
+                        ex1_5_steps3: "Calculer l'inverse de A.",
+                        ex1_5_steps3_math: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\frac{1}{-14} \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix}`,
+                        ex1_5_steps4: "Enfin, multiplier A^{-1} par b pour trouver le vecteur solution x.",
+                        ex1_5_steps4_math: `\\begin{bmatrix} x \\\\ y \\end{bmatrix} = A^{-1}\\mathbf{b} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix} \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix} = \\begin{bmatrix} \\frac{7 + 21}{14} \\\\ \\frac{28 - 14}{14} \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 1 \\end{bmatrix}`,
+                        ex1_5_result: "Ainsi, la solution du système d'équations est x = 2 et y = 1."
+                    },
+                    example_section: {
+                        title_ex: "Exemples avec Solutions Étape par Étape",
+                        ex1: {
+                            ex1_title: "1. Élimination de Gauss-Jordan (3x3)",
+                            ex1_problem: "Trouvez l'inverse de la matrice A en utilisant la réduction de lignes :",
+                            ex1_matrix: `A = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & 2 & 3 \\end{bmatrix}`,
+                            ex1_step1_title: "Étape 1 : Former la Matrice Augmentée [A | I]",
+                            ex1_step1_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 1 & 2 & 2 & 0 & 1 & 0 \\\\ 1 & 2 & 3 & 0 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step2_title: "Étape 2 : Zéros sous le pivot 1 (Colonne 1)",
+                            ex1_step2_desc: "Effectuer R2 = R2 - R1 et R3 = R3 - R1.",
+                            ex1_step2_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 1 & 2 & -1 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step3_title: "Étape 3 : Zéros sous le pivot 2 (Colonne 2)",
+                            ex1_step3_desc: "Effectuer R3 = R3 - R2.",
+                            ex1_step3_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step4_title: "Étape 4 : Zéros au-dessus du pivot 3 (Colonne 3)",
+                            ex1_step4_desc: "Effectuer R2 = R2 - R3 et R1 = R1 - R3.",
+                            ex1_step4_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 0 & 1 & 1 & -1 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step5_title: "Étape 5 : Zéros au-dessus du pivot 2 (Colonne 2)",
+                            ex1_step5_desc: "Effectuer R1 = R1 - R2. Le côté gauche est maintenant la matrice Identité.",
+                            ex1_step5_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 0 & 0 & 2 & -1 & 0 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_result: `A^{-1} = \\begin{bmatrix} 2 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 1 \\end{bmatrix}`,
+                        },
+                        ex2: {
+                            ex2_title: "2. Méthode de l'Adjointe (3x3)",
+                            ex2_problem: "Trouvez l'inverse de la matrice B en utilisant le déterminant et les cofacteurs :",
+                            ex2_matrix: `B = \\begin{bmatrix} 1 & 0 & -1 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 2 \\end{bmatrix}`,
+                            ex2_step1_title: "Étape 1 : Calculer le Déterminant",
+                            ex2_step1_math: `\\det(B) = 1(2-0) - 0 + (-1)(2-1) = 2 - 1 = 1`,
+                            ex2_step2_title: "Étape 2 : Calculer les Cofacteurs",
+                            ex2_step2_row1: `C_{11}=+(2), \\; C_{12}=-(-4)=4, \\; C_{13}=+(1)`,
+                            ex2_step2_row2: `C_{21}=-(-1)=1, \\; C_{22}=+(3), \\; C_{23}=-(-1)=1`,
+                            ex2_step2_row3: `C_{31}=+(1), \\; C_{32}=-( -2)=2, \\; C_{33}=+(1)`,
+                            ex2_step2_matrix: `C = \\begin{bmatrix} 2 & 4 & 1 \\\\ 1 & 3 & 1 \\\\ 1 & 2 & 1 \\end{bmatrix}`,
+                            ex2_step3_title: "Étape 3 : Transposer pour obtenir l'Adjointe",
+                            ex2_step3_math: `\\text{Adj}(B) = C^T = \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                            ex2_result: `B^{-1} = \\frac{1}{1} \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                        },
+                        ex3: {
+                            ex3_title: "3. Résolution d'un Système Linéaire 3x3",
+                            ex3_problem: "Résolvez le système Ax = b en utilisant l'inverse de la matrice.",
+                            ex3_system: `\\begin{cases} x + 2y + z = 8 \\\\ 2x + 5y + 2z = 18 \\\\ x + 2y + 2z = 11 \\end{cases}`,
+                            ex3_step1_title: "Étape 1 : Identifier A et b",
+                            ex3_step1_math: `A = \\begin{bmatrix} 1 & 2 & 1 \\\\ 2 & 5 & 2 \\\\ 1 & 2 & 2 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step2_title: "Étape 2 : Trouver l'Inverse de A",
+                            ex3_step2_desc: "En utilisant la méthode de l'adjointe (omise pour brièveté, det(A)=1), nous obtenons :",
+                            ex3_step2_math: `A^{-1} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix}`,
+                            ex3_step3_title: "Étape 3 : Multiplier x = A^{-1}b",
+                            ex3_step3_math: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix} \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step4_title: "Étape 4 : Calculer le Produit",
+                            ex3_step4_x: `x = 6(8) - 2(18) - 1(11) = 48 - 36 - 11 = 1`,
+                            ex3_step4_y: `y = -2(8) + 1(18) + 0 = -16 + 18 = 2`,
+                            ex3_step4_z: `z = -1(8) + 0 + 1(11) = -8 + 11 = 3`,
+                            ex3_result: `\\text{Solution : } x=1, y=2, z=3`
+                        }
+                    }
+                }
+            }
+        },
+        linearEquations: {
+            title: "Systèmes d'Équations Linéaires",
+            description: "Apprenez à résoudre des systèmes d'équations linéaires en utilisant diverses méthodes.",
+            lessons: {
+                lesson4_title: "Résolution d'Équations Linéaires",
+                lesson4: {
+                    section1: {
+                        title1: "Introduction aux Systèmes d'Équations Linéaires",
+                        def1_1: "Un système d'équations linéaires est un ensemble d'une ou plusieurs équations linéaires impliquant le même ensemble de variables (par exemple, x, y, z). Une solution à un système linéaire est une affectation de valeurs aux variables qui satisfait toutes les équations simultanément.",
+                        def1_2: "L'équation linéaire la plus simple est l'équation ax = b. La lettre x est la variable, et a et b sont des nombres fixes. La solution à cette équation est x = b/a, à condition que a ne soit pas nul.",
+                        def1_3: "Un système linéaire général composé de m équations à n inconnues ressemblera à :",
+                        def1_3_math: `\\begin{cases} a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = b_1 \\\\ a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = b_2 \\\\ \\vdots \\\\ a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m \\end{cases}`,
+                    },
+                    section2: {
+                        title2: "Résolution de Systèmes Linéaires avec Réduction de Gauss (Cas Homogène)",
+                        def2_1: "La réduction de Gauss est une procédure algorithmique pour trouver l'ensemble des solutions d'un système linéaire. La stratégie de la réduction de Gauss consiste à remplacer le système original par une séquence de systèmes équivalents jusqu'à ce que le système final soit sous forme échelonnée réduite.",
+                        subtitle2_1: "Le Cas du Système Homogène",
+                        text2_1: "La résolution d'un système linéaire Ax = b implique plusieurs étapes. La première étape consiste à résoudre le système homogène associé.",
+                        def2_2: "Un système linéaire Ax = b est appelé homogène si b = 0. L'ensemble des solutions d'un système linéaire homogène Ax = 0 est appelé noyau (ou espace nul) de A.",
+                        ex2_1: `Considérez le système linéaire homogène`,
+                        ex2_1_system: `\\begin{cases} x + 2y - z = 0 \\\\ 2x + 5y - 3z = 0 \\\\ x + 3y - 2z = 0 \\end{cases}`,
+                        ex2_1_desc: "Puisque le côté droit est entièrement nul, nous formons la matrice augmentée [A | 0].",
+                        ex2_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 2 & 5 & -3 & 0 \\\\ 1 & 3 & -2 & 0 \\end{array} \\right]`,
+                        ex2_1_step1_title: "Réduction de Ligne",
+                        ex2_1_step1_math: `\\xrightarrow{R_2-2R_1, R_3-R_1} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\end{array} \\right] \\xrightarrow{R_3-R_2} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex2_1_step2_title: "Résolution pour les Variables",
+                        ex2_1_step2_desc: "La dernière ligne 0=0 indique que z est une variable libre. Soit z = t.",
+                        ex2_1_step2_math: `y - z = 0 \\Rightarrow y = t \\\\ x + 2y - z = 0 \\Rightarrow x + 2t - t = 0 \\Rightarrow x = -t`,
+                        ex2_1_result: `\\text{Solution : } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix} \\text{ (Ce vecteur engendre le Noyau)}`
+                    },
+                    section3: {
+                        title3: "Résolution de Systèmes Linéaires avec Réduction de Gauss (Cas Non Homogène)",
+                        def3_1: "Un système Ax = b avec b \\ne 0 est appelé non homogène. Un système non homogène nécessite que nous utilisions une matrice de coefficients augmentée (A | b).",
+                        ex3_1: "Considérez le même système mais égal à des constantes non nulles :",
+                        ex3_1_system: `\\begin{cases} x + 2y - z = 2 \\\\ 2x + 5y - 3z = 7 \\\\ x + 3y - 2z = 5 \\end{cases}`,
+                        ex3_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 2 \\\\ 2 & 5 & -3 & 7 \\\\ 1 & 3 & -2 & 5 \\end{array} \\right]`,
+                        ex3_1_step1: "La réduction de ligne de cette matrice donne :",
+                        ex3_1_math: `\\left[ \\begin{array}{ccc|c} 1 & 0 & 1 & -4 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex3_1_result: `\\text{Solution : } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\underbrace{t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix}}_{\\text{Homogène}} + \\underbrace{\\begin{bmatrix} -4 \\\\ 3 \\\\ 0 \\end{bmatrix}}_{\\text{Particulière}}`
+                    },
+                    section4: {
+                        title4: "Forme Échelonnée Réduite",
+                        title: "Forme Échelonnée Réduite (RREF)",
+                        description: "Comprendre l'état cible de la réduction de ligne et la différence entre REF et RREF.",
+                        def_title: "Qu'est-ce que la RREF ?",
+                        def_desc: "Une matrice est sous Forme Échelonnée Réduite (RREF) si elle satisfait quatre conditions spécifiques. C'est la version la plus simplifiée possible d'une matrice.",
+                        cond_title: "Les 4 Conditions",
+                        cond1: "1. Lignes non nulles : Toutes les lignes composées entièrement de zéros sont en bas de la matrice.",
+                        cond2: "2. 1 principaux : La première entrée non nulle dans toute ligne non nulle est un 1 (appelé pivot).",
+                        cond3: "3. Motif en escalier : Chaque 1 principal est à la droite du 1 principal de la ligne du dessus.",
+                        cond4: "4. Zéros dans les Colonnes : Chaque 1 principal est la seule entrée non nulle dans sa colonne (zéros au-dessus et en dessous).",
+                        comparison_title: "REF vs RREF",
+                        comparison_desc: "De nombreux étudiants confondent ces deux formes. Voici la différence :",
+                        ref_title: "Forme Échelonnée (REF)",
+                        ref_desc: "Satisfait uniquement les conditions 1, 2 et 3. Les nombres au-dessus des pivots peuvent être non nuls.",
+                        ref_method: "Utilisé dans : Élimination de Gauss (nécessite une substitution arrière).",
+                        ref_ex: `\\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 5 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        rref_title: "Forme Échelonnée Réduite (RREF)",
+                        rref_desc: "Satisfait les 4 conditions. Les pivots sont la SEULE entrée non nulle dans leurs colonnes.",
+                        rref_method: "Utilisé dans : Élimination de Gauss-Jordan (donne la solution directement).",
+                        rref_ex: `\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        note_title: "Théorème d'Unicité",
+                        note_desc: "La Forme Échelonnée (REF) d'une matrice n'est PAS unique (différentes opérations de ligne peuvent conduire à des nombres différents au-dessus des pivots). Cependant, la Forme Échelonnée Réduite (RREF) EST unique. Chaque matrice a exactement une RREF."
+                    },
+                    example_section: {
+                        example_section: {
+                            title_ex: "Exemples avec Solutions Étape par Étape",
+                            ex1: {
+                                title: "1. Solution Unique (Gauss-Jordan)",
+                                problem: "Résolvez le système suivant en utilisant l'élimination de Gauss-Jordan :",
+                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                                step1_title: "Étape 1 : Matrice Augmentée",
+                                step1_desc: "Convertissez le système en une matrice augmentée [A|b].",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                                step2_title: "Étape 2 : Créer des Zéros Sous le Pivot 1",
+                                step2_desc: "Utilisez le 1 en haut à gauche pour éliminer les entrées en dessous. (R2 = R2 - 2R1) et (R3 = R3 - 3R1).",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                                step3_title: "Étape 3 : Créer le Pivot 2",
+                                step3_desc: "Pour faciliter les calculs, échelonnons R2 par 1/2 pour obtenir un 1 principal, ou soustrayons R2 de R3. Multiplions R2 par 0.5.",
+                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                                step4_title: "Étape 4 : Créer des Zéros Sous le Pivot 2",
+                                step4_desc: "Effectuez (R3 = R3 - 3R2).",
+                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                                step5_title: "Étape 5 : Résoudre pour les variables (Substitution Arrière)",
+                                step5_desc: "De R3 : -0.5z = -1.5 → z = 3. Substituez z dans R2, puis x et y dans R1.",
+                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                                result_title: "Réponse Finale",
+                                result: `\\text{Solution : } x=1, y=2, z=3`
+                            },
+                            ex2: {
+                                title: "2. Solutions Infinies (Variables Libres)",
+                                problem: "Trouvez la solution générale du système :",
+                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                                step1_title: "Étape 1 : Réduction de Ligne",
+                                step1_desc: "Formez la matrice augmentée et réduisez.",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                                step2_title: "Étape 2 : Identifier les Variables Libres",
+                                step2_desc: "Les lignes 2 et 3 sont devenues entièrement nulles. Cela signifie que nous n'avons qu'un seul pivot (pour x). Les variables y et z n'ont pas de pivots, ce sont donc des variables LIBRES.",
+                                step2_math: `\\text{Soit } y = s \\text{ et } z = t, \\text{ où } s,t \\in \\mathbb{R}.`,
+                                step3_title: "Étape 3 : Exprimer les Variables de Base",
+                                step3_desc: "Réécrivez la première équation en termes de variables libres.",
+                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                                result_title: "Réponse Finale (Forme Paramétrique)",
+                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                            },
+                            ex3: {
+                                title: "3. Pas de Solution (Système Incohérent)",
+                                problem: "Déterminez la solution du système suivant :",
+                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                                step1_title: "Étape 1 : Former la Matrice Augmentée",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                                step2_title: "Étape 2 : Opérations de Ligne",
+                                step2_desc: "Effectuez R2 = R2 - R1.",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                                step3_title: "Étape 3 : Interpréter le Résultat",
+                                step3_desc: "Regardez attentivement la deuxième ligne. Traduire cela en une équation nous donne :",
+                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                                result_title: "Conclusion Finale",
+                                result: `Puisque 0 = 3 est une contradiction mathématique, le système est Incohérent (Pas de Solution). Géométriquement, cela représente des plans parallèles qui ne se croisent jamais.`
+                            }
+                        }
+                    }
+                }
+            }
+        }
     },
     de: {
         matrixBasics: {
@@ -675,7 +1492,7 @@ export const linearAlgebraCourse = {
                     },
                     example_section: {
                         title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
-                        
+
                         example1: {
                             title: "1. Linearkombination von Matrizen",
                             problem: `Gegeben A = \\begin{bmatrix} 2 & -1 \\\\ 0 & 3 \\end{bmatrix} \\text{ und } B = \\begin{bmatrix} 1 & 4 \\\\ 5 & -2 \\end{bmatrix}, \\text{ berechne } 2A - B.`,
@@ -811,6 +1628,279 @@ export const linearAlgebraCourse = {
                 }
             }
         },
+        matrixInverse: {
+            title: "Inverse einer Matrix",
+            description: "Erfahren Sie, wie Sie die Inverse einer Matrix finden und ihre Anwendungen.",
+            lessons: {
+                lesson3_title: "Inverse einer Matrix",
+                lesson3: {
+                    section1: {
+                        title1: "Definition der Matrixinversen",
+                        def1_1: "Angenommen, zwei n x n Matrizen A und B haben die Eigenschaft, dass AB = BA = I_n gilt, wobei I_n die n x n Identitätsmatrix ist. Dann sagen wir, dass A invertierbar (oder nicht singulär) ist und B die Inverse von A ist, bezeichnet mit A^{-1}. Mit anderen Worten, A^{-1} ist die eindeutige Matrix, so dass A A^{-1} = A^{-1} A = I_n.",
+                        proposition1_1: "Proposition: Angenommen, A in R^{n x n} oder A in F_2^{n x n} und A hat eine Inverse B. Dann ist B eindeutig.",
+                        proof1_1: "Beweis: Angenommen, A hat zwei Inversen B und C. Dann gilt",
+                        proof1_1_math: `B = B I_n = B(AC) = (BA)C = I_n C = C`,
+                        expl1_1: "Folglich ist B = C, und die Inverse ist eindeutig.",
+                        ex1_1: "Zum Beispiel sind die Inversen der 2 x 2 Elementarmatrizen wie folgt:",
+                        ex1_1_list1: `E_{1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} \\Rightarrow E_{1}^{-1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}`,
+                        ex1_1_list2: `E_{2} = \\begin{bmatrix} k & 0 \\\\ 0 & 1 \\end{bmatrix} \\Rightarrow E_{2}^{-1} = \\begin{bmatrix} \\frac{1}{k} & 0 \\\\ 0 & 1 \\end{bmatrix}, k \\ne 0`,
+                        ex1_1_list3: `E_{3} = \\begin{bmatrix} 1 & 0 \\\\ k & 1 \\end{bmatrix} \\Rightarrow E_{3}^{-1} = \\begin{bmatrix} 1 & 0 \\\\ -k & 1 \\end{bmatrix}`,
+                    },
+                    section2: {
+                        title2: "Methode 1 zum Finden der Inversen (Gauss-Jordan-Elimination)",
+                        def1_2: "Wir haben zwei Möglichkeiten, die Matrix B zu finden, so dass B A = I_n ist. Die erste Methode besteht einfach darin, die Folge von Elementarmatrizen zu multiplizieren, die A auf I_n zeilenreduzieren. Die zweite Methode besteht darin, die erweiterte Matrix (A | I_n) zu bilden und zeilenweise zu reduzieren. Das Endergebnis wird in der Form (I_n | B) vorliegen. Dies ist die Methode, die in den meisten Lehrbüchern verwendet wird.",
+                        text1_2: "Hier haben wir ein Beispiel.",
+                        method1_1: "Methode 1: Gauss-Jordan-Elimination oder Zeilenreduktion",
+                        ex1_2: `Angenommen, wir wollen eine Inverse finden für`,
+                        ex1_2_matrix: `A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex1_2_steps1: "Da wir nur die Matrixgleichung XA = I_3 lösen müssen, können wir unsere vorherige Strategie der Zeilenreduktion (A | I_3) verwenden.",
+                        ex1_2_steps2: `(A | I_3) = \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 1 & 3 & 1 & | & 0 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_1} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_3 - R_2}`,
+                        ex1_2_steps3: `\\begin{bmatrix} 1 & 2 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_3} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_1 - 2R_2}`,
+                        ex1_2_steps4: `\\begin{bmatrix} 1 & 0 & 0 & | & 5 & -4 & 2 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix}`,
+                        ex1_2_result: `\\text{Somit ist } A^{-1} = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section3: {
+                        title2: "Methode 2 zum Finden der Inversen (Adjunkten-Methode)",
+                        method2_1: "Methode 2: Adjunkten-Methode",
+                        ex2_2: `Alternativ können wir die Adjunkten-Methode verwenden. Wir berechnen zuerst die Kofaktormatrix, transponieren sie dann, um die Adjunktmatrix zu erhalten, und dividieren schließlich durch die Determinante von A, um die Inverse zu erhalten.`,
+                        ex2_2_matrix: `\\text{Für } A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex2_2_steps1: "Berechnen Sie die Determinante von A.",
+                        ex2_2_steps1_math: `det(A) = 1(3*2 - 1*1) - 2(1*2 - 0*1) + 0(1*1 - 3*0) = 1`,
+                        ex2_2_steps2: "Finden Sie die Matrix der Minoren, dann die Matrix der Kofaktoren.",
+                        ex2_2_steps2_desc: "Der Minor M_{ij} eines Elements a_ij ist definiert als die Determinante der Untermatrix, die nach dem Entfernen der i-ten Zeile und j-ten Spalte von A verbleibt. Der Kofaktor C_{ij} ist dann gegeben durch C_{ij} = (-1)^{i+j} M_{ij}.",
+                        ex2_2_steps2_math: `M_{11} = det \\begin{bmatrix} 3 & 1 \\\\ 1 & 2 \\end{bmatrix} = 5, \\quad C_{11} = (-1)^{1+1} M_{11} = 5`,
+                        ex2_2_steps2_math2: `M_{12} = det \\begin{bmatrix} 1 & 1 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{12} = (-1)^{1+2} M_{12} = -2`,
+                        ex2_2_steps2_math3: `M_{13} = det \\begin{bmatrix} 1 & 3 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{13} = (-1)^{1+3} M_{13} = 1`,
+                        ex2_2_steps2_math4: `M_{21} = det \\begin{bmatrix} 2 & 0 \\\\ 1 & 2 \\end{bmatrix} = 4, \\quad C_{21} = (-1)^{2+1} M_{21} = -4`,
+                        ex2_2_steps2_math5: `M_{22} = det \\begin{bmatrix} 1 & 0 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{22} = (-1)^{2+2} M_{22} = 2`,
+                        ex2_2_steps2_math6: `M_{23} = det \\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{23} = (-1)^{2+3} M_{23} = -1`,
+                        ex2_2_steps2_math7: `M_{31} = det \\begin{bmatrix} 2 & 0 \\\\ 3 & 1 \\end{bmatrix} = 2, \\quad C_{31} = (-1)^{3+1} M_{31} = 2`,
+                        ex2_2_steps2_math8: `M_{32} = det \\begin{bmatrix} 1 & 0 \\\\ 1 & 1 \\end{bmatrix} = 1, \\quad C_{32} = (-1)^{3+2} M_{32} = -1`,
+                        ex2_2_steps2_math9: `M_{33} = det \\begin{bmatrix} 1 & 2 \\\\ 1 & 3 \\end{bmatrix} = 1, \\quad C_{33} = (-1)^{3+3} M_{33} = 1`,
+                        ex2_2_steps2_matrix: `\\text{Kofaktormatrix} = \\begin{bmatrix} 5 & -2 & 1 \\\\ -4 & 2 & -1 \\\\ 2 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps3: "Transponieren Sie die Kofaktormatrix, um die Adjunktmatrix zu erhalten.",
+                        ex2_2_steps3_math: `\\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps4: "Schließlich dividieren Sie die Adjunktmatrix durch die Determinante, um die Inverse zu erhalten.",
+                        ex2_2_result: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section4: {
+                        title4: "Eigenschaften invertierbarer Matrizen",
+                        description: "Wichtige algebraische Regeln für die Arbeit mit invertierbaren Matrizen.",
+                        prop1_title: "Die Inverse eines Produkts (Socke-Schuh-Regel)",
+                        prop1_desc: "Die Inverse eines Produkts ist das Produkt der Inversen in umgekehrter Reihenfolge. Denken Sie daran wie beim Anziehen von Socken und Schuhen: Um es rückgängig zu machen, müssen Sie zuerst die Schuhe und dann die Socken ausziehen.",
+                        prop1_math: `(AB)^{-1} = B^{-1}A^{-1}`,
+                        prop2_title: "Inverse einer Inversen",
+                        prop2_desc: "Die doppelte Inversion führt zur ursprünglichen Matrix zurück.",
+                        prop2_math: `(A^{-1})^{-1} = A`,
+                        prop3_title: "Inverse einer Transponierten",
+                        prop3_desc: "Die Reihenfolge der Operationen zwischen Inversion und Transposition spielt keine Rolle.",
+                        prop3_math: `(A^T)^{-1} = (A^{-1})^T`,
+                        prop4_title: "Skalarmultiplikation",
+                        prop4_desc: "Wenn k ein Skalar ungleich Null ist, skaliert die Inverse mit dem Kehrwert von k.",
+                        prop4_math: `(kA)^{-1} = \\frac{1}{k}A^{-1}`
+                    },
+                    section5: {
+                        title5: "Anwendungen von Inversen (Lösen linearer Systeme)",
+                        description: "Matrixinversen können unter anderem zum Lösen linearer Gleichungssysteme verwendet werden.",
+                        app1_title: "Lösen linearer Systeme",
+                        app1_desc: "Wenn A eine invertierbare Matrix und \\mathbf{b} ein Vektor ist, hat das Gleichungssystem A\\mathbf{x} = \\mathbf{b} die eindeutige Lösung \\mathbf{x} = A^{-1}\\mathbf{b}.",
+                        ex1_5: 'Betrachten Sie zum Beispiel das Gleichungssystem:',
+                        ex1_5_equations: `\\begin{cases} 2x + 3y = 7 \\\\ 4x - y = 7 \\end{cases}`,
+                        ex1_5_matrix: `A = \\begin{bmatrix} 2 & 3 \\\\ 4 & -1 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix}`,
+                        ex1_5_solution: `Zuerst finden wir die Inverse von A und multiplizieren sie dann mit b, um den Lösungsvektor x zu finden.`,
+                        ex1_5_steps1: "Berechnen Sie die Determinante von A.",
+                        ex1_5_steps1_math: `det(A) = (2)(-1) - (3)(4) = -2 - 12 = -14`,
+                        ex1_5_steps2: "Finden Sie die Kofaktormatrix und dann die Adjunktmatrix.",
+                        ex1_5_steps2_math: `\\text{Adj}(A) = \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix}`,
+                        ex1_5_steps3: "Berechnen Sie die Inverse von A.",
+                        ex1_5_steps3_math: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\frac{1}{-14} \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix}`,
+                        ex1_5_steps4: "Schließlich multiplizieren Sie A^{-1} mit b, um den Lösungsvektor x zu finden.",
+                        ex1_5_steps4_math: `\\begin{bmatrix} x \\\\ y \\end{bmatrix} = A^{-1}\\mathbf{b} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix} \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix} = \\begin{bmatrix} \\frac{7 + 21}{14} \\\\ \\frac{28 - 14}{14} \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 1 \\end{bmatrix}`,
+                        ex1_5_result: "Somit ist die Lösung des Gleichungssystems x = 2 und y = 1."
+                    },
+                    example_section: {
+                        title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                        ex1: {
+                            ex1_title: "1. Gauss-Jordan-Elimination (3x3)",
+                            ex1_problem: "Finden Sie die Inverse der Matrix A durch Zeilenreduktion:",
+                            ex1_matrix: `A = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & 2 & 3 \\end{bmatrix}`,
+                            ex1_step1_title: "Schritt 1: Erweiterte Matrix [A | I] bilden",
+                            ex1_step1_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 1 & 2 & 2 & 0 & 1 & 0 \\\\ 1 & 2 & 3 & 0 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step2_title: "Schritt 2: Nullen unter Pivot 1 (Spalte 1)",
+                            ex1_step2_desc: "Führe R2 = R2 - R1 und R3 = R3 - R1 aus.",
+                            ex1_step2_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 1 & 2 & -1 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step3_title: "Schritt 3: Nullen unter Pivot 2 (Spalte 2)",
+                            ex1_step3_desc: "Führe R3 = R3 - R2 aus.",
+                            ex1_step3_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step4_title: "Schritt 4: Nullen über Pivot 3 (Spalte 3)",
+                            ex1_step4_desc: "Führe R2 = R2 - R3 und R1 = R1 - R3 aus.",
+                            ex1_step4_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 0 & 1 & 1 & -1 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step5_title: "Schritt 5: Nullen über Pivot 2 (Spalte 2)",
+                            ex1_step5_desc: "Führe R1 = R1 - R2 aus. Die linke Seite ist jetzt die Einheitsmatrix.",
+                            ex1_step5_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 0 & 0 & 2 & -1 & 0 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_result: `A^{-1} = \\begin{bmatrix} 2 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 1 \\end{bmatrix}`,
+                        },
+                        ex2: {
+                            ex2_title: "2. Adjunkten-Methode (3x3)",
+                            ex2_problem: "Finden Sie die Inverse der Matrix B mithilfe der Determinante und Kofaktoren:",
+                            ex2_matrix: `B = \\begin{bmatrix} 1 & 0 & -1 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 2 \\end{bmatrix}`,
+                            ex2_step1_title: "Schritt 1: Determinante berechnen",
+                            ex2_step1_math: `\\det(B) = 1(2-0) - 0 + (-1)(2-1) = 2 - 1 = 1`,
+                            ex2_step2_title: "Schritt 2: Kofaktoren berechnen",
+                            ex2_step2_row1: `C_{11}=+(2), \\; C_{12}=-(-4)=4, \\; C_{13}=+(1)`,
+                            ex2_step2_row2: `C_{21}=-(-1)=1, \\; C_{22}=+(3), \\; C_{23}=-(-1)=1`,
+                            ex2_step2_row3: `C_{31}=+(1), \\; C_{32}=-( -2)=2, \\; C_{33}=+(1)`,
+                            ex2_step2_matrix: `C = \\begin{bmatrix} 2 & 4 & 1 \\\\ 1 & 3 & 1 \\\\ 1 & 2 & 1 \\end{bmatrix}`,
+                            ex2_step3_title: "Schritt 3: Transponieren für die Adjunkte",
+                            ex2_step3_math: `\\text{Adj}(B) = C^T = \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                            ex2_result: `B^{-1} = \\frac{1}{1} \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                        },
+                        ex3: {
+                            ex3_title: "3. Lösen eines linearen 3x3-Systems",
+                            ex3_problem: "Lösen Sie das System Ax = b unter Verwendung der Matrixinversen.",
+                            ex3_system: `\\begin{cases} x + 2y + z = 8 \\\\ 2x + 5y + 2z = 18 \\\\ x + 2y + 2z = 11 \\end{cases}`,
+                            ex3_step1_title: "Schritt 1: A und b identifizieren",
+                            ex3_step1_math: `A = \\begin{bmatrix} 1 & 2 & 1 \\\\ 2 & 5 & 2 \\\\ 1 & 2 & 2 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step2_title: "Schritt 2: Inverse von A finden",
+                            ex3_step2_desc: "Mit der Adjunkten-Methode (der Kürze halber weggelassen, det(A)=1) erhalten wir:",
+                            ex3_step2_math: `A^{-1} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix}`,
+                            ex3_step3_title: "Schritt 3: Multiplizieren x = A^{-1}b",
+                            ex3_step3_math: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix} \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step4_title: "Schritt 4: Produkt berechnen",
+                            ex3_step4_x: `x = 6(8) - 2(18) - 1(11) = 48 - 36 - 11 = 1`,
+                            ex3_step4_y: `y = -2(8) + 1(18) + 0 = -16 + 18 = 2`,
+                            ex3_step4_z: `z = -1(8) + 0 + 1(11) = -8 + 11 = 3`,
+                            ex3_result: `\\text{Lösung: } x=1, y=2, z=3`
+                        }
+                    }
+                }
+            }
+        },
+        linearEquations: {
+            title: "Lineare Gleichungssysteme",
+            description: "Lernen Sie, lineare Gleichungssysteme mit verschiedenen Methoden zu lösen.",
+            lessons: {
+                lesson4_title: "Lösen von Linearen Gleichungen",
+                lesson4: {
+                    section1: {
+                        title1: "Einführung in Lineare Gleichungssysteme",
+                        def1_1: "Ein lineares Gleichungssystem ist eine Sammlung von einer oder mehreren linearen Gleichungen mit denselben Variablen (z. B. x, y, z). Eine Lösung für ein lineares System ist eine Zuweisung von Werten zu den Variablen, die alle Gleichungen gleichzeitig erfüllt.",
+                        def1_2: "Die einfachste lineare Gleichung ist die Gleichung ax = b. Der Buchstabe x ist die Variable, und a und b sind feste Zahlen. Die Lösung dieser Gleichung ist x = b/a, vorausgesetzt, a ist nicht null.",
+                        def1_3: "Ein allgemeines lineares System bestehend aus m Gleichungen in n Unbekannten sieht wie folgt aus:",
+                        def1_3_math: `\\begin{cases} a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = b_1 \\\\ a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = b_2 \\\\ \\vdots \\\\ a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m \\end{cases}`,
+                    },
+                    section2: {
+                        title2: "Lösen linearer Systeme mit Gaußscher Elimination (Homogener Fall)",
+                        def2_1: "Die Gaußsche Elimination ist ein algorithmisches Verfahren zum Finden der Lösungsmenge eines linearen Systems. Die Strategie bei der Gaußschen Elimination besteht darin, das ursprüngliche System durch eine Folge äquivalenter Systeme zu ersetzen, bis das endgültige System in reduzierter Zeilenstufenform vorliegt.",
+                        subtitle2_1: "Der Fall des homogenen Systems",
+                        text2_1: "Das Lösen eines linearen Systems Ax = b umfasst mehrere Schritte. Der erste Schritt besteht darin, das zugehörige homogene System zu lösen.",
+                        def2_2: "Ein lineares System Ax = b heißt homogen, wenn b = 0 ist. Die Lösungsmenge eines homogenen linearen Systems Ax = 0 wird als Nullraum (oder Kern) von A bezeichnet.",
+                        ex2_1: `Betrachten Sie das homogene lineare System`,
+                        ex2_1_system: `\\begin{cases} x + 2y - z = 0 \\\\ 2x + 5y - 3z = 0 \\\\ x + 3y - 2z = 0 \\end{cases}`,
+                        ex2_1_desc: "Da die rechte Seite nur aus Nullen besteht, bilden wir die erweiterte Koeffizientenmatrix [A | 0].",
+                        ex2_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 2 & 5 & -3 & 0 \\\\ 1 & 3 & -2 & 0 \\end{array} \\right]`,
+                        ex2_1_step1_title: "Zeilenreduktion",
+                        ex2_1_step1_math: `\\xrightarrow{R_2-2R_1, R_3-R_1} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\end{array} \\right] \\xrightarrow{R_3-R_2} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex2_1_step2_title: "Lösen nach Variablen",
+                        ex2_1_step2_desc: "Die letzte Zeile 0=0 zeigt an, dass z eine freie Variable ist. Sei z = t.",
+                        ex2_1_step2_math: `y - z = 0 \\Rightarrow y = t \\\\ x + 2y - z = 0 \\Rightarrow x + 2t - t = 0 \\Rightarrow x = -t`,
+                        ex2_1_result: `\\text{Lösung: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix} \\text{ (Dieser Vektor spannt den Nullraum auf)}`
+                    },
+                    section3: {
+                        title3: "Lösen linearer Systeme mit Gaußscher Elimination (Inhomogener Fall)",
+                        def3_1: "Ein System Ax = b mit b \\ne 0 wird als inhomogen bezeichnet. Ein inhomogenes System erfordert die Verwendung einer erweiterten Koeffizientenmatrix (A | b).",
+                        ex3_1: "Betrachten Sie dasselbe System, jedoch gleichgesetzt mit Konstanten ungleich Null:",
+                        ex3_1_system: `\\begin{cases} x + 2y - z = 2 \\\\ 2x + 5y - 3z = 7 \\\\ x + 3y - 2z = 5 \\end{cases}`,
+                        ex3_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 2 \\\\ 2 & 5 & -3 & 7 \\\\ 1 & 3 & -2 & 5 \\end{array} \\right]`,
+                        ex3_1_step1: "Die Zeilenreduktion dieser Matrix ergibt:",
+                        ex3_1_math: `\\left[ \\begin{array}{ccc|c} 1 & 0 & 1 & -4 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex3_1_result: `\\text{Lösung: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\underbrace{t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix}}_{\\text{Homogen}} + \\underbrace{\\begin{bmatrix} -4 \\\\ 3 \\\\ 0 \\end{bmatrix}}_{\\text{Partikulär}}`
+                    },
+                    section4: {
+                        title4: "Reduzierte Zeilenstufenform",
+                        title: "Reduzierte Zeilenstufenform (RREF)",
+                        description: "Verstehen des 'Zielzustands' der Zeilenreduktion und des Unterschieds zwischen REF und RREF.",
+                        def_title: "Was ist RREF?",
+                        def_desc: "Eine Matrix befindet sich in reduzierter Zeilenstufenform (RREF), wenn sie vier spezifische Bedingungen erfüllt. Es ist die am weitesten vereinfachte Version einer Matrix.",
+                        cond_title: "Die 4 Bedingungen",
+                        cond1: "1. Nicht-Null-Zeilen: Alle Zeilen, die vollständig aus Nullen bestehen, befinden sich am unteren Rand der Matrix.",
+                        cond2: "2. Führende Einsen: Der erste Eintrag ungleich Null in jeder Nicht-Null-Zeile ist eine 1 (genannt Pivot).",
+                        cond3: "3. Treppenmuster: Jede führende 1 befindet sich rechts von der führenden 1 in der Zeile darüber.",
+                        cond4: "4. Nullen in Spalten: Jede führende 1 ist der einzige Eintrag ungleich Null in ihrer Spalte (Nullen darüber und darunter).",
+                        comparison_title: "REF vs. RREF",
+                        comparison_desc: "Viele Studenten verwechseln diese beiden Formen. Hier ist der Unterschied:",
+                        ref_title: "Zeilenstufenform (REF)",
+                        ref_desc: "Erfüllt nur die Bedingungen 1, 2 und 3. Zahlen über Pivots können ungleich Null sein.",
+                        ref_method: "Verwendet in: Gauß-Elimination (erfordert Rückwärtssubstitution).",
+                        ref_ex: `\\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 5 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        rref_title: "Reduzierte Zeilenstufenform (RREF)",
+                        rref_desc: "Erfüllt alle 4 Bedingungen. Pivots sind der EINZIGE Eintrag ungleich Null in ihren Spalten.",
+                        rref_method: "Verwendet in: Gauß-Jordan-Elimination (liefert die Lösung direkt).",
+                        rref_ex: `\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        note_title: "Eindeutigkeitssatz",
+                        note_desc: "Die Zeilenstufenform (REF) einer Matrix ist NICHT eindeutig (unterschiedliche Zeilenoperationen können zu unterschiedlichen Zahlen über den Pivots führen). Die reduzierte Zeilenstufenform (RREF) ist jedoch EINDEUTIG. Jede Matrix hat genau eine RREF."
+                    },
+                    example_section: {
+                        example_section: {
+                            title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                            ex1: {
+                                title: "1. Eindeutige Lösung (Gauß-Jordan)",
+                                problem: "Lösen Sie das folgende System mit der Gauß-Jordan-Elimination:",
+                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                                step1_title: "Schritt 1: Erweiterte Matrix",
+                                step1_desc: "Wandeln Sie das System in eine erweiterte Matrix [A|b].",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                                step2_title: "Schritt 2: Nullen unter Pivot 1 erzeugen",
+                                step2_desc: "Verwenden Sie die 1 oben links, um die Einträge darunter zu eliminieren. (R2 = R2 - 2R1) und (R3 = R3 - 3R1).",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                                step3_title: "Schritt 3: Pivot 2 erzeugen",
+                                step3_desc: "Um die Mathematik zu vereinfachen, skalieren wir R2 um 1/2, um eine führende 1 zu erhalten, oder subtrahieren R2 von R3. Multiplizieren wir R2 mit 0,5.",
+                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                                step4_title: "Schritt 4: Nullen unter Pivot 2 erzeugen",
+                                step4_desc: "Führen Sie (R3 = R3 - 3R2) aus.",
+                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                                step5_title: "Schritt 5: Lösen nach Variablen (Rückwärtssubstitution)",
+                                step5_desc: "Aus R3: -0,5z = -1,5 → z = 3. Setzen Sie z wieder in R2 ein, dann x und y in R1.",
+                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                                result_title: "Endgültige Antwort",
+                                result: `\\text{Lösung: } x=1, y=2, z=3`
+                            },
+                            ex2: {
+                                title: "2. Unendliche Lösungen (Freie Variablen)",
+                                problem: "Finden Sie die allgemeine Lösung für das System:",
+                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                                step1_title: "Schritt 1: Zeilenreduktion",
+                                step1_desc: "Bilden Sie die erweiterte Matrix und reduzieren Sie sie.",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                                step2_title: "Schritt 2: Freie Variablen identifizieren",
+                                step2_desc: "Die Zeilen 2 und 3 wurden alle zu Nullen. Das bedeutet, wir haben nur einen Pivot (für x). Die Variablen y und z haben keine Pivots, also sind sie FREIE Variablen.",
+                                step2_math: `\\text{Sei } y = s \\text{ und } z = t, \\text{ wobei } s,t \\in \\mathbb{R}.`,
+                                step3_title: "Schritt 3: Basisvariablen ausdrücken",
+                                step3_desc: "Schreiben Sie die erste Gleichung in Bezug auf die freien Variablen um.",
+                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                                result_title: "Endgültige Antwort (Parameterform)",
+                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                            },
+                            ex3: {
+                                title: "3. Keine Lösung (Inkonsistentes System)",
+                                problem: "Bestimmen Sie die Lösung für das folgende System:",
+                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                                step1_title: "Schritt 1: Erweiterte Matrix bilden",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                                step2_title: "Schritt 2: Zeilenoperationen",
+                                step2_desc: "Führen Sie R2 = R2 - R1 aus.",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                                step3_title: "Schritt 3: Ergebnis interpretieren",
+                                step3_desc: "Schauen Sie sich die zweite Zeile genau an. Wenn wir dies zurück in eine Gleichung übersetzen, erhalten wir:",
+                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                                result_title: "Endgültige Schlussfolgerung",
+                                result: `Da 0 = 3 ein mathematischer Widerspruch ist, ist das System inkonsistent (Keine Lösung). Geometrisch stellt dies parallele Ebenen dar, die sich niemals schneiden.`
+                            }
+                        }
+                    }
+                }
+            }
+        }
     },
     pl: {
         matrixBasics: {
@@ -865,7 +1955,7 @@ export const linearAlgebraCourse = {
                     },
                     example_section: {
                         title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
-                        
+
                         example1: {
                             title: "1. Kombinacja Liniowa Macierzy",
                             problem: `Dane są A = \\begin{bmatrix} 2 & -1 \\\\ 0 & 3 \\end{bmatrix} \\text{ oraz } B = \\begin{bmatrix} 1 & 4 \\\\ 5 & -2 \\end{bmatrix}, \\text{ znajdź } 2A - B.`,
@@ -1001,6 +2091,277 @@ export const linearAlgebraCourse = {
                 }
             }
         },
+        matrixInverse: {
+            title: "Odwrotność Macierzy",
+            description: "Dowiedz się, jak znaleźć odwrotność macierzy i jej zastosowania.",
+            lessons: {
+                lesson3_title: "Odwrotność Macierzy",
+                lesson3: {
+                    section1: {
+                        title1: "Definicja Odwrotności Macierzy",
+                        def1_1: "Przypuśćmy, że dwie macierze n x n A i B mają własność, że AB = BA = I_n, gdzie I_n jest macierzą jednostkową n x n. Wtedy mówimy, że A jest odwracalna (lub nieosobliwa), a B jest odwrotnością A, oznaczoną przez A^{-1}. Innymi słowy, A^{-1} jest unikalną macierzą, taką że A A^{-1} = A^{-1} A = I_n.",
+                        proposition1_1: "Twierdzenie: Przypuśćmy, że A w R^{n x n} lub A w F_2^{n x n} i A ma odwrotność B. Wtedy B jest unikalna.",
+                        proof1_1: "Dowód: Przypuśćmy, że A ma dwie odwrotności B i C. Wtedy",
+                        proof1_1_math: `B = B I_n = B(AC) = (BA)C = I_n C = C`,
+                        expl1_1: "Zatem B = C, a odwrotność jest unikalna.",
+                        ex1_1: "Na przykład, odwrotności elementarnych macierzy 2 x 2 są następujące:",
+                        ex1_1_list1: `E_{1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} \\Rightarrow E_{1}^{-1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}`,
+                        ex1_1_list2: `E_{2} = \\begin{bmatrix} k & 0 \\\\ 0 & 1 \\end{bmatrix} \\Rightarrow E_{2}^{-1} = \\begin{bmatrix} \\frac{1}{k} & 0 \\\\ 0 & 1 \\end{bmatrix}, k \\ne 0`,
+                        ex1_1_list3: `E_{3} = \\begin{bmatrix} 1 & 0 \\\\ k & 1 \\end{bmatrix} \\Rightarrow E_{3}^{-1} = \\begin{bmatrix} 1 & 0 \\\\ -k & 1 \\end{bmatrix}`,
+                    },
+                    section2: {
+                        title2: "Metoda 1 Znajdowania Odwrotności (Eliminacja Gaussa-Jordana)",
+                        def1_2: "Mamy dwa sposoby na znalezienie macierzy B takiej, że B A = I_n. Pierwsza metoda to po prostu pomnożenie sekwencji macierzy elementarnych, które redukują wierszowo A do I_n. Druga metoda polega na utworzeniu macierzy rozszerzonej (A | I_n) i redukcji wierszowej. Wynik końcowy będzie w postaci (I_n | B). Jest to metoda stosowana w większości podręczników.",
+                        text1_2: "Oto przykład.",
+                        method1_1: "Metoda 1: Eliminacja Gaussa-Jordana lub Redukcja Wierszowa",
+                        ex1_2: `Przypuśćmy, że chcemy znaleźć odwrotność dla`,
+                        ex1_2_matrix: `A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex1_2_steps1: "Ponieważ musimy tylko rozwiązać równanie macierzowe XA = I_3, możemy użyć naszej poprzedniej strategii redukcji wierszowej (A | I_3).",
+                        ex1_2_steps2: `(A | I_3) = \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 1 & 3 & 1 & | & 0 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_1} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_3 - R_2}`,
+                        ex1_2_steps3: `\\begin{bmatrix} 1 & 2 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_3} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_1 - 2R_2}`,
+                        ex1_2_steps4: `\\begin{bmatrix} 1 & 0 & 0 & | & 5 & -4 & 2 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix}`,
+                        ex1_2_result: `\\text{Zatem, } A^{-1} = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section3: {
+                        title2: "Metoda 2 Znajdowania Odwrotności (Metoda Dołączona)",
+                        method2_1: "Metoda 2: Metoda Macierzy Dołączonej",
+                        ex2_2: `Alternatywnie możemy użyć metody macierzy dołączonej. Najpierw obliczamy macierz kofaktorów, następnie bierzemy jej transpozycję, aby uzyskać macierz dołączoną, i na koniec dzielimy przez wyznacznik A, aby uzyskać odwrotność.`,
+                        ex2_2_matrix: `\\text{Dla } A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex2_2_steps1: "Oblicz wyznacznik macierzy A.",
+                        ex2_2_steps1_math: `det(A) = 1(3*2 - 1*1) - 2(1*2 - 0*1) + 0(1*1 - 3*0) = 1`,
+                        ex2_2_steps2: "Znajdź macierz minorów, a następnie macierz kofaktorów.",
+                        ex2_2_steps2_desc: "Minor M_{ij} elementu a_ij jest zdefiniowany jako wyznacznik podmacierzy, która pozostaje po usunięciu i-tego wiersza i j-tej kolumny z A. Kofaktor C_{ij} jest dany wzorem C_{ij} = (-1)^{i+j} M_{ij}.",
+                        ex2_2_steps2_math: `M_{11} = det \\begin{bmatrix} 3 & 1 \\\\ 1 & 2 \\end{bmatrix} = 5, \\quad C_{11} = (-1)^{1+1} M_{11} = 5`,
+                        ex2_2_steps2_math2: `M_{12} = det \\begin{bmatrix} 1 & 1 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{12} = (-1)^{1+2} M_{12} = -2`,
+                        ex2_2_steps2_math3: `M_{13} = det \\begin{bmatrix} 1 & 3 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{13} = (-1)^{1+3} M_{13} = 1`,
+                        ex2_2_steps2_math4: `M_{21} = det \\begin{bmatrix} 2 & 0 \\\\ 1 & 2 \\end{bmatrix} = 4, \\quad C_{21} = (-1)^{2+1} M_{21} = -4`,
+                        ex2_2_steps2_math5: `M_{22} = det \\begin{bmatrix} 1 & 0 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{22} = (-1)^{2+2} M_{22} = 2`,
+                        ex2_2_steps2_math6: `M_{23} = det \\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{23} = (-1)^{2+3} M_{23} = -1`,
+                        ex2_2_steps2_math7: `M_{31} = det \\begin{bmatrix} 2 & 0 \\\\ 3 & 1 \\end{bmatrix} = 2, \\quad C_{31} = (-1)^{3+1} M_{31} = 2`,
+                        ex2_2_steps2_math8: `M_{32} = det \\begin{bmatrix} 1 & 0 \\\\ 1 & 1 \\end{bmatrix} = 1, \\quad C_{32} = (-1)^{3+2} M_{32} = -1`,
+                        ex2_2_steps2_math9: `M_{33} = det \\begin{bmatrix} 1 & 2 \\\\ 1 & 3 \\end{bmatrix} = 1, \\quad C_{33} = (-1)^{3+3} M_{33} = 1`,
+                        ex2_2_steps2_matrix: `\\text{Macierz Kofaktorów} = \\begin{bmatrix} 5 & -2 & 1 \\\\ -4 & 2 & -1 \\\\ 2 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps3: "Transponuj macierz kofaktorów, aby uzyskać macierz dołączoną.",
+                        ex2_2_steps3_math: `\\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps4: "Na koniec podziel macierz dołączoną przez wyznacznik, aby uzyskać odwrotność.",
+                        ex2_2_result: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section4: {
+                        title4: "Właściwości Macierzy Odwracalnych",
+                        description: "Kluczowe reguły algebraiczne dla macierzy odwracalnych.",
+                        prop1_title: "Odwrotność Iloczynu (Reguła Skarpety i Buta)",
+                        prop1_desc: "Odwrotność iloczynu to iloczyn odwrotności w odwrotnej kolejności. Pomyśl o tym jak o zakładaniu skarpet i butów: aby to cofnąć, musisz najpierw zdjąć buty, a potem skarpety.",
+                        prop1_math: `(AB)^{-1} = B^{-1}A^{-1}`,
+                        prop2_title: "Odwrotność Odwrotności",
+                        prop2_desc: "Dwukrotne wzięcie odwrotności zwraca oryginalną macierz.",
+                        prop2_math: `(A^{-1})^{-1} = A`,
+                        prop3_title: "Odwrotność Transpozycji",
+                        prop3_desc: "Kolejność operacji między odwracaniem a transpozycją nie ma znaczenia.",
+                        prop3_math: `(A^T)^{-1} = (A^{-1})^T`,
+                        prop4_title: "Mnożenie przez Skalar",
+                        prop4_desc: "Jeśli k jest skalarem różnym od zera, odwrotność skaluje się przez odwrotność k.",
+                        prop4_math: `(kA)^{-1} = \\frac{1}{k}A^{-1}`
+                    },
+                    section5: {
+                        title5: "Zastosowania Odwrotności (Rozwiązywanie Układów Liniowych)",
+                        description: "Odwrotności macierzy mogą być używane do rozwiązywania układów równań liniowych, wśród innych zastosowań.",
+                        app1_title: "Rozwiązywanie Układów Liniowych",
+                        app1_desc: "Jeśli A jest macierzą odwracalną, a \\mathbf{b} jest wektorem, układ równań A\\mathbf{x} = \\mathbf{b} ma unikalne rozwiązanie \\mathbf{x} = A^{-1}\\mathbf{b}.",
+                        ex1_5: 'Na przykład rozważmy układ równań:',
+                        ex1_5_equations: `\\begin{cases} 2x + 3y = 7 \\\\ 4x - y = 7 \\end{cases}`,
+                        ex1_5_matrix: `A = \\begin{bmatrix} 2 & 3 \\\\ 4 & -1 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix}`,
+                        ex1_5_solution: `Najpierw znajdujemy odwrotność A, a następnie mnożymy ją przez b, aby znaleźć wektor rozwiązania x.`,
+                        ex1_5_steps1: "Oblicz wyznacznik macierzy A.",
+                        ex1_5_steps1_math: `det(A) = (2)(-1) - (3)(4) = -2 - 12 = -14`,
+                        ex1_5_steps2: "Znajdź macierz kofaktorów, a następnie macierz dołączoną.",
+                        ex1_5_steps2_math: `\\text{Adj}(A) = \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix}`,
+                        ex1_5_steps3: "Oblicz odwrotność macierzy A.",
+                        ex1_5_steps3_math: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\frac{1}{-14} \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix}`,
+                        ex1_5_steps4: "Na koniec pomnóż A^{-1} przez b, aby znaleźć wektor rozwiązania x.",
+                        ex1_5_steps4_math: `\\begin{bmatrix} x \\\\ y \\end{bmatrix} = A^{-1}\\mathbf{b} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix} \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix} = \\begin{bmatrix} \\frac{7 + 21}{14} \\\\ \\frac{28 - 14}{14} \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 1 \\end{bmatrix}`,
+                        ex1_5_result: "Zatem rozwiązaniem układu równań jest x = 2 i y = 1."
+                    },
+                    example_section: {
+                        title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
+                        ex1: {
+                            ex1_title: "1. Eliminacja Gaussa-Jordana (3x3)",
+                            ex1_problem: "Znajdź odwrotność macierzy A używając redukcji wierszowej:",
+                            ex1_matrix: `A = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & 2 & 3 \\end{bmatrix}`,
+                            ex1_step1_title: "Krok 1: Utwórz Macierz Rozszerzoną [A | I]",
+                            ex1_step1_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 1 & 2 & 2 & 0 & 1 & 0 \\\\ 1 & 2 & 3 & 0 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step2_title: "Krok 2: Zera poniżej jedynki wiodącej 1 (Kolumna 1)",
+                            ex1_step2_desc: "Wykonaj R2 = R2 - R1 i R3 = R3 - R1.",
+                            ex1_step2_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 1 & 2 & -1 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step3_title: "Krok 3: Zera poniżej jedynki wiodącej 2 (Kolumna 2)",
+                            ex1_step3_desc: "Wykonaj R3 = R3 - R2.",
+                            ex1_step3_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step4_title: "Krok 4: Zera powyżej jedynki wiodącej 3 (Kolumna 3)",
+                            ex1_step4_desc: "Wykonaj R2 = R2 - R3 i R1 = R1 - R3.",
+                            ex1_step4_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 0 & 1 & 1 & -1 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step5_title: "Krok 5: Zera powyżej jedynki wiodącej 2 (Kolumna 2)",
+                            ex1_step5_desc: "Wykonaj R1 = R1 - R2. Lewa strona to teraz macierz jednostkowa.",
+                            ex1_step5_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 0 & 0 & 2 & -1 & 0 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_result: `A^{-1} = \\begin{bmatrix} 2 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 1 \\end{bmatrix}`,
+                        },
+                        ex2: {
+                            ex2_title: "2. Metoda Macierzy Dołączonej (3x3)",
+                            ex2_problem: "Znajdź odwrotność macierzy B używając wyznacznika i kofaktorów:",
+                            ex2_matrix: `B = \\begin{bmatrix} 1 & 0 & -1 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 2 \\end{bmatrix}`,
+                            ex2_step1_title: "Krok 1: Oblicz Wyznacznik",
+                            ex2_step1_math: `\\det(B) = 1(2-0) - 0 + (-1)(2-1) = 2 - 1 = 1`,
+                            ex2_step2_title: "Krok 2: Oblicz Kofaktory",
+                            ex2_step2_row1: `C_{11}=+(2), \\; C_{12}=-(-4)=4, \\; C_{13}=+(1)`,
+                            ex2_step2_row2: `C_{21}=-(-1)=1, \\; C_{22}=+(3), \\; C_{23}=-(-1)=1`,
+                            ex2_step2_row3: `C_{31}=+(1), \\; C_{32}=-( -2)=2, \\; C_{33}=+(1)`,
+                            ex2_step2_matrix: `C = \\begin{bmatrix} 2 & 4 & 1 \\\\ 1 & 3 & 1 \\\\ 1 & 2 & 1 \\end{bmatrix}`,
+                            ex2_step3_title: "Krok 3: Transponuj, aby uzyskać Macierz Dołączoną",
+                            ex2_step3_math: `\\text{Adj}(B) = C^T = \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                            ex2_result: `B^{-1} = \\frac{1}{1} \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                        },
+                        ex3: {
+                            ex3_title: "3. Rozwiązywanie Układu Liniowego 3x3",
+                            ex3_problem: "Rozwiąż układ Ax = b używając odwrotności macierzy.",
+                            ex3_system: `\\begin{cases} x + 2y + z = 8 \\\\ 2x + 5y + 2z = 18 \\\\ x + 2y + 2z = 11 \\end{cases}`,
+                            ex3_step1_title: "Krok 1: Zidentyfikuj A i b",
+                            ex3_step1_math: `A = \\begin{bmatrix} 1 & 2 & 1 \\\\ 2 & 5 & 2 \\\\ 1 & 2 & 2 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step2_title: "Krok 2: Znajdź Odwrotność A",
+                            ex3_step2_desc: "Używając metody macierzy dołączonej (pominięte dla zwięzłości, det(A)=1), otrzymujemy:",
+                            ex3_step2_math: `A^{-1} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix}`,
+                            ex3_step3_title: "Krok 3: Pomnóż x = A^{-1}b",
+                            ex3_step3_math: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix} \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step4_title: "Krok 4: Oblicz Iloczyn",
+                            ex3_step4_x: `x = 6(8) - 2(18) - 1(11) = 48 - 36 - 11 = 1`,
+                            ex3_step4_y: `y = -2(8) + 1(18) + 0 = -16 + 18 = 2`,
+                            ex3_step4_z: `z = -1(8) + 0 + 1(11) = -8 + 11 = 3`,
+                            ex3_result: `\\text{Rozwiązanie: } x=1, y=2, z=3`
+                        }
+                    }
+                }
+            }
+        },
+        linearEquations: {
+            title: "Układy Równań Liniowych",
+            description: "Dowiedz się, jak rozwiązywać układy równań liniowych różnymi metodami.",
+            lessons: {
+                lesson4_title: "Rozwiązywanie Równań Liniowych",
+                lesson4: {
+                    section1: {
+                        title1: "Wprowadzenie do Układów Równań Liniowych",
+                        def1_1: "Układ równań liniowych to zbiór jednego lub więcej równań liniowych z tym samym zestawem zmiennych (np. x, y, z). Rozwiązaniem układu liniowego jest przypisanie wartości zmiennym, które spełniają wszystkie równania jednocześnie.",
+                        def1_2: "Najprostszym równaniem liniowym jest równanie ax = b. Litera x jest zmienną, a a i b są ustalonymi liczbami. Rozwiązaniem tego równania jest x = b/a, pod warunkiem, że a nie jest zerem.",
+                        def1_3: "Ogólny układ liniowy składający się z m równań i n niewiadomych będzie wyglądał tak:",
+                        def1_3_math: `\\begin{cases} a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = b_1 \\\\ a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = b_2 \\\\ \\vdots \\\\ a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m \\end{cases}`,
+                    },
+                    section2: {
+                        title2: "Rozwiązywanie Układów Liniowych Metodą Eliminacji Gaussa (Przypadek Jednorodny)",
+                        def2_1: "Eliminacja Gaussa to algorytmiczna procedura znajdowania zbioru rozwiązań układu liniowego. Strategia w eliminacji Gaussa polega na zastąpieniu pierwotnego układu sekwencją równoważnych układów, aż ostateczny układ będzie w postaci schodkowej zredukowanej.",
+                        subtitle2_1: "Przypadek Układu Jednorodnego",
+                        text2_1: "Rozwiązanie układu liniowego Ax = b obejmuje kilka kroków. Pierwszym krokiem jest rozwiązanie powiązanego układu jednorodnego.",
+                        def2_2: "Układ liniowy Ax = b nazywamy jednorodnym, jeśli b = 0. Zbiór rozwiązań jednorodnego układu liniowego Ax = 0 nazywamy jądrem (przestrzenią zerową) macierzy A.",
+                        ex2_1: `Rozważmy jednorodny układ liniowy`,
+                        ex2_1_system: `\\begin{cases} x + 2y - z = 0 \\\\ 2x + 5y - 3z = 0 \\\\ x + 3y - 2z = 0 \\end{cases}`,
+                        ex2_1_desc: "Ponieważ prawa strona to same zera, tworzymy macierz rozszerzoną [A | 0].",
+                        ex2_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 2 & 5 & -3 & 0 \\\\ 1 & 3 & -2 & 0 \\end{array} \\right]`,
+                        ex2_1_step1_title: "Redukcja Wierszowa",
+                        ex2_1_step1_math: `\\xrightarrow{R_2-2R_1, R_3-R_1} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\end{array} \\right] \\xrightarrow{R_3-R_2} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex2_1_step2_title: "Rozwiązanie dla Zmiennych",
+                        ex2_1_step2_desc: "Ostatni wiersz 0=0 wskazuje, że z jest zmienną wolną. Niech z = t.",
+                        ex2_1_step2_math: `y - z = 0 \\Rightarrow y = t \\\\ x + 2y - z = 0 \\Rightarrow x + 2t - t = 0 \\Rightarrow x = -t`,
+                        ex2_1_result: `\\text{Rozwiązanie: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix} \\text{ (Ten wektor rozpina przestrzeń zerową)}`
+                    },
+                    section3: {
+                        title3: "Rozwiązywanie Układów Liniowych Metodą Eliminacji Gaussa (Przypadek Niejednorodny)",
+                        def3_1: "Układ Ax = b z b \\ne 0 nazywamy niejednorodnym. Układ niejednorodny wymaga użycia macierzy rozszerzonej współczynników (A | b).",
+                        ex3_1: "Rozważmy ten sam układ, ale równy stałym niezerowym:",
+                        ex3_1_system: `\\begin{cases} x + 2y - z = 2 \\\\ 2x + 5y - 3z = 7 \\\\ x + 3y - 2z = 5 \\end{cases}`,
+                        ex3_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 2 \\\\ 2 & 5 & -3 & 7 \\\\ 1 & 3 & -2 & 5 \\end{array} \\right]`,
+                        ex3_1_step1: "Redukcja wierszowa tej macierzy daje:",
+                        ex3_1_math: `\\left[ \\begin{array}{ccc|c} 1 & 0 & 1 & -4 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex3_1_result: `\\text{Rozwiązanie: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\underbrace{t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix}}_{\\text{Jednorodne}} + \\underbrace{\\begin{bmatrix} -4 \\\\ 3 \\\\ 0 \\end{bmatrix}}_{\\text{Szczególne}}`
+                    },
+                    section4: {
+                        title4: "Postać Schodkowa Zredukowana",
+                        title: "Zredukowana Postać Schodkowa Wierszowa (RREF)",
+                        description: "Zrozumienie 'stanu docelowego' redukcji wierszowej i różnicy między REF a RREF.",
+                        def_title: "Czym jest RREF?",
+                        def_desc: "Macierz jest w Zredukowanej Postaci Schodkowej Wierszowej (RREF), jeśli spełnia cztery określone warunki. Jest to najbardziej uproszczona wersja macierzy.",
+                        cond_title: "4 Warunki",
+                        cond1: "1. Wiersze niezerowe: Wszystkie wiersze składające się wyłącznie z zer znajdują się na dole macierzy.",
+                        cond2: "2. Jedynki wiodące: Pierwszym niezerowym elementem w każdym niezerowym wierszu jest 1 (zwany pivotem).",
+                        cond3: "3. Wzór schodkowy: Każda jedynka wiodąca znajduje się na prawo od jedynki wiodącej w wierszu powyżej.",
+                        cond4: "4. Zera w kolumnach: Każda jedynka wiodąca jest jedynym niezerowym elementem w swojej kolumnie (zera powyżej i poniżej).",
+                        comparison_title: "REF vs. RREF",
+                        comparison_desc: "Wielu studentów myli te dwie formy. Oto różnica:",
+                        ref_title: "Postać Schodkowa Wierszowa (REF)",
+                        ref_desc: "Spełnia tylko warunki 1, 2 i 3. Liczby powyżej pivotów mogą być niezerowe.",
+                        ref_method: "Używane w: Eliminacji Gaussa (wymaga podstawiania wstecznego).",
+                        ref_ex: `\\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 5 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        rref_title: "Zredukowana Postać Schodkowa Wierszowa (RREF)",
+                        rref_desc: "Spełnia wszystkie 4 warunki. Pivoty są JEDYNYM niezerowym elementem w swoich kolumnach.",
+                        rref_method: "Używane w: Eliminacji Gaussa-Jordana (daje rozwiązanie bezpośrednio).",
+                        rref_ex: `\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        note_title: "Twierdzenie o Jednoznaczności",
+                        note_desc: "Postać Schodkowa Wierszowa (REF) macierzy NIE jest unikalna (różne operacje wierszowe mogą prowadzić do różnych liczb powyżej pivotów). Jednak Zredukowana Postać Schodkowa Wierszowa (RREF) JEST unikalna. Każda macierz ma dokładnie jedną postać RREF."
+                    },
+                    example_section: {
+                        title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
+                        ex1: {
+                            title: "1. Unikalne Rozwiązanie (Gauss-Jordan)",
+                            problem: "Rozwiąż poniższy układ za pomocą eliminacji Gaussa-Jordana:",
+                            system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                            step1_title: "Krok 1: Macierz Rozszerzona",
+                            step1_desc: "Przekształć układ w macierz rozszerzoną [A|b].",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                            step2_title: "Krok 2: Utwórz Zera Poniżej Pivota 1",
+                            step2_desc: "Użyj jedynki w lewym górnym rogu, aby wyeliminować elementy poniżej. (R2 = R2 - 2R1) i (R3 = R3 - 3R1).",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step3_title: "Krok 3: Utwórz Pivot 2",
+                            step3_desc: "Aby ułatwić obliczenia, przeskalujmy R2 przez 1/2, aby uzyskać jedynkę wiodącą, lub odejmijmy R2 od R3. Pomnóżmy R2 przez 0.5.",
+                            step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step4_title: "Krok 4: Utwórz Zera Poniżej Pivota 2",
+                            step4_desc: "Wykonaj (R3 = R3 - 3R2).",
+                            step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                            step5_title: "Krok 5: Rozwiąż zmienne (Podstawianie Wsteczne)",
+                            step5_desc: "Z R3: -0.5z = -1.5 → z = 3. Podstaw z z powrotem do R2, a następnie x i y do R1.",
+                            step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                            result_title: "Ostateczna Odpowiedź",
+                            result: `\\text{Rozwiązanie: } x=1, y=2, z=3`
+                        },
+                        ex2: {
+                            title: "2. Nieskończenie Wiele Rozwiązań (Zmienne Wolne)",
+                            problem: "Znajdź rozwiązanie ogólne układu:",
+                            system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                            step1_title: "Krok 1: Redukcja Wierszowa",
+                            step1_desc: "Utwórz macierz rozszerzoną i zredukuj.",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                            step2_title: "Krok 2: Zidentyfikuj Zmienne Wolne",
+                            step2_desc: "Wiersze 2 i 3 stały się zerami. Oznacza to, że mamy tylko jeden pivot (dla x). Zmienne y i z nie mają pivotów, więc są zmiennymi WOLNYMI.",
+                            step2_math: `\\text{Niech } y = s \\text{ i } z = t, \\text{ gdzie } s,t \\in \\mathbb{R}.`,
+                            step3_title: "Krok 3: Wyraź Zmienne Bazowe",
+                            step3_desc: "Przepisz pierwsze równanie w zależności od zmiennych wolnych.",
+                            step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                            result_title: "Ostateczna Odpowiedź (Postać Parametryczna)",
+                            result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                        },
+                        ex3: {
+                            title: "3. Brak Rozwiązania (Układ Sprzeczny)",
+                            problem: "Określ rozwiązanie następującego układu:",
+                            system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                            step1_title: "Krok 1: Utwórz Macierz Rozszerzoną",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step2_title: "Krok 2: Operacje Wierszowe",
+                            step2_desc: "Wykonaj R2 = R2 - R1.",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step3_title: "Krok 3: Interpretacja Wyniku",
+                            step3_desc: "Przyjrzyj się uważnie drugiemu wierszowi. Przetłumaczenie tego z powrotem na równanie daje nam:",
+                            step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                            result_title: "Ostateczny Wniosek",
+                            result: `Ponieważ 0 = 3 jest sprzecznością matematyczną, układ jest sprzeczny (Brak Rozwiązania). Geometrycznie reprezentuje to płaszczyzny równoległe, które nigdy się nie przecinają.`
+                        }
+                    }
+                }
+            }
+        }
     },
     ro: {
         matrixBasics: {
@@ -1055,7 +2416,7 @@ export const linearAlgebraCourse = {
                     },
                     example_section: {
                         title_ex: "Exemple cu Soluții Pas cu Pas",
-                        
+
                         example1: {
                             title: "1. Combinație Liniară de Matrice",
                             problem: `Date fiind A = \\begin{bmatrix} 2 & -1 \\\\ 0 & 3 \\end{bmatrix} \și B = \\begin{bmatrix} 1 & 4 \\\\ 5 & -2 \\end{bmatrix}, \calculați 2A - B.`,
@@ -1191,5 +2552,278 @@ export const linearAlgebraCourse = {
                 }
             }
         },
+        matrixInverse: {
+            title: "Inversa unei Matrice",
+            description: "Aflați cum să găsiți inversa unei matrice și aplicațiile acesteia.",
+            lessons: {
+                lesson3_title: "Inversa unei Matrice",
+                lesson3: {
+                    section1: {
+                        title1: "Definiția Inversei unei Matrice",
+                        def1_1: "Să presupunem că două matrice A și B de n x n au proprietatea că AB = BA = I_n, unde I_n este matricea identitate de n x n. Atunci spunem că A este inversabilă (sau nesingulară) și B este inversa lui A, notată cu A^{-1}. Cu alte cuvinte, A^{-1} este matricea unică astfel încât A A^{-1} = A^{-1} A = I_n.",
+                        proposition1_1: "Propoziție: Să presupunem că A în R^{n x n} sau A în F_2^{n x n} și A are o inversă B. Atunci B este unică.",
+                        proof1_1: "Demonstrație: Să presupunem că A are două inverse B și C. Atunci",
+                        proof1_1_math: `B = B I_n = B(AC) = (BA)C = I_n C = C`,
+                        expl1_1: "Astfel, B = C, iar inversa este unică.",
+                        ex1_1: "De exemplu, inversele matricelor elementare 2 x 2 sunt următoarele:",
+                        ex1_1_list1: `E_{1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} \\Rightarrow E_{1}^{-1} = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}`,
+                        ex1_1_list2: `E_{2} = \\begin{bmatrix} k & 0 \\\\ 0 & 1 \\end{bmatrix} \\Rightarrow E_{2}^{-1} = \\begin{bmatrix} \\frac{1}{k} & 0 \\\\ 0 & 1 \\end{bmatrix}, k \\ne 0`,
+                        ex1_1_list3: `E_{3} = \\begin{bmatrix} 1 & 0 \\\\ k & 1 \\end{bmatrix} \\Rightarrow E_{3}^{-1} = \\begin{bmatrix} 1 & 0 \\\\ -k & 1 \\end{bmatrix}`,
+                    },
+                    section2: {
+                        title2: "Metoda 1 pentru Găsirea Inversei (Eliminarea Gauss-Jordan)",
+                        def1_2: "Avem două moduri de a găsi matricea B astfel încât B A = I_n. Prima metodă este pur și simplu înmulțirea secvenței de matrice elementare care reduc pe linii A la I_n. A doua metodă este formarea matricei extinse (A | I_n) și reducerea pe linii. Rezultatul final va fi sub forma (I_n | B). Aceasta este metoda folosită în majoritatea manualelor.",
+                        text1_2: "Aici avem un exemplu.",
+                        method1_1: "Metoda 1: Eliminarea Gauss-Jordan sau Reducerea pe Linii",
+                        ex1_2: `Să presupunem că vrem să găsim o inversă pentru`,
+                        ex1_2_matrix: `A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex1_2_steps1: "Deoarece trebuie doar să rezolvăm ecuația matricială XA = I_3, putem folosi strategia noastră anterioară de reducere pe linii (A | I_3).",
+                        ex1_2_steps2: `(A | I_3) = \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 1 & 3 & 1 & | & 0 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_1} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 1 & 2 & | & 0 & 0 & 1 \\end{bmatrix} \\xrightarrow{R_3 - R_2}`,
+                        ex1_2_steps3: `\\begin{bmatrix} 1 & 2 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 1 & | & -1 & 1 & 0 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_2 - R_3} \\begin{bmatrix} 1 & 2 & 0 & | & 1 & 0 & 0 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix} \\xrightarrow{R_1 - 2R_2}`,
+                        ex1_2_steps4: `\\begin{bmatrix} 1 & 0 & 0 & | & 5 & -4 & 2 \\\\ 0 & 1 & 0 & | & -2 & 2 & -1 \\\\ 0 & 0 & 1 & | & 1 & -1 & 1 \\end{bmatrix}`,
+                        ex1_2_result: `\\text{Astfel, } A^{-1} = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section3: {
+                        title2: "Metoda 2 pentru Găsirea Inversei (Metoda Adjunctei)",
+                        method2_1: "Metoda 2: Metoda Adjunctei",
+                        ex2_2: `Alternativ, putem folosi metoda adjunctei. Mai întâi calculăm matricea de cofactori, apoi luăm transpusa acesteia pentru a obține adjuncta și, în final, împărțim la determinantul lui A pentru a obține inversa.`,
+                        ex2_2_matrix: `\\text{Pentru } A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 1 & 3 & 1 \\\\0 & 1 & 2 \\end{bmatrix}`,
+                        ex2_2_steps1: "Calculați determinantul lui A.",
+                        ex2_2_steps1_math: `det(A) = 1(3*2 - 1*1) - 2(1*2 - 0*1) + 0(1*1 - 3*0) = 1`,
+                        ex2_2_steps2: "Găsiți matricea de minori, apoi matricea de cofactori.",
+                        ex2_2_steps2_desc: "Minorul M_{ij} al unui element a_ij este definit ca determinantul submatricei care rămâne după eliminarea liniei i și coloanei j din A. Cofactorul C_{ij} este apoi dat de C_{ij} = (-1)^{i+j} M_{ij}.",
+                        ex2_2_steps2_math: `M_{11} = det \\begin{bmatrix} 3 & 1 \\\\ 1 & 2 \\end{bmatrix} = 5, \\quad C_{11} = (-1)^{1+1} M_{11} = 5`,
+                        ex2_2_steps2_math2: `M_{12} = det \\begin{bmatrix} 1 & 1 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{12} = (-1)^{1+2} M_{12} = -2`,
+                        ex2_2_steps2_math3: `M_{13} = det \\begin{bmatrix} 1 & 3 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{13} = (-1)^{1+3} M_{13} = 1`,
+                        ex2_2_steps2_math4: `M_{21} = det \\begin{bmatrix} 2 & 0 \\\\ 1 & 2 \\end{bmatrix} = 4, \\quad C_{21} = (-1)^{2+1} M_{21} = -4`,
+                        ex2_2_steps2_math5: `M_{22} = det \\begin{bmatrix} 1 & 0 \\\\ 0 & 2 \\end{bmatrix} = 2, \\quad C_{22} = (-1)^{2+2} M_{22} = 2`,
+                        ex2_2_steps2_math6: `M_{23} = det \\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix} = 1, \\quad C_{23} = (-1)^{2+3} M_{23} = -1`,
+                        ex2_2_steps2_math7: `M_{31} = det \\begin{bmatrix} 2 & 0 \\\\ 3 & 1 \\end{bmatrix} = 2, \\quad C_{31} = (-1)^{3+1} M_{31} = 2`,
+                        ex2_2_steps2_math8: `M_{32} = det \\begin{bmatrix} 1 & 0 \\\\ 1 & 1 \\end{bmatrix} = 1, \\quad C_{32} = (-1)^{3+2} M_{32} = -1`,
+                        ex2_2_steps2_math9: `M_{33} = det \\begin{bmatrix} 1 & 2 \\\\ 1 & 3 \\end{bmatrix} = 1, \\quad C_{33} = (-1)^{3+3} M_{33} = 1`,
+                        ex2_2_steps2_matrix: `\\text{Matricea de Cofactori} = \\begin{bmatrix} 5 & -2 & 1 \\\\ -4 & 2 & -1 \\\\ 2 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps3: "Transpuneți matricea de cofactori pentru a obține adjuncta.",
+                        ex2_2_steps3_math: `\\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                        ex2_2_steps4: "În final, împărțiți adjuncta la determinant pentru a obține inversa.",
+                        ex2_2_result: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\begin{bmatrix} 5 & -4 & 2 \\\\ -2 & 2 & -1 \\\\ 1 & -1 & 1 \\end{bmatrix}`,
+                    },
+                    section4: {
+                        title4: "Proprietățile Matricelor Inversabile",
+                        description: "Reguli algebrice cheie pentru lucrul cu matrice inversabile.",
+                        prop1_title: "Inversa unui Produs (Regula Ciorap-Pantof)",
+                        prop1_desc: "Inversa unui produs este produsul inverselor în ordine inversă. Gândiți-vă la asta ca la încălțarea ciorapilor și pantofilor: pentru a anula procesul, trebuie mai întâi să scoateți pantofii, apoi ciorapii.",
+                        prop1_math: `(AB)^{-1} = B^{-1}A^{-1}`,
+                        prop2_title: "Inversa unei Inverse",
+                        prop2_desc: "Inversarea de două ori vă readuce la matricea originală.",
+                        prop2_math: `(A^{-1})^{-1} = A`,
+                        prop3_title: "Inversa unei Transpuse",
+                        prop3_desc: "Ordinea operațiilor între inversare și transpunere nu contează.",
+                        prop3_math: `(A^T)^{-1} = (A^{-1})^T`,
+                        prop4_title: "Înmulțirea cu un Scalar",
+                        prop4_desc: "Dacă k este un scalar nenul, inversa se scalează cu reciproca lui k.",
+                        prop4_math: `(kA)^{-1} = \\frac{1}{k}A^{-1}`
+                    },
+                    section5: {
+                        title5: "Aplicații ale Inverselor (Rezolvarea Sistemelor Liniare)",
+                        description: "Inversele matricelor pot fi folosite pentru a rezolva sisteme de ecuații liniare, printre alte aplicații.",
+                        app1_title: "Rezolvarea Sistemelor Liniare",
+                        app1_desc: "Dacă A este o matrice inversabilă și \\mathbf{b} este un vector, sistemul de ecuații A\\mathbf{x} = \\mathbf{b} are soluția unică \\mathbf{x} = A^{-1}\\mathbf{b}.",
+                        ex1_5: 'De exemplu, considerați sistemul de ecuații:',
+                        ex1_5_equations: `\\begin{cases} 2x + 3y = 7 \\\\ 4x - y = 7 \\end{cases}`,
+                        ex1_5_matrix: `A = \\begin{bmatrix} 2 & 3 \\\\ 4 & -1 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix}`,
+                        ex1_5_solution: `Mai întâi, găsim inversa lui A, apoi o înmulțim cu b pentru a găsi vectorul soluție x.`,
+                        ex1_5_steps1: "Calculați determinantul lui A.",
+                        ex1_5_steps1_math: `det(A) = (2)(-1) - (3)(4) = -2 - 12 = -14`,
+                        ex1_5_steps2: "Găsiți matricea de cofactori și apoi adjuncta.",
+                        ex1_5_steps2_math: `\\text{Adj}(A) = \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix}`,
+                        ex1_5_steps3: "Calculați inversa lui A.",
+                        ex1_5_steps3_math: `A^{-1} = \\frac{1}{det(A)} \\text{Adj}(A) = \\frac{1}{-14} \\begin{bmatrix} -1 & -3 \\\\ -4 & 2 \\end{bmatrix} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix}`,
+                        ex1_5_steps4: "În final, înmulțiți A^{-1} cu b pentru a găsi vectorul soluție x.",
+                        ex1_5_steps4_math: `\\begin{bmatrix} x \\\\ y \\end{bmatrix} = A^{-1}\\mathbf{b} = \\begin{bmatrix} \\frac{1}{14} & \\frac{3}{14} \\\\ \\frac{4}{14} & -\\frac{2}{14} \\end{bmatrix} \\begin{bmatrix} 7 \\\\ 7 \\end{bmatrix} = \\begin{bmatrix} \\frac{7 + 21}{14} \\\\ \\frac{28 - 14}{14} \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 1 \\end{bmatrix}`,
+                        ex1_5_result: "Astfel, soluția sistemului de ecuații este x = 2 și y = 1."
+                    },
+                    example_section: {
+                        title_ex: "Exemple cu Soluții Pas cu Pas",
+                        ex1: {
+                            ex1_title: "1. Eliminarea Gauss-Jordan (3x3)",
+                            ex1_problem: "Găsiți inversa matricei A folosind reducerea pe linii:",
+                            ex1_matrix: `A = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & 2 & 3 \\end{bmatrix}`,
+                            ex1_step1_title: "Pasul 1: Formați Matricea Extinsă [A | I]",
+                            ex1_step1_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 1 & 2 & 2 & 0 & 1 & 0 \\\\ 1 & 2 & 3 & 0 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step2_title: "Pasul 2: Zerouri sub pivotul 1 (Coloana 1)",
+                            ex1_step2_desc: "Efectuați R2 = R2 - R1 și R3 = R3 - R1.",
+                            ex1_step2_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 1 & 2 & -1 & 0 & 1 \\end{array} \\right]`,
+                            ex1_step3_title: "Pasul 3: Zerouri sub pivotul 2 (Coloana 2)",
+                            ex1_step3_desc: "Efectuați R3 = R3 - R2.",
+                            ex1_step3_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -1 & 1 & 0 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step4_title: "Pasul 4: Zerouri deasupra pivotului 3 (Coloana 3)",
+                            ex1_step4_desc: "Efectuați R2 = R2 - R3 și R1 = R1 - R3.",
+                            ex1_step4_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 1 & 0 & 1 & 1 & -1 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_step5_title: "Pasul 5: Zerouri deasupra pivotului 2 (Coloana 2)",
+                            ex1_step5_desc: "Efectuați R1 = R1 - R2. Partea stângă este acum matricea Identitate.",
+                            ex1_step5_math: `\\left[ \\begin{array}{ccc|ccc} 1 & 0 & 0 & 2 & -1 & 0 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & 0 & -1 & 1 \\end{array} \\right]`,
+                            ex1_result: `A^{-1} = \\begin{bmatrix} 2 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 1 \\end{bmatrix}`,
+                        },
+                        ex2: {
+                            ex2_title: "2. Metoda Adjunctei (3x3)",
+                            ex2_problem: "Găsiți inversa matricei B folosind determinantul și cofactorii:",
+                            ex2_matrix: `B = \\begin{bmatrix} 1 & 0 & -1 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 2 \\end{bmatrix}`,
+                            ex2_step1_title: "Pasul 1: Calculați Determinantul",
+                            ex2_step1_math: `\\det(B) = 1(2-0) - 0 + (-1)(2-1) = 2 - 1 = 1`,
+                            ex2_step2_title: "Pasul 2: Calculați Cofactorii",
+                            ex2_step2_row1: `C_{11}=+(2), \\; C_{12}=-(-4)=4, \\; C_{13}=+(1)`,
+                            ex2_step2_row2: `C_{21}=-(-1)=1, \\; C_{22}=+(3), \\; C_{23}=-(-1)=1`,
+                            ex2_step2_row3: `C_{31}=+(1), \\; C_{32}=-( -2)=2, \\; C_{33}=+(1)`,
+                            ex2_step2_matrix: `C = \\begin{bmatrix} 2 & 4 & 1 \\\\ 1 & 3 & 1 \\\\ 1 & 2 & 1 \\end{bmatrix}`,
+                            ex2_step3_title: "Pasul 3: Transpuneți pentru a obține Adjuncta",
+                            ex2_step3_math: `\\text{Adj}(B) = C^T = \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                            ex2_result: `B^{-1} = \\frac{1}{1} \\begin{bmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 2 \\\\ 1 & 1 & 1 \\end{bmatrix}`,
+                        },
+                        ex3: {
+                            ex3_title: "3. Rezolvarea unui Sistem Liniar 3x3",
+                            ex3_problem: "Rezolvați sistemul Ax = b folosind inversa matricei.",
+                            ex3_system: `\\begin{cases} x + 2y + z = 8 \\\\ 2x + 5y + 2z = 18 \\\\ x + 2y + 2z = 11 \\end{cases}`,
+                            ex3_step1_title: "Pasul 1: Identificați A și b",
+                            ex3_step1_math: `A = \\begin{bmatrix} 1 & 2 & 1 \\\\ 2 & 5 & 2 \\\\ 1 & 2 & 2 \\end{bmatrix}, \\quad \\mathbf{b} = \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step2_title: "Pasul 2: Găsiți Inversa lui A",
+                            ex3_step2_desc: "Folosind metoda adjunctei (omisă pentru concizie, det(A)=1), obținem:",
+                            ex3_step2_math: `A^{-1} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix}`,
+                            ex3_step3_title: "Pasul 3: Înmulțiți x = A^{-1}b",
+                            ex3_step3_math: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 6 & -2 & -1 \\\\ -2 & 1 & 0 \\\\ -1 & 0 & 1 \\end{bmatrix} \\begin{bmatrix} 8 \\\\ 18 \\\\ 11 \\end{bmatrix}`,
+                            ex3_step4_title: "Pasul 4: Calculați Produsul",
+                            ex3_step4_x: `x = 6(8) - 2(18) - 1(11) = 48 - 36 - 11 = 1`,
+                            ex3_step4_y: `y = -2(8) + 1(18) + 0 = -16 + 18 = 2`,
+                            ex3_step4_z: `z = -1(8) + 0 + 1(11) = -8 + 11 = 3`,
+                            ex3_result: `\\text{Soluție: } x=1, y=2, z=3`
+                        }
+                    }
+                }
+            }
+        },
+        linearEquations: {
+            title: "Sisteme de Ecuații Liniare",
+            description: "Învață să rezolvi sisteme de ecuații liniare folosind diverse metode.",
+            lessons: {
+                lesson4_title: "Rezolvarea Ecuațiilor Liniare",
+                lesson4: {
+                    section1: {
+                        title1: "Introducere în Sisteme de Ecuații Liniare",
+                        def1_1: "Un sistem de ecuații liniare este o colecție de una sau mai multe ecuații liniare care implică același set de variabile (de exemplu, x, y, z). O soluție a unui sistem liniar este o atribuire de valori variabilelor care satisface toate ecuațiile simultan.",
+                        def1_2: "Cea mai simplă ecuație liniară este ecuația ax = b. Litera x este variabila, iar a și b sunt numere fixe. Soluția acestei ecuații este x = b/a, cu condiția ca a să nu fie zero.",
+                        def1_3: "Un sistem liniar general format din m ecuații cu n necunoscute va arăta astfel:",
+                        def1_3_math: `\\begin{cases} a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = b_1 \\\\ a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = b_2 \\\\ \\vdots \\\\ a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m \\end{cases}`,
+                    },
+                    section2: {
+                        title2: "Rezolvarea Sistemelor Liniare cu Reducere Gaussiană (Cazul Omogen)",
+                        def2_1: "Reducerea Gaussiană este o procedură algoritmică pentru găsirea setului de soluții al unui sistem liniar. Strategia în reducerea Gaussiană este de a înlocui sistemul original cu o secvență de sisteme echivalente până când sistemul final este în formă eșalonată redusă pe linii.",
+                        subtitle2_1: "Cazul Sistemului Omogen",
+                        text2_1: "Rezolvarea unui sistem liniar Ax = b implică mai mulți pași. Primul pas este rezolvarea sistemului omogen asociat.",
+                        def2_2: "Un sistem liniar Ax = b se numește omogen dacă b = 0. Setul de soluții al unui sistem liniar omogen Ax = 0 se numește spațiul nul (sau nucleu) al lui A.",
+                        ex2_1: `Considerați sistemul liniar omogen`,
+                        ex2_1_system: `\\begin{cases} x + 2y - z = 0 \\\\ 2x + 5y - 3z = 0 \\\\ x + 3y - 2z = 0 \\end{cases}`,
+                        ex2_1_desc: "Deoarece partea dreaptă este formată doar din zerouri, formăm matricea extinsă [A | 0].",
+                        ex2_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 2 & 5 & -3 & 0 \\\\ 1 & 3 & -2 & 0 \\end{array} \\right]`,
+                        ex2_1_step1_title: "Reducerea Rândurilor",
+                        ex2_1_step1_math: `\\xrightarrow{R_2-2R_1, R_3-R_1} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\end{array} \\right] \\xrightarrow{R_3-R_2} \\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex2_1_step2_title: "Rezolvarea pentru Variabile",
+                        ex2_1_step2_desc: "Ultimul rând 0=0 indică faptul că z este o variabilă liberă. Fie z = t.",
+                        ex2_1_step2_math: `y - z = 0 \\Rightarrow y = t \\\\ x + 2y - z = 0 \\Rightarrow x + 2t - t = 0 \\Rightarrow x = -t`,
+                        ex2_1_result: `\\text{Soluție: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix} \\text{ (Acest vector generează Spațiul Nul)}`
+                    },
+                    section3: {
+                        title3: "Rezolvarea Sistemelor Liniare cu Reducere Gaussiană (Cazul Neomogen)",
+                        def3_1: "Un sistem Ax = b cu b \\ne 0 se numește neomogen. Un sistem neomogen necesită utilizarea unei matrice extinse de coeficienți (A | b).",
+                        ex3_1: "Considerați același sistem, dar egal cu constante nenule:",
+                        ex3_1_system: `\\begin{cases} x + 2y - z = 2 \\\\ 2x + 5y - 3z = 7 \\\\ x + 3y - 2z = 5 \\end{cases}`,
+                        ex3_1_matrix: `\\left[ \\begin{array}{ccc|c} 1 & 2 & -1 & 2 \\\\ 2 & 5 & -3 & 7 \\\\ 1 & 3 & -2 & 5 \\end{array} \\right]`,
+                        ex3_1_step1: "Reducerea rândurilor acestei matrice dă:",
+                        ex3_1_math: `\\left[ \\begin{array}{ccc|c} 1 & 0 & 1 & -4 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                        ex3_1_result: `\\text{Soluție: } \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\underbrace{t \\begin{bmatrix} -1 \\\\ 1 \\\\ 1 \\end{bmatrix}}_{\\text{Omogen}} + \\underbrace{\\begin{bmatrix} -4 \\\\ 3 \\\\ 0 \\end{bmatrix}}_{\\text{Particular}}`
+                    },
+                    section4: {
+                        title4: "Forma Eșalonată Redusă",
+                        title: "Forma Eșalonată Redusă pe Linii (RREF)",
+                        description: "Înțelegerea 'stării țintă' a reducerii rândurilor și diferența dintre REF și RREF.",
+                        def_title: "Ce este RREF?",
+                        def_desc: "O matrice este în Forma Eșalonată Redusă pe Linii (RREF) dacă îndeplinește patru condiții specifice. Este cea mai simplificată versiune posibilă a unei matrice.",
+                        cond_title: "Cele 4 Condiții",
+                        cond1: "1. Rânduri nenule: Toate rândurile formate în întregime din zerouri sunt în partea de jos a matricei.",
+                        cond2: "2. 1 Principal: Prima intrare nenulă în orice rând nenul este un 1 (numit pivot).",
+                        cond3: "3. Model în scară: Fiecare 1 principal este la dreapta lui 1 principal din rândul de deasupra.",
+                        cond4: "4. Zerouri în Coloane: Fiecare 1 principal este singura intrare nenulă în coloana sa (zerouri deasupra și dedesubt).",
+                        comparison_title: "REF vs. RREF",
+                        comparison_desc: "Mulți studenți confundă aceste două forme. Iată diferența:",
+                        ref_title: "Forma Eșalonată pe Linii (REF)",
+                        ref_desc: "Îndeplinește doar condițiile 1, 2 și 3. Numerele deasupra pivoților pot fi nenule.",
+                        ref_method: "Folosit în: Eliminarea Gaussiană (necesită substituție înapoi).",
+                        ref_ex: `\\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 5 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        rref_title: "Forma Eșalonată Redusă pe Linii (RREF)",
+                        rref_desc: "Îndeplinește toate cele 4 condiții. Pivoții sunt SINGURA intrare nenulă în coloanele lor.",
+                        rref_method: "Folosit în: Eliminarea Gauss-Jordan (dă soluția direct).",
+                        rref_ex: `\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}`,
+                        note_title: "Teorema Unicității",
+                        note_desc: "Forma Eșalonată pe Linii (REF) a unei matrice NU este unică (diferite operații pe rânduri pot duce la numere diferite deasupra pivoților). Cu toate acestea, Forma Eșalonată Redusă pe Linii (RREF) ESTE unică. Fiecare matrice are exact o RREF."
+                    },
+                    example_section: {
+                        example_section: {
+                            title_ex: "Exemple cu Soluții Pas cu Pas",
+                            ex1: {
+                                title: "1. Soluție Unică (Gauss-Jordan)",
+                                problem: "Rezolvați următorul sistem folosind eliminarea Gauss-Jordan:",
+                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                                step1_title: "Pasul 1: Matricea Extinsă",
+                                step1_desc: "Convertiți sistemul într-o matrice extinsă [A|b].",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                                step2_title: "Pasul 2: Creați Zerouri Sub Pivotul 1",
+                                step2_desc: "Folosiți 1 din stânga sus pentru a elimina intrările de sub el. (R2 = R2 - 2R1) și (R3 = R3 - 3R1).",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                                step3_title: "Pasul 3: Creați Pivotul 2",
+                                step3_desc: "Pentru a ușura calculele, să scalăm R2 cu 1/2 pentru a obține un 1 principal, sau să scădem R2 din R3. Să înmulțim R2 cu 0.5.",
+                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                                step4_title: "Pasul 4: Creați Zerouri Sub Pivotul 2",
+                                step4_desc: "Efectuați (R3 = R3 - 3R2).",
+                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                                step5_title: "Pasul 5: Rezolvați pentru variabile (Substituție Înapoi)",
+                                step5_desc: "Din R3: -0.5z = -1.5 → z = 3. Înlocuiți z înapoi în R2, apoi x și y în R1.",
+                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                                result_title: "Răspuns Final",
+                                result: `\\text{Soluție: } x=1, y=2, z=3`
+                            },
+                            ex2: {
+                                title: "2. Soluții Infinite (Variabile Libere)",
+                                problem: "Găsiți soluția generală a sistemului:",
+                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                                step1_title: "Pasul 1: Reducerea Rândurilor",
+                                step1_desc: "Formați matricea extinsă și reduceți.",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                                step2_title: "Pasul 2: Identificați Variabilele Libere",
+                                step2_desc: "Rândurile 2 și 3 au devenit toate zerouri. Aceasta înseamnă că avem un singur pivot (pentru x). Variabilele y și z nu au pivoți, deci sunt variabile LIBERE.",
+                                step2_math: `\\text{Fie } y = s \\text{ și } z = t, \\text{ unde } s,t \\in \\mathbb{R}.`,
+                                step3_title: "Pasul 3: Exprimați Variabilele de Bază",
+                                step3_desc: "Rescrieți prima ecuație în funcție de variabilele libere.",
+                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                                result_title: "Răspuns Final (Formă Parametrică)",
+                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                            },
+                            ex3: {
+                                title: "3. Fără Soluție (Sistem Incompatibil)",
+                                problem: "Determinați soluția sistemului următor:",
+                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                                step1_title: "Pasul 1: Formați Matricea Extinsă",
+                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                                step2_title: "Pasul 2: Operații pe Rânduri",
+                                step2_desc: "Efectuați R2 = R2 - R1.",
+                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                                step3_title: "Pasul 3: Interpretați Rezultatul",
+                                step3_desc: "Priviți cu atenție rândul al doilea. Traducerea acestuia înapoi într-o ecuație ne dă:",
+                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                                result_title: "Concluzie Finală",
+                                result: `Deoarece 0 = 3 este o contradicție matematică, sistemul este Incompatibil (Fără Soluție). Geometric, aceasta reprezintă planuri paralele care nu se intersectează niciodată.`
+                            }
+                        }
+                    }
+                }
+            }
+        }       
     }
 }
