@@ -511,6 +511,219 @@ export const linearAlgebraCourse = {
                     }
                 }
             }
+        },
+        vectorSpaces: {
+            title: "Vector Spaces",
+            description: "An introduction to vector spaces, subspaces, and their properties.",
+            lessons: {
+                lesson5_title: "Vector Spaces",
+                lesson5: {
+                    section1: {
+                        title1: "What is a Vector Space? Vector Operations.",
+                        def1_1: "To understand what a vector space is, we first need to define the playground. A Vector Space is a set V equipped with two operations: Vector Addition and Scalar Multiplication. These operations must satisfy specific rules (axioms) for the set to qualify as a vector space.",
+                        axiom_intro: "Formally, a set V is a vector space over real numbers \\mathbb{R} if the following 10 axioms hold for all vectors \\mathbf{u}, \\mathbf{v}, \\mathbf{w}\\in V and scalars c, d\\in \\mathbb{R}:",
+
+                        axiom_title_add: "1. Properties of Addition",
+                        axiom_add_1: "1. Closure: \\mathbf{u} + \\mathbf{v} is in V.",
+                        axiom_add_2: "2. Commutativity: \\mathbf{u} + \\mathbf{v} = \\mathbf{v} + \\mathbf{u}",
+                        axiom_add_3: "3. Associativity: (\\mathbf{u} + \\mathbf{v}) + \\mathbf{w} = \\mathbf{u} + (\\mathbf{v} + \\mathbf{w})",
+                        axiom_add_4: "4. Zero Vector: There exists a zero vector \\mathbf{0} in V such that \\mathbf{u} + \\mathbf{0} = \\mathbf{u}.",
+                        axiom_add_5: "5. Additive Inverse: For every \\mathbf{u}, there exists -\\mathbf{u} such that \\mathbf{u} + (-\\mathbf{u}) = \\mathbf{0}.",
+
+                        axiom_title_scal: "2. Properties of Scalar Multiplication",
+                        axiom_scal_1: "6. Closure: c\\mathbf{u} is in V.",
+                        axiom_scal_2: "7. Distributivity (Vector): c(\\mathbf{u} + \\mathbf{v}) = c\\mathbf{u} + c\\mathbf{v}",
+                        axiom_scal_3: "8. Distributivity (Scalar): (c + d)\\mathbf{u} = c\\mathbf{u} + d\\mathbf{u}",
+                        axiom_scal_4: "9. Associativity: c(d\\mathbf{u}) = (cd)\\mathbf{u}",
+                        axiom_scal_5: "10. Identity: 1\\mathbf{u} = \\mathbf{u}",
+
+                        title_ex1: "The Standard Example: Euclidean Space \\mathbb{R}^n",
+                        text_ex1: "The most common example of a vector space is \\mathbb{R}^n, the set of all ordered n-tuples of real numbers. ",
+                        
+                        def_ops_title: "Standard Operations in \\mathbb{R}^n",
+                        def_ops_add: "Vector Addition is performed component-wise:",
+                        math_ops_add: `\\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} + \\begin{bmatrix} v_1 \\\\ \\vdots \\\\ v_n \\end{bmatrix} = \\begin{bmatrix} u_1 + v_1 \\\\ \\vdots \\\\ u_n + v_n \\end{bmatrix}`,
+                        
+                        def_ops_scal: "Scalar Multiplication distributes the scalar to every component:",
+                        math_ops_scal: `c \\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} = \\begin{bmatrix} c u_1 \\\\ \\vdots \\\\ c u_n \\end{bmatrix}`,
+
+                        title_ex2: "Other Examples of Vector Spaces",
+                        text_ex2: "Vector spaces are not just arrows in space. They can be functions, matrices, or polynomials.",
+                        list_ex2_1: "1. \\mathbb{P}_n: The set of all polynomials of degree at most n.",
+                        list_ex2_2: "2. M_{m\\times n}: The set of all m\\times n matrices.",
+                        list_ex2_3: "3. F(-\\infty, \\infty): The set of all continuous real-valued functions.",
+
+                        simple_ex_title: "Quick Example: The Space R2",
+                        simple_ex_desc: "Consider the set of all 2D vectors (R2). If you take a vector u = [1, 2] and a vector v = [3, 4], their sum is [4, 6].",
+                        simple_ex_math: `\\mathbf{u} + \\mathbf{v} = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 6 \\end{bmatrix}`,
+                        simple_ex_note: "Notice that the result [4, 6] is still a 2D vector. We say the space is 'closed' under addition.",
+                    },
+                    section2: {
+                        title2: "Subspaces",
+                        description: "Determining when a subset of a vector space is itself a vector space.",
+                        
+                        def2_1: "A subspace W is a subset of a vector space V that is itself a vector space under the same operations of addition and scalar multiplication defined on V.",
+                        
+                        text2_1: "You do not need to check all 10 axioms to prove a subset is a subspace. Since the operations are inherited from V, most axioms (like commutativity) are automatically true. You only need to check 3 conditions.",
+                        
+                        theorem2_1_title: "The Subspace Test",
+                        theorem2_1_desc: "A subset W of a vector space V is a subspace if and only if:",
+                        cond2_1: "1. The Zero Vector is in W (\\mathbf{0} \\in W).",
+                        cond2_2: "2. Closed under Addition: If \\mathbf{u} and \\mathbf{v} are in W, then \\mathbf{u} + \\mathbf{v} is in W.",
+                        cond2_3: "3. Closed under Scalar Multiplication: If \\mathbf{u} is in W and c is any scalar, then c\\mathbf{u} is in W.",
+                        
+                        title_ex2: "Visualizing Subspaces in \\mathbb{R}^3",
+                        text_ex2: "Geometrically, subspaces of \\mathbb{R}^3 are strictly flat objects that pass through the origin. ",
+                        list_ex2_1: "1. The zero vector itself {\\mathbf{0}} (The trivial subspace).",
+                        list_ex2_2: "2. Any line passing through the origin.",
+                        list_ex2_3: "3. Any plane passing through the origin.",
+                        list_ex2_4: "4. The entire space \\mathbb{R}^3 itself.",
+
+                        title_non_ex2: "Common Non-Examples (Why do they fail?)",
+                        non_ex2_1: "1. A line NOT through the origin: Fails Condition 1 (Zero Vector).",
+                        non_ex2_2: "2. A set of integers \\mathbb{Z}^2: Fails Condition 3. (Multiplication by 0.5 takes you out of the set).",
+                        non_ex2_3: "3. The first quadrant of \\mathbb{R}^2 (x \\ge 0, y \\ge 0): Fails Condition 3. (Multiplication by -1 takes you out of the set)."
+                    },
+                    section3: {
+                        title3: "Linear Combinations and Span",
+                        description: "Understanding how vectors can be combined to generate lines, planes, and entire spaces.",
+
+                        def3_1_title: "Linear Combinations",
+                        def3_1: "A vector \\mathbf{w} is a linear combination of vectors \\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_p if there exist scalars c_1, c_2, \\dots, c_p such that:",
+                        math3_1: `\\mathbf{w} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p`,
+                        text3_1: "Think of this as a recipe: the scalars c are the 'amounts' of each vector ingredient you mix together to create a new vector \\mathbf{w}.",
+
+                        def3_2_title: "The Span",
+                        def3_2: "The set of all possible linear combinations of a set of vectors {\\mathbf{v}_1, \\dots, \\mathbf{v}_p} is called the Span of those vectors.",
+                        math3_2: `\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} = \\{ c_1\\mathbf{v}_1 + \\cdots + c_p\\mathbf{v}_p : c_i \\in \\mathbb{R} \\}`,
+
+                        visual_title: "Visualizing Span in \\mathbb{R}^3",
+                        visual_desc: "The geometric shape of the Span depends on the vectors:",
+                        visual_item1: "1. Span of 1 non-zero vector: A line passing through the origin. ",
+                        visual_item2: "2. Span of 2 non-collinear vectors: A plane passing through the origin. ",
+                        visual_item3: "3. Span of 3 linearly independent vectors: The entire 3D space (\\mathbb{R}^3).",
+
+                        connection_title: "The Connection to Linear Systems",
+                        connection_text: "Asking 'Is vector \\mathbf{b} in the Span of \\mathbf{v}_1, \\dots, \\mathbf{v}_p?' is exactly the same as asking 'Does the system [\\mathbf{v}_1 \\dots \\mathbf{v}_p]\\mathbf{x} = \\mathbf{b} have a solution?'",
+
+                        theorem3_1: "Theorem: The Span of any set of vectors in a vector space V is always a subspace of V.",
+
+                        simple_ex_title: "Quick Example: Spanning a Line vs. a Plane",
+                        simple_ex_desc: "Imagine a single vector v = [1, 0] (pointing East). Its Span is the entire x-axis, because you can scale it to reach any point on that line.",
+                        simple_ex_math1: `\\text{Span}\\{ \\mathbf{v} \\} = c \\cdot \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} \\text{ (A line)}`,
+                        simple_ex_desc2: "Now add a second vector w = [0, 1] (pointing North). By combining North and East movements, you can reach ANY point on the 2D map.",
+                        simple_ex_math2: `\\text{Span}\\{ \\mathbf{v}, \\mathbf{w} \\} = c_1 \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} + c_2 \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix} = \\mathbb{R}^2 \\text{ (A plane)}`
+
+                    },
+                    section4: {
+                        title4: "Linear Independence",
+                        description: "Determining if a set of vectors contains redundant information.",
+
+                        def4_1_title: "Definition of Linear Independence",
+                        def4_1: "A set of vectors {\\mathbf{v}_1, \\dots, \\mathbf{v}_p } is said to be linearly independent if the vector equation",
+                        math4_1: `c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p = \\mathbf{0}`,
+                        def4_1_conclusion: "has ONLY the trivial solution c_1 = c_2 = \\cdots = c_p = 0.",
+
+                        def4_2_title: "Linear Dependence",
+                        def4_2: "If there exist scalars c_1, \\dots, c_p, not all zero, such that the equation above holds, the set is linearly dependent.",
+                        text4_2: "Intuitively, dependence means at least one vector in the set is redundant; it is a linear combination of the others.",
+
+                        simple_ex_title: "Quick Example: Dependent Vectors",
+                        simple_ex_desc: "Consider \\mathbf{u} = [1, 2] and \\mathbf{v} = [2, 4]. Notice that \\mathbf{v} is just twice \\mathbf{u} (\\mathbf{v} = 2\\mathbf{u}).",
+                        simple_ex_math: `2\\mathbf{u} - 1\\mathbf{v} = \\mathbf{0}`,
+                        simple_ex_conc: "Since we found non-zero scalars (2 and -1) that satisfy the equation, the set is Linearly Dependent.",
+
+                        visual_title: "Geometric Interpretation",
+                        visual_2d: "Two vectors are dependent if they lie on the same line (they are collinear). [Image of collinear vectors]",
+                        visual_3d: "Three vectors are dependent if they lie on the same plane (they are coplanar). [Image of coplanar vectors]",
+
+                        test_title: "How to Test for Independence",
+                        test_desc: "To check if columns of a matrix A are independent, solve the homogeneous system A\\mathbf{x} = \\mathbf{0}.",
+                        test_cond1: "1. If there are NO free variables (only the trivial solution) -> Independent.",
+                        test_cond2: "2. If there ARE free variables (infinite solutions) -> Dependent."
+                    },section5: {
+                        title5: "Basis and Dimension",
+                        description: "Combining span and independence to define the 'skeleton' of a vector space.",
+
+                        def5_1_title: "What is a Basis?",
+                        def5_1: "A set of vectors \\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} is a basis for a vector space V if it satisfies two conditions:",
+                        cond5_1: "1. The set \\mathcal{B} spans V (it covers the entire space).",
+                        cond5_2: "2. The set \\mathcal{B} is linearly independent (no redundancy).",
+                        text5_1: "Think of a basis as the 'coordinate system' for the space. It is the smallest set of vectors needed to generate the entire space.",
+
+                        simple_ex_title: "Quick Example: The Standard Basis",
+                        simple_ex_desc: "In \\mathbb{R}^3, the standard basis is \\mathbf{e}_1 = [1,0,0], \\mathbf{e}_2 = [0,1,0], and \\mathbf{e}_3 = [0,0,1].",
+                        simple_ex_math: `\\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                        simple_ex_note: "These 3 vectors span all of 3D space and are clearly independent.",
+
+                        def5_2_title: "Dimension",
+                        def5_2: "The dimension of a vector space V, denoted dim(V), is the number of vectors in any basis of V.",
+                        text5_2: "Theorem: Although a vector space can have infinitely many different bases, every basis has exactly the same number of vectors.",
+
+                        visual_title: "Visualizing Dimension",
+                        visual_0d: "dim(V) = 0: The zero subspace {\\mathbf{0}}.",
+                        visual_1d: "dim(V) = 1: A line through the origin. ",
+                        visual_2d: "dim(V) = 2: A plane through the origin. ",
+                        visual_3d: "dim(V) = 3: The entire \\mathbb{R}^3 space."
+                    },
+
+                    example_section: {
+                        title_ex: "Examples with Step-by-Step Solutions",
+
+                        ex1: {
+                            title: "1. Testing for Subspaces",
+                            problem: "Is the set W of all vectors of the form \\begin{bmatrix} a \\\\ b \\\\ 1 \\end{bmatrix} a subspace of \\mathbb{R}^3?",
+                            
+                            step1_title: "Step 1: Check the Zero Vector",
+                            step1_desc: "For a set to be a subspace, it must contain the zero vector \\mathbf{0} = [0, 0, 0].",
+                            step1_math: `\\text{In our set W, the last component is always 1.}`,
+                            
+                            step2_title: "Step 2: Conclusion",
+                            step2_desc: "Since [0, 0, 0] cannot be written in the form [a, b, 1] (because 0 \\ne 1), the zero vector is NOT in W.",
+                            
+                            result_title: "Final Answer",
+                            result: "W is NOT a subspace of \\mathbb{R}^3."
+                        },
+
+                        ex2: {
+                            title: "2. Testing Linear Independence",
+                            problem: "Are the vectors \\mathbf{v}_1 = [1, 2] and \\mathbf{v}_2 = [3, 6] linearly independent?",
+                            
+                            step1_title: "Step 1: Setup the Equation",
+                            step1_desc: "Check if c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 = \\mathbf{0} has only the trivial solution.",
+                            step1_math: `c_1 \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + c_2 \\begin{bmatrix} 3 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            
+                            step2_title: "Step 2: Solve the System",
+                            step2_desc: "This corresponds to the augmented matrix:",
+                            step2_math: `\\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 2 & 6 & 0 \\end{array} \\right] \\xrightarrow{R_2 - 2R_1} \\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 0 & 0 & 0 \\end{array} \\right]`,
+                            
+                            step3_title: "Step 3: Interpret Results",
+                            step3_desc: "We have a row of zeros and a free variable (c_2). This means there are infinite non-zero solutions (e.g., c_1 = -3, c_2 = 1).",
+                            
+                            result_title: "Final Answer",
+                            result: "The vectors are Linearly Dependent."
+                        },
+
+                        ex3: {
+                            title: "3. Finding a Basis and Dimension",
+                            problem: "Find a basis for the subspace spanned by \\mathbf{v}_1 = [1, 2, 3], \\mathbf{v}_2 = [2, 4, 6], and \\mathbf{v}_3 = [0, 1, 1].",
+                            
+                            step1_title: "Step 1: Check for Dependence",
+                            step1_desc: "Notice that \\mathbf{v}_2 = 2\\mathbf{v}_1. This means \\mathbf{v}_2$ is redundant and can be removed.",
+                            step1_math: `\\text{Span}{\\mathbf{v}_1, \\mathbf{v}_2, \\mathbf{v}_3 } = \\text{Span}{\\mathbf{v}_1, \\mathbf{v}_3 }`,
+                            
+                            step2_title: "Step 2: Verify Independence of Remaining Vectors",
+                            step2_desc: "\\mathbf{v}_1 and \\mathbf{v}_3 are not multiples of each other. Therefore, they are linearly independent.",
+                            
+                            step3_title: "Step 3: Form the Basis",
+                            step3_math: `\\text{Basis } \\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                            
+                            result_title: "Final Answer",
+                            result: "The basis is {\\mathbf{v}_1, \\mathbf{v}_3 } and the Dimension is 2 (a plane)."
+                        }
+                    }
+                }
+            }
         }
     },
     es: {
@@ -970,6 +1183,177 @@ export const linearAlgebraCourse = {
                                 result_title: "Conclusión Final",
                                 result: `Dado que 0 = 3 es una contradicción matemática, el sistema es Inconsistente (Sin Solución). Geométricamente, esto representa planos paralelos que nunca se intersectan.`
                             }
+                        }
+                    }
+                }
+            }
+        },
+        vectorSpaces: {
+            title: "Espacios Vectoriales",
+            description: "Una introducción a los espacios vectoriales, subespacios y sus propiedades.",
+            lessons: {
+                lesson5_title: "Espacios Vectoriales",
+                lesson5: {
+                    section1: {
+                        title1: "¿Qué es un Espacio Vectorial? Operaciones con Vectores.",
+                        def1_1: "Para entender qué es un espacio vectorial, primero necesitamos definir el terreno de juego. Un Espacio Vectorial es un conjunto V equipado con dos operaciones: Suma de Vectores y Multiplicación Escalar. Estas operaciones deben satisfacer reglas específicas (axiomas) para que el conjunto califique como un espacio vectorial.",
+                        axiom_intro: "Formalmente, un conjunto V es un espacio vectorial sobre los números reales \\mathbb{R} si se cumplen los siguientes 10 axiomas para todos los vectores \\mathbf{u}, \\mathbf{v}, \\mathbf{w}\\in V y escalares c, d\\in \\mathbb{R}:",
+                        axiom_title_add: "1. Propiedades de la Suma",
+                        axiom_add_1: "1. Cerradura: \\mathbf{u} + \\mathbf{v} está en V.",
+                        axiom_add_2: "2. Conmutatividad: \\mathbf{u} + \\mathbf{v} = \\mathbf{v} + \\mathbf{u}",
+                        axiom_add_3: "3. Asociatividad: (\\mathbf{u} + \\mathbf{v}) + \\mathbf{w} = \\mathbf{u} + (\\mathbf{v} + \\mathbf{w})",
+                        axiom_add_4: "4. Vector Cero: Existe un vector cero \\mathbf{0} en V tal que \\mathbf{u} + \\mathbf{0} = \\mathbf{u}.",
+                        axiom_add_5: "5. Inverso Aditivo: Para cada \\mathbf{u}, existe -\\mathbf{u} tal que \\mathbf{u} + (-\\mathbf{u}) = \\mathbf{0}.",
+                        axiom_title_scal: "2. Propiedades de la Multiplicación Escalar",
+                        axiom_scal_1: "6. Cerradura: c\\mathbf{u} está en V.",
+                        axiom_scal_2: "7. Distributividad (Vector): c(\\mathbf{u} + \\mathbf{v}) = c\\mathbf{u} + c\\mathbf{v}",
+                        axiom_scal_3: "8. Distributividad (Escalar): (c + d)\\mathbf{u} = c\\mathbf{u} + d\\mathbf{u}",
+                        axiom_scal_4: "9. Asociatividad: c(d\\mathbf{u}) = (cd)\\mathbf{u}",
+                        axiom_scal_5: "10. Identidad: 1\\mathbf{u} = \\mathbf{u}",
+                        title_ex1: "El Ejemplo Estándar: Espacio Euclidiano \\mathbb{R}^n",
+                        text_ex1: "El ejemplo más común de un espacio vectorial es \\mathbb{R}^n, el conjunto de todas las n-tuplas ordenadas de números reales.",
+                        def_ops_title: "Operaciones Estándar en \\mathbb{R}^n",
+                        def_ops_add: "La Suma de Vectores se realiza componente a componente:",
+                        math_ops_add: `\\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} + \\begin{bmatrix} v_1 \\\\ \\vdots \\\\ v_n \\end{bmatrix} = \\begin{bmatrix} u_1 + v_1 \\\\ \\vdots \\\\ u_n + v_n \\end{bmatrix}`,
+                        def_ops_scal: "La Multiplicación Escalar distribuye el escalar a cada componente:",
+                        math_ops_scal: `c \\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} = \\begin{bmatrix} c u_1 \\\\ \\vdots \\\\ c u_n \\end{bmatrix}`,
+                        title_ex2: "Otros Ejemplos de Espacios Vectoriales",
+                        text_ex2: "Los espacios vectoriales no son solo flechas en el espacio. Pueden ser funciones, matrices o polinomios.",
+                        list_ex2_1: "1. \\mathbb{P}_n: El conjunto de todos los polinomios de grado a lo sumo n.",
+                        list_ex2_2: "2. M_{m\\times n}: El conjunto de todas las matrices de m\\times n.",
+                        list_ex2_3: "3. F(-\\infty, \\infty): El conjunto de todas las funciones continuas con valores reales.",
+                        simple_ex_title: "Ejemplo Rápido: El Espacio R2",
+                        simple_ex_desc: "Considere el conjunto de todos los vectores 2D (R2). Si toma un vector u = [1, 2] y un vector v = [3, 4], su suma es [4, 6].",
+                        simple_ex_math: `\\mathbf{u} + \\mathbf{v} = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 6 \\end{bmatrix}`,
+                        simple_ex_note: "Note que el resultado [4, 6] sigue siendo un vector 2D. Decimos que el espacio es 'cerrado' bajo la suma."
+                    },
+                    section2: {
+                        title2: "Subespacios",
+                        description: "Determinar cuándo un subconjunto de un espacio vectorial es en sí mismo un espacio vectorial.",
+                        def2_1: "Un subespacio W es un subconjunto de un espacio vectorial V que es en sí mismo un espacio vectorial bajo las mismas operaciones de suma y multiplicación escalar definidas en V.",
+                        text2_1: "No necesita verificar los 10 axiomas para probar que un subconjunto es un subespacio. Dado que las operaciones se heredan de V, la mayoría de los axiomas (como la conmutatividad) son automáticamente verdaderos. Solo necesita verificar 3 condiciones.",
+                        theorem2_1_title: "El Criterio del Subespacio",
+                        theorem2_1_desc: "Un subconjunto W de un espacio vectorial V es un subespacio si y solo si:",
+                        cond2_1: "1. El Vector Cero está en W (\\mathbf{0} \\in W).",
+                        cond2_2: "2. Cerrado bajo la Suma: Si \\mathbf{u} y \\mathbf{v} están en W, entonces \\mathbf{u} + \\mathbf{v} está en W.",
+                        cond2_3: "3. Cerrado bajo la Multiplicación Escalar: Si \\mathbf{u} está en W y c es cualquier escalar, entonces c\\mathbf{u} está en W.",
+                        title_ex2: "Visualizando Subespacios en \\mathbb{R}^3",
+                        text_ex2: "Geométricamente, los subespacios de \\mathbb{R}^3 son objetos estrictamente planos que pasan por el origen.",
+                        list_ex2_1: "1. El vector cero mismo {\\mathbf{0}} (El subespacio trivial).",
+                        list_ex2_2: "2. Cualquier línea que pase por el origen.",
+                        list_ex2_3: "3. Cualquier plano que pase por el origen.",
+                        list_ex2_4: "4. Todo el espacio \\mathbb{R}^3 mismo.",
+                        title_non_ex2: "No-Ejemplos Comunes (¿Por qué fallan?)",
+                        non_ex2_1: "1. Una línea que NO pasa por el origen: Falla la Condición 1 (Vector Cero).",
+                        non_ex2_2: "2. Un conjunto de enteros \\mathbb{Z}^2: Falla la Condición 3. (La multiplicación por 0.5 te saca del conjunto).",
+                        non_ex2_3: "3. El primer cuadrante de \\mathbb{R}^2 (x \\ge 0, y \\ge 0): Falla la Condición 3. (La multiplicación por -1 te saca del conjunto)."
+                    },
+                    section3: {
+                        title3: "Combinaciones Lineales y Espacio Generado (Span)",
+                        description: "Entendiendo cómo los vectores pueden combinarse para generar líneas, planos y espacios completos.",
+                        def3_1_title: "Combinaciones Lineales",
+                        def3_1: "Un vector \\mathbf{w} es una combinación lineal de los vectores \\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_p si existen escalares c_1, c_2, \\dots, c_p tales que:",
+                        math3_1: `\\mathbf{w} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p`,
+                        text3_1: "Piense en esto como una receta: los escalares c son las 'cantidades' de cada ingrediente vectorial que mezcla para crear un nuevo vector \\mathbf{w}.",
+                        def3_2_title: "El Espacio Generado (Span)",
+                        def3_2: "El conjunto de todas las combinaciones lineales posibles de un conjunto de vectores {\\mathbf{v}_1, \\dots, \\mathbf{v}_p} se llama el Span (o espacio generado) de esos vectores.",
+                        math3_2: `\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} = \\{ c_1\\mathbf{v}_1 + \\cdots + c_p\\mathbf{v}_p : c_i \\in \\mathbb{R} \\}`,
+                        visual_title: "Visualizando el Span en \\mathbb{R}^3",
+                        visual_desc: "La forma geométrica del Span depende de los vectores:",
+                        visual_item1: "1. Span de 1 vector no nulo: Una línea que pasa por el origen.",
+                        visual_item2: "2. Span de 2 vectores no colineales: Un plano que pasa por el origen.",
+                        visual_item3: "3. Span de 3 vectores linealmente independientes: Todo el espacio 3D (\\mathbb{R}^3).",
+                        connection_title: "La Conexión con Sistemas Lineales",
+                        connection_text: "Preguntar '¿Está el vector \\mathbf{b} en el Span de \\mathbf{v}_1, \\dots, \\mathbf{v}_p?' es exactamente lo mismo que preguntar '¿Tiene solución el sistema [\\mathbf{v}_1 \\dots \\mathbf{v}_p]\\mathbf{x} = \\mathbf{b}?'",
+                        theorem3_1: "Teorema: El Span de cualquier conjunto de vectores en un espacio vectorial V es siempre un subespacio de V.",
+                        simple_ex_title: "Ejemplo Rápido: Generando una Línea vs. un Plano",
+                        simple_ex_desc: "Imagine un solo vector v = [1, 0] (apuntando al Este). Su Span es todo el eje x, porque puede escalarlo para llegar a cualquier punto en esa línea.",
+                        simple_ex_math1: `\\text{Span}\\{ \\mathbf{v} \\} = c \\cdot \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} \\text{ (Una línea)}`,
+                        simple_ex_desc2: "Ahora agregue un segundo vector w = [0, 1] (apuntando al Norte). Combinando movimientos al Norte y al Este, puede llegar a CUALQUIER punto en el mapa 2D.",
+                        simple_ex_math2: `\\text{Span}\\{ \\mathbf{v}, \\mathbf{w} \\} = c_1 \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} + c_2 \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix} = \\mathbb{R}^2 \\text{ (Un plano)}`
+                    },
+                    section4: {
+                        title4: "Independencia Lineal",
+                        description: "Determinando si un conjunto de vectores contiene información redundante.",
+                        def4_1_title: "Definición de Independencia Lineal",
+                        def4_1: "Un conjunto de vectores {\\mathbf{v}_1, \\dots, \\mathbf{v}_p } se dice que es linealmente independiente si la ecuación vectorial",
+                        math4_1: `c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p = \\mathbf{0}`,
+                        def4_1_conclusion: "tiene SOLO la solución trivial c_1 = c_2 = \\cdots = c_p = 0.",
+                        def4_2_title: "Dependencia Lineal",
+                        def4_2: "Si existen escalares c_1, \\dots, c_p, no todos cero, tales que la ecuación anterior se cumple, el conjunto es linealmente dependiente.",
+                        text4_2: "Intuitivamente, la dependencia significa que al menos un vector en el conjunto es redundante; es una combinación lineal de los otros.",
+                        simple_ex_title: "Ejemplo Rápido: Vectores Dependientes",
+                        simple_ex_desc: "Considere \\mathbf{u} = [1, 2] y \\mathbf{v} = [2, 4]. Note que \\mathbf{v} es simplemente dos veces \\mathbf{u} (\\mathbf{v} = 2\\mathbf{u}).",
+                        simple_ex_math: `2\\mathbf{u} - 1\\mathbf{v} = \\mathbf{0}`,
+                        simple_ex_conc: "Dado que encontramos escalares no nulos (2 y -1) que satisfacen la ecuación, el conjunto es Linealmente Dependiente.",
+                        visual_title: "Interpretación Geométrica",
+                        visual_2d: "Dos vectores son dependientes si yacen en la misma línea (son colineales).",
+                        visual_3d: "Tres vectores son dependientes si yacen en el mismo plano (son coplanares).",
+                        test_title: "Cómo Probar la Independencia",
+                        test_desc: "Para verificar si las columnas de una matriz A son independientes, resuelva el sistema homogéneo A\\mathbf{x} = \\mathbf{0}.",
+                        test_cond1: "1. Si NO hay variables libres (solo la solución trivial) -> Independiente.",
+                        test_cond2: "2. Si HAY variables libres (infinitas soluciones) -> Dependiente."
+                    },
+                    section5: {
+                        title5: "Base y Dimensión",
+                        description: "Combinando span e independencia para definir el 'esqueleto' de un espacio vectorial.",
+                        def5_1_title: "¿Qué es una Base?",
+                        def5_1: "Un conjunto de vectores \\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} es una base para un espacio vectorial V si satisface dos condiciones:",
+                        cond5_1: "1. El conjunto \\mathcal{B} genera (spans) V (cubre todo el espacio).",
+                        cond5_2: "2. El conjunto \\mathcal{B} es linealmente independiente (sin redundancia).",
+                        text5_1: "Piense en una base como el 'sistema de coordenadas' para el espacio. Es el conjunto más pequeño de vectores necesario para generar todo el espacio.",
+                        simple_ex_title: "Ejemplo Rápido: La Base Estándar",
+                        simple_ex_desc: "En \\mathbb{R}^3, la base estándar es \\mathbf{e}_1 = [1,0,0], \\mathbf{e}_2 = [0,1,0], y \\mathbf{e}_3 = [0,0,1].",
+                        simple_ex_math: `\\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                        simple_ex_note: "Estos 3 vectores generan todo el espacio 3D y son claramente independientes.",
+                        def5_2_title: "Dimensión",
+                        def5_2: "La dimensión de un espacio vectorial V, denotada dim(V), es el número de vectores en cualquier base de V.",
+                        text5_2: "Teorema: Aunque un espacio vectorial puede tener infinitas bases diferentes, cada base tiene exactamente el mismo número de vectores.",
+                        visual_title: "Visualizando la Dimensión",
+                        visual_0d: "dim(V) = 0: El subespacio cero {\\mathbf{0}}.",
+                        visual_1d: "dim(V) = 1: Una línea a través del origen.",
+                        visual_2d: "dim(V) = 2: Un plano a través del origen.",
+                        visual_3d: "dim(V) = 3: Todo el espacio \\mathbb{R}^3."
+                    },
+                    example_section: {
+                        title_ex: "Ejemplos con Soluciones Paso a Paso",
+                        ex1: {
+                            title: "1. Probando Subespacios",
+                            problem: "¿Es el conjunto W de todos los vectores de la forma \\begin{bmatrix} a \\\\ b \\\\ 1 \\end{bmatrix} un subespacio de \\mathbb{R}^3?",
+                            step1_title: "Paso 1: Verificar el Vector Cero",
+                            step1_desc: "Para que un conjunto sea un subespacio, debe contener el vector cero \\mathbf{0} = [0, 0, 0].",
+                            step1_math: `\\text{En nuestro conjunto W, el último componente es siempre 1.}`,
+                            step2_title: "Paso 2: Conclusión",
+                            step2_desc: "Dado que [0, 0, 0] no puede escribirse en la forma [a, b, 1] (porque 0 \\ne 1), el vector cero NO está en W.",
+                            result_title: "Respuesta Final",
+                            result: "W NO es un subespacio de \\mathbb{R}^3."
+                        },
+                        ex2: {
+                            title: "2. Probando Independencia Lineal",
+                            problem: "¿Son los vectores \\mathbf{v}_1 = [1, 2] y \\mathbf{v}_2 = [3, 6] linealmente independientes?",
+                            step1_title: "Paso 1: Configurar la Ecuación",
+                            step1_desc: "Verificar si c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 = \\mathbf{0} tiene solo la solución trivial.",
+                            step1_math: `c_1 \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + c_2 \\begin{bmatrix} 3 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Paso 2: Resolver el Sistema",
+                            step2_desc: "Esto corresponde a la matriz aumentada:",
+                            step2_math: `\\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 2 & 6 & 0 \\end{array} \\right] \\xrightarrow{R_2 - 2R_1} \\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 0 & 0 & 0 \\end{array} \\right]`,
+                            step3_title: "Paso 3: Interpretar Resultados",
+                            step3_desc: "Tenemos una fila de ceros y una variable libre (c_2). Esto significa que hay infinitas soluciones no nulas (ej., c_1 = -3, c_2 = 1).",
+                            result_title: "Respuesta Final",
+                            result: "Los vectores son Linealmente Dependientes."
+                        },
+                        ex3: {
+                            title: "3. Encontrando una Base y Dimensión",
+                            problem: "Encuentre una base para el subespacio generado por \\mathbf{v}_1 = [1, 2, 3], \\mathbf{v}_2 = [2, 4, 6] y \\mathbf{v}_3 = [0, 1, 1].",
+                            step1_title: "Paso 1: Verificar Dependencia",
+                            step1_desc: "Note que \\mathbf{v}_2 = 2\\mathbf{v}_1. Esto significa que \\mathbf{v}_2$ es redundante y puede eliminarse.",
+                            step1_math: `\\text{Span}{\\mathbf{v}_1, \\mathbf{v}_2, \\mathbf{v}_3 } = \\text{Span}{\\mathbf{v}_1, \\mathbf{v}_3 }`,
+                            step2_title: "Paso 2: Verificar Independencia de los Vectores Restantes",
+                            step2_desc: "\\mathbf{v}_1 y \\mathbf{v}_3 no son múltiplos entre sí. Por lo tanto, son linealmente independientes.",
+                            step3_title: "Paso 3: Formar la Base",
+                            step3_math: `\\text{Base } \\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                            result_title: "Respuesta Final",
+                            result: "La base es {\\mathbf{v}_1, \\mathbf{v}_3 } y la Dimensión es 2 (un plano)."
                         }
                     }
                 }
@@ -1437,6 +1821,177 @@ export const linearAlgebraCourse = {
                     }
                 }
             }
+        },
+        vectorSpaces: {
+            title: "Espaces Vectoriels",
+            description: "Une introduction aux espaces vectoriels, aux sous-espaces et à leurs propriétés.",
+            lessons: {
+                lesson5_title: "Espaces Vectoriels",
+                lesson5: {
+                    section1: {
+                        title1: "Qu'est-ce qu'un Espace Vectoriel ? Opérations Vectorielles.",
+                        def1_1: "Pour comprendre ce qu'est un espace vectoriel, nous devons d'abord définir le terrain de jeu. Un Espace Vectoriel est un ensemble V équipé de deux opérations : l'Addition de Vecteurs et la Multiplication par un Scalaire. Ces opérations doivent satisfaire des règles spécifiques (axiomes) pour que l'ensemble soit qualifié d'espace vectoriel.",
+                        axiom_intro: "Formellement, un ensemble V est un espace vectoriel sur les nombres réels \\mathbb{R} si les 10 axiomes suivants sont vérifiés pour tous les vecteurs \\mathbf{u}, \\mathbf{v}, \\mathbf{w}\\in V et les scalaires c, d\\in \\mathbb{R} :",
+                        axiom_title_add: "1. Propriétés de l'Addition",
+                        axiom_add_1: "1. Stabilité (Fermeture) : \\mathbf{u} + \\mathbf{v} est dans V.",
+                        axiom_add_2: "2. Commutativité : \\mathbf{u} + \\mathbf{v} = \\mathbf{v} + \\mathbf{u}",
+                        axiom_add_3: "3. Associativité : (\\mathbf{u} + \\mathbf{v}) + \\mathbf{w} = \\mathbf{u} + (\\mathbf{v} + \\mathbf{w})",
+                        axiom_add_4: "4. Vecteur Nul : Il existe un vecteur nul \\mathbf{0} dans V tel que \\mathbf{u} + \\mathbf{0} = \\mathbf{u}.",
+                        axiom_add_5: "5. Inverse Additif : Pour tout \\mathbf{u}, il existe -\\mathbf{u} tel que \\mathbf{u} + (-\\mathbf{u}) = \\mathbf{0}.",
+                        axiom_title_scal: "2. Propriétés de la Multiplication par un Scalaire",
+                        axiom_scal_1: "6. Stabilité (Fermeture) : c\\mathbf{u} est dans V.",
+                        axiom_scal_2: "7. Distributivité (Vecteur) : c(\\mathbf{u} + \\mathbf{v}) = c\\mathbf{u} + c\\mathbf{v}",
+                        axiom_scal_3: "8. Distributivité (Scalaire) : (c + d)\\mathbf{u} = c\\mathbf{u} + d\\mathbf{u}",
+                        axiom_scal_4: "9. Associativité : c(d\\mathbf{u}) = (cd)\\mathbf{u}",
+                        axiom_scal_5: "10. Identité : 1\\mathbf{u} = \\mathbf{u}",
+                        title_ex1: "L'Exemple Standard : Espace Euclidien \\mathbb{R}^n",
+                        text_ex1: "L'exemple le plus courant d'un espace vectoriel est \\mathbb{R}^n, l'ensemble de tous les n-uplets ordonnés de nombres réels.",
+                        def_ops_title: "Opérations Standard dans \\mathbb{R}^n",
+                        def_ops_add: "L'Addition de Vecteurs s'effectue composante par composante :",
+                        math_ops_add: `\\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} + \\begin{bmatrix} v_1 \\\\ \\vdots \\\\ v_n \\end{bmatrix} = \\begin{bmatrix} u_1 + v_1 \\\\ \\vdots \\\\ u_n + v_n \\end{bmatrix}`,
+                        def_ops_scal: "La Multiplication par un Scalaire distribue le scalaire à chaque composante :",
+                        math_ops_scal: `c \\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} = \\begin{bmatrix} c u_1 \\\\ \\vdots \\\\ c u_n \\end{bmatrix}`,
+                        title_ex2: "Autres Exemples d'Espaces Vectoriels",
+                        text_ex2: "Les espaces vectoriels ne sont pas seulement des flèches dans l'espace. Ils peuvent être des fonctions, des matrices ou des polynômes.",
+                        list_ex2_1: "1. \\mathbb{P}_n : L'ensemble de tous les polynômes de degré au plus n.",
+                        list_ex2_2: "2. M_{m\\times n} : L'ensemble de toutes les matrices m\\times n.",
+                        list_ex2_3: "3. F(-\\infty, \\infty) : L'ensemble de toutes les fonctions continues à valeurs réelles.",
+                        simple_ex_title: "Exemple Rapide : L'Espace R2",
+                        simple_ex_desc: "Considérez l'ensemble de tous les vecteurs 2D (R2). Si vous prenez un vecteur u = [1, 2] et un vecteur v = [3, 4], leur somme est [4, 6].",
+                        simple_ex_math: `\\mathbf{u} + \\mathbf{v} = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 6 \\end{bmatrix}`,
+                        simple_ex_note: "Remarquez que le résultat [4, 6] est toujours un vecteur 2D. On dit que l'espace est 'fermé' (stable) sous l'addition."
+                    },
+                    section2: {
+                        title2: "Sous-espaces",
+                        description: "Déterminer quand un sous-ensemble d'un espace vectoriel est lui-même un espace vectoriel.",
+                        def2_1: "Un sous-espace W est un sous-ensemble d'un espace vectoriel V qui est lui-même un espace vectoriel sous les mêmes opérations d'addition et de multiplication par un scalaire définies sur V.",
+                        text2_1: "Vous n'avez pas besoin de vérifier les 10 axiomes pour prouver qu'un sous-ensemble est un sous-espace. Puisque les opérations sont héritées de V, la plupart des axiomes (comme la commutativité) sont automatiquement vrais. Vous n'avez besoin de vérifier que 3 conditions.",
+                        theorem2_1_title: "Le Test de Sous-espace",
+                        theorem2_1_desc: "Un sous-ensemble W d'un espace vectoriel V est un sous-espace si et seulement si :",
+                        cond2_1: "1. Le Vecteur Nul est dans W (\\mathbf{0} \\in W).",
+                        cond2_2: "2. Stabilité par Addition : Si \\mathbf{u} et \\mathbf{v} sont dans W, alors \\mathbf{u} + \\mathbf{v} est dans W.",
+                        cond2_3: "3. Stabilité par Multiplication Scalaire : Si \\mathbf{u} est dans W et c est un scalaire quelconque, alors c\\mathbf{u} est dans W.",
+                        title_ex2: "Visualisation des Sous-espaces dans \\mathbb{R}^3",
+                        text_ex2: "Géométriquement, les sous-espaces de \\mathbb{R}^3 sont des objets strictement plats qui passent par l'origine.",
+                        list_ex2_1: "1. Le vecteur nul lui-même {\\mathbf{0}} (Le sous-espace trivial).",
+                        list_ex2_2: "2. Toute droite passant par l'origine.",
+                        list_ex2_3: "3. Tout plan passant par l'origine.",
+                        list_ex2_4: "4. L'espace entier \\mathbb{R}^3 lui-même.",
+                        title_non_ex2: "Contre-exemples Courants (Pourquoi échouent-ils ?)",
+                        non_ex2_1: "1. Une droite qui NE passe PAS par l'origine : Échoue à la Condition 1 (Vecteur Nul).",
+                        non_ex2_2: "2. Un ensemble d'entiers \\mathbb{Z}^2 : Échoue à la Condition 3. (La multiplication par 0,5 vous sort de l'ensemble).",
+                        non_ex2_3: "3. Le premier quadrant de \\mathbb{R}^2 (x \\ge 0, y \\ge 0) : Échoue à la Condition 3. (La multiplication par -1 vous sort de l'ensemble)."
+                    },
+                    section3: {
+                        title3: "Combinaisons Linéaires et Espace Engendré (Span)",
+                        description: "Comprendre comment les vecteurs peuvent être combinés pour générer des droites, des plans et des espaces entiers.",
+                        def3_1_title: "Combinaisons Linéaires",
+                        def3_1: "Un vecteur \\mathbf{w} est une combinaison linéaire des vecteurs \\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_p s'il existe des scalaires c_1, c_2, \\dots, c_p tels que :",
+                        math3_1: `\\mathbf{w} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p`,
+                        text3_1: "Pensez-y comme à une recette : les scalaires c sont les 'quantités' de chaque ingrédient vectoriel que vous mélangez pour créer un nouveau vecteur \\mathbf{w}.",
+                        def3_2_title: "Le Span (Espace Engendré)",
+                        def3_2: "L'ensemble de toutes les combinaisons linéaires possibles d'un ensemble de vecteurs {\\mathbf{v}_1, \\dots, \\mathbf{v}_p} est appelé le Span (ou espace engendré) de ces vecteurs.",
+                        math3_2: `\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} = \\{ c_1\\mathbf{v}_1 + \\cdots + c_p\\mathbf{v}_p : c_i \\in \\mathbb{R} \\}`,
+                        visual_title: "Visualisation du Span dans \\mathbb{R}^3",
+                        visual_desc: "La forme géométrique du Span dépend des vecteurs :",
+                        visual_item1: "1. Span d'un vecteur non nul : Une droite passant par l'origine.",
+                        visual_item2: "2. Span de 2 vecteurs non colinéaires : Un plan passant par l'origine.",
+                        visual_item3: "3. Span de 3 vecteurs linéairement indépendants : L'espace 3D entier (\\mathbb{R}^3).",
+                        connection_title: "Le Lien avec les Systèmes Linéaires",
+                        connection_text: "Demander 'Le vecteur \\mathbf{b} est-il dans le Span de \\mathbf{v}_1, \\dots, \\mathbf{v}_p ?' est exactement la même chose que demander 'Le système [\\mathbf{v}_1 \\dots \\mathbf{v}_p]\\mathbf{x} = \\mathbf{b} a-t-il une solution ?'",
+                        theorem3_1: "Théorème : Le Span de tout ensemble de vecteurs dans un espace vectoriel V est toujours un sous-espace de V.",
+                        simple_ex_title: "Exemple Rapide : Engendrer une Droite vs un Plan",
+                        simple_ex_desc: "Imaginez un seul vecteur v = [1, 0] (pointant vers l'Est). Son Span est tout l'axe des x, car vous pouvez le mettre à l'échelle pour atteindre n'importe quel point sur cette ligne.",
+                        simple_ex_math1: `\\text{Span}\\{ \\mathbf{v} \\} = c \\cdot \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} \\text{ (Une droite)}`,
+                        simple_ex_desc2: "Maintenant, ajoutez un second vecteur w = [0, 1] (pointant vers le Nord). En combinant les mouvements Nord et Est, vous pouvez atteindre N'IMPORTE QUEL point sur la carte 2D.",
+                        simple_ex_math2: `\\text{Span}\\{ \\mathbf{v}, \\mathbf{w} \\} = c_1 \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} + c_2 \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix} = \\mathbb{R}^2 \\text{ (Un plan)}`
+                    },
+                    section4: {
+                        title4: "Indépendance Linéaire",
+                        description: "Déterminer si un ensemble de vecteurs contient des informations redondantes.",
+                        def4_1_title: "Définition de l'Indépendance Linéaire",
+                        def4_1: "Un ensemble de vecteurs {\\mathbf{v}_1, \\dots, \\mathbf{v}_p } est dit linéairement indépendant si l'équation vectorielle",
+                        math4_1: `c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p = \\mathbf{0}`,
+                        def4_1_conclusion: "a SEULEMENT la solution triviale c_1 = c_2 = \\cdots = c_p = 0.",
+                        def4_2_title: "Dépendance Linéaire",
+                        def4_2: "S'il existe des scalaires c_1, \\dots, c_p, non tous nuls, tels que l'équation ci-dessus est vérifiée, l'ensemble est linéairement dépendant.",
+                        text4_2: "Intuitivement, la dépendance signifie qu'au moins un vecteur dans l'ensemble est redondant ; c'est une combinaison linéaire des autres.",
+                        simple_ex_title: "Exemple Rapide : Vecteurs Dépendants",
+                        simple_ex_desc: "Considérez \\mathbf{u} = [1, 2] et \\mathbf{v} = [2, 4]. Remarquez que \\mathbf{v} est simplement deux fois \\mathbf{u} (\\mathbf{v} = 2\\mathbf{u}).",
+                        simple_ex_math: `2\\mathbf{u} - 1\\mathbf{v} = \\mathbf{0}`,
+                        simple_ex_conc: "Puisque nous avons trouvé des scalaires non nuls (2 et -1) qui satisfont l'équation, l'ensemble est Linéairement Dépendant.",
+                        visual_title: "Interprétation Géométrique",
+                        visual_2d: "Deux vecteurs sont dépendants s'ils se trouvent sur la même droite (ils sont colinéaires).",
+                        visual_3d: "Trois vecteurs sont dépendants s'ils se trouvent sur le même plan (ils sont coplanaires).",
+                        test_title: "Comment Tester l'Indépendance",
+                        test_desc: "Pour vérifier si les colonnes d'une matrice A sont indépendantes, résolvez le système homogène A\\mathbf{x} = \\mathbf{0}.",
+                        test_cond1: "1. S'il n'y a PAS de variables libres (seulement la solution triviale) -> Indépendant.",
+                        test_cond2: "2. S'il Y A des variables libres (solutions infinies) -> Dépendant."
+                    },
+                    section5: {
+                        title5: "Base et Dimension",
+                        description: "Combiner span et indépendance pour définir le 'squelette' d'un espace vectoriel.",
+                        def5_1_title: "Qu'est-ce qu'une Base ?",
+                        def5_1: "Un ensemble de vecteurs \\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} est une base pour un espace vectoriel V s'il satisfait deux conditions :",
+                        cond5_1: "1. L'ensemble \\mathcal{B} engendre (span) V (il couvre tout l'espace).",
+                        cond5_2: "2. L'ensemble \\mathcal{B} est linéairement indépendant (pas de redondance).",
+                        text5_1: "Pensez à une base comme au 'système de coordonnées' de l'espace. C'est le plus petit ensemble de vecteurs nécessaire pour générer tout l'espace.",
+                        simple_ex_title: "Exemple Rapide : La Base Standard",
+                        simple_ex_desc: "Dans \\mathbb{R}^3, la base standard est \\mathbf{e}_1 = [1,0,0], \\mathbf{e}_2 = [0,1,0], et \\mathbf{e}_3 = [0,0,1].",
+                        simple_ex_math: `\\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                        simple_ex_note: "Ces 3 vecteurs engendrent tout l'espace 3D et sont clairement indépendants.",
+                        def5_2_title: "Dimension",
+                        def5_2: "La dimension d'un espace vectoriel V, notée dim(V), est le nombre de vecteurs dans n'importe quelle base de V.",
+                        text5_2: "Théorème : Bien qu'un espace vectoriel puisse avoir une infinité de bases différentes, chaque base a exactement le même nombre de vecteurs.",
+                        visual_title: "Visualisation de la Dimension",
+                        visual_0d: "dim(V) = 0 : Le sous-espace nul {\\mathbf{0}}.",
+                        visual_1d: "dim(V) = 1 : Une droite passant par l'origine.",
+                        visual_2d: "dim(V) = 2 : Un plan passant par l'origine.",
+                        visual_3d: "dim(V) = 3 : L'espace entier \\mathbb{R}^3."
+                    },
+                    example_section: {
+                        title_ex: "Exemples avec Solutions Étape par Étape",
+                        ex1: {
+                            title: "1. Tester les Sous-espaces",
+                            problem: "L'ensemble W de tous les vecteurs de la forme \\begin{bmatrix} a \\\\ b \\\\ 1 \\end{bmatrix} est-il un sous-espace de \\mathbb{R}^3 ?",
+                            step1_title: "Étape 1 : Vérifier le Vecteur Nul",
+                            step1_desc: "Pour qu'un ensemble soit un sous-espace, il doit contenir le vecteur nul \\mathbf{0} = [0, 0, 0].",
+                            step1_math: `\\text{Dans notre ensemble W, la dernière composante est toujours 1.}`,
+                            step2_title: "Étape 2 : Conclusion",
+                            step2_desc: "Puisque [0, 0, 0] ne peut pas s'écrire sous la forme [a, b, 1] (car 0 \\ne 1), le vecteur nul n'est PAS dans W.",
+                            result_title: "Réponse Finale",
+                            result: "W n'est PAS un sous-espace de \\mathbb{R}^3."
+                        },
+                        ex2: {
+                            title: "2. Tester l'Indépendance Linéaire",
+                            problem: "Les vecteurs \\mathbf{v}_1 = [1, 2] et \\mathbf{v}_2 = [3, 6] sont-ils linéairement indépendants ?",
+                            step1_title: "Étape 1 : Configurer l'Équation",
+                            step1_desc: "Vérifier si c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 = \\mathbf{0} a seulement la solution triviale.",
+                            step1_math: `c_1 \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + c_2 \\begin{bmatrix} 3 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Étape 2 : Résoudre le Système",
+                            step2_desc: "Cela correspond à la matrice augmentée :",
+                            step2_math: `\\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 2 & 6 & 0 \\end{array} \\right] \\xrightarrow{R_2 - 2R_1} \\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 0 & 0 & 0 \\end{array} \\right]`,
+                            step3_title: "Étape 3 : Interpréter les Résultats",
+                            step3_desc: "Nous avons une ligne de zéros et une variable libre (c_2). Cela signifie qu'il y a une infinité de solutions non nulles (ex : c_1 = -3, c_2 = 1).",
+                            result_title: "Réponse Finale",
+                            result: "Les vecteurs sont Linéairement Dépendants."
+                        },
+                        ex3: {
+                            title: "3. Trouver une Base et une Dimension",
+                            problem: "Trouvez une base pour le sous-espace engendré par \\mathbf{v}_1 = [1, 2, 3], \\mathbf{v}_2 = [2, 4, 6], et \\mathbf{v}_3 = [0, 1, 1].",
+                            step1_title: "Étape 1 : Vérifier la Dépendance",
+                            step1_desc: "Remarquez que \\mathbf{v}_2 = 2\\mathbf{v}_1. Cela signifie que \\mathbf{v}_2$ est redondant et peut être retiré.",
+                            step1_math: `\\text{Span}{\\mathbf{v}_1, \\mathbf{v}_2, \\mathbf{v}_3 } = \\text{Span}{\\mathbf{v}_1, \\mathbf{v}_3 }`,
+                            step2_title: "Étape 2 : Vérifier l'Indépendance des Vecteurs Restants",
+                            step2_desc: "\\mathbf{v}_1 et \\mathbf{v}_3 ne sont pas multiples l'un de l'autre. Par conséquent, ils sont linéairement indépendants.",
+                            step3_title: "Étape 3 : Former la Base",
+                            step3_math: `\\text{Base } \\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                            result_title: "Réponse Finale",
+                            result: "La base est {\\mathbf{v}_1, \\mathbf{v}_3 } et la Dimension est 2 (un plan)."
+                        }
+                    }
+                }
+            }
         }
     },
     de: {
@@ -1900,6 +2455,177 @@ export const linearAlgebraCourse = {
                     }
                 }
             }
+        },
+        vectorSpaces: {
+            title: "Vektorräume",
+            description: "Eine Einführung in Vektorräume, Unterräume und ihre Eigenschaften.",
+            lessons: {
+                lesson5_title: "Vektorräume",
+                lesson5: {
+                    section1: {
+                        title1: "Was ist ein Vektorraum? Vektoroperationen.",
+                        def1_1: "Um zu verstehen, was ein Vektorraum ist, müssen wir zuerst das Spielfeld definieren. Ein Vektorraum ist eine Menge V, ausgestattet mit zwei Operationen: Vektoraddition und Skalarmultiplikation. Diese Operationen müssen spezifische Regeln (Axiome) erfüllen, damit die Menge als Vektorraum gilt.",
+                        axiom_intro: "Formal ist eine Menge V ein Vektorraum über den reellen Zahlen \\mathbb{R}, wenn die folgenden 10 Axiome für alle Vektoren \\mathbf{u}, \\mathbf{v}, \\mathbf{w}\\in V und Skalare c, d\\in \\mathbb{R} gelten:",
+                        axiom_title_add: "1. Eigenschaften der Addition",
+                        axiom_add_1: "1. Abgeschlossenheit: \\mathbf{u} + \\mathbf{v} ist in V.",
+                        axiom_add_2: "2. Kommutativität: \\mathbf{u} + \\mathbf{v} = \\mathbf{v} + \\mathbf{u}",
+                        axiom_add_3: "3. Assoziativität: (\\mathbf{u} + \\mathbf{v}) + \\mathbf{w} = \\mathbf{u} + (\\mathbf{v} + \\mathbf{w})",
+                        axiom_add_4: "4. Nullvektor: Es existiert ein Nullvektor \\mathbf{0} in V, sodass \\mathbf{u} + \\mathbf{0} = \\mathbf{u}.",
+                        axiom_add_5: "5. Additives Inverses: Für jedes \\mathbf{u} existiert -\\mathbf{u}, sodass \\mathbf{u} + (-\\mathbf{u}) = \\mathbf{0}.",
+                        axiom_title_scal: "2. Eigenschaften der Skalarmultiplikation",
+                        axiom_scal_1: "6. Abgeschlossenheit: c\\mathbf{u} ist in V.",
+                        axiom_scal_2: "7. Distributivität (Vektor): c(\\mathbf{u} + \\mathbf{v}) = c\\mathbf{u} + c\\mathbf{v}",
+                        axiom_scal_3: "8. Distributivität (Skalar): (c + d)\\mathbf{u} = c\\mathbf{u} + d\\mathbf{u}",
+                        axiom_scal_4: "9. Assoziativität: c(d\\mathbf{u}) = (cd)\\mathbf{u}",
+                        axiom_scal_5: "10. Identität: 1\\mathbf{u} = \\mathbf{u}",
+                        title_ex1: "Das Standardbeispiel: Euklidischer Raum \\mathbb{R}^n",
+                        text_ex1: "Das häufigste Beispiel für einen Vektorraum ist \\mathbb{R}^n, die Menge aller geordneten n-Tupel reeller Zahlen.",
+                        def_ops_title: "Standardoperationen in \\mathbb{R}^n",
+                        def_ops_add: "Die Vektoraddition erfolgt komponentenweise:",
+                        math_ops_add: `\\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} + \\begin{bmatrix} v_1 \\\\ \\vdots \\\\ v_n \\end{bmatrix} = \\begin{bmatrix} u_1 + v_1 \\\\ \\vdots \\\\ u_n + v_n \\end{bmatrix}`,
+                        def_ops_scal: "Die Skalarmultiplikation verteilt den Skalar auf jede Komponente:",
+                        math_ops_scal: `c \\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} = \\begin{bmatrix} c u_1 \\\\ \\vdots \\\\ c u_n \\end{bmatrix}`,
+                        title_ex2: "Andere Beispiele für Vektorräume",
+                        text_ex2: "Vektorräume sind nicht nur Pfeile im Raum. Sie können Funktionen, Matrizen oder Polynome sein.",
+                        list_ex2_1: "1. \\mathbb{P}_n: Die Menge aller Polynome vom Grad höchstens n.",
+                        list_ex2_2: "2. M_{m\\times n}: Die Menge aller m\\times n Matrizen.",
+                        list_ex2_3: "3. F(-\\infty, \\infty): Die Menge aller stetigen reellwertigen Funktionen.",
+                        simple_ex_title: "Schnelles Beispiel: Der Raum R2",
+                        simple_ex_desc: "Betrachten Sie die Menge aller 2D-Vektoren (R2). Wenn Sie einen Vektor u = [1, 2] und einen Vektor v = [3, 4] nehmen, ist ihre Summe [4, 6].",
+                        simple_ex_math: `\\mathbf{u} + \\mathbf{v} = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 6 \\end{bmatrix}`,
+                        simple_ex_note: "Beachten Sie, dass das Ergebnis [4, 6] immer noch ein 2D-Vektor ist. Wir sagen, der Raum ist unter Addition 'abgeschlossen'."
+                    },
+                    section2: {
+                        title2: "Unterräume",
+                        description: "Bestimmen, wann eine Teilmenge eines Vektorraums selbst ein Vektorraum ist.",
+                        def2_1: "Ein Unterraum W ist eine Teilmenge eines Vektorraums V, die selbst ein Vektorraum unter denselben Operationen der Addition und Skalarmultiplikation ist, die auf V definiert sind.",
+                        text2_1: "Sie müssen nicht alle 10 Axiome überprüfen, um zu beweisen, dass eine Teilmenge ein Unterraum ist. Da die Operationen von V geerbt werden, sind die meisten Axiome (wie Kommutativität) automatisch wahr. Sie müssen nur 3 Bedingungen prüfen.",
+                        theorem2_1_title: "Das Unterraumkriterium",
+                        theorem2_1_desc: "Eine Teilmenge W eines Vektorraums V ist genau dann ein Unterraum, wenn:",
+                        cond2_1: "1. Der Nullvektor in W ist (\\mathbf{0} \\in W).",
+                        cond2_2: "2. Abgeschlossenheit unter Addition: Wenn \\mathbf{u} und \\mathbf{v} in W sind, dann ist \\mathbf{u} + \\mathbf{v} in W.",
+                        cond2_3: "3. Abgeschlossenheit unter Skalarmultiplikation: Wenn \\mathbf{u} in W ist und c ein beliebiger Skalar ist, dann ist c\\mathbf{u} in W.",
+                        title_ex2: "Visualisierung von Unterräumen in \\mathbb{R}^3",
+                        text_ex2: "Geometrisch gesehen sind Unterräume von \\mathbb{R}^3 streng flache Objekte, die durch den Ursprung verlaufen.",
+                        list_ex2_1: "1. Der Nullvektor selbst {\\mathbf{0}} (Der triviale Unterraum).",
+                        list_ex2_2: "2. Jede Gerade, die durch den Ursprung verläuft.",
+                        list_ex2_3: "3. Jede Ebene, die durch den Ursprung verläuft.",
+                        list_ex2_4: "4. Der gesamte Raum \\mathbb{R}^3 selbst.",
+                        title_non_ex2: "Häufige Gegenbeispiele (Warum scheitern sie?)",
+                        non_ex2_1: "1. Eine Gerade, die NICHT durch den Ursprung verläuft: Scheitert an Bedingung 1 (Nullvektor).",
+                        non_ex2_2: "2. Eine Menge von ganzen Zahlen \\mathbb{Z}^2: Scheitert an Bedingung 3 (Multiplikation mit 0,5 führt aus der Menge heraus).",
+                        non_ex2_3: "3. Der erste Quadrant von \\mathbb{R}^2 (x \\ge 0, y \\ge 0): Scheitert an Bedingung 3 (Multiplikation mit -1 führt aus der Menge heraus)."
+                    },
+                    section3: {
+                        title3: "Linearkombinationen und Spann (Span)",
+                        description: "Verstehen, wie Vektoren kombiniert werden können, um Geraden, Ebenen und ganze Räume zu erzeugen.",
+                        def3_1_title: "Linearkombinationen",
+                        def3_1: "Ein Vektor \\mathbf{w} ist eine Linearkombination der Vektoren \\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_p, wenn Skalare c_1, c_2, \\dots, c_p existieren, sodass:",
+                        math3_1: `\\mathbf{w} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p`,
+                        text3_1: "Stellen Sie sich das wie ein Rezept vor: Die Skalare c sind die 'Mengen' jeder Vektorzutat, die Sie mischen, um einen neuen Vektor \\mathbf{w} zu erstellen.",
+                        def3_2_title: "Der Spann (Span)",
+                        def3_2: "Die Menge aller möglichen Linearkombinationen einer Menge von Vektoren {\\mathbf{v}_1, \\dots, \\mathbf{v}_p} wird als Spann (oder lineare Hülle) dieser Vektoren bezeichnet.",
+                        math3_2: `\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} = \\{ c_1\\mathbf{v}_1 + \\cdots + c_p\\mathbf{v}_p : c_i \\in \\mathbb{R} \\}`,
+                        visual_title: "Visualisierung des Spanns in \\mathbb{R}^3",
+                        visual_desc: "Die geometrische Form des Spanns hängt von den Vektoren ab:",
+                        visual_item1: "1. Spann von 1 Nicht-Null-Vektor: Eine Gerade, die durch den Ursprung verläuft.",
+                        visual_item2: "2. Spann von 2 nicht-kolinearen Vektoren: Eine Ebene, die durch den Ursprung verläuft.",
+                        visual_item3: "3. Spann von 3 linear unabhängigen Vektoren: Der gesamte 3D-Raum (\\mathbb{R}^3).",
+                        connection_title: "Die Verbindung zu linearen Systemen",
+                        connection_text: "Die Frage 'Ist Vektor \\mathbf{b} im Spann von \\mathbf{v}_1, \\dots, \\mathbf{v}_p?' ist genau dasselbe wie die Frage 'Hat das System [\\mathbf{v}_1 \\dots \\mathbf{v}_p]\\mathbf{x} = \\mathbf{b} eine Lösung?'",
+                        theorem3_1: "Theorem: Der Spann einer beliebigen Menge von Vektoren in einem Vektorraum V ist immer ein Unterraum von V.",
+                        simple_ex_title: "Schnelles Beispiel: Aufspannen einer Gerade vs. einer Ebene",
+                        simple_ex_desc: "Stellen Sie sich einen einzelnen Vektor v = [1, 0] vor (der nach Osten zeigt). Sein Spann ist die gesamte x-Achse, da Sie ihn skalieren können, um jeden Punkt auf dieser Linie zu erreichen.",
+                        simple_ex_math1: `\\text{Span}\\{ \\mathbf{v} \\} = c \\cdot \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} \\text{ (Eine Gerade)}`,
+                        simple_ex_desc2: "Fügen Sie nun einen zweiten Vektor w = [0, 1] hinzu (der nach Norden zeigt). Durch Kombination von Nord- und Ostbewegungen können Sie JEDEN Punkt auf der 2D-Karte erreichen.",
+                        simple_ex_math2: `\\text{Span}\\{ \\mathbf{v}, \\mathbf{w} \\} = c_1 \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} + c_2 \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix} = \\mathbb{R}^2 \\text{ (Eine Ebene)}`
+                    },
+                    section4: {
+                        title4: "Lineare Unabhängigkeit",
+                        description: "Bestimmen, ob eine Menge von Vektoren redundante Informationen enthält.",
+                        def4_1_title: "Definition der linearen Unabhängigkeit",
+                        def4_1: "Eine Menge von Vektoren {\\mathbf{v}_1, \\dots, \\mathbf{v}_p } heißt linear unabhängig, wenn die Vektorgleichung",
+                        math4_1: `c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p = \\mathbf{0}`,
+                        def4_1_conclusion: "NUR die triviale Lösung c_1 = c_2 = \\cdots = c_p = 0 hat.",
+                        def4_2_title: "Lineare Abhängigkeit",
+                        def4_2: "Wenn Skalare c_1, \\dots, c_p existieren, die nicht alle null sind, sodass die obige Gleichung gilt, ist die Menge linear abhängig.",
+                        text4_2: "Intuitiv bedeutet Abhängigkeit, dass mindestens ein Vektor in der Menge redundant ist; er ist eine Linearkombination der anderen.",
+                        simple_ex_title: "Schnelles Beispiel: Abhängige Vektoren",
+                        simple_ex_desc: "Betrachten Sie \\mathbf{u} = [1, 2] und \\mathbf{v} = [2, 4]. Beachten Sie, dass \\mathbf{v} einfach zweimal \\mathbf{u} ist (\\mathbf{v} = 2\\mathbf{u}).",
+                        simple_ex_math: `2\\mathbf{u} - 1\\mathbf{v} = \\mathbf{0}`,
+                        simple_ex_conc: "Da wir Skalare ungleich Null (2 und -1) gefunden haben, die die Gleichung erfüllen, ist die Menge linear abhängig.",
+                        visual_title: "Geometrische Interpretation",
+                        visual_2d: "Zwei Vektoren sind abhängig, wenn sie auf derselben Geraden liegen (sie sind kolinear).",
+                        visual_3d: "Drei Vektoren sind abhängig, wenn sie auf derselben Ebene liegen (sie sind koplanar).",
+                        test_title: "Wie man auf Unabhängigkeit prüft",
+                        test_desc: "Um zu prüfen, ob die Spalten einer Matrix A unabhängig sind, lösen Sie das homogene System A\\mathbf{x} = \\mathbf{0}.",
+                        test_cond1: "1. Wenn es KEINE freien Variablen gibt (nur die triviale Lösung) -> Unabhängig.",
+                        test_cond2: "2. Wenn es freie Variablen GIBT (unendliche Lösungen) -> Abhängig."
+                    },
+                    section5: {
+                        title5: "Basis und Dimension",
+                        description: "Kombination von Spann und Unabhängigkeit zur Definition des 'Skeletts' eines Vektorraums.",
+                        def5_1_title: "Was ist eine Basis?",
+                        def5_1: "Eine Menge von Vektoren \\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} ist eine Basis für einen Vektorraum V, wenn sie zwei Bedingungen erfüllt:",
+                        cond5_1: "1. Die Menge \\mathcal{B} spannt V auf (sie deckt den gesamten Raum ab).",
+                        cond5_2: "2. Die Menge \\mathcal{B} ist linear unabhängig (keine Redundanz).",
+                        text5_1: "Denken Sie bei einer Basis an das 'Koordinatensystem' für den Raum. Es ist die kleinste Menge von Vektoren, die benötigt wird, um den gesamten Raum zu erzeugen.",
+                        simple_ex_title: "Schnelles Beispiel: Die Standardbasis",
+                        simple_ex_desc: "In \\mathbb{R}^3 ist die Standardbasis \\mathbf{e}_1 = [1,0,0], \\mathbf{e}_2 = [0,1,0] und \\mathbf{e}_3 = [0,0,1].",
+                        simple_ex_math: `\\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                        simple_ex_note: "Diese 3 Vektoren spannen den gesamten 3D-Raum auf und sind eindeutig unabhängig.",
+                        def5_2_title: "Dimension",
+                        def5_2: "Die Dimension eines Vektorraums V, bezeichnet mit dim(V), ist die Anzahl der Vektoren in einer beliebigen Basis von V.",
+                        text5_2: "Theorem: Obwohl ein Vektorraum unendlich viele verschiedene Basen haben kann, hat jede Basis genau dieselbe Anzahl von Vektoren.",
+                        visual_title: "Visualisierung der Dimension",
+                        visual_0d: "dim(V) = 0: Der Nullunterraum {\\mathbf{0}}.",
+                        visual_1d: "dim(V) = 1: Eine Gerade durch den Ursprung.",
+                        visual_2d: "dim(V) = 2: Eine Ebene durch den Ursprung.",
+                        visual_3d: "dim(V) = 3: Der gesamte Raum \\mathbb{R}^3."
+                    },
+                    example_section: {
+                        title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                        ex1: {
+                            title: "1. Prüfung auf Unterräume",
+                            problem: "Ist die Menge W aller Vektoren der Form \\begin{bmatrix} a \\\\ b \\\\ 1 \\end{bmatrix} ein Unterraum von \\mathbb{R}^3?",
+                            step1_title: "Schritt 1: Nullvektor prüfen",
+                            step1_desc: "Damit eine Menge ein Unterraum ist, muss sie den Nullvektor \\mathbf{0} = [0, 0, 0] enthalten.",
+                            step1_math: `\\text{In unserer Menge W ist die letzte Komponente immer 1.}`,
+                            step2_title: "Schritt 2: Schlussfolgerung",
+                            step2_desc: "Da [0, 0, 0] nicht in der Form [a, b, 1] geschrieben werden kann (weil 0 \\ne 1), ist der Nullvektor NICHT in W.",
+                            result_title: "Endgültige Antwort",
+                            result: "W ist KEIN Unterraum von \\mathbb{R}^3."
+                        },
+                        ex2: {
+                            title: "2. Prüfung auf lineare Unabhängigkeit",
+                            problem: "Sind die Vektoren \\mathbf{v}_1 = [1, 2] und \\mathbf{v}_2 = [3, 6] linear unabhängig?",
+                            step1_title: "Schritt 1: Gleichung aufstellen",
+                            step1_desc: "Prüfen Sie, ob c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 = \\mathbf{0} nur die triviale Lösung hat.",
+                            step1_math: `c_1 \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + c_2 \\begin{bmatrix} 3 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Schritt 2: System lösen",
+                            step2_desc: "Dies entspricht der erweiterten Matrix:",
+                            step2_math: `\\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 2 & 6 & 0 \\end{array} \\right] \\xrightarrow{R_2 - 2R_1} \\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 0 & 0 & 0 \\end{array} \\right]`,
+                            step3_title: "Schritt 3: Ergebnisse interpretieren",
+                            step3_desc: "Wir haben eine Nullzeile und eine freie Variable (c_2). Das bedeutet, es gibt unendlich viele Lösungen ungleich Null (z. B. c_1 = -3, c_2 = 1).",
+                            result_title: "Endgültige Antwort",
+                            result: "Die Vektoren sind linear abhängig."
+                        },
+                        ex3: {
+                            title: "3. Finden einer Basis und Dimension",
+                            problem: "Finden Sie eine Basis für den Unterraum, der von \\mathbf{v}_1 = [1, 2, 3], \\mathbf{v}_2 = [2, 4, 6] und \\mathbf{v}_3 = [0, 1, 1] aufgespannt wird.",
+                            step1_title: "Schritt 1: Prüfung auf Abhängigkeit",
+                            step1_desc: "Beachten Sie, dass \\mathbf{v}_2 = 2\\mathbf{v}_1 ist. Das bedeutet, \\mathbf{v}_2$ ist redundant und kann entfernt werden.",
+                            step1_math: `\\text{Span}{\\mathbf{v}_1, \\mathbf{v}_2, \\mathbf{v}_3 } = \\text{Span}{\\mathbf{v}_1, \\mathbf{v}_3 }`,
+                            step2_title: "Schritt 2: Unabhängigkeit der verbleibenden Vektoren prüfen",
+                            step2_desc: "\\mathbf{v}_1 und \\mathbf{v}_3 sind keine Vielfachen voneinander. Daher sind sie linear unabhängig.",
+                            step3_title: "Schritt 3: Basis bilden",
+                            step3_math: `\\text{Basis } \\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                            result_title: "Endgültige Antwort",
+                            result: "Die Basis ist {\\mathbf{v}_1, \\mathbf{v}_3 } und die Dimension ist 2 (eine Ebene)."
+                        }
+                    }
+                }
+            }
         }
     },
     pl: {
@@ -2357,6 +3083,177 @@ export const linearAlgebraCourse = {
                             step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
                             result_title: "Ostateczny Wniosek",
                             result: `Ponieważ 0 = 3 jest sprzecznością matematyczną, układ jest sprzeczny (Brak Rozwiązania). Geometrycznie reprezentuje to płaszczyzny równoległe, które nigdy się nie przecinają.`
+                        }
+                    }
+                }
+            }
+        },
+        vectorSpaces: {
+            title: "Przestrzenie Wektorowe",
+            description: "Wprowadzenie do przestrzeni wektorowych, podprzestrzeni i ich właściwości.",
+            lessons: {
+                lesson5_title: "Przestrzenie Wektorowe",
+                lesson5: {
+                    section1: {
+                        title1: "Czym jest Przestrzeń Wektorowa? Działania na Wektorach.",
+                        def1_1: "Aby zrozumieć, czym jest przestrzeń wektorowa, musimy najpierw zdefiniować pole gry. Przestrzeń Wektorowa to zbiór V wyposażony w dwa działania: Dodawanie Wektorów i Mnożenie przez Skalar. Działania te muszą spełniać określone reguły (aksjomaty), aby zbiór mógł być uznany za przestrzeń wektorową.",
+                        axiom_intro: "Formalnie, zbiór V jest przestrzenią wektorową nad liczbami rzeczywistymi \\mathbb{R}, jeśli spełnione są następujące 10 aksjomatów dla wszystkich wektorów \\mathbf{u}, \\mathbf{v}, \\mathbf{w}\\in V i skalarów c, d\\in \\mathbb{R}:",
+                        axiom_title_add: "1. Właściwości Dodawania",
+                        axiom_add_1: "1. Zamkniętość: \\mathbf{u} + \\mathbf{v} należy do V.",
+                        axiom_add_2: "2. Przemienność: \\mathbf{u} + \\mathbf{v} = \\mathbf{v} + \\mathbf{u}",
+                        axiom_add_3: "3. Łączność: (\\mathbf{u} + \\mathbf{v}) + \\mathbf{w} = \\mathbf{u} + (\\mathbf{v} + \\mathbf{w})",
+                        axiom_add_4: "4. Wektor Zerowy: Istnieje wektor zerowy \\mathbf{0} w V taki, że \\mathbf{u} + \\mathbf{0} = \\mathbf{u}.",
+                        axiom_add_5: "5. Element Przeciwny: Dla każdego \\mathbf{u}, istnieje -\\mathbf{u} taki, że \\mathbf{u} + (-\\mathbf{u}) = \\mathbf{0}.",
+                        axiom_title_scal: "2. Właściwości Mnożenia przez Skalar",
+                        axiom_scal_1: "6. Zamkniętość: c\\mathbf{u} należy do V.",
+                        axiom_scal_2: "7. Rozdzielność (Wektor): c(\\mathbf{u} + \\mathbf{v}) = c\\mathbf{u} + c\\mathbf{v}",
+                        axiom_scal_3: "8. Rozdzielność (Skalar): (c + d)\\mathbf{u} = c\\mathbf{u} + d\\mathbf{u}",
+                        axiom_scal_4: "9. Łączność: c(d\\mathbf{u}) = (cd)\\mathbf{u}",
+                        axiom_scal_5: "10. Element Neutralny: 1\\mathbf{u} = \\mathbf{u}",
+                        title_ex1: "Standardowy Przykład: Przestrzeń Euklidesowa \\mathbb{R}^n",
+                        text_ex1: "Najczęstszym przykładem przestrzeni wektorowej jest \\mathbb{R}^n, zbiór wszystkich uporządkowanych n-krotek liczb rzeczywistych.",
+                        def_ops_title: "Standardowe Działania w \\mathbb{R}^n",
+                        def_ops_add: "Dodawanie Wektorów wykonuje się po współrzędnych:",
+                        math_ops_add: `\\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} + \\begin{bmatrix} v_1 \\\\ \\vdots \\\\ v_n \\end{bmatrix} = \\begin{bmatrix} u_1 + v_1 \\\\ \\vdots \\\\ u_n + v_n \\end{bmatrix}`,
+                        def_ops_scal: "Mnożenie przez Skalar rozdziela skalar na każdą współrzędną:",
+                        math_ops_scal: `c \\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} = \\begin{bmatrix} c u_1 \\\\ \\vdots \\\\ c u_n \\end{bmatrix}`,
+                        title_ex2: "Inne Przykłady Przestrzeni Wektorowych",
+                        text_ex2: "Przestrzenie wektorowe to nie tylko strzałki w przestrzeni. Mogą to być funkcje, macierze lub wielomiany.",
+                        list_ex2_1: "1. \\mathbb{P}_n: Zbiór wszystkich wielomianów stopnia co najwyżej n.",
+                        list_ex2_2: "2. M_{m\\times n}: Zbiór wszystkich macierzy m\\times n.",
+                        list_ex2_3: "3. F(-\\infty, \\infty): Zbiór wszystkich ciągłych funkcji o wartościach rzeczywistych.",
+                        simple_ex_title: "Szybki Przykład: Przestrzeń R2",
+                        simple_ex_desc: "Rozważ zbiór wszystkich wektorów 2D (R2). Jeśli weźmiesz wektor u = [1, 2] i wektor v = [3, 4], ich suma wynosi [4, 6].",
+                        simple_ex_math: `\\mathbf{u} + \\mathbf{v} = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 6 \\end{bmatrix}`,
+                        simple_ex_note: "Zauważ, że wynik [4, 6] jest nadal wektorem 2D. Mówimy, że przestrzeń jest 'zamknięta' ze względu na dodawanie."
+                    },
+                    section2: {
+                        title2: "Podprzestrzenie",
+                        description: "Określanie, kiedy podzbiór przestrzeni wektorowej jest sam w sobie przestrzenią wektorową.",
+                        def2_1: "Podprzestrzeń W to podzbiór przestrzeni wektorowej V, który sam jest przestrzenią wektorową przy tych samych działaniach dodawania i mnożenia przez skalar zdefiniowanych w V.",
+                        text2_1: "Nie musisz sprawdzać wszystkich 10 aksjomatów, aby udowodnić, że podzbiór jest podprzestrzenią. Ponieważ działania są dziedziczone z V, większość aksjomatów (jak przemienność) jest automatycznie prawdziwa. Musisz sprawdzić tylko 3 warunki.",
+                        theorem2_1_title: "Kryterium Podprzestrzeni",
+                        theorem2_1_desc: "Podzbiór W przestrzeni wektorowej V jest podprzestrzenią wtedy i tylko wtedy, gdy:",
+                        cond2_1: "1. Wektor Zerowy znajduje się w W (\\mathbf{0} \\in W).",
+                        cond2_2: "2. Zamkniętość ze względu na Dodawanie: Jeśli \\mathbf{u} i \\mathbf{v} są w W, to \\mathbf{u} + \\mathbf{v} jest w W.",
+                        cond2_3: "3. Zamkniętość ze względu na Mnożenie przez Skalar: Jeśli \\mathbf{u} jest w W i c jest dowolnym skalarem, to c\\mathbf{u} jest w W.",
+                        title_ex2: "Wizualizacja Podprzestrzeni w \\mathbb{R}^3",
+                        text_ex2: "Geometrycznie podprzestrzenie \\mathbb{R}^3 są ściśle płaskimi obiektami przechodzącymi przez początek układu współrzędnych.",
+                        list_ex2_1: "1. Sam wektor zerowy {\\mathbf{0}} (Podprzestrzeń trywialna).",
+                        list_ex2_2: "2. Każda prosta przechodząca przez początek układu.",
+                        list_ex2_3: "3. Każda płaszczyzna przechodząca przez początek układu.",
+                        list_ex2_4: "4. Cała przestrzeń \\mathbb{R}^3.",
+                        title_non_ex2: "Typowe Nie-Przykłady (Dlaczego zawodzą?)",
+                        non_ex2_1: "1. Prosta, która NIE przechodzi przez początek: Nie spełnia Warunku 1 (Wektor Zerowy).",
+                        non_ex2_2: "2. Zbiór liczb całkowitych \\mathbb{Z}^2: Nie spełnia Warunku 3. (Mnożenie przez 0,5 wyprowadza poza zbiór).",
+                        non_ex2_3: "3. Pierwsza ćwiartka \\mathbb{R}^2 (x \\ge 0, y \\ge 0): Nie spełnia Warunku 3. (Mnożenie przez -1 wyprowadza poza zbiór)."
+                    },
+                    section3: {
+                        title3: "Kombinacje Liniowe i Powłoka Liniowa (Span)",
+                        description: "Zrozumienie, jak wektory mogą być łączone, aby generować proste, płaszczyzny i całe przestrzenie.",
+                        def3_1_title: "Kombinacje Liniowe",
+                        def3_1: "Wektor \\mathbf{w} jest kombinacją liniową wektorów \\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_p, jeśli istnieją skalary c_1, c_2, \\dots, c_p takie, że:",
+                        math3_1: `\\mathbf{w} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p`,
+                        text3_1: "Pomyśl o tym jak o przepisie: skalary c to 'ilości' każdego składnika wektorowego, które mieszasz, aby stworzyć nowy wektor \\mathbf{w}.",
+                        def3_2_title: "Powłoka Liniowa (Span)",
+                        def3_2: "Zbiór wszystkich możliwych kombinacji liniowych zbioru wektorów {\\mathbf{v}_1, \\dots, \\mathbf{v}_p} nazywany jest Powłoką Liniową (Span) tych wektorów.",
+                        math3_2: `\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} = \\{ c_1\\mathbf{v}_1 + \\cdots + c_p\\mathbf{v}_p : c_i \\in \\mathbb{R} \\}`,
+                        visual_title: "Wizualizacja Spanu w \\mathbb{R}^3",
+                        visual_desc: "Kształt geometryczny Spanu zależy od wektorów:",
+                        visual_item1: "1. Span 1 niezerowego wektora: Prosta przechodząca przez początek układu.",
+                        visual_item2: "2. Span 2 wektorów nie współliniowych: Płaszczyzna przechodząca przez początek układu.",
+                        visual_item3: "3. Span 3 liniowo niezależnych wektorów: Cała przestrzeń 3D (\\mathbb{R}^3).",
+                        connection_title: "Połączenie z Układami Liniowymi",
+                        connection_text: "Pytanie 'Czy wektor \\mathbf{b} znajduje się w Spanie \\mathbf{v}_1, \\dots, \\mathbf{v}_p?' jest dokładnie tym samym, co pytanie 'Czy układ [\\mathbf{v}_1 \\dots \\mathbf{v}_p]\\mathbf{x} = \\mathbf{b} ma rozwiązanie?'",
+                        theorem3_1: "Twierdzenie: Span dowolnego zbioru wektorów w przestrzeni wektorowej V jest zawsze podprzestrzenią V.",
+                        simple_ex_title: "Szybki Przykład: Generowanie Prostej vs. Płaszczyzny",
+                        simple_ex_desc: "Wyobraź sobie pojedynczy wektor v = [1, 0] (skierowany na Wschód). Jego Span to cała oś x, ponieważ możesz go skalować, aby dotrzeć do dowolnego punktu na tej linii.",
+                        simple_ex_math1: `\\text{Span}\\{ \\mathbf{v} \\} = c \\cdot \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} \\text{ (Prosta)}`,
+                        simple_ex_desc2: "Teraz dodaj drugi wektor w = [0, 1] (skierowany na Północ). Łącząc ruchy na Północ i Wschód, możesz dotrzeć do DOWOLNEGO punktu na mapie 2D.",
+                        simple_ex_math2: `\\text{Span}\\{ \\mathbf{v}, \\mathbf{w} \\} = c_1 \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} + c_2 \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix} = \\mathbb{R}^2 \\text{ (Płaszczyzna)}`
+                    },
+                    section4: {
+                        title4: "Niezależność Liniowa",
+                        description: "Określanie, czy zbiór wektorów zawiera nadmiarowe informacje.",
+                        def4_1_title: "Definicja Niezależności Liniowej",
+                        def4_1: "Zbiór wektorów {\\mathbf{v}_1, \\dots, \\mathbf{v}_p } nazywamy liniowo niezależnym, jeśli równanie wektorowe",
+                        math4_1: `c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p = \\mathbf{0}`,
+                        def4_1_conclusion: "ma TYLKO trywialne rozwiązanie c_1 = c_2 = \\cdots = c_p = 0.",
+                        def4_2_title: "Zależność Liniowa",
+                        def4_2: "Jeśli istnieją skalary c_1, \\dots, c_p, nie wszystkie zerowe, takie że powyższe równanie jest spełnione, zbiór jest liniowo zależny.",
+                        text4_2: "Intuicyjnie zależność oznacza, że przynajmniej jeden wektor w zbiorze jest nadmiarowy; jest kombinacją liniową pozostałych.",
+                        simple_ex_title: "Szybki Przykład: Wektory Zależne",
+                        simple_ex_desc: "Rozważ \\mathbf{u} = [1, 2] i \\mathbf{v} = [2, 4]. Zauważ, że \\mathbf{v} to po prostu dwa razy \\mathbf{u} (\\mathbf{v} = 2\\mathbf{u}).",
+                        simple_ex_math: `2\\mathbf{u} - 1\\mathbf{v} = \\mathbf{0}`,
+                        simple_ex_conc: "Ponieważ znaleźliśmy niezerowe skalary (2 i -1), które spełniają równanie, zbiór jest Liniowo Zależny.",
+                        visual_title: "Interpretacja Geometryczna",
+                        visual_2d: "Dwa wektory są zależne, jeśli leżą na tej samej prostej (są współliniowe).",
+                        visual_3d: "Trzy wektory są zależne, jeśli leżą na tej samej płaszczyźnie (są współpłaszczyznowe).",
+                        test_title: "Jak Sprawdzić Niezależność",
+                        test_desc: "Aby sprawdzić, czy kolumny macierzy A są niezależne, rozwiąż układ jednorodny A\\mathbf{x} = \\mathbf{0}.",
+                        test_cond1: "1. Jeśli NIE MA zmiennych wolnych (tylko rozwiązanie trywialne) -> Niezależne.",
+                        test_cond2: "2. Jeśli SĄ zmienne wolne (nieskończenie wiele rozwiązań) -> Zależne."
+                    },
+                    section5: {
+                        title5: "Baza i Wymiar",
+                        description: "Łączenie spanu i niezależności w celu zdefiniowania 'szkieletu' przestrzeni wektorowej.",
+                        def5_1_title: "Czym jest Baza?",
+                        def5_1: "Zbiór wektorów \\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} jest bazą przestrzeni wektorowej V, jeśli spełnia dwa warunki:",
+                        cond5_1: "1. Zbiór \\mathcal{B} rozpina (span) V (pokrywa całą przestrzeń).",
+                        cond5_2: "2. Zbiór \\mathcal{B} jest liniowo niezależny (brak nadmiarowości).",
+                        text5_1: "Pomyśl o bazie jak o 'układzie współrzędnych' dla przestrzeni. Jest to najmniejszy zbiór wektorów potrzebny do wygenerowania całej przestrzeni.",
+                        simple_ex_title: "Szybki Przykład: Baza Standardowa",
+                        simple_ex_desc: "W \\mathbb{R}^3 bazą standardową jest \\mathbf{e}_1 = [1,0,0], \\mathbf{e}_2 = [0,1,0], i \\mathbf{e}_3 = [0,0,1].",
+                        simple_ex_math: `\\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                        simple_ex_note: "Te 3 wektory rozpinają całą przestrzeń 3D i są wyraźnie niezależne.",
+                        def5_2_title: "Wymiar",
+                        def5_2: "Wymiar przestrzeni wektorowej V, oznaczany jako dim(V), to liczba wektorów w dowolnej bazie V.",
+                        text5_2: "Twierdzenie: Chociaż przestrzeń wektorowa może mieć nieskończenie wiele różnych baz, każda baza ma dokładnie taką samą liczbę wektorów.",
+                        visual_title: "Wizualizacja Wymiaru",
+                        visual_0d: "dim(V) = 0: Podprzestrzeń zerowa {\\mathbf{0}}.",
+                        visual_1d: "dim(V) = 1: Prosta przechodząca przez początek układu.",
+                        visual_2d: "dim(V) = 2: Płaszczyzna przechodząca przez początek układu.",
+                        visual_3d: "dim(V) = 3: Cała przestrzeń \\mathbb{R}^3."
+                    },
+                    example_section: {
+                        title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
+                        ex1: {
+                            title: "1. Sprawdzanie Podprzestrzeni",
+                            problem: "Czy zbiór W wszystkich wektorów postaci \\begin{bmatrix} a \\\\ b \\\\ 1 \\end{bmatrix} jest podprzestrzenią \\mathbb{R}^3?",
+                            step1_title: "Krok 1: Sprawdź Wektor Zerowy",
+                            step1_desc: "Aby zbiór był podprzestrzenią, musi zawierać wektor zerowy \\mathbf{0} = [0, 0, 0].",
+                            step1_math: `\\text{W naszym zbiorze W, ostatnia składowa to zawsze 1.}`,
+                            step2_title: "Krok 2: Wniosek",
+                            step2_desc: "Ponieważ [0, 0, 0] nie może być zapisane w postaci [a, b, 1] (ponieważ 0 \\ne 1), wektor zerowy NIE znajduje się w W.",
+                            result_title: "Ostateczna Odpowiedź",
+                            result: "W NIE jest podprzestrzenią \\mathbb{R}^3."
+                        },
+                        ex2: {
+                            title: "2. Sprawdzanie Niezależności Liniowej",
+                            problem: "Czy wektory \\mathbf{v}_1 = [1, 2] i \\mathbf{v}_2 = [3, 6] są liniowo niezależne?",
+                            step1_title: "Krok 1: Ustaw Równanie",
+                            step1_desc: "Sprawdź, czy c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 = \\mathbf{0} ma tylko rozwiązanie trywialne.",
+                            step1_math: `c_1 \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + c_2 \\begin{bmatrix} 3 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Krok 2: Rozwiąż Układ",
+                            step2_desc: "Odpowiada to macierzy rozszerzonej:",
+                            step2_math: `\\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 2 & 6 & 0 \\end{array} \\right] \\xrightarrow{R_2 - 2R_1} \\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 0 & 0 & 0 \\end{array} \\right]`,
+                            step3_title: "Krok 3: Interpretacja Wyników",
+                            step3_desc: "Mamy wiersz zer i zmienną wolną (c_2). Oznacza to, że istnieje nieskończenie wiele rozwiązań niezerowych (np. c_1 = -3, c_2 = 1).",
+                            result_title: "Ostateczna Odpowiedź",
+                            result: "Wektory są Liniowo Zależne."
+                        },
+                        ex3: {
+                            title: "3. Znajdowanie Bazy i Wymiaru",
+                            problem: "Znajdź bazę dla podprzestrzeni rozpiętej przez \\mathbf{v}_1 = [1, 2, 3], \\mathbf{v}_2 = [2, 4, 6], i \\mathbf{v}_3 = [0, 1, 1].",
+                            step1_title: "Krok 1: Sprawdź Zależność",
+                            step1_desc: "Zauważ, że \\mathbf{v}_2 = 2\\mathbf{v}_1. Oznacza to, że \\mathbf{v}_2$ jest nadmiarowy i można go usunąć.",
+                            step1_math: `\\text{Span}{\\mathbf{v}_1, \\mathbf{v}_2, \\mathbf{v}_3 } = \\text{Span}{\\mathbf{v}_1, \\mathbf{v}_3 }`,
+                            step2_title: "Krok 2: Zweryfikuj Niezależność Pozostałych Wektorów",
+                            step2_desc: "\\mathbf{v}_1 i \\mathbf{v}_3 nie są swoimi wielokrotnościami. Dlatego są liniowo niezależne.",
+                            step3_title: "Krok 3: Utwórz Bazę",
+                            step3_math: `\\text{Baza } \\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                            result_title: "Ostateczna Odpowiedź",
+                            result: "Bazą jest {\\mathbf{v}_1, \\mathbf{v}_3 }, a Wymiar wynosi 2 (płaszczyzna)."
                         }
                     }
                 }
@@ -2824,6 +3721,177 @@ export const linearAlgebraCourse = {
                     }
                 }
             }
-        }       
+        },
+        vectorSpaces: {
+            title: "Spații Vectoriale",
+            description: "O introducere în spații vectoriale, subspații și proprietățile lor.",
+            lessons: {
+                lesson5_title: "Spații Vectoriale",
+                lesson5: {
+                    section1: {
+                        title1: "Ce este un Spațiu Vectorial? Operații Vectoriale.",
+                        def1_1: "Pentru a înțelege ce este un spațiu vectorial, mai întâi trebuie să definim terenul de joc. Un Spațiu Vectorial este o mulțime V echipată cu două operații: Adunarea Vectorilor și Înmulțirea cu Scalari. Aceste operații trebuie să satisfacă reguli specifice (axiome) pentru ca mulțimea să se califice drept spațiu vectorial.",
+                        axiom_intro: "Formal, o mulțime V este un spațiu vectorial peste numerele reale \\mathbb{R} dacă următoarele 10 axiome sunt valabile pentru toți vectorii \\mathbf{u}, \\mathbf{v}, \\mathbf{w}\\in V și scalarii c, d\\in \\mathbb{R}:",
+                        axiom_title_add: "1. Proprietățile Adunării",
+                        axiom_add_1: "1. Închidere: \\mathbf{u} + \\mathbf{v} este în V.",
+                        axiom_add_2: "2. Comutativitate: \\mathbf{u} + \\mathbf{v} = \\mathbf{v} + \\mathbf{u}",
+                        axiom_add_3: "3. Asociativitate: (\\mathbf{u} + \\mathbf{v}) + \\mathbf{w} = \\mathbf{u} + (\\mathbf{v} + \\mathbf{w})",
+                        axiom_add_4: "4. Vectorul Zero: Există un vector zero \\mathbf{0} în V astfel încât \\mathbf{u} + \\mathbf{0} = \\mathbf{u}.",
+                        axiom_add_5: "5. Invers Aditiv: Pentru orice \\mathbf{u}, există -\\mathbf{u} astfel încât \\mathbf{u} + (-\\mathbf{u}) = \\mathbf{0}.",
+                        axiom_title_scal: "2. Proprietățile Înmulțirii cu Scalari",
+                        axiom_scal_1: "6. Închidere: c\\mathbf{u} este în V.",
+                        axiom_scal_2: "7. Distributivitate (Vector): c(\\mathbf{u} + \\mathbf{v}) = c\\mathbf{u} + c\\mathbf{v}",
+                        axiom_scal_3: "8. Distributivitate (Scalar): (c + d)\\mathbf{u} = c\\mathbf{u} + d\\mathbf{u}",
+                        axiom_scal_4: "9. Asociativitate: c(d\\mathbf{u}) = (cd)\\mathbf{u}",
+                        axiom_scal_5: "10. Identitate: 1\\mathbf{u} = \\mathbf{u}",
+                        title_ex1: "Exemplul Standard: Spațiul Euclidian \\mathbb{R}^n",
+                        text_ex1: "Cel mai comun exemplu de spațiu vectorial este \\mathbb{R}^n, mulțimea tuturor n-tuplurilor ordonate de numere reale.",
+                        def_ops_title: "Operații Standard în \\mathbb{R}^n",
+                        def_ops_add: "Adunarea Vectorilor se efectuează componentă cu componentă:",
+                        math_ops_add: `\\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} + \\begin{bmatrix} v_1 \\\\ \\vdots \\\\ v_n \\end{bmatrix} = \\begin{bmatrix} u_1 + v_1 \\\\ \\vdots \\\\ u_n + v_n \\end{bmatrix}`,
+                        def_ops_scal: "Înmulțirea cu Scalari distribuie scalarul la fiecare componentă:",
+                        math_ops_scal: `c \\begin{bmatrix} u_1 \\\\ \\vdots \\\\ u_n \\end{bmatrix} = \\begin{bmatrix} c u_1 \\\\ \\vdots \\\\ c u_n \\end{bmatrix}`,
+                        title_ex2: "Alte Exemple de Spații Vectoriale",
+                        text_ex2: "Spațiile vectoriale nu sunt doar săgeți în spațiu. Ele pot fi funcții, matrice sau polinoame.",
+                        list_ex2_1: "1. \\mathbb{P}_n: Mulțimea tuturor polinoamelor de grad cel mult n.",
+                        list_ex2_2: "2. M_{m\\times n}: Mulțimea tuturor matricelor m\\times n.",
+                        list_ex2_3: "3. F(-\\infty, \\infty): Mulțimea tuturor funcțiilor continue cu valori reale.",
+                        simple_ex_title: "Exemplu Rapid: Spațiul R2",
+                        simple_ex_desc: "Considerați mulțimea tuturor vectorilor 2D (R2). Dacă luați un vector u = [1, 2] și un vector v = [3, 4], suma lor este [4, 6].",
+                        simple_ex_math: `\\mathbf{u} + \\mathbf{v} = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 6 \\end{bmatrix}`,
+                        simple_ex_note: "Observați că rezultatul [4, 6] este tot un vector 2D. Spunem că spațiul este 'închis' la adunare."
+                    },
+                    section2: {
+                        title2: "Subspații",
+                        description: "Determinarea momentului când o submulțime a unui spațiu vectorial este ea însăși un spațiu vectorial.",
+                        def2_1: "Un subspațiu W este o submulțime a unui spațiu vectorial V care este ea însăși un spațiu vectorial sub aceleași operații de adunare și înmulțire cu scalari definite pe V.",
+                        text2_1: "Nu trebuie să verificați toate cele 10 axiome pentru a demonstra că o submulțime este un subspațiu. Deoarece operațiile sunt moștenite din V, majoritatea axiomelor (cum ar fi comutativitatea) sunt automat adevărate. Trebuie să verificați doar 3 condiții.",
+                        theorem2_1_title: "Criteriul Subspațiului",
+                        theorem2_1_desc: "O submulțime W a unui spațiu vectorial V este un subspațiu dacă și numai dacă:",
+                        cond2_1: "1. Vectorul Zero este în W (\\mathbf{0} \\in W).",
+                        cond2_2: "2. Închidere la Adunare: Dacă \\mathbf{u} și \\mathbf{v} sunt în W, atunci \\mathbf{u} + \\mathbf{v} este în W.",
+                        cond2_3: "3. Închidere la Înmulțire cu Scalari: Dacă \\mathbf{u} este în W și c este orice scalar, atunci c\\mathbf{u} este în W.",
+                        title_ex2: "Vizualizarea Subspațiilor în \\mathbb{R}^3",
+                        text_ex2: "Geometric, subspațiile din \\mathbb{R}^3 sunt obiecte strict plate care trec prin origine.",
+                        list_ex2_1: "1. Vectorul zero însuși {\\mathbf{0}} (Subspațiul trivial).",
+                        list_ex2_2: "2. Orice dreaptă care trece prin origine.",
+                        list_ex2_3: "3. Orice plan care trece prin origine.",
+                        list_ex2_4: "4. Întregul spațiu \\mathbb{R}^3 însuși.",
+                        title_non_ex2: "Non-Exemple Comune (De ce eșuează?)",
+                        non_ex2_1: "1. O dreaptă care NU trece prin origine: Eșuează la Condiția 1 (Vectorul Zero).",
+                        non_ex2_2: "2. O mulțime de numere întregi \\mathbb{Z}^2: Eșuează la Condiția 3. (Înmulțirea cu 0.5 te scoate din mulțime).",
+                        non_ex2_3: "3. Primul cadran din \\mathbb{R}^2 (x \\ge 0, y \\ge 0): Eșuează la Condiția 3. (Înmulțirea cu -1 te scoate din mulțime)."
+                    },
+                    section3: {
+                        title3: "Combinații Liniare și Acoperire Liniară (Span)",
+                        description: "Înțelegerea modului în care vectorii pot fi combinați pentru a genera drepte, plane și spații întregi.",
+                        def3_1_title: "Combinații Liniare",
+                        def3_1: "Un vector \\mathbf{w} este o combinație liniară a vectorilor \\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_p dacă există scalari c_1, c_2, \\dots, c_p astfel încât:",
+                        math3_1: `\\mathbf{w} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p`,
+                        text3_1: "Gândiți-vă la asta ca la o rețetă: scalarii c sunt 'cantitățile' fiecărui ingredient vectorial pe care le amestecați pentru a crea un nou vector \\mathbf{w}.",
+                        def3_2_title: "Acoperirea Liniară (Span)",
+                        def3_2: "Mulțimea tuturor combinațiilor liniare posibile ale unei mulțimi de vectori {\\mathbf{v}_1, \\dots, \\mathbf{v}_p} se numește Span (sau acoperire liniară/spațiu generat) al acelor vectori.",
+                        math3_2: `\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} = \\{ c_1\\mathbf{v}_1 + \\cdots + c_p\\mathbf{v}_p : c_i \\in \\mathbb{R} \\}`,
+                        visual_title: "Vizualizarea Span-ului în \\mathbb{R}^3",
+                        visual_desc: "Forma geometrică a Span-ului depinde de vectori:",
+                        visual_item1: "1. Span-ul unui vector nenul: O dreaptă care trece prin origine.",
+                        visual_item2: "2. Span-ul a 2 vectori necoliniari: Un plan care trece prin origine.",
+                        visual_item3: "3. Span-ul a 3 vectori liniar independenți: Întregul spațiu 3D (\\mathbb{R}^3).",
+                        connection_title: "Legătura cu Sistemele Liniare",
+                        connection_text: "A întreba 'Este vectorul \\mathbf{b} în Span-ul lui \\mathbf{v}_1, \\dots, \\mathbf{v}_p?' este exact același lucru cu a întreba 'Are sistemul [\\mathbf{v}_1 \\dots \\mathbf{v}_p]\\mathbf{x} = \\mathbf{b} o soluție?'",
+                        theorem3_1: "Teoremă: Span-ul oricărei mulțimi de vectori dintr-un spațiu vectorial V este întotdeauna un subspațiu al lui V.",
+                        simple_ex_title: "Exemplu Rapid: Generarea unei Drepte vs. un Plan",
+                        simple_ex_desc: "Imaginați-vă un singur vector v = [1, 0] (îndreptat spre Est). Span-ul său este întreaga axă x, deoarece îl puteți scala pentru a ajunge la orice punct de pe acea linie.",
+                        simple_ex_math1: `\\text{Span}\\{ \\mathbf{v} \\} = c \\cdot \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} \\text{ (O dreaptă)}`,
+                        simple_ex_desc2: "Acum adăugați un al doilea vector w = [0, 1] (îndreptat spre Nord). Combinând mișcările spre Nord și Est, puteți ajunge la ORICE punct de pe harta 2D.",
+                        simple_ex_math2: `\\text{Span}\\{ \\mathbf{v}, \\mathbf{w} \\} = c_1 \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} + c_2 \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix} = \\mathbb{R}^2 \\text{ (Un plan)}`
+                    },
+                    section4: {
+                        title4: "Independența Liniară",
+                        description: "Determinarea dacă o mulțime de vectori conține informații redundante.",
+                        def4_1_title: "Definiția Independenței Liniare",
+                        def4_1: "O mulțime de vectori {\\mathbf{v}_1, \\dots, \\mathbf{v}_p } se numește liniar independentă dacă ecuația vectorială",
+                        math4_1: `c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_p\\mathbf{v}_p = \\mathbf{0}`,
+                        def4_1_conclusion: "are DOAR soluția trivială c_1 = c_2 = \\cdots = c_p = 0.",
+                        def4_2_title: "Dependența Liniară",
+                        def4_2: "Dacă există scalari c_1, \\dots, c_p, nu toți zero, astfel încât ecuația de mai sus este valabilă, mulțimea este liniar dependentă.",
+                        text4_2: "Intuitiv, dependența înseamnă că cel puțin un vector din mulțime este redundant; este o combinație liniară a celorlalți.",
+                        simple_ex_title: "Exemplu Rapid: Vectori Dependenți",
+                        simple_ex_desc: "Considerați \\mathbf{u} = [1, 2] și \\mathbf{v} = [2, 4]. Observați că \\mathbf{v} este doar de două ori \\mathbf{u} (\\mathbf{v} = 2\\mathbf{u}).",
+                        simple_ex_math: `2\\mathbf{u} - 1\\mathbf{v} = \\mathbf{0}`,
+                        simple_ex_conc: "Deoarece am găsit scalari nenuli (2 și -1) care satisfac ecuația, mulțimea este Liniar Dependentă.",
+                        visual_title: "Interpretare Geometrică",
+                        visual_2d: "Doi vectori sunt dependenți dacă se află pe aceeași dreaptă (sunt coliniari).",
+                        visual_3d: "Trei vectori sunt dependenți dacă se află pe același plan (sunt coplanari).",
+                        test_title: "Cum să Testați Independența",
+                        test_desc: "Pentru a verifica dacă coloanele unei matrice A sunt independente, rezolvați sistemul omogen A\\mathbf{x} = \\mathbf{0}.",
+                        test_cond1: "1. Dacă NU există variabile libere (doar soluția trivială) -> Independent.",
+                        test_cond2: "2. Dacă EXISTĂ variabile libere (soluții infinite) -> Dependent."
+                    },
+                    section5: {
+                        title5: "Bază și Dimensiune",
+                        description: "Combinarea span-ului și independenței pentru a defini 'scheletul' unui spațiu vectorial.",
+                        def5_1_title: "Ce este o Bază?",
+                        def5_1: "O mulțime de vectori \\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_p\\} este o bază pentru un spațiu vectorial V dacă satisface două condiții:",
+                        cond5_1: "1. Mulțimea \\mathcal{B} generează (span) V (acoperă întregul spațiu).",
+                        cond5_2: "2. Mulțimea \\mathcal{B} este liniar independentă (fără redundanță).",
+                        text5_1: "Gândiți-vă la o bază ca la 'sistemul de coordonate' pentru spațiu. Este cea mai mică mulțime de vectori necesară pentru a genera întregul spațiu.",
+                        simple_ex_title: "Exemplu Rapid: Baza Standard",
+                        simple_ex_desc: "În \\mathbb{R}^3, baza standard este \\mathbf{e}_1 = [1,0,0], \\mathbf{e}_2 = [0,1,0], și \\mathbf{e}_3 = [0,0,1].",
+                        simple_ex_math: `\\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 0 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                        simple_ex_note: "Acești 3 vectori generează întregul spațiu 3D și sunt clar independenți.",
+                        def5_2_title: "Dimensiune",
+                        def5_2: "Dimensiunea unui spațiu vectorial V, notată dim(V), este numărul de vectori din orice bază a lui V.",
+                        text5_2: "Teoremă: Deși un spațiu vectorial poate avea infinit de multe baze diferite, fiecare bază are exact același număr de vectori.",
+                        visual_title: "Vizualizarea Dimensiunii",
+                        visual_0d: "dim(V) = 0: Subspațiul zero {\\mathbf{0}}.",
+                        visual_1d: "dim(V) = 1: O dreaptă prin origine.",
+                        visual_2d: "dim(V) = 2: Un plan prin origine.",
+                        visual_3d: "dim(V) = 3: Întregul spațiu \\mathbb{R}^3."
+                    },
+                    example_section: {
+                        title_ex: "Exemple cu Soluții Pas cu Pas",
+                        ex1: {
+                            title: "1. Testarea Subspațiilor",
+                            problem: "Este mulțimea W a tuturor vectorilor de forma \\begin{bmatrix} a \\\\ b \\\\ 1 \\end{bmatrix} un subspațiu al \\mathbb{R}^3?",
+                            step1_title: "Pasul 1: Verificați Vectorul Zero",
+                            step1_desc: "Pentru ca o mulțime să fie un subspațiu, trebuie să conțină vectorul zero \\mathbf{0} = [0, 0, 0].",
+                            step1_math: `\\text{În mulțimea noastră W, ultima componentă este întotdeauna 1.}`,
+                            step2_title: "Pasul 2: Concluzie",
+                            step2_desc: "Deoarece [0, 0, 0] nu poate fi scris sub forma [a, b, 1] (pentru că 0 \\ne 1), vectorul zero NU este în W.",
+                            result_title: "Răspuns Final",
+                            result: "W NU este un subspațiu al \\mathbb{R}^3."
+                        },
+                        ex2: {
+                            title: "2. Testarea Independenței Liniare",
+                            problem: "Sunt vectorii \\mathbf{v}_1 = [1, 2] și \\mathbf{v}_2 = [3, 6] liniar independenți?",
+                            step1_title: "Pasul 1: Configurați Ecuația",
+                            step1_desc: "Verificați dacă c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 = \\mathbf{0} are doar soluția trivială.",
+                            step1_math: `c_1 \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + c_2 \\begin{bmatrix} 3 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Pasul 2: Rezolvați Sistemul",
+                            step2_desc: "Aceasta corespunde matricei extinse:",
+                            step2_math: `\\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 2 & 6 & 0 \\end{array} \\right] \\xrightarrow{R_2 - 2R_1} \\left[ \\begin{array}{cc|c} 1 & 3 & 0 \\\\ 0 & 0 & 0 \\end{array} \\right]`,
+                            step3_title: "Pasul 3: Interpretați Rezultatele",
+                            step3_desc: "Avem un rând de zerouri și o variabilă liberă (c_2). Aceasta înseamnă că există soluții infinite nenule (de ex., c_1 = -3, c_2 = 1).",
+                            result_title: "Răspuns Final",
+                            result: "Vectorii sunt Liniar Dependenți."
+                        },
+                        ex3: {
+                            title: "3. Găsirea unei Baze și a Dimensiunii",
+                            problem: "Găsiți o bază pentru subspațiul generat de \\mathbf{v}_1 = [1, 2, 3], \\mathbf{v}_2 = [2, 4, 6] și \\mathbf{v}_3 = [0, 1, 1].",
+                            step1_title: "Pasul 1: Verificați Dependența",
+                            step1_desc: "Observați că \\mathbf{v}_2 = 2\\mathbf{v}_1. Aceasta înseamnă că \\mathbf{v}_2$ este redundant și poate fi eliminat.",
+                            step1_math: `\\text{Span}{\\mathbf{v}_1, \\mathbf{v}_2, \\mathbf{v}_3 } = \\text{Span}{\\mathbf{v}_1, \\mathbf{v}_3 }`,
+                            step2_title: "Pasul 2: Verificați Independența Vectorilor Rămași",
+                            step2_desc: "\\mathbf{v}_1 și \\mathbf{v}_3 nu sunt multipli unul celuilalt. Prin urmare, sunt liniar independenți.",
+                            step3_title: "Pasul 3: Formați Baza",
+                            step3_math: `\\text{Baza } \\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 1 \\end{bmatrix} \\right\\}`,
+                            result_title: "Răspuns Final",
+                            result: "Baza este {\\mathbf{v}_1, \\mathbf{v}_3 } și Dimensiunea este 2 (un plan)."
+                        }
+                    }
+                }
+            }
+        }      
     }
 }

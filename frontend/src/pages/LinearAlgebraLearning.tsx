@@ -23,6 +23,7 @@ const LinearAlgebraLearning = () => {
   const lesson2 = course.determinants.lessons.lesson2;
   const lesson3 = (course as any).matrixInverse.lessons.lesson3;
   const lesson4 = (course as any).linearEquations.lessons.lesson4;
+  const lesson5 = (course as any).vectorSpaces.lessons.lesson5;
 
   const scrollToLesson = (lessonId: string) => {
     const element = document.getElementById(lessonId);
@@ -80,8 +81,27 @@ const LinearAlgebraLearning = () => {
     
     // PRIORITY 2: Handle subscripts and other inline patterns
     
+    // Handle letter with subscript and superscript like F_2^{n x n} BEFORE other patterns
+    processed = processed.replace(/([A-Za-z])_([a-zA-Z0-9])\^\{([^}]+)\}/g, (match, letter, subscript, superscript) => {
+      try {
+        return katex.renderToString(`${letter}_{${subscript}}^{${superscript}}`, { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return match;
+      }
+    });
+    
     // Handle complex subscripts with commas and parentheses like a_{\pi(i),i}
     processed = processed.replace(/([a-zA-Z])_\{([^}]+)\}/g, (match, letter, subscript) => {
+      try {
+        return katex.renderToString(`${letter}_{${subscript}}`, { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return match;
+      }
+    });
+    
+    // Handle simple subscripts without braces for single characters (like I_m, I_n, S_n, S_2)
+    // But NOT if followed by ^ (superscript) since those are handled above
+    processed = processed.replace(/([A-Za-z])_([a-zA-Z0-9])(?![a-zA-Z0-9_^])/g, (match, letter, subscript) => {
       try {
         return katex.renderToString(`${letter}_{${subscript}}`, { displayMode: false, throwOnError: false });
       } catch (e) {
@@ -135,7 +155,7 @@ const LinearAlgebraLearning = () => {
     });
     
     // Handle bold vectors like \mathbf{a}_1, \mathbf{b}_2
-    processed = processed.replace(/\\mathbf\{([a-zA-Z])\}_\{?([0-9a-zA-Z]+)\}?/g, (match, letter, subscript) => {
+    processed = processed.replace(/\\mathbf\{([a-zA-Z0-9])\}_\{?([0-9a-zA-Z]+)\}?/g, (match, letter, subscript) => {
       try {
         return katex.renderToString(`\\mathbf{${letter}}_{${subscript}}`, { displayMode: false, throwOnError: false });
       } catch (e) {
@@ -143,8 +163,8 @@ const LinearAlgebraLearning = () => {
       }
     });
     
-    // Handle bold vectors without subscripts
-    processed = processed.replace(/\\mathbf\{([a-zA-Z])\}/g, (match, letter) => {
+    // Handle bold vectors without subscripts (including \mathbf{0})
+    processed = processed.replace(/\\mathbf\{([a-zA-Z0-9])\}/g, (match, letter) => {
       try {
         return katex.renderToString(`\\mathbf{${letter}}`, { displayMode: false, throwOnError: false });
       } catch (e) {
@@ -152,10 +172,56 @@ const LinearAlgebraLearning = () => {
       }
     });
     
-    // Handle inline math delimiters like \(...\) or just raw LaTeX
+    // Handle \mathbb{} with superscripts like \mathbb{R}^{n}
     processed = processed.replace(/\\mathbb\{([^}]+)\}\^\{([^}]+)\}/g, (match, p1, p2) => {
       try {
         return katex.renderToString(`\\mathbb{${p1}}^{${p2}}`, { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return match;
+      }
+    });
+    
+    // Handle \mathbb{} with single character superscripts like \mathbb{R}^n
+    processed = processed.replace(/\\mathbb\{([^}]+)\}\^([a-zA-Z0-9])/g, (match, letter, superscript) => {
+      try {
+        return katex.renderToString(`\\mathbb{${letter}}^{${superscript}}`, { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return match;
+      }
+    });
+    
+    // Handle \mathbb{} with subscripts like \mathbb{P}_{n}
+    processed = processed.replace(/\\mathbb\{([^}]+)\}_\{([^}]+)\}/g, (match, letter, subscript) => {
+      try {
+        return katex.renderToString(`\\mathbb{${letter}}_{${subscript}}`, { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return match;
+      }
+    });
+    
+    // Handle \mathbb{} with single character subscripts like \mathbb{P}_n
+    processed = processed.replace(/\\mathbb\{([^}]+)\}_([a-zA-Z0-9])/g, (match, letter, subscript) => {
+      try {
+        return katex.renderToString(`\\mathbb{${letter}}_{${subscript}}`, { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return match;
+      }
+    });
+    
+    // Handle plain \mathbb{} like \mathbb{R}, \mathbb{P} 
+    // But NOT if followed by _ or ^ (those are handled above)
+    processed = processed.replace(/\\mathbb\{([^}]+)\}(?![_^])/g, (match, letter) => {
+      try {
+        return katex.renderToString(`\\mathbb{${letter}}`, { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return match;
+      }
+    });
+    
+    // Handle \mathcal{} like \mathcal{B} (calligraphic font)
+    processed = processed.replace(/\\mathcal\{([^}]+)\}/g, (match, letter) => {
+      try {
+        return katex.renderToString(`\\mathcal{${letter}}`, { displayMode: false, throwOnError: false });
       } catch (e) {
         return match;
       }
@@ -170,21 +236,21 @@ const LinearAlgebraLearning = () => {
       }
     });
     
-    // Handle subscripts without braces for single characters (like I_m, I_n, S_n, S_2)
-    processed = processed.replace(/([A-Za-z])_([a-zA-Z0-9])(?![a-zA-Z0-9_])/g, (match, letter, subscript) => {
-      try {
-        return katex.renderToString(`${letter}_{${subscript}}`, { displayMode: false, throwOnError: false });
-      } catch (e) {
-        return match;
-      }
-    });
-    
     // Handle cdots
     processed = processed.replace(/\\cdots/g, () => {
       try {
         return katex.renderToString('\\cdots', { displayMode: false, throwOnError: false });
       } catch (e) {
         return '⋯';
+      }
+    });
+    
+    // Handle dots (lower dots)
+    processed = processed.replace(/\\dots(?![a-zA-Z])/g, () => {
+      try {
+        return katex.renderToString('\\dots', { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return '…';
       }
     });
     
@@ -224,6 +290,33 @@ const LinearAlgebraLearning = () => {
       }
     });
     
+    // Handle \ge (greater than or equal)
+    processed = processed.replace(/\\ge(?![a-zA-Z])/g, () => {
+      try {
+        return katex.renderToString('\\ge', { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return '≥';
+      }
+    });
+    
+    // Handle \le (less than or equal)
+    processed = processed.replace(/\\le(?![a-zA-Z])/g, () => {
+      try {
+        return katex.renderToString('\\le', { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return '≤';
+      }
+    });
+    
+    // Handle \infty (infinity)
+    processed = processed.replace(/\\infty(?![a-zA-Z])/g, () => {
+      try {
+        return katex.renderToString('\\infty', { displayMode: false, throwOnError: false });
+      } catch (e) {
+        return '∞';
+      }
+    });
+    
     return processed;
   };
 
@@ -254,7 +347,7 @@ const LinearAlgebraLearning = () => {
     },
     {
       id: "vectors",
-      lessonId: null,
+      lessonId: "lesson-vectors",
       color: "from-orange-500/10 to-orange-500/5 hover:from-orange-500/20 hover:to-orange-500/10",
       borderColor: "hover:border-orange-500/30"
     },
@@ -1534,7 +1627,408 @@ const LinearAlgebraLearning = () => {
           </Accordion>
         </div>
 
-        {/* Topics Grid */}
+        {/* Lesson 5: Vector Spaces */}
+        <div id="lesson-vectors" className="max-w-4xl mx-auto mb-12">
+          <div className="mb-6">
+            <Badge className="mb-3">Lesson 5</Badge>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-2">{(course as any).vectorSpaces.lessons.lesson5_title}</h2>
+            <p className="text-muted-foreground">{(course as any).vectorSpaces.description}</p>
+          </div>
+
+          <Accordion type="single" collapsible className="space-y-4">
+            {/* Section 1: What is a Vector Space? */}
+            <AccordionItem value="vec-section1" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
+                {lesson5.section1.title1}
+              </AccordionTrigger>
+              <AccordionContent className="pb-6">
+                <div className="space-y-4">
+                  <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.def1_1) }} />
+                  
+                  <p className="text-muted-foreground font-semibold mt-4" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_intro) }} />
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section1.axiom_title_add}</p>
+                    <ul className="list-none space-y-1 ml-4 text-muted-foreground">
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_add_1) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_add_2) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_add_3) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_add_4) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_add_5) }} />
+                    </ul>
+                  </div>
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section1.axiom_title_scal}</p>
+                    <ul className="list-none space-y-1 ml-4 text-muted-foreground">
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_scal_1) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_scal_2) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_scal_3) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_scal_4) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.axiom_scal_5) }} />
+                    </ul>
+                  </div>
+                  
+                  <p className="text-muted-foreground font-semibold mt-6" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.title_ex1) }} />
+                  <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.text_ex1) }} />
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.def_ops_title) }} />
+                    <p className="text-muted-foreground mb-2">{lesson5.section1.def_ops_add}</p>
+                    <div 
+                      className="my-3 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section1.math_ops_add, true) }}
+                    />
+                    <p className="text-muted-foreground mb-2 mt-4">{lesson5.section1.def_ops_scal}</p>
+                    <div 
+                      className="my-3 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section1.math_ops_scal, true) }}
+                    />
+                  </div>
+                  
+                  <p className="text-muted-foreground font-semibold mt-6" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.title_ex2) }} />
+                  <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.text_ex2) }} />
+                  <ul className="list-none space-y-1 ml-4 text-muted-foreground mt-2">
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.list_ex2_1) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.list_ex2_2) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.list_ex2_3) }} />
+                  </ul>
+                  
+                  <div className="mt-6 bg-blue-50 dark:bg-blue-950/20 p-4 rounded">
+                    <p className="font-semibold mb-2 text-blue-700 dark:text-blue-400">{lesson5.section1.simple_ex_title}</p>
+                    <p className="text-sm text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.simple_ex_desc) }} />
+                    <div 
+                      className="my-2 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section1.simple_ex_math, true) }}
+                    />
+                    <p className="text-sm text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.simple_ex_note) }} />
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Section 2: Subspaces */}
+            <AccordionItem value="vec-section2" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
+                {lesson5.section2.title2}
+              </AccordionTrigger>
+              <AccordionContent className="pb-6">
+                <div className="space-y-4">
+                  <p className="text-muted-foreground italic">{lesson5.section2.description}</p>
+                  <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.def2_1) }} />
+                  <p className="text-muted-foreground mt-4" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.text2_1) }} />
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section2.theorem2_1_title}</p>
+                    <p className="text-muted-foreground mb-2">{lesson5.section2.theorem2_1_desc}</p>
+                    <ul className="list-none space-y-1 ml-4 text-muted-foreground">
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.cond2_1) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.cond2_2) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.cond2_3) }} />
+                    </ul>
+                  </div>
+                  
+                  <p className="text-muted-foreground font-semibold mt-6" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.title_ex2) }} />
+                  <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.text_ex2) }} />
+                  <ul className="list-none space-y-1 ml-4 text-muted-foreground mt-2">
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.list_ex2_1) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.list_ex2_2) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.list_ex2_3) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.list_ex2_4) }} />
+                  </ul>
+                  
+                  <p className="text-muted-foreground font-semibold mt-6">{lesson5.section2.title_non_ex2}</p>
+                  <ul className="list-none space-y-1 ml-4 text-muted-foreground mt-2">
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.non_ex2_1) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.non_ex2_2) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.non_ex2_3) }} />
+                  </ul>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Section 3: Linear Combinations and Span */}
+            <AccordionItem value="vec-section3" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
+                {lesson5.section3.title3}
+              </AccordionTrigger>
+              <AccordionContent className="pb-6">
+                <div className="space-y-4">
+                  <p className="text-muted-foreground italic">{lesson5.section3.description}</p>
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section3.def3_1_title}</p>
+                    <p className="text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.def3_1) }} />
+                    <div 
+                      className="my-3 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section3.math3_1, true) }}
+                    />
+                    <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.text3_1) }} />
+                  </div>
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section3.def3_2_title}</p>
+                    <p className="text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.def3_2) }} />
+                    <div 
+                      className="my-3 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section3.math3_2, true) }}
+                    />
+                  </div>
+                  
+                  <p className="text-muted-foreground font-semibold mt-6" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.visual_title) }} />
+                  <p className="text-muted-foreground mb-2">{lesson5.section3.visual_desc}</p>
+                  <ul className="list-none space-y-1 ml-4 text-muted-foreground">
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.visual_item1) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.visual_item2) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.visual_item3) }} />
+                  </ul>
+                  
+                  <div className="mt-4 bg-green-50 dark:bg-green-950/20 p-4 rounded">
+                    <p className="font-semibold mb-2 text-green-700 dark:text-green-400">{lesson5.section3.connection_title}</p>
+                    <p className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.connection_text) }} />
+                  </div>
+                  
+                  <p className="text-muted-foreground font-semibold mt-6" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.theorem3_1) }} />
+                  
+                  <div className="mt-6 bg-blue-50 dark:bg-blue-950/20 p-4 rounded">
+                    <p className="font-semibold mb-2 text-blue-700 dark:text-blue-400">{lesson5.section3.simple_ex_title}</p>
+                    <p className="text-sm text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.simple_ex_desc) }} />
+                    <div 
+                      className="my-2 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section3.simple_ex_math1, true) }}
+                    />
+                    <p className="text-sm text-muted-foreground mt-3 mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.simple_ex_desc2) }} />
+                    <div 
+                      className="my-2 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section3.simple_ex_math2, true) }}
+                    />
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Section 4: Linear Independence */}
+            <AccordionItem value="vec-section4" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
+                {lesson5.section4.title4}
+              </AccordionTrigger>
+              <AccordionContent className="pb-6">
+                <div className="space-y-4">
+                  <p className="text-muted-foreground italic">{lesson5.section4.description}</p>
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section4.def4_1_title}</p>
+                    <p className="text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.def4_1) }} />
+                    <div 
+                      className="my-3 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section4.math4_1, true) }}
+                    />
+                    <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.def4_1_conclusion) }} />
+                  </div>
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section4.def4_2_title}</p>
+                    <p className="text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.def4_2) }} />
+                    <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.text4_2) }} />
+                  </div>
+                  
+                  <div className="mt-6 bg-blue-50 dark:bg-blue-950/20 p-4 rounded">
+                    <p className="font-semibold mb-2 text-blue-700 dark:text-blue-400">{lesson5.section4.simple_ex_title}</p>
+                    <p className="text-sm text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.simple_ex_desc) }} />
+                    <div 
+                      className="my-2 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section4.simple_ex_math, true) }}
+                    />
+                    <p className="text-sm text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.simple_ex_conc) }} />
+                  </div>
+                  
+                  <p className="text-muted-foreground font-semibold mt-6">{lesson5.section4.visual_title}</p>
+                  <ul className="list-none space-y-2 ml-4 text-muted-foreground">
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.visual_2d) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.visual_3d) }} />
+                  </ul>
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section4.test_title}</p>
+                    <p className="text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.test_desc) }} />
+                    <ul className="list-none space-y-1 ml-4 text-muted-foreground">
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.test_cond1) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.test_cond2) }} />
+                    </ul>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Section 5: Basis and Dimension */}
+            <AccordionItem value="vec-section5" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
+                {lesson5.section5.title5}
+              </AccordionTrigger>
+              <AccordionContent className="pb-6">
+                <div className="space-y-4">
+                  <p className="text-muted-foreground italic">{lesson5.section5.description}</p>
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section5.def5_1_title}</p>
+                    <p className="text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.def5_1) }} />
+                    <ul className="list-none space-y-1 ml-4 text-muted-foreground">
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.cond5_1) }} />
+                      <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.cond5_2) }} />
+                    </ul>
+                    <p className="text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.text5_1) }} />
+                  </div>
+                  
+                  <div className="mt-6 bg-blue-50 dark:bg-blue-950/20 p-4 rounded">
+                    <p className="font-semibold mb-2 text-blue-700 dark:text-blue-400">{lesson5.section5.simple_ex_title}</p>
+                    <p className="text-sm text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.simple_ex_desc) }} />
+                    <div 
+                      className="my-2 overflow-x-auto"
+                      dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section5.simple_ex_math, true) }}
+                    />
+                    <p className="text-sm text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.simple_ex_note) }} />
+                  </div>
+                  
+                  <div className="mt-4">
+                    <p className="font-semibold mb-2">{lesson5.section5.def5_2_title}</p>
+                    <p className="text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.def5_2) }} />
+                    <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.text5_2) }} />
+                  </div>
+                  
+                  <p className="text-muted-foreground font-semibold mt-6">{lesson5.section5.visual_title}</p>
+                  <ul className="list-none space-y-1 ml-4 text-muted-foreground">
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.visual_0d) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.visual_1d) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.visual_2d) }} />
+                    <li dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section5.visual_3d) }} />
+                  </ul>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Examples Section */}
+            <AccordionItem value="vec-examples" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
+                {lesson5.example_section.title_ex}
+              </AccordionTrigger>
+              <AccordionContent className="pb-6">
+                <div className="space-y-8">
+                  {/* Example 1 */}
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <h4 className="font-semibold mb-3">{lesson5.example_section.ex1.title}</h4>
+                    <p className="text-muted-foreground mb-3 font-medium">Problem:</p>
+                    <div 
+                      className="mb-4"
+                      dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex1.problem) }}
+                    />
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <p className="font-semibold text-sm mb-1">{lesson5.example_section.ex1.step1_title}</p>
+                        <p className="text-sm text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex1.step1_desc) }} />
+                        <div 
+                          className="overflow-x-auto text-sm"
+                          dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex1.step1_math) }}
+                        />
+                      </div>
+                      
+                      <div>
+                        <p className="font-semibold text-sm mb-1">{lesson5.example_section.ex1.step2_title}</p>
+                        <p className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex1.step2_desc) }} />
+                      </div>
+                      
+                      <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded">
+                        <p className="font-semibold text-sm mb-2 text-green-700 dark:text-green-400">{lesson5.example_section.ex1.result_title}</p>
+                        <p className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex1.result) }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Example 2 */}
+                  <div className="border-l-4 border-purple-500 pl-4">
+                    <h4 className="font-semibold mb-3">{lesson5.example_section.ex2.title}</h4>
+                    <p className="text-muted-foreground mb-3 font-medium">Problem:</p>
+                    <div 
+                      className="mb-4"
+                      dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex2.problem) }}
+                    />
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <p className="font-semibold text-sm mb-1">{lesson5.example_section.ex2.step1_title}</p>
+                        <p className="text-sm text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex2.step1_desc) }} />
+                        <div 
+                          className="overflow-x-auto"
+                          dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex2.step1_math, true) }}
+                        />
+                      </div>
+                      
+                      <div>
+                        <p className="font-semibold text-sm mb-1">{lesson5.example_section.ex2.step2_title}</p>
+                        <p className="text-sm text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex2.step2_desc) }} />
+                        <div 
+                          className="overflow-x-auto"
+                          dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex2.step2_math, true) }}
+                        />
+                      </div>
+                      
+                      <div>
+                        <p className="font-semibold text-sm mb-1">{lesson5.example_section.ex2.step3_title}</p>
+                        <p className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex2.step3_desc) }} />
+                      </div>
+                      
+                      <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded">
+                        <p className="font-semibold text-sm mb-2 text-green-700 dark:text-green-400">{lesson5.example_section.ex2.result_title}</p>
+                        <p className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex2.result) }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Example 3 */}
+                  <div className="border-l-4 border-orange-500 pl-4">
+                    <h4 className="font-semibold mb-3">{lesson5.example_section.ex3.title}</h4>
+                    <p className="text-muted-foreground mb-3 font-medium">Problem:</p>
+                    <div 
+                      className="mb-4"
+                      dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex3.problem) }}
+                    />
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <p className="font-semibold text-sm mb-1">{lesson5.example_section.ex3.step1_title}</p>
+                        <p className="text-sm text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex3.step1_desc) }} />
+                        <div 
+                          className="overflow-x-auto text-sm"
+                          dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex3.step1_math) }}
+                        />
+                      </div>
+                      
+                      <div>
+                        <p className="font-semibold text-sm mb-1">{lesson5.example_section.ex3.step2_title}</p>
+                        <p className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex3.step2_desc) }} />
+                      </div>
+                      
+                      <div>
+                        <p className="font-semibold text-sm mb-1">{lesson5.example_section.ex3.step3_title}</p>
+                        <div 
+                          className="overflow-x-auto"
+                          dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex3.step3_math, true) }}
+                        />
+                      </div>
+                      
+                      <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded">
+                        <p className="font-semibold text-sm mb-2 text-green-700 dark:text-green-400">{lesson5.example_section.ex3.result_title}</p>
+                        <p className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex3.result) }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+
+        {/* Topics Grid */
         <div className="max-w-6xl mx-auto mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
             {t.topics_covered}
@@ -1576,7 +2070,7 @@ const LinearAlgebraLearning = () => {
             })}
           </div>
         </div>
-
+        }
         {/* Features */}
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">

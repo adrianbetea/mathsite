@@ -874,6 +874,162 @@ const MatrixCalculator = () => {
             )}
           </div>
 
+          {/* Loading State */}
+          {isComputing && (
+            <div className="math-display animate-scale-in">
+              <div className="text-sm text-muted-foreground mb-2">
+                {t.matrixCalculator.result}
+              </div>
+              <div className="flex items-center gap-3 py-4">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                </div>
+                <span className="text-muted-foreground text-sm">{t.matrixCalculator.computing}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Result */}
+          {!isComputing && (result || error) && (
+            <div
+              className={`animate-scale-in ${error ? "result-error" : "math-display"}`}
+            >
+              {error ? (
+                <pre className="whitespace-pre-wrap font-mono text-sm">{error}</pre>
+              ) : (
+                <div className="text-sm">
+                  {parseAndRenderResult(result)}
+                  
+                  {/* Show method explanation if this is a determinant calculation */}
+                  {result.includes("Determinant:") && (
+                    <div className="mt-4 p-3 bg-secondary/30 rounded-lg text-xs">
+                      {determinantMethod === "cofactor" && (
+                        <div>
+                          <strong>Cofactor Expansion (Column):</strong>
+                          <div className="mt-2" dangerouslySetInnerHTML={{ 
+                            __html: katex.renderToString(
+                              "\\det(A) = \\sum_{i=1}^{n} (-1)^{i+j} a_{ij} M_{ij}",
+                              { throwOnError: false, displayMode: true }
+                            )
+                          }} />
+                          <p className="mt-1">Expand along a column j, where M<sub>ij</sub> is the minor (determinant of the submatrix without row i and column j).</p>
+                        </div>
+                      )}
+                      {determinantMethod === "cofactorRow" && (
+                        <div>
+                          <strong>Cofactor Expansion (Row):</strong>
+                          <div className="mt-2" dangerouslySetInnerHTML={{ 
+                            __html: katex.renderToString(
+                              "\\det(A) = \\sum_{j=1}^{n} (-1)^{i+j} a_{ij} M_{ij}",
+                              { throwOnError: false, displayMode: true }
+                            )
+                          }} />
+                          <p className="mt-1">Expand along a row i, where M<sub>ij</sub> is the minor (determinant of the submatrix without row i and column j).</p>
+                        </div>
+                      )}
+                      {determinantMethod === "columnZeros" && (
+                        <div>
+                          <strong>Get Zeros in Column:</strong>
+                          <p className="mt-1">Use row operations to create zeros in a column, then expand along that column. Determinant is invariant under row operations of type: R<sub>i</sub> → R<sub>i</sub> + kR<sub>j</sub></p>
+                          <div className="mt-2" dangerouslySetInnerHTML={{ 
+                            __html: katex.renderToString(
+                              "\\det(A) = \\det(A'), \\text{ where } A' \\text{ has zeros in a column}",
+                              { throwOnError: false, displayMode: true }
+                            )
+                          }} />
+                        </div>
+                      )}
+                      {determinantMethod === "rowZeros" && (
+                        <div>
+                          <strong>Get Zeros in Row:</strong>
+                          <p className="mt-1">Use column operations to create zeros in a row, then expand along that row. Determinant is invariant under column operations of type: C<sub>j</sub> → C<sub>j</sub> + kC<sub>i</sub></p>
+                          <div className="mt-2" dangerouslySetInnerHTML={{ 
+                            __html: katex.renderToString(
+                              "\\det(A) = \\det(A'), \\text{ where } A' \\text{ has zeros in a row}",
+                              { throwOnError: false, displayMode: true }
+                            )
+                          }} />
+                        </div>
+                      )}
+                      {determinantMethod === "gaussian" && (
+                        <div>
+                          <strong>Gaussian Elimination:</strong>
+                          <p className="mt-1">Convert matrix to upper triangular form using row operations. The determinant is the product of diagonal elements (accounting for row swaps).</p>
+                          <div className="mt-2" dangerouslySetInnerHTML={{ 
+                            __html: katex.renderToString(
+                              "\\det(A) = (-1)^s \\prod_{i=1}^{n} u_{ii}",
+                              { throwOnError: false, displayMode: true }
+                            )
+                          }} />
+                          <p className="mt-1">where s is the number of row swaps and u<sub>ii</sub> are diagonal elements of upper triangular matrix.</p>
+                        </div>
+                      )}
+                      {determinantMethod === "triangle" && (
+                        <div>
+                          <strong>Triangle's Rule:</strong>
+                          <p className="mt-1">For 3×3 matrices, add products of diagonals going down-right, subtract products going down-left.</p>
+                          <div className="mt-2" dangerouslySetInnerHTML={{ 
+                            __html: katex.renderToString(
+                              "\\det(A) = (a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32}) - (a_{13}a_{22}a_{31} + a_{11}a_{23}a_{32} + a_{12}a_{21}a_{33})",
+                              { throwOnError: false, displayMode: true }
+                            )
+                          }} />
+                        </div>
+                      )}
+                      {determinantMethod === "sarrus" && (
+                        <div>
+                          <strong>Rule of Sarrus (3×3 only):</strong>
+                          <p className="mt-1">Extend the matrix by repeating first two columns, then sum main diagonals and subtract anti-diagonals.</p>
+                          <div className="mt-2" dangerouslySetInnerHTML={{ 
+                            __html: katex.renderToString(
+                              "\\begin{vmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{vmatrix} = aei + bfg + cdh - ceg - afh - bdi",
+                              { throwOnError: false, displayMode: true }
+                            )
+                          }} />
+                        </div>
+                      )}
+                      {determinantMethod === "leibniz" && (
+                        <div>
+                          <strong>Leibniz Formula:</strong>
+                          <p className="mt-1">Sum over all permutations σ of &#123;1,...,n&#125;, with sign based on permutation parity.</p>
+                          <div className="mt-2" dangerouslySetInnerHTML={{ 
+                            __html: katex.renderToString(
+                              "\\det(A) = \\sum_{\\sigma \\in S_n} \\text{sgn}(\\sigma) \\prod_{i=1}^{n} a_{i,\\sigma(i)}",
+                              { throwOnError: false, displayMode: true }
+                            )
+                          }} />
+                          <p className="mt-1">where sgn(σ) is +1 for even permutations and -1 for odd permutations.</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+              
+              {/* Show Steps Button */}
+              {!error && steps && (
+                <div className="mt-4">
+                  <button
+                    onClick={() => setShowSteps(!showSteps)}
+                    className="btn-primary text-sm px-4 py-2"
+                  >
+                    {showSteps ? t.matrixCalculator.hideSteps : t.matrixCalculator.showSteps}
+                  </button>
+                  
+                  {/* Steps Dropdown */}
+                  {showSteps && (
+                    <div className="mt-4 p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up">
+                      <h3 className="text-sm font-semibold text-foreground mb-2">{t.matrixCalculator.detailedStepsLabel}</h3>
+                      <div className="text-sm" dangerouslySetInnerHTML={{ __html: steps }} />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Operations */}
           <div className="calculator-card mb-6 sm:mb-8 animate-slide-up" style={{ animationDelay: "300ms" }}>
             <div className="flex items-center justify-between mb-4">
@@ -1030,162 +1186,6 @@ const MatrixCalculator = () => {
               </>
             )}
           </div>
-
-          {/* Loading State */}
-          {isComputing && (
-            <div className="math-display animate-scale-in">
-              <div className="text-sm text-muted-foreground mb-2">
-                {t.matrixCalculator.result}
-              </div>
-              <div className="flex items-center gap-3 py-4">
-                <div className="flex gap-1">
-                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                </div>
-                <span className="text-muted-foreground text-sm">{t.matrixCalculator.computing}</span>
-              </div>
-            </div>
-          )}
-
-          {/* Result */}
-          {!isComputing && (result || error) && (
-            <div
-              className={`animate-scale-in ${error ? "result-error" : "math-display"}`}
-            >
-              {error ? (
-                <pre className="whitespace-pre-wrap font-mono text-sm">{error}</pre>
-              ) : (
-                <div className="text-sm">
-                  {parseAndRenderResult(result)}
-                  
-                  {/* Show method explanation if this is a determinant calculation */}
-                  {result.includes("Determinant:") && (
-                    <div className="mt-4 p-3 bg-secondary/30 rounded-lg text-xs">
-                      {determinantMethod === "cofactor" && (
-                        <div>
-                          <strong>Cofactor Expansion (Column):</strong>
-                          <div className="mt-2" dangerouslySetInnerHTML={{ 
-                            __html: katex.renderToString(
-                              "\\det(A) = \\sum_{i=1}^{n} (-1)^{i+j} a_{ij} M_{ij}",
-                              { throwOnError: false, displayMode: true }
-                            )
-                          }} />
-                          <p className="mt-1">Expand along a column j, where M<sub>ij</sub> is the minor (determinant of the submatrix without row i and column j).</p>
-                        </div>
-                      )}
-                      {determinantMethod === "cofactorRow" && (
-                        <div>
-                          <strong>Cofactor Expansion (Row):</strong>
-                          <div className="mt-2" dangerouslySetInnerHTML={{ 
-                            __html: katex.renderToString(
-                              "\\det(A) = \\sum_{j=1}^{n} (-1)^{i+j} a_{ij} M_{ij}",
-                              { throwOnError: false, displayMode: true }
-                            )
-                          }} />
-                          <p className="mt-1">Expand along a row i, where M<sub>ij</sub> is the minor (determinant of the submatrix without row i and column j).</p>
-                        </div>
-                      )}
-                      {determinantMethod === "columnZeros" && (
-                        <div>
-                          <strong>Get Zeros in Column:</strong>
-                          <p className="mt-1">Use row operations to create zeros in a column, then expand along that column. Determinant is invariant under row operations of type: R<sub>i</sub> → R<sub>i</sub> + kR<sub>j</sub></p>
-                          <div className="mt-2" dangerouslySetInnerHTML={{ 
-                            __html: katex.renderToString(
-                              "\\det(A) = \\det(A'), \\text{ where } A' \\text{ has zeros in a column}",
-                              { throwOnError: false, displayMode: true }
-                            )
-                          }} />
-                        </div>
-                      )}
-                      {determinantMethod === "rowZeros" && (
-                        <div>
-                          <strong>Get Zeros in Row:</strong>
-                          <p className="mt-1">Use column operations to create zeros in a row, then expand along that row. Determinant is invariant under column operations of type: C<sub>j</sub> → C<sub>j</sub> + kC<sub>i</sub></p>
-                          <div className="mt-2" dangerouslySetInnerHTML={{ 
-                            __html: katex.renderToString(
-                              "\\det(A) = \\det(A'), \\text{ where } A' \\text{ has zeros in a row}",
-                              { throwOnError: false, displayMode: true }
-                            )
-                          }} />
-                        </div>
-                      )}
-                      {determinantMethod === "gaussian" && (
-                        <div>
-                          <strong>Gaussian Elimination:</strong>
-                          <p className="mt-1">Convert matrix to upper triangular form using row operations. The determinant is the product of diagonal elements (accounting for row swaps).</p>
-                          <div className="mt-2" dangerouslySetInnerHTML={{ 
-                            __html: katex.renderToString(
-                              "\\det(A) = (-1)^s \\prod_{i=1}^{n} u_{ii}",
-                              { throwOnError: false, displayMode: true }
-                            )
-                          }} />
-                          <p className="mt-1">where s is the number of row swaps and u<sub>ii</sub> are diagonal elements of upper triangular matrix.</p>
-                        </div>
-                      )}
-                      {determinantMethod === "triangle" && (
-                        <div>
-                          <strong>Triangle's Rule:</strong>
-                          <p className="mt-1">For 3×3 matrices, add products of diagonals going down-right, subtract products going down-left.</p>
-                          <div className="mt-2" dangerouslySetInnerHTML={{ 
-                            __html: katex.renderToString(
-                              "\\det(A) = (a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32}) - (a_{13}a_{22}a_{31} + a_{11}a_{23}a_{32} + a_{12}a_{21}a_{33})",
-                              { throwOnError: false, displayMode: true }
-                            )
-                          }} />
-                        </div>
-                      )}
-                      {determinantMethod === "sarrus" && (
-                        <div>
-                          <strong>Rule of Sarrus (3×3 only):</strong>
-                          <p className="mt-1">Extend the matrix by repeating first two columns, then sum main diagonals and subtract anti-diagonals.</p>
-                          <div className="mt-2" dangerouslySetInnerHTML={{ 
-                            __html: katex.renderToString(
-                              "\\begin{vmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{vmatrix} = aei + bfg + cdh - ceg - afh - bdi",
-                              { throwOnError: false, displayMode: true }
-                            )
-                          }} />
-                        </div>
-                      )}
-                      {determinantMethod === "leibniz" && (
-                        <div>
-                          <strong>Leibniz Formula:</strong>
-                          <p className="mt-1">Sum over all permutations σ of &#123;1,...,n&#125;, with sign based on permutation parity.</p>
-                          <div className="mt-2" dangerouslySetInnerHTML={{ 
-                            __html: katex.renderToString(
-                              "\\det(A) = \\sum_{\\sigma \\in S_n} \\text{sgn}(\\sigma) \\prod_{i=1}^{n} a_{i,\\sigma(i)}",
-                              { throwOnError: false, displayMode: true }
-                            )
-                          }} />
-                          <p className="mt-1">where sgn(σ) is +1 for even permutations and -1 for odd permutations.</p>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
-              
-              {/* Show Steps Button */}
-              {!error && steps && (
-                <div className="mt-4">
-                  <button
-                    onClick={() => setShowSteps(!showSteps)}
-                    className="btn-primary text-sm px-4 py-2"
-                  >
-                    {showSteps ? t.matrixCalculator.hideSteps : t.matrixCalculator.showSteps}
-                  </button>
-                  
-                  {/* Steps Dropdown */}
-                  {showSteps && (
-                    <div className="mt-4 p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up">
-                      <h3 className="text-sm font-semibold text-foreground mb-2">{t.matrixCalculator.detailedStepsLabel}</h3>
-                      <div className="text-sm" dangerouslySetInnerHTML={{ __html: steps }} />
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
         </div>
       </main>
 
