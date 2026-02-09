@@ -56,7 +56,7 @@ const LearningMaterials = () => {
 
       <main className="container mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-12">
         {/* Hero Section */}
-        <div className="text-center mb-8 animate-slide-up">
+        <div className="text-center mb-12 animate-slide-up">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">
             <span className="text-gradient">{t.title}</span>
           </h1>
@@ -65,29 +65,8 @@ const LearningMaterials = () => {
           </p>
         </div>
 
-        {/* Available Soon Banner */}
-        <div className="max-w-3xl mx-auto mb-12">
-          <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20 p-6 sm:p-8 text-center animate-slide-up">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
-              <BookOpen className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-foreground">
-              {t.explore}
-            </h2>
-            <p className="text-muted-foreground text-base sm:text-lg mb-2">
-              {t.inDevelopment}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              {t.stayTuned}
-            </p>
-          </Card>
-        </div>
-
         {/* Learning Materials */}
         <div className="max-w-6xl mx-auto mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8">
-            {t.upcomingMaterials}
-          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             {materials.map((material, index) => {
               const materialData = t.materials[material.id as keyof typeof t.materials];
