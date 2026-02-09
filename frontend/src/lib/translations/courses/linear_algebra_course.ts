@@ -432,81 +432,79 @@ export const linearAlgebraCourse = {
                         note_desc: "The Row Echelon Form (REF) of a matrix is NOT unique (different row operations can lead to different numbers above the pivots). However, the Reduced Row Echelon Form (RREF) IS unique. Every matrix has exactly one RREF."
                     },
                     example_section: {
-                        example_section: {
-                            title_ex: "Examples with Step-by-Step Solutions",
+                        title_ex: "Examples with Step-by-Step Solutions",
 
-                            // Example 1: Unique Solution (Gauss-Jordan)
-                            ex1: {
-                                title: "1. Unique Solution (Gauss-Jordan)",
-                                problem: "Solve the following system using Gauss-Jordan elimination:",
-                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                        // Example 1: Unique Solution (Gauss-Jordan)
+                        ex1: {
+                            title: "1. Unique Solution (Gauss-Jordan)",
+                            problem: "Solve the following system using Gauss-Jordan elimination:",
+                            system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
 
-                                step1_title: "Step 1: Augmented Matrix",
-                                step1_desc: "Convert the system into an augmented matrix [A|b].",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                            step1_title: "Step 1: Augmented Matrix",
+                            step1_desc: "Convert the system into an augmented matrix [A|b].",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
 
-                                step2_title: "Step 2: Create Zeros Below Pivot 1",
-                                step2_desc: "Use the 1 in the top-left to eliminate the entries below it. (R2 = R2 - 2R1) and (R3 = R3 - 3R1).",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step2_title: "Step 2: Create Zeros Below Pivot 1",
+                            step2_desc: "Use the 1 in the top-left to eliminate the entries below it. (R2 = R2 - 2R1) and (R3 = R3 - 3R1).",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
 
-                                step3_title: "Step 3: Create Pivot 2",
-                                step3_desc: "To make the math easier, let's scale R2 by 1/2 to get a leading 1, or subtract R2 from R3. Let's multiply R2 by 0.5.",
-                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step3_title: "Step 3: Create Pivot 2",
+                            step3_desc: "To make the math easier, let's scale R2 by 1/2 to get a leading 1, or subtract R2 from R3. Let's multiply R2 by 0.5.",
+                            step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
 
-                                step4_title: "Step 4: Create Zeros Below Pivot 2",
-                                step4_desc: "Perform (R3 = R3 - 3R2).",
-                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                            step4_title: "Step 4: Create Zeros Below Pivot 2",
+                            step4_desc: "Perform (R3 = R3 - 3R2).",
+                            step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
 
-                                step5_title: "Step 5: Solve for variables (Back Substitution)",
-                                step5_desc: "From R3: -0.5z = -1.5 → z = 3. Substitute z back into R2, then x and y into R1.",
-                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                            step5_title: "Step 5: Solve for variables (Back Substitution)",
+                            step5_desc: "From R3: -0.5z = -1.5 → z = 3. Substitute z back into R2, then x and y into R1.",
+                            step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
 
-                                result_title: "Final Answer",
-                                result: `\\text{Solution: } x=1, y=2, z=3`
-                            },
+                            result_title: "Final Answer",
+                            result: `\\text{Solution: } x=1, y=2, z=3`
+                        },
 
-                            // Example 2: Infinite Solutions (Free Variables)
-                            ex2: {
-                                title: "2. Infinite Solutions (Free Variables)",
-                                problem: "Find the general solution to the system:",
-                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                        // Example 2: Infinite Solutions (Free Variables)
+                        ex2: {
+                            title: "2. Infinite Solutions (Free Variables)",
+                            problem: "Find the general solution to the system:",
+                            system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
 
-                                step1_title: "Step 1: Row Reduction",
-                                step1_desc: "Form the augmented matrix and reduce.",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                            step1_title: "Step 1: Row Reduction",
+                            step1_desc: "Form the augmented matrix and reduce.",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
 
-                                step2_title: "Step 2: Identify Free Variables",
-                                step2_desc: "Rows 2 and 3 became all zeros. This means we have only one pivot (for x). The variables y and z do not have pivots, so they are FREE variables.",
-                                step2_math: `\\text{Let } y = s \\text{ and } z = t, \\text{ where } s,t \\in \\mathbb{R}.`,
+                            step2_title: "Step 2: Identify Free Variables",
+                            step2_desc: "Rows 2 and 3 became all zeros. This means we have only one pivot (for x). The variables y and z do not have pivots, so they are FREE variables.",
+                            step2_math: `\\text{Let } y = s \\text{ and } z = t, \\text{ where } s,t \\in \\mathbb{R}.`,
 
-                                step3_title: "Step 3: Express Basic Variables",
-                                step3_desc: "Rewrite the first equation in terms of the free variables.",
-                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                            step3_title: "Step 3: Express Basic Variables",
+                            step3_desc: "Rewrite the first equation in terms of the free variables.",
+                            step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
 
-                                result_title: "Final Answer (Parametric Form)",
-                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
-                            },
+                            result_title: "Final Answer (Parametric Form)",
+                            result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                        },
 
-                            // Example 3: No Solution (Inconsistent System)
-                            ex3: {
-                                title: "3. No Solution (Inconsistent System)",
-                                problem: "Determine the solution to the following system:",
-                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                        // Example 3: No Solution (Inconsistent System)
+                        ex3: {
+                            title: "3. No Solution (Inconsistent System)",
+                            problem: "Determine the solution to the following system:",
+                            system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
 
-                                step1_title: "Step 1: Form Augmented Matrix",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step1_title: "Step 1: Form Augmented Matrix",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
 
-                                step2_title: "Step 2: Row Operations",
-                                step2_desc: "Perform R2 = R2 - R1.",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step2_title: "Step 2: Row Operations",
+                            step2_desc: "Perform R2 = R2 - R1.",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
 
-                                step3_title: "Step 3: Interpret Result",
-                                step3_desc: "Look closely at the second row. Translating this back into an equation gives us:",
-                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                            step3_title: "Step 3: Interpret Result",
+                            step3_desc: "Look closely at the second row. Translating this back into an equation gives us:",
+                            step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
 
-                                result_title: "Final Conclusion",
-                                result: `Since 0 = 3 is a mathematical contradiction, the system is Inconsistent (No Solution). Geometrically, this represents parallel planes that never intersect.`
-                            }
+                            result_title: "Final Conclusion",
+                            result: `Since 0 = 3 is a mathematical contradiction, the system is Inconsistent (No Solution). Geometrically, this represents parallel planes that never intersect.`
                         }
                     }
                 }
@@ -724,7 +722,103 @@ export const linearAlgebraCourse = {
                     }
                 }
             }
-        }
+        }, 
+        eigenvalues: {
+            title: "Eigenvalues & Eigenvectors",
+            description: "Learn how to compute eigenvalues, eigenvectors, and diagonalize matrices.",
+            lessons: {
+                lesson6_title: "Eigenvalues & Eigenvectors",
+                lesson6: {
+                    section1: {
+                        title1: "What are Eigenvalues and Eigenvectors?",
+                        def1_1: "Let A be a square n x n matrix. An eigenpair is a pair (\\lambda, \\mathbf{v}) where \\lambda is a scalar and \\mathbf{v} is a non-zero vector such that:",
+                        math1_1: `A\\mathbf{v} = \\lambda \\mathbf{v}`,
+                        def1_2: "The scalar \\lambda is called an eigenvalue and the vector \\mathbf{v} is called an eigenvector.",
+                        text1_1: "Geometrically, multiplying \\mathbf{v} by A does not change its direction, only its length (scaled by \\lambda). If \\lambda > 1, it stretches; if 0 < \\lambda < 1, it shrinks; if \\lambda < 0, it flips direction.",
+                        simple_ex_title: "Quick Example",
+                        simple_ex_desc: "Consider the matrix A and vector v:",
+                        simple_ex_math: `A = \\begin{bmatrix} 1 & 6 \\\\ 5 & 2 \\end{bmatrix}, \\quad \\mathbf{v} = \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix} \\implies A\\mathbf{v} = \\begin{bmatrix} -24 \\\\ 20 \\end{bmatrix} = -4 \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix}`,
+                        simple_ex_conc: "Since A\\mathbf{v} = -4\\mathbf{v}, \\lambda = -4 is an eigenvalue and \\mathbf{v} is an eigenvector."
+                    },
+                    section2: {
+                        title2: "The Characteristic Polynomial",
+                        description: "The algebraic tool used to find eigenvalues.",
+                        def2_1: "To find eigenvalues, we rewrite A\\mathbf{v} = \\lambda \\mathbf{v} as (A - \\lambda I)\\mathbf{v} = \\mathbf{0}.",
+                        def2_2: "For a non-zero vector \\mathbf{v} to exist, the matrix (A - \\lambda I) must be non-invertible (singular). This leads to the characteristic equation:",
+                        math2_1: `\\det(A - \\lambda I) = 0`,
+                        text2_1: "The polynomial p(\\lambda) = \\det(A - \\lambda I) is called the characteristic polynomial of A. The roots of this polynomial are the eigenvalues of A.",
+                        prop2_1_title: "Trace and Determinant Shortcut",
+                        prop2_1_desc: "For any n x n matrix, the sum of eigenvalues equals the trace (sum of diagonal elements), and the product of eigenvalues equals the determinant.",
+                        math2_2: `\\sum \\lambda_i = \\text{Tr}(A), \\quad \\prod \\lambda_i = \\det(A)`
+                    },
+                    section3: {
+                        title3: "Finding Eigenvectors and Eigenspaces",
+                        description: "Once \\lambda is found, how do we find \\mathbf{v}?",
+                        def3_1: "After finding an eigenvalue \\lambda, the corresponding eigenvectors are found by solving the homogeneous linear system:",
+                        math3_1: `(A - \\lambda I)\\mathbf{v} = \\mathbf{0}`,
+                        def3_2: "The set of all solutions (including the zero vector) forms a subspace called the Eigenspace of A corresponding to \\lambda, denoted E_{\\lambda}.",
+                        text3_1: "E_{\\lambda} is simply the Null Space of the matrix (A - \\lambda I)."
+                    },
+                    section4: {
+                        title4: "Diagonalization",
+                        description: "Decomposing a matrix into a simpler diagonal form.",
+                        def4_1: "A square matrix A is diagonalizable if it is similar to a diagonal matrix D. This means there exists an invertible matrix P such that:",
+                        math4_1: `A = PDP^{-1} \\quad \\text{or} \\quad D = P^{-1}AP`,
+                        text4_1: "Here, D is a diagonal matrix containing the eigenvalues of A, and P is a matrix whose columns are the corresponding linearly independent eigenvectors.",
+                        cond4_1_title: "When is a matrix diagonalizable?",
+                        cond4_1_desc: "An n x n matrix is diagonalizable if and only if it has n linearly independent eigenvectors.",
+                        cond4_2_desc: "A sufficient condition: If A has n distinct eigenvalues, it is guaranteed to be diagonalizable."
+                    },
+                    example_section: {
+                        title_ex: "Examples with Step-by-Step Solutions",
+                        ex1: {
+                            title: "1. Finding Eigenvalues",
+                            problem: "Find the eigenvalues of the matrix A.",
+                            problem_math: `A = \\begin{bmatrix} 1 & 2 \\\\ 2 & 1 \\end{bmatrix}`,
+                            step1_title: "Step 1: Characteristic Equation",
+                            step1_desc: "Compute det(A - \\lambda I) = 0.",
+                            step1_math: `\\det \\begin{bmatrix} 1-\\lambda & 2 \\\\ 2 & 1-\\lambda \\end{bmatrix} = (1-\\lambda)(1-\\lambda) - (2)(2)`,
+                            step2_title: "Step 2: Solve the Polynomial",
+                            step2_desc: "Expand and solve for \\lambda.",
+                            step2_math: `(1 - 2\\lambda + \\lambda^2) - 4 = \\lambda^2 - 2\\lambda - 3 = 0`,
+                            step3_title: "Step 3: Factor",
+                            step3_math: `(\\lambda - 3)(\\lambda + 1) = 0`,
+                            result_title: "Final Answer",
+                            result: `The eigenvalues are $\\lambda_{1} = 3$ and $\\lambda_{2} = -1$.`
+                        },
+                        ex2: {
+                            title: "2. Finding Eigenvectors",
+                            problem: "Find the eigenvectors for the matrix A from Example 1.",
+                            step1_title: "Step 1: For $\\lambda = 3$",
+                            step1_desc: "Solve (A - 3I)\\mathbf{v} = \\mathbf{0}. Subtract 3 from the diagonal.",
+                            step1_math: `\\begin{bmatrix} 1-3 & 2 \\\\ 2 & 1-3 \\end{bmatrix} \\mathbf{v} = \\begin{bmatrix} -2 & 2 \\\\ 2 & -2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Step 2: Solve the System",
+                            step2_desc: "The equation simplifies to -2x + 2y = 0, or x = y. Let y = 1, then x = 1.",
+                            step2_math: `\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}`,
+                            step3_title: "Step 3: For $\\lambda = -1$",
+                            step3_desc: "Solve (A - (-1)I)\\mathbf{v} = (A + I)\\mathbf{v} = \\mathbf{0}. Add 1 to the diagonal.",
+                            step3_math: `\\begin{bmatrix} 2 & 2 \\\\ 2 & 2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix} \\Rightarrow 2x + 2y = 0 \\Rightarrow x = -y`,
+                            result_title: "Final Answer",
+                            result: "$\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}, \\quad \\mathbf{v}_2 = \\begin{bmatrix} 1 \\\\ -1 \\end{bmatrix}$"
+                        },
+                        ex3: {
+                            title: "3. Diagonalization",
+                            problem: "Diagonalize the matrix A using the results from Examples 1 and 2.",
+                            step1_title: "Step 1: Form Matrix P",
+                            step1_desc: "Construct P using the eigenvectors as columns.",
+                            step1_math: `P = \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}`,
+                            step2_title: "Step 2: Form Matrix D",
+                            step2_desc: "Construct D using the corresponding eigenvalues on the diagonal.",
+                            step2_math: `D = \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix}`,
+                            step3_title: "Step 3: Verify $PDP^{-1}$ (Optional but recommended)",
+                            step3_desc: "The diagonalization equation is A = PDP^{-1}.",
+                            result_title: "Final Answer",
+                            result: `A = $\\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix} \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix} \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}^{-1}$`
+                        }
+                    }
+                }
+            }
+        } 
     },
     es: {
         matrixBasics: {
@@ -1128,61 +1222,59 @@ export const linearAlgebraCourse = {
                         note_desc: "La Forma Escalonada por Filas (REF) de una matriz NO es única (diferentes operaciones de fila pueden llevar a diferentes números por encima de los pivotes). Sin embargo, la Forma Escalonada Reducida por Filas (RREF) ES única. Cada matriz tiene exactamente una RREF."
                     },
                     example_section: {
-                        example_section: {
-                            title_ex: "Ejemplos con Soluciones Paso a Paso",
-                            ex1: {
-                                title: "1. Solución Única (Gauss-Jordan)",
-                                problem: "Resuelva el siguiente sistema usando eliminación de Gauss-Jordan:",
-                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
-                                step1_title: "Paso 1: Matriz Aumentada",
-                                step1_desc: "Convierta el sistema en una matriz aumentada [A|b].",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
-                                step2_title: "Paso 2: Crear Ceros Debajo del Pivote 1",
-                                step2_desc: "Use el 1 en la parte superior izquierda para eliminar las entradas debajo de él. (R2 = R2 - 2R1) y (R3 = R3 - 3R1).",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
-                                step3_title: "Paso 3: Crear Pivote 2",
-                                step3_desc: "Para facilitar las matemáticas, escalemos R2 por 1/2 para obtener un 1 principal, o restemos R2 de R3. Multipliquemos R2 por 0.5.",
-                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
-                                step4_title: "Paso 4: Crear Ceros Debajo del Pivote 2",
-                                step4_desc: "Realice (R3 = R3 - 3R2).",
-                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
-                                step5_title: "Paso 5: Resolver para variables (Sustitución hacia atrás)",
-                                step5_desc: "De R3: -0.5z = -1.5 → z = 3. Sustituya z nuevamente en R2, luego x y y en R1.",
-                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
-                                result_title: "Respuesta Final",
-                                result: `\\text{Solución: } x=1, y=2, z=3`
-                            },
-                            ex2: {
-                                title: "2. Soluciones Infinitas (Variables Libres)",
-                                problem: "Encuentre la solución general al sistema:",
-                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
-                                step1_title: "Paso 1: Reducción por Filas",
-                                step1_desc: "Forme la matriz aumentada y reduzca.",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
-                                step2_title: "Paso 2: Identificar Variables Libres",
-                                step2_desc: "Las filas 2 y 3 se convirtieron en ceros. Esto significa que tenemos solo un pivote (para x). Las variables y y z no tienen pivotes, por lo que son variables LIBRES.",
-                                step2_math: `\\text{Sea } y = s \\text{ y } z = t, \\text{ donde } s,t \\in \\mathbb{R}.`,
-                                step3_title: "Paso 3: Expresar Variables Básicas",
-                                step3_desc: "Reescriba la primera ecuación en términos de las variables libres.",
-                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
-                                result_title: "Respuesta Final (Forma Paramétrica)",
-                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
-                            },
-                            ex3: {
-                                title: "3. Sin Solución (Sistema Inconsistente)",
-                                problem: "Determine la solución al siguiente sistema:",
-                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
-                                step1_title: "Paso 1: Formar Matriz Aumentada",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
-                                step2_title: "Paso 2: Operaciones de Fila",
-                                step2_desc: "Realice R2 = R2 - R1.",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
-                                step3_title: "Paso 3: Interpretar Resultado",
-                                step3_desc: "Mire de cerca la segunda fila. Traducir esto de nuevo en una ecuación nos da:",
-                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
-                                result_title: "Conclusión Final",
-                                result: `Dado que 0 = 3 es una contradicción matemática, el sistema es Inconsistente (Sin Solución). Geométricamente, esto representa planos paralelos que nunca se intersectan.`
-                            }
+                        title_ex: "Ejemplos con Soluciones Paso a Paso",
+                        ex1: {
+                            title: "1. Solución Única (Gauss-Jordan)",
+                            problem: "Resuelva el siguiente sistema usando eliminación de Gauss-Jordan:",
+                            system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                            step1_title: "Paso 1: Matriz Aumentada",
+                            step1_desc: "Convierta el sistema en una matriz aumentada [A|b].",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                            step2_title: "Paso 2: Crear Ceros Debajo del Pivote 1",
+                            step2_desc: "Use el 1 en la parte superior izquierda para eliminar las entradas debajo de él. (R2 = R2 - 2R1) y (R3 = R3 - 3R1).",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step3_title: "Paso 3: Crear Pivote 2",
+                            step3_desc: "Para facilitar las matemáticas, escalemos R2 por 1/2 para obtener un 1 principal, o restemos R2 de R3. Multipliquemos R2 por 0.5.",
+                            step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step4_title: "Paso 4: Crear Ceros Debajo del Pivote 2",
+                            step4_desc: "Realice (R3 = R3 - 3R2).",
+                            step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                            step5_title: "Paso 5: Resolver para variables (Sustitución hacia atrás)",
+                            step5_desc: "De R3: -0.5z = -1.5 → z = 3. Sustituya z nuevamente en R2, luego x y y en R1.",
+                            step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                            result_title: "Respuesta Final",
+                            result: `\\text{Solución: } x=1, y=2, z=3`
+                        },
+                        ex2: {
+                            title: "2. Soluciones Infinitas (Variables Libres)",
+                            problem: "Encuentre la solución general al sistema:",
+                            system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                            step1_title: "Paso 1: Reducción por Filas",
+                            step1_desc: "Forme la matriz aumentada y reduzca.",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                            step2_title: "Paso 2: Identificar Variables Libres",
+                            step2_desc: "Las filas 2 y 3 se convirtieron en ceros. Esto significa que tenemos solo un pivote (para x). Las variables y y z no tienen pivotes, por lo que son variables LIBRES.",
+                            step2_math: `\\text{Sea } y = s \\text{ y } z = t, \\text{ donde } s,t \\in \\mathbb{R}.`,
+                            step3_title: "Paso 3: Expresar Variables Básicas",
+                            step3_desc: "Reescriba la primera ecuación en términos de las variables libres.",
+                            step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                            result_title: "Respuesta Final (Forma Paramétrica)",
+                            result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                        },
+                        ex3: {
+                            title: "3. Sin Solución (Sistema Inconsistente)",
+                            problem: "Determine la solución al siguiente sistema:",
+                            system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                            step1_title: "Paso 1: Formar Matriz Aumentada",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step2_title: "Paso 2: Operaciones de Fila",
+                            step2_desc: "Realice R2 = R2 - R1.",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step3_title: "Paso 3: Interpretar Resultado",
+                            step3_desc: "Mire de cerca la segunda fila. Traducir esto de nuevo en una ecuación nos da:",
+                            step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                            result_title: "Conclusión Final",
+                            result: `Dado que 0 = 3 es una contradicción matemática, el sistema es Inconsistente (Sin Solución). Geométricamente, esto representa planos paralelos que nunca se intersectan.`
                         }
                     }
                 }
@@ -1354,6 +1446,102 @@ export const linearAlgebraCourse = {
                             step3_math: `\\text{Base } \\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 1 \\end{bmatrix} \\right\\}`,
                             result_title: "Respuesta Final",
                             result: "La base es {\\mathbf{v}_1, \\mathbf{v}_3 } y la Dimensión es 2 (un plano)."
+                        }
+                    }
+                }
+            }
+        },
+        eigenvalues: {
+            title: "Valores Propios y Vectores Propios",
+            description: "Aprende a calcular valores propios, vectores propios y a diagonalizar matrices.",
+            lessons: {
+                lesson6_title: "Valores Propios y Vectores Propios",
+                lesson6: {
+                    section1: {
+                        title1: "¿Qué son los Valores Propios y los Vectores Propios?",
+                        def1_1: "Sea A una matriz cuadrada n x n. Un par propio es un par (\\lambda, \\mathbf{v}) donde \\lambda es un escalar y \\mathbf{v} es un vector no nulo tal que:",
+                        math1_1: `A\\mathbf{v} = \\lambda \\mathbf{v}`,
+                        def1_2: "El escalar \\lambda se llama valor propio (o autovalor) y el vector \\mathbf{v} se llama vector propio (o autovector).",
+                        text1_1: "Geométricamente, multiplicar \\mathbf{v} por A no cambia su dirección, solo su longitud (escalada por \\lambda). Si \\lambda > 1, se estira; si 0 < \\lambda < 1, se contrae; si \\lambda < 0, invierte su dirección.",
+                        simple_ex_title: "Ejemplo Rápido",
+                        simple_ex_desc: "Considere la matriz A y el vector v:",
+                        simple_ex_math: `A = \\begin{bmatrix} 1 & 6 \\\\ 5 & 2 \\end{bmatrix}, \\quad \\mathbf{v} = \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix} \\implies A\\mathbf{v} = \\begin{bmatrix} -24 \\\\ 20 \\end{bmatrix} = -4 \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix}`,
+                        simple_ex_conc: "Dado que A\\mathbf{v} = -4\\mathbf{v}, \\lambda = -4 es un valor propio y \\mathbf{v} es un vector propio."
+                    },
+                    section2: {
+                        title2: "El Polinomio Característico",
+                        description: "La herramienta algebraica utilizada para encontrar valores propios.",
+                        def2_1: "Para encontrar valores propios, reescribimos A\\mathbf{v} = \\lambda \\mathbf{v} como (A - \\lambda I)\\mathbf{v} = \\mathbf{0}.",
+                        def2_2: "Para que exista un vector no nulo \\mathbf{v}, la matriz (A - \\lambda I) debe ser no invertible (singular). Esto lleva a la ecuación característica:",
+                        math2_1: `\\det(A - \\lambda I) = 0`,
+                        text2_1: "El polinomio p(\\lambda) = \\det(A - \\lambda I) se llama polinomio característico de A. Las raíces de este polinomio son los valores propios de A.",
+                        prop2_1_title: "Atajo de Traza y Determinante",
+                        prop2_1_desc: "Para cualquier matriz n x n, la suma de los valores propios es igual a la traza (suma de los elementos de la diagonal), y el producto de los valores propios es igual al determinante.",
+                        math2_2: `\\sum \\lambda_i = \\text{Tr}(A), \\quad \\prod \\lambda_i = \\det(A)`
+                    },
+                    section3: {
+                        title3: "Encontrando Vectores Propios y Espacios Propios",
+                        description: "Una vez encontrado \\lambda, ¿cómo encontramos \\mathbf{v}?",
+                        def3_1: "Después de encontrar un valor propio \\lambda, los vectores propios correspondientes se encuentran resolviendo el sistema lineal homogéneo:",
+                        math3_1: `(A - \\lambda I)\\mathbf{v} = \\mathbf{0}`,
+                        def3_2: "El conjunto de todas las soluciones (incluyendo el vector cero) forma un subespacio llamado el Espacio Propio de A correspondiente a \\lambda, denotado E_{\\lambda}.",
+                        text3_1: "E_{\\lambda} es simplemente el Espacio Nulo (o Núcleo) de la matriz (A - \\lambda I)."
+                    },
+                    section4: {
+                        title4: "Diagonalización",
+                        description: "Descomponer una matriz en una forma diagonal más simple.",
+                        def4_1: "Una matriz cuadrada A es diagonalizable si es similar a una matriz diagonal D. Esto significa que existe una matriz invertible P tal que:",
+                        math4_1: `A = PDP^{-1} \\quad \\text{o} \\quad D = P^{-1}AP`,
+                        text4_1: "Aquí, D es una matriz diagonal que contiene los valores propios de A, y P es una matriz cuyas columnas son los vectores propios linealmente independientes correspondientes.",
+                        cond4_1_title: "¿Cuándo es una matriz diagonalizable?",
+                        cond4_1_desc: "Una matriz n x n es diagonalizable si y solo si tiene n vectores propios linealmente independientes.",
+                        cond4_2_desc: "Una condición suficiente: Si A tiene n valores propios distintos, se garantiza que es diagonalizable."
+                    },
+                    example_section: {
+                        title_ex: "Ejemplos con Soluciones Paso a Paso",
+                        ex1: {
+                            title: "1. Encontrando Valores Propios",
+                            problem: "Encuentre los valores propios de la matriz A.",
+                            problem_math: `A = \\begin{bmatrix} 1 & 2 \\\\ 2 & 1 \\end{bmatrix}`,
+                            step1_title: "Paso 1: Ecuación Característica",
+                            step1_desc: "Calcule det(A - \\lambda I) = 0.",
+                            step1_math: `\\det \\begin{bmatrix} 1-\\lambda & 2 \\\\ 2 & 1-\\lambda \\end{bmatrix} = (1-\\lambda)(1-\\lambda) - (2)(2)`,
+                            step2_title: "Paso 2: Resolver el Polinomio",
+                            step2_desc: "Expanda y resuelva para \\lambda.",
+                            step2_math: `(1 - 2\\lambda + \\lambda^2) - 4 = \\lambda^2 - 2\\lambda - 3 = 0`,
+                            step3_title: "Paso 3: Factorizar",
+                            step3_math: `(\\lambda - 3)(\\lambda + 1) = 0`,
+                            result_title: "Respuesta Final",
+                            result: `Los valores propios son $\\lambda_{1} = 3$ y $\\lambda_{2} = -1$.`
+                        },
+                        ex2: {
+                            title: "2. Encontrando Vectores Propios",
+                            problem: "Encuentre los vectores propios para la matriz A del Ejemplo 1.",
+                            step1_title: "Paso 1: Para $\\lambda = 3$",
+                            step1_desc: "Resuelva (A - 3I)\\mathbf{v} = \\mathbf{0}. Reste 3 de la diagonal.",
+                            step1_math: `\\begin{bmatrix} 1-3 & 2 \\\\ 2 & 1-3 \\end{bmatrix} \\mathbf{v} = \\begin{bmatrix} -2 & 2 \\\\ 2 & -2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Paso 2: Resolver el Sistema",
+                            step2_desc: "La ecuación se simplifica a -2x + 2y = 0, o x = y. Sea y = 1, entonces x = 1.",
+                            step2_math: `\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}`,
+                            step3_title: "Paso 3: Para $\\lambda = -1$",
+                            step3_desc: "Resuelva (A - (-1)I)\\mathbf{v} = (A + I)\\mathbf{v} = \\mathbf{0}. Sume 1 a la diagonal.",
+                            step3_math: `\\begin{bmatrix} 2 & 2 \\\\ 2 & 2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix} \\Rightarrow 2x + 2y = 0 \\Rightarrow x = -y`,
+                            result_title: "Respuesta Final",
+                            result: `$\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}, \\quad \\mathbf{v}_2 = \\begin{bmatrix} 1 \\\\ -1 \\end{bmatrix}$`
+                        },
+                        ex3: {
+                            title: "3. Diagonalización",
+                            problem: "Diagonalice la matriz A usando los resultados de los Ejemplos 1 y 2.",
+                            step1_title: "Paso 1: Formar la Matriz P",
+                            step1_desc: "Construya P usando los vectores propios como columnas.",
+                            step1_math: `P = \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}`,
+                            step2_title: "Paso 2: Formar la Matriz D",
+                            step2_desc: "Construya D usando los valores propios correspondientes en la diagonal.",
+                            step2_math: `D = \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix}`,
+                            step3_title: "Paso 3: Verificar $PDP^{-1}$ (Opcional pero recomendado)",
+                            step3_desc: "La ecuación de diagonalización es A = PDP^{-1}.",
+                            result_title: "Respuesta Final",
+                            result: `A = $\\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix} \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix} \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}^{-1}$`
                         }
                     }
                 }
@@ -1762,61 +1950,59 @@ export const linearAlgebraCourse = {
                         note_desc: "La Forme Échelonnée (REF) d'une matrice n'est PAS unique (différentes opérations de ligne peuvent conduire à des nombres différents au-dessus des pivots). Cependant, la Forme Échelonnée Réduite (RREF) EST unique. Chaque matrice a exactement une RREF."
                     },
                     example_section: {
-                        example_section: {
-                            title_ex: "Exemples avec Solutions Étape par Étape",
-                            ex1: {
-                                title: "1. Solution Unique (Gauss-Jordan)",
-                                problem: "Résolvez le système suivant en utilisant l'élimination de Gauss-Jordan :",
-                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
-                                step1_title: "Étape 1 : Matrice Augmentée",
-                                step1_desc: "Convertissez le système en une matrice augmentée [A|b].",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
-                                step2_title: "Étape 2 : Créer des Zéros Sous le Pivot 1",
-                                step2_desc: "Utilisez le 1 en haut à gauche pour éliminer les entrées en dessous. (R2 = R2 - 2R1) et (R3 = R3 - 3R1).",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
-                                step3_title: "Étape 3 : Créer le Pivot 2",
-                                step3_desc: "Pour faciliter les calculs, échelonnons R2 par 1/2 pour obtenir un 1 principal, ou soustrayons R2 de R3. Multiplions R2 par 0.5.",
-                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
-                                step4_title: "Étape 4 : Créer des Zéros Sous le Pivot 2",
-                                step4_desc: "Effectuez (R3 = R3 - 3R2).",
-                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
-                                step5_title: "Étape 5 : Résoudre pour les variables (Substitution Arrière)",
-                                step5_desc: "De R3 : -0.5z = -1.5 → z = 3. Substituez z dans R2, puis x et y dans R1.",
-                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
-                                result_title: "Réponse Finale",
-                                result: `\\text{Solution : } x=1, y=2, z=3`
-                            },
-                            ex2: {
-                                title: "2. Solutions Infinies (Variables Libres)",
-                                problem: "Trouvez la solution générale du système :",
-                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
-                                step1_title: "Étape 1 : Réduction de Ligne",
-                                step1_desc: "Formez la matrice augmentée et réduisez.",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
-                                step2_title: "Étape 2 : Identifier les Variables Libres",
-                                step2_desc: "Les lignes 2 et 3 sont devenues entièrement nulles. Cela signifie que nous n'avons qu'un seul pivot (pour x). Les variables y et z n'ont pas de pivots, ce sont donc des variables LIBRES.",
-                                step2_math: `\\text{Soit } y = s \\text{ et } z = t, \\text{ où } s,t \\in \\mathbb{R}.`,
-                                step3_title: "Étape 3 : Exprimer les Variables de Base",
-                                step3_desc: "Réécrivez la première équation en termes de variables libres.",
-                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
-                                result_title: "Réponse Finale (Forme Paramétrique)",
-                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
-                            },
-                            ex3: {
-                                title: "3. Pas de Solution (Système Incohérent)",
-                                problem: "Déterminez la solution du système suivant :",
-                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
-                                step1_title: "Étape 1 : Former la Matrice Augmentée",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
-                                step2_title: "Étape 2 : Opérations de Ligne",
-                                step2_desc: "Effectuez R2 = R2 - R1.",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
-                                step3_title: "Étape 3 : Interpréter le Résultat",
-                                step3_desc: "Regardez attentivement la deuxième ligne. Traduire cela en une équation nous donne :",
-                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
-                                result_title: "Conclusion Finale",
-                                result: `Puisque 0 = 3 est une contradiction mathématique, le système est Incohérent (Pas de Solution). Géométriquement, cela représente des plans parallèles qui ne se croisent jamais.`
-                            }
+                        title_ex: "Exemples avec Solutions Étape par Étape",
+                        ex1: {
+                            title: "1. Solution Unique (Gauss-Jordan)",
+                            problem: "Résolvez le système suivant en utilisant l'élimination de Gauss-Jordan :",
+                            system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                            step1_title: "Étape 1 : Matrice Augmentée",
+                            step1_desc: "Convertissez le système en une matrice augmentée [A|b].",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                            step2_title: "Étape 2 : Créer des Zéros Sous le Pivot 1",
+                            step2_desc: "Utilisez le 1 en haut à gauche pour éliminer les entrées en dessous. (R2 = R2 - 2R1) et (R3 = R3 - 3R1).",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step3_title: "Étape 3 : Créer le Pivot 2",
+                            step3_desc: "Pour faciliter les calculs, échelonnons R2 par 1/2 pour obtenir un 1 principal, ou soustrayons R2 de R3. Multiplions R2 par 0.5.",
+                            step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step4_title: "Étape 4 : Créer des Zéros Sous le Pivot 2",
+                            step4_desc: "Effectuez (R3 = R3 - 3R2).",
+                            step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                            step5_title: "Étape 5 : Résoudre pour les variables (Substitution Arrière)",
+                            step5_desc: "De R3 : -0.5z = -1.5 → z = 3. Substituez z dans R2, puis x et y dans R1.",
+                            step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                            result_title: "Réponse Finale",
+                            result: `\\text{Solution : } x=1, y=2, z=3`
+                        },
+                        ex2: {
+                            title: "2. Solutions Infinies (Variables Libres)",
+                            problem: "Trouvez la solution générale du système :",
+                            system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                            step1_title: "Étape 1 : Réduction de Ligne",
+                            step1_desc: "Formez la matrice augmentée et réduisez.",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                            step2_title: "Étape 2 : Identifier les Variables Libres",
+                            step2_desc: "Les lignes 2 et 3 sont devenues entièrement nulles. Cela signifie que nous n'avons qu'un seul pivot (pour x). Les variables y et z n'ont pas de pivots, ce sont donc des variables LIBRES.",
+                            step2_math: `\\text{Soit } y = s \\text{ et } z = t, \\text{ où } s,t \\in \\mathbb{R}.`,
+                            step3_title: "Étape 3 : Exprimer les Variables de Base",
+                            step3_desc: "Réécrivez la première équation en termes de variables libres.",
+                            step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                            result_title: "Réponse Finale (Forme Paramétrique)",
+                            result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                        },
+                        ex3: {
+                            title: "3. Pas de Solution (Système Incohérent)",
+                            problem: "Déterminez la solution du système suivant :",
+                            system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                            step1_title: "Étape 1 : Former la Matrice Augmentée",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step2_title: "Étape 2 : Opérations de Ligne",
+                            step2_desc: "Effectuez R2 = R2 - R1.",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step3_title: "Étape 3 : Interpréter le Résultat",
+                            step3_desc: "Regardez attentivement la deuxième ligne. Traduire cela en une équation nous donne :",
+                            step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                            result_title: "Conclusion Finale",
+                            result: `Puisque 0 = 3 est une contradiction mathématique, le système est Incohérent (Pas de Solution). Géométriquement, cela représente des plans parallèles qui ne se croisent jamais.`
                         }
                     }
                 }
@@ -1992,7 +2178,103 @@ export const linearAlgebraCourse = {
                     }
                 }
             }
-        }
+        },
+       eigenvalues: {
+            title: "Valeurs Propres et Vecteurs Propres",
+            description: "Apprenez à calculer les valeurs propres, les vecteurs propres et à diagonaliser les matrices.",
+            lessons: {
+                lesson6_title: "Valeurs Propres et Vecteurs Propres",
+                lesson6: {
+                    section1: {
+                        title1: "Qu'est-ce que les Valeurs Propres et les Vecteurs Propres ?",
+                        def1_1: "Soit A une matrice carrée n x n. Un couple propre est une paire (\\lambda, \\mathbf{v}) où \\lambda est un scalaire et \\mathbf{v} est un vecteur non nul tel que :",
+                        math1_1: `A\\mathbf{v} = \\lambda \\mathbf{v}`,
+                        def1_2: "Le scalaire \\lambda est appelé valeur propre et le vecteur \\mathbf{v} est appelé vecteur propre.",
+                        text1_1: "Géométriquement, multiplier \\mathbf{v} par A ne change pas sa direction, seulement sa longueur (mise à l'échelle par \\lambda). Si \\lambda > 1, il s'étire ; si 0 < \\lambda < 1, il rétrécit ; si \\lambda < 0, il change de direction.",
+                        simple_ex_title: "Exemple Rapide",
+                        simple_ex_desc: "Considérez la matrice A et le vecteur v :",
+                        simple_ex_math: `A = \\begin{bmatrix} 1 & 6 \\\\ 5 & 2 \\end{bmatrix}, \\quad \\mathbf{v} = \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix} \\implies A\\mathbf{v} = \\begin{bmatrix} -24 \\\\ 20 \\end{bmatrix} = -4 \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix}`,
+                        simple_ex_conc: "Puisque A\\mathbf{v} = -4\\mathbf{v}, \\lambda = -4 est une valeur propre et \\mathbf{v} est un vecteur propre."
+                    },
+                    section2: {
+                        title2: "Le Polynôme Caractéristique",
+                        description: "L'outil algébrique utilisé pour trouver les valeurs propres.",
+                        def2_1: "Pour trouver les valeurs propres, nous réécrivons A\\mathbf{v} = \\lambda \\mathbf{v} comme (A - \\lambda I)\\mathbf{v} = \\mathbf{0}.",
+                        def2_2: "Pour qu'un vecteur non nul \\mathbf{v} existe, la matrice (A - \\lambda I) doit être non inversible (singulière). Cela conduit à l'équation caractéristique :",
+                        math2_1: `\\det(A - \\lambda I) = 0`,
+                        text2_1: "Le polynôme p(\\lambda) = \\det(A - \\lambda I) est appelé le polynôme caractéristique de A. Les racines de ce polynôme sont les valeurs propres de A.",
+                        prop2_1_title: "Raccourci Trace et Déterminant",
+                        prop2_1_desc: "Pour toute matrice n x n, la somme des valeurs propres est égale à la trace (somme des éléments diagonaux), et le produit des valeurs propres est égal au déterminant.",
+                        math2_2: `\\sum \\lambda_i = \\text{Tr}(A), \\quad \\prod \\lambda_i = \\det(A)`
+                    },
+                    section3: {
+                        title3: "Trouver les Vecteurs Propres et les Sous-espaces Propres",
+                        description: "Une fois \\lambda trouvé, comment trouvons-nous \\mathbf{v} ?",
+                        def3_1: "Après avoir trouvé une valeur propre \\lambda, les vecteurs propres correspondants sont trouvés en résolvant le système linéaire homogène :",
+                        math3_1: `(A - \\lambda I)\\mathbf{v} = \\mathbf{0}`,
+                        def3_2: "L'ensemble de toutes les solutions (y compris le vecteur nul) forme un sous-espace appelé le Sous-espace Propre de A correspondant à \\lambda, noté E_{\\lambda}.",
+                        text3_1: "E_{\\lambda} est simplement le Noyau de la matrice (A - \\lambda I)."
+                    },
+                    section4: {
+                        title4: "Diagonalisation",
+                        description: "Décomposer une matrice en une forme diagonale plus simple.",
+                        def4_1: "Une matrice carrée A est diagonalisable si elle est semblable à une matrice diagonale D. Cela signifie qu'il existe une matrice inversible P telle que :",
+                        math4_1: `A = PDP^{-1} \\quad \\text{ou} \\quad D = P^{-1}AP`,
+                        text4_1: "Ici, D est une matrice diagonale contenant les valeurs propres de A, et P est une matrice dont les colonnes sont les vecteurs propres linéairement indépendants correspondants.",
+                        cond4_1_title: "Quand une matrice est-elle diagonalisable ?",
+                        cond4_1_desc: "Une matrice n x n est diagonalisable si et seulement si elle possède n vecteurs propres linéairement indépendants.",
+                        cond4_2_desc: "Une condition suffisante : Si A a n valeurs propres distinctes, elle est garantie d'être diagonalisable."
+                    },
+                    example_section: {
+                        title_ex: "Exemples avec Solutions Étape par Étape",
+                        ex1: {
+                            title: "1. Trouver les Valeurs Propres",
+                            problem: "Trouvez les valeurs propres de la matrice A.",
+                            problem_math: `A = \\begin{bmatrix} 1 & 2 \\\\ 2 & 1 \\end{bmatrix}`,
+                            step1_title: "Étape 1 : Équation Caractéristique",
+                            step1_desc: "Calculez det(A - \\lambda I) = 0.",
+                            step1_math: `\\det \\begin{bmatrix} 1-\\lambda & 2 \\\\ 2 & 1-\\lambda \\end{bmatrix} = (1-\\lambda)(1-\\lambda) - (2)(2)`,
+                            step2_title: "Étape 2 : Résoudre le Polynôme",
+                            step2_desc: "Développez et résolvez pour \\lambda.",
+                            step2_math: `(1 - 2\\lambda + \\lambda^2) - 4 = \\lambda^2 - 2\\lambda - 3 = 0`,
+                            step3_title: "Étape 3 : Factoriser",
+                            step3_math: `(\\lambda - 3)(\\lambda + 1) = 0`,
+                            result_title: "Réponse Finale",
+                            result: `Les valeurs propres sont $\\lambda_{1} = 3$ et $\\lambda_{2} = -1$.`
+                        },
+                        ex2: {
+                            title: "2. Trouver les Vecteurs Propres",
+                            problem: "Trouvez les vecteurs propres pour la matrice A de l'Exemple 1.",
+                            step1_title: "Étape 1 : Pour $\\lambda = 3$",
+                            step1_desc: "Résolvez (A - 3I)\\mathbf{v} = \\mathbf{0}. Soustrayez 3 de la diagonale.",
+                            step1_math: `\\begin{bmatrix} 1-3 & 2 \\\\ 2 & 1-3 \\end{bmatrix} \\mathbf{v} = \\begin{bmatrix} -2 & 2 \\\\ 2 & -2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Étape 2 : Résoudre le Système",
+                            step2_desc: "L'équation se simplifie en -2x + 2y = 0, ou x = y. Soit y = 1, alors x = 1.",
+                            step2_math: `\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}`,
+                            step3_title: "Étape 3 : Pour $\\lambda = -1$",
+                            step3_desc: "Résolvez (A - (-1)I)\\mathbf{v} = (A + I)\\mathbf{v} = \\mathbf{0}. Ajoutez 1 à la diagonale.",
+                            step3_math: `\\begin{bmatrix} 2 & 2 \\\\ 2 & 2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix} \\Rightarrow 2x + 2y = 0 \\Rightarrow x = -y`,
+                            result_title: "Réponse Finale",
+                            result: `$\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}, \\quad \\mathbf{v}_2 = \\begin{bmatrix} 1 \\\\ -1 \\end{bmatrix}$`
+                        },
+                        ex3: {
+                            title: "3. Diagonalisation",
+                            problem: "Diagonalisez la matrice A en utilisant les résultats des Exemples 1 et 2.",
+                            step1_title: "Étape 1 : Former la Matrice P",
+                            step1_desc: "Construisez P en utilisant les vecteurs propres comme colonnes.",
+                            step1_math: `P = \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}`,
+                            step2_title: "Étape 2 : Former la Matrice D",
+                            step2_desc: "Construisez D en utilisant les valeurs propres correspondantes sur la diagonale.",
+                            step2_math: `D = \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix}`,
+                            step3_title: "Étape 3 : Vérifier $PDP^{-1}$ (Optionnel mais recommandé)",
+                            step3_desc: "L'équation de diagonalisation est A = PDP^{-1}.",
+                            result_title: "Réponse Finale",
+                            result: `A = $\\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix} \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix} \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}^{-1}$`
+                        }
+                    }
+                }
+            }
+        } 
     },
     de: {
         matrixBasics: {
@@ -2396,61 +2678,59 @@ export const linearAlgebraCourse = {
                         note_desc: "Die Zeilenstufenform (REF) einer Matrix ist NICHT eindeutig (unterschiedliche Zeilenoperationen können zu unterschiedlichen Zahlen über den Pivots führen). Die reduzierte Zeilenstufenform (RREF) ist jedoch EINDEUTIG. Jede Matrix hat genau eine RREF."
                     },
                     example_section: {
-                        example_section: {
-                            title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
-                            ex1: {
-                                title: "1. Eindeutige Lösung (Gauß-Jordan)",
-                                problem: "Lösen Sie das folgende System mit der Gauß-Jordan-Elimination:",
-                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
-                                step1_title: "Schritt 1: Erweiterte Matrix",
-                                step1_desc: "Wandeln Sie das System in eine erweiterte Matrix [A|b].",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
-                                step2_title: "Schritt 2: Nullen unter Pivot 1 erzeugen",
-                                step2_desc: "Verwenden Sie die 1 oben links, um die Einträge darunter zu eliminieren. (R2 = R2 - 2R1) und (R3 = R3 - 3R1).",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
-                                step3_title: "Schritt 3: Pivot 2 erzeugen",
-                                step3_desc: "Um die Mathematik zu vereinfachen, skalieren wir R2 um 1/2, um eine führende 1 zu erhalten, oder subtrahieren R2 von R3. Multiplizieren wir R2 mit 0,5.",
-                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
-                                step4_title: "Schritt 4: Nullen unter Pivot 2 erzeugen",
-                                step4_desc: "Führen Sie (R3 = R3 - 3R2) aus.",
-                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
-                                step5_title: "Schritt 5: Lösen nach Variablen (Rückwärtssubstitution)",
-                                step5_desc: "Aus R3: -0,5z = -1,5 → z = 3. Setzen Sie z wieder in R2 ein, dann x und y in R1.",
-                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
-                                result_title: "Endgültige Antwort",
-                                result: `\\text{Lösung: } x=1, y=2, z=3`
-                            },
-                            ex2: {
-                                title: "2. Unendliche Lösungen (Freie Variablen)",
-                                problem: "Finden Sie die allgemeine Lösung für das System:",
-                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
-                                step1_title: "Schritt 1: Zeilenreduktion",
-                                step1_desc: "Bilden Sie die erweiterte Matrix und reduzieren Sie sie.",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
-                                step2_title: "Schritt 2: Freie Variablen identifizieren",
-                                step2_desc: "Die Zeilen 2 und 3 wurden alle zu Nullen. Das bedeutet, wir haben nur einen Pivot (für x). Die Variablen y und z haben keine Pivots, also sind sie FREIE Variablen.",
-                                step2_math: `\\text{Sei } y = s \\text{ und } z = t, \\text{ wobei } s,t \\in \\mathbb{R}.`,
-                                step3_title: "Schritt 3: Basisvariablen ausdrücken",
-                                step3_desc: "Schreiben Sie die erste Gleichung in Bezug auf die freien Variablen um.",
-                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
-                                result_title: "Endgültige Antwort (Parameterform)",
-                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
-                            },
-                            ex3: {
-                                title: "3. Keine Lösung (Inkonsistentes System)",
-                                problem: "Bestimmen Sie die Lösung für das folgende System:",
-                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
-                                step1_title: "Schritt 1: Erweiterte Matrix bilden",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
-                                step2_title: "Schritt 2: Zeilenoperationen",
-                                step2_desc: "Führen Sie R2 = R2 - R1 aus.",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
-                                step3_title: "Schritt 3: Ergebnis interpretieren",
-                                step3_desc: "Schauen Sie sich die zweite Zeile genau an. Wenn wir dies zurück in eine Gleichung übersetzen, erhalten wir:",
-                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
-                                result_title: "Endgültige Schlussfolgerung",
-                                result: `Da 0 = 3 ein mathematischer Widerspruch ist, ist das System inkonsistent (Keine Lösung). Geometrisch stellt dies parallele Ebenen dar, die sich niemals schneiden.`
-                            }
+                        title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                        ex1: {
+                            title: "1. Eindeutige Lösung (Gauß-Jordan)",
+                            problem: "Lösen Sie das folgende System mit der Gauß-Jordan-Elimination:",
+                            system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                            step1_title: "Schritt 1: Erweiterte Matrix",
+                            step1_desc: "Wandeln Sie das System in eine erweiterte Matrix [A|b].",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                            step2_title: "Schritt 2: Nullen unter Pivot 1 erzeugen",
+                            step2_desc: "Verwenden Sie die 1 oben links, um die Einträge darunter zu eliminieren. (R2 = R2 - 2R1) und (R3 = R3 - 3R1).",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step3_title: "Schritt 3: Pivot 2 erzeugen",
+                            step3_desc: "Um die Mathematik zu vereinfachen, skalieren wir R2 um 1/2, um eine führende 1 zu erhalten, oder subtrahieren R2 von R3. Multiplizieren wir R2 mit 0,5.",
+                            step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step4_title: "Schritt 4: Nullen unter Pivot 2 erzeugen",
+                            step4_desc: "Führen Sie (R3 = R3 - 3R2) aus.",
+                            step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                            step5_title: "Schritt 5: Lösen nach Variablen (Rückwärtssubstitution)",
+                            step5_desc: "Aus R3: -0,5z = -1,5 → z = 3. Setzen Sie z wieder in R2 ein, dann x und y in R1.",
+                            step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                            result_title: "Endgültige Antwort",
+                            result: `\\text{Lösung: } x=1, y=2, z=3`
+                        },
+                        ex2: {
+                            title: "2. Unendliche Lösungen (Freie Variablen)",
+                            problem: "Finden Sie die allgemeine Lösung für das System:",
+                            system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                            step1_title: "Schritt 1: Zeilenreduktion",
+                            step1_desc: "Bilden Sie die erweiterte Matrix und reduzieren Sie sie.",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                            step2_title: "Schritt 2: Freie Variablen identifizieren",
+                            step2_desc: "Die Zeilen 2 und 3 wurden alle zu Nullen. Das bedeutet, wir haben nur einen Pivot (für x). Die Variablen y und z haben keine Pivots, also sind sie FREIE Variablen.",
+                            step2_math: `\\text{Sei } y = s \\text{ und } z = t, \\text{ wobei } s,t \\in \\mathbb{R}.`,
+                            step3_title: "Schritt 3: Basisvariablen ausdrücken",
+                            step3_desc: "Schreiben Sie die erste Gleichung in Bezug auf die freien Variablen um.",
+                            step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                            result_title: "Endgültige Antwort (Parameterform)",
+                            result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                        },
+                        ex3: {
+                            title: "3. Keine Lösung (Inkonsistentes System)",
+                            problem: "Bestimmen Sie die Lösung für das folgende System:",
+                            system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                            step1_title: "Schritt 1: Erweiterte Matrix bilden",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step2_title: "Schritt 2: Zeilenoperationen",
+                            step2_desc: "Führen Sie R2 = R2 - R1 aus.",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step3_title: "Schritt 3: Ergebnis interpretieren",
+                            step3_desc: "Schauen Sie sich die zweite Zeile genau an. Wenn wir dies zurück in eine Gleichung übersetzen, erhalten wir:",
+                            step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                            result_title: "Endgültige Schlussfolgerung",
+                            result: `Da 0 = 3 ein mathematischer Widerspruch ist, ist das System inkonsistent (Keine Lösung). Geometrisch stellt dies parallele Ebenen dar, die sich niemals schneiden.`
                         }
                     }
                 }
@@ -2622,6 +2902,102 @@ export const linearAlgebraCourse = {
                             step3_math: `\\text{Basis } \\mathcal{B} = \\left\\{ \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}, \\begin{bmatrix} 0 \\\\ 1 \\\\ 1 \\end{bmatrix} \\right\\}`,
                             result_title: "Endgültige Antwort",
                             result: "Die Basis ist {\\mathbf{v}_1, \\mathbf{v}_3 } und die Dimension ist 2 (eine Ebene)."
+                        }
+                    }
+                }
+            }
+        },
+        eigenvalues: {
+            title: "Eigenwerte & Eigenvektoren",
+            description: "Lernen Sie, wie man Eigenwerte und Eigenvektoren berechnet und Matrizen diagonalisiert.",
+            lessons: {
+                lesson6_title: "Eigenwerte & Eigenvektoren",
+                lesson6: {
+                    section1: {
+                        title1: "Was sind Eigenwerte und Eigenvektoren?",
+                        def1_1: "Sei A eine quadratische n x n Matrix. Ein Eigenpaar ist ein Paar (\\lambda, \\mathbf{v}), wobei \\lambda ein Skalar und \\mathbf{v} ein Vektor ungleich Null ist, sodass:",
+                        math1_1: `A\\mathbf{v} = \\lambda \\mathbf{v}`,
+                        def1_2: "Der Skalar \\lambda wird als Eigenwert und der Vektor \\mathbf{v} als Eigenvektor bezeichnet.",
+                        text1_1: "Geometrisch gesehen ändert die Multiplikation von \\mathbf{v} mit A nicht dessen Richtung, sondern nur dessen Länge (skaliert um \\lambda). Wenn \\lambda > 1, wird er gestreckt; wenn 0 < \\lambda < 1, wird er gestaucht; wenn \\lambda < 0, kehrt er die Richtung um.",
+                        simple_ex_title: "Schnelles Beispiel",
+                        simple_ex_desc: "Betrachten Sie die Matrix A und den Vektor v:",
+                        simple_ex_math: `A = \\begin{bmatrix} 1 & 6 \\\\ 5 & 2 \\end{bmatrix}, \\quad \\mathbf{v} = \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix} \\implies A\\mathbf{v} = \\begin{bmatrix} -24 \\\\ 20 \\end{bmatrix} = -4 \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix}`,
+                        simple_ex_conc: "Da A\\mathbf{v} = -4\\mathbf{v}, ist \\lambda = -4 ein Eigenwert und \\mathbf{v} ein Eigenvektor."
+                    },
+                    section2: {
+                        title2: "Das charakteristische Polynom",
+                        description: "Das algebraische Werkzeug zur Bestimmung von Eigenwerten.",
+                        def2_1: "Um Eigenwerte zu finden, schreiben wir A\\mathbf{v} = \\lambda \\mathbf{v} als (A - \\lambda I)\\mathbf{v} = \\mathbf{0} um.",
+                        def2_2: "Damit ein Vektor \\mathbf{v} ungleich Null existiert, muss die Matrix (A - \\lambda I) nicht invertierbar (singulär) sein. Dies führt zur charakteristischen Gleichung:",
+                        math2_1: `\\det(A - \\lambda I) = 0`,
+                        text2_1: "Das Polynom p(\\lambda) = \\det(A - \\lambda I) wird als charakteristisches Polynom von A bezeichnet. Die Wurzeln dieses Polynoms sind die Eigenwerte von A.",
+                        prop2_1_title: "Spur- und Determinanten-Abkürzung",
+                        prop2_1_desc: "Für jede n x n Matrix ist die Summe der Eigenwerte gleich der Spur (Summe der Diagonalelemente) und das Produkt der Eigenwerte gleich der Determinante.",
+                        math2_2: `\\sum \\lambda_i = \\text{Tr}(A), \\quad \\prod \\lambda_i = \\det(A)`
+                    },
+                    section3: {
+                        title3: "Finden von Eigenvektoren und Eigenräumen",
+                        description: "Sobald \\lambda gefunden ist, wie finden wir \\mathbf{v}?",
+                        def3_1: "Nachdem ein Eigenwert \\lambda gefunden wurde, werden die entsprechenden Eigenvektoren durch Lösen des homogenen linearen Gleichungssystems gefunden:",
+                        math3_1: `(A - \\lambda I)\\mathbf{v} = \\mathbf{0}`,
+                        def3_2: "Die Menge aller Lösungen (einschließlich des Nullvektors) bildet einen Unterraum, der als Eigenraum von A bezüglich \\lambda bezeichnet wird, notiert als E_{\\lambda}.",
+                        text3_1: "E_{\\lambda} ist einfach der Nullraum (Kern) der Matrix (A - \\lambda I)."
+                    },
+                    section4: {
+                        title4: "Diagonalisierung",
+                        description: "Zerlegung einer Matrix in eine einfachere Diagonalform.",
+                        def4_1: "Eine quadratische Matrix A ist diagonalisierbar, wenn sie ähnlich zu einer Diagonalmatrix D ist. Das bedeutet, es existiert eine invertierbare Matrix P, sodass:",
+                        math4_1: `A = PDP^{-1} \\quad \\text{oder} \\quad D = P^{-1}AP`,
+                        text4_1: "Hier ist D eine Diagonalmatrix, die die Eigenwerte von A enthält, und P ist eine Matrix, deren Spalten die entsprechenden linear unabhängigen Eigenvektoren sind.",
+                        cond4_1_title: "Wann ist eine Matrix diagonalisierbar?",
+                        cond4_1_desc: "Eine n x n Matrix ist genau dann diagonalisierbar, wenn sie n linear unabhängige Eigenvektoren besitzt.",
+                        cond4_2_desc: "Eine hinreichende Bedingung: Wenn A n verschiedene Eigenwerte hat, ist sie garantiert diagonalisierbar."
+                    },
+                    example_section: {
+                        title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                        ex1: {
+                            title: "1. Finden von Eigenwerten",
+                            problem: "Finden Sie die Eigenwerte der Matrix A.",
+                            problem_math: `A = \\begin{bmatrix} 1 & 2 \\\\ 2 & 1 \\end{bmatrix}`,
+                            step1_title: "Schritt 1: Charakteristische Gleichung",
+                            step1_desc: "Berechnen Sie det(A - \\lambda I) = 0.",
+                            step1_math: `\\det \\begin{bmatrix} 1-\\lambda & 2 \\\\ 2 & 1-\\lambda \\end{bmatrix} = (1-\\lambda)(1-\\lambda) - (2)(2)`,
+                            step2_title: "Schritt 2: Lösen des Polynoms",
+                            step2_desc: "Expandieren und nach \\lambda auflösen.",
+                            step2_math: `(1 - 2\\lambda + \\lambda^2) - 4 = \\lambda^2 - 2\\lambda - 3 = 0`,
+                            step3_title: "Schritt 3: Faktorisieren",
+                            step3_math: `(\\lambda - 3)(\\lambda + 1) = 0`,
+                            result_title: "Endgültige Antwort",
+                            result: `Die Eigenwerte sind $\\lambda_{1} = 3$ und $\\lambda_{2} = -1$.`
+                        },
+                        ex2: {
+                            title: "2. Finden von Eigenvektoren",
+                            problem: "Finden Sie die Eigenvektoren für die Matrix A aus Beispiel 1.",
+                            step1_title: "Schritt 1: Für $\\lambda = 3$",
+                            step1_desc: "Lösen Sie (A - 3I)\\mathbf{v} = \\mathbf{0}. Subtrahieren Sie 3 von der Diagonalen.",
+                            step1_math: `\\begin{bmatrix} 1-3 & 2 \\\\ 2 & 1-3 \\end{bmatrix} \\mathbf{v} = \\begin{bmatrix} -2 & 2 \\\\ 2 & -2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Schritt 2: Lösen des Systems",
+                            step2_desc: "Die Gleichung vereinfacht sich zu -2x + 2y = 0 oder x = y. Sei y = 1, dann ist x = 1.",
+                            step2_math: `\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}`,
+                            step3_title: "Schritt 3: Für $\\lambda = -1$",
+                            step3_desc: "Lösen Sie (A - (-1)I)\\mathbf{v} = (A + I)\\mathbf{v} = \\mathbf{0}. Addieren Sie 1 zur Diagonalen.",
+                            step3_math: `\\begin{bmatrix} 2 & 2 \\\\ 2 & 2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix} \\Rightarrow 2x + 2y = 0 \\Rightarrow x = -y`,
+                            result_title: "Endgültige Antwort",
+                            result: `$\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}, \\quad \\mathbf{v}_2 = \\begin{bmatrix} 1 \\\\ -1 \\end{bmatrix}$`
+                        },
+                        ex3: {
+                            title: "3. Diagonalisierung",
+                            problem: "Diagonalisieren Sie die Matrix A unter Verwendung der Ergebnisse aus den Beispielen 1 und 2.",
+                            step1_title: "Schritt 1: Bilden der Matrix P",
+                            step1_desc: "Konstruieren Sie P unter Verwendung der Eigenvektoren als Spalten.",
+                            step1_math: `P = \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}`,
+                            step2_title: "Schritt 2: Bilden der Matrix D",
+                            step2_desc: "Konstruieren Sie D unter Verwendung der entsprechenden Eigenwerte auf der Diagonalen.",
+                            step2_math: `D = \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix}`,
+                            step3_title: "Schritt 3: Überprüfen von $PDP^{-1}$ (Optional, aber empfohlen)",
+                            step3_desc: "Die Diagonalisierungsgleichung ist A = PDP^{-1}.",
+                            result_title: "Endgültige Antwort",
+                            result: `A = $\\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix} \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix} \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}^{-1}$`
                         }
                     }
                 }
@@ -3258,6 +3634,102 @@ export const linearAlgebraCourse = {
                     }
                 }
             }
+        },  
+        eigenvalues: {
+            title: "Wartości Własne i Wektory Własne",
+            description: "Dowiedz się, jak obliczać wartości własne, wektory własne i diagonalizować macierze.",
+            lessons: {
+                lesson6_title: "Wartości Własne i Wektory Własne",
+                lesson6: {
+                    section1: {
+                        title1: "Czym są Wartości Własne i Wektory Własne?",
+                        def1_1: "Niech A będzie macierzą kwadratową n x n. Para własna to para (\\lambda, \\mathbf{v}), gdzie \\lambda jest skalarem, a \\mathbf{v} jest wektorem niezerowym takim, że:",
+                        math1_1: `A\\mathbf{v} = \\lambda \\mathbf{v}`,
+                        def1_2: "Skalar \\lambda nazywany jest wartością własną, a wektor \\mathbf{v} nazywany jest wektorem własnym.",
+                        text1_1: "Geometrycznie, pomnożenie \\mathbf{v} przez A nie zmienia jego kierunku, a jedynie jego długość (skalowaną przez \\lambda). Jeśli \\lambda > 1, rozciąga się; jeśli 0 < \\lambda < 1, kurczy się; jeśli \\lambda < 0, odwraca kierunek.",
+                        simple_ex_title: "Szybki Przykład",
+                        simple_ex_desc: "Rozważ macierz A i wektor v:",
+                        simple_ex_math: `A = \\begin{bmatrix} 1 & 6 \\\\ 5 & 2 \\end{bmatrix}, \\quad \\mathbf{v} = \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix} \\implies A\\mathbf{v} = \\begin{bmatrix} -24 \\\\ 20 \\end{bmatrix} = -4 \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix}`,
+                        simple_ex_conc: "Ponieważ A\\mathbf{v} = -4\\mathbf{v}, \\lambda = -4 jest wartością własną, a \\mathbf{v} jest wektorem własnym."
+                    },
+                    section2: {
+                        title2: "Wielomian Charakterystyczny",
+                        description: "Narzędzie algebraiczne używane do znajdowania wartości własnych.",
+                        def2_1: "Aby znaleźć wartości własne, przepisujemy A\\mathbf{v} = \\lambda \\mathbf{v} jako (A - \\lambda I)\\mathbf{v} = \\mathbf{0}.",
+                        def2_2: "Aby istniał wektor niezerowy \\mathbf{v}, macierz (A - \\lambda I) musi być nieodwracalna (osobliwa). Prowadzi to do równania charakterystycznego:",
+                        math2_1: `\\det(A - \\lambda I) = 0`,
+                        text2_1: "Wielomian p(\\lambda) = \\det(A - \\lambda I) nazywany jest wielomianem charakterystycznym macierzy A. Pierwiastki tego wielomianu są wartościami własnymi macierzy A.",
+                        prop2_1_title: "Skrót Śladu i Wyznacznika",
+                        prop2_1_desc: "Dla dowolnej macierzy n x n suma wartości własnych jest równa śladowi (sumie elementów na przekątnej), a iloczyn wartości własnych jest równy wyznacznikowi.",
+                        math2_2: `\\sum \\lambda_i = \\text{Tr}(A), \\quad \\prod \\lambda_i = \\det(A)`
+                    },
+                    section3: {
+                        title3: "Znajdowanie Wektorów Własnych i Podprzestrzeni Własnych",
+                        description: "Po znalezieniu \\lambda, jak znaleźć \\mathbf{v}?",
+                        def3_1: "Po znalezieniu wartości własnej \\lambda, odpowiednie wektory własne znajduje się, rozwiązując jednorodny układ równań liniowych:",
+                        math3_1: `(A - \\lambda I)\\mathbf{v} = \\mathbf{0}`,
+                        def3_2: "Zbiór wszystkich rozwiązań (w tym wektor zerowy) tworzy podprzestrzeń zwaną Podprzestrzenią Własną macierzy A odpowiadającą \\lambda, oznaczaną E_{\\lambda}.",
+                        text3_1: "E_{\\lambda} to po prostu Jądro (Przestrzeń Zerowa) macierzy (A - \\lambda I)."
+                    },
+                    section4: {
+                        title4: "Diagonalizacja",
+                        description: "Rozkład macierzy na prostszą postać diagonalną.",
+                        def4_1: "Macierz kwadratowa A jest diagonalizowalna, jeśli jest podobna do macierzy diagonalnej D. Oznacza to, że istnieje macierz odwracalna P taka, że:",
+                        math4_1: `A = PDP^{-1} \\quad \\text{lub} \\quad D = P^{-1}AP`,
+                        text4_1: "Tutaj D jest macierzą diagonalną zawierającą wartości własne macierzy A, a P jest macierzą, której kolumnami są odpowiednie liniowo niezależne wektory własne.",
+                        cond4_1_title: "Kiedy macierz jest diagonalizowalna?",
+                        cond4_1_desc: "Macierz n x n jest diagonalizowalna wtedy i tylko wtedy, gdy ma n liniowo niezależnych wektorów własnych.",
+                        cond4_2_desc: "Warunek wystarczający: Jeśli A ma n różnych wartości własnych, to na pewno jest diagonalizowalna."
+                    },
+                    example_section: {
+                        title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
+                        ex1: {
+                            title: "1. Znajdowanie Wartości Własnych",
+                            problem: "Znajdź wartości własne macierzy A.",
+                            problem_math: `A = \\begin{bmatrix} 1 & 2 \\\\ 2 & 1 \\end{bmatrix}`,
+                            step1_title: "Krok 1: Równanie Charakterystyczne",
+                            step1_desc: "Oblicz det(A - \\lambda I) = 0.",
+                            step1_math: `\\det \\begin{bmatrix} 1-\\lambda & 2 \\\\ 2 & 1-\\lambda \\end{bmatrix} = (1-\\lambda)(1-\\lambda) - (2)(2)`,
+                            step2_title: "Krok 2: Rozwiąż Wielomian",
+                            step2_desc: "Rozwiń i rozwiąż dla \\lambda.",
+                            step2_math: `(1 - 2\\lambda + \\lambda^2) - 4 = \\lambda^2 - 2\\lambda - 3 = 0`,
+                            step3_title: "Krok 3: Faktoryzacja",
+                            step3_math: `(\\lambda - 3)(\\lambda + 1) = 0`,
+                            result_title: "Ostateczna Odpowiedź",
+                            result: `Wartości własne to $\\lambda_{1} = 3$ i $\\lambda_{2} = -1$.`
+                        },
+                        ex2: {
+                            title: "2. Znajdowanie Wektorów Własnych",
+                            problem: "Znajdź wektory własne dla macierzy A z Przykładu 1.",
+                            step1_title: "Krok 1: Dla $\\lambda = 3$",
+                            step1_desc: "Rozwiąż (A - 3I)\\mathbf{v} = \\mathbf{0}. Odejmij 3 od przekątnej.",
+                            step1_math: `\\begin{bmatrix} 1-3 & 2 \\\\ 2 & 1-3 \\end{bmatrix} \\mathbf{v} = \\begin{bmatrix} -2 & 2 \\\\ 2 & -2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Krok 2: Rozwiąż Układ",
+                            step2_desc: "Równanie upraszcza się do -2x + 2y = 0, lub x = y. Niech y = 1, wtedy x = 1.",
+                            step2_math: `\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}`,
+                            step3_title: "Krok 3: Dla $\\lambda = -1$",
+                            step3_desc: "Rozwiąż (A - (-1)I)\\mathbf{v} = (A + I)\\mathbf{v} = \\mathbf{0}. Dodaj 1 do przekątnej.",
+                            step3_math: `\\begin{bmatrix} 2 & 2 \\\\ 2 & 2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix} \\Rightarrow 2x + 2y = 0 \\Rightarrow x = -y`,
+                            result_title: "Ostateczna Odpowiedź",
+                            result: `$\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}, \\quad \\mathbf{v}_2 = \\begin{bmatrix} 1 \\\\ -1 \\end{bmatrix}$`
+                        },
+                        ex3: {
+                            title: "3. Diagonalizacja",
+                            problem: "Zdiagonalizuj macierz A, używając wyników z Przykładów 1 i 2.",
+                            step1_title: "Krok 1: Utwórz Macierz P",
+                            step1_desc: "Zbuduj P, używając wektorów własnych jako kolumn.",
+                            step1_math: `P = \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}`,
+                            step2_title: "Krok 2: Utwórz Macierz D",
+                            step2_desc: "Zbuduj D, używając odpowiednich wartości własnych na przekątnej.",
+                            step2_math: `D = \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix}`,
+                            step3_title: "Krok 3: Sprawdź $PDP^{-1}$ (Opcjonalne, ale zalecane)",
+                            step3_desc: "Równanie diagonalizacji to A = PDP^{-1}.",
+                            result_title: "Ostateczna Odpowiedź",
+                            result: `A = $\\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix} \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix} \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}^{-1}$`
+                        }
+                    }
+                }
+            }
         }
     },
     ro: {
@@ -3662,61 +4134,59 @@ export const linearAlgebraCourse = {
                         note_desc: "Forma Eșalonată pe Linii (REF) a unei matrice NU este unică (diferite operații pe rânduri pot duce la numere diferite deasupra pivoților). Cu toate acestea, Forma Eșalonată Redusă pe Linii (RREF) ESTE unică. Fiecare matrice are exact o RREF."
                     },
                     example_section: {
-                        example_section: {
-                            title_ex: "Exemple cu Soluții Pas cu Pas",
-                            ex1: {
-                                title: "1. Soluție Unică (Gauss-Jordan)",
-                                problem: "Rezolvați următorul sistem folosind eliminarea Gauss-Jordan:",
-                                system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
-                                step1_title: "Pasul 1: Matricea Extinsă",
-                                step1_desc: "Convertiți sistemul într-o matrice extinsă [A|b].",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
-                                step2_title: "Pasul 2: Creați Zerouri Sub Pivotul 1",
-                                step2_desc: "Folosiți 1 din stânga sus pentru a elimina intrările de sub el. (R2 = R2 - 2R1) și (R3 = R3 - 3R1).",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
-                                step3_title: "Pasul 3: Creați Pivotul 2",
-                                step3_desc: "Pentru a ușura calculele, să scalăm R2 cu 1/2 pentru a obține un 1 principal, sau să scădem R2 din R3. Să înmulțim R2 cu 0.5.",
-                                step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
-                                step4_title: "Pasul 4: Creați Zerouri Sub Pivotul 2",
-                                step4_desc: "Efectuați (R3 = R3 - 3R2).",
-                                step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
-                                step5_title: "Pasul 5: Rezolvați pentru variabile (Substituție Înapoi)",
-                                step5_desc: "Din R3: -0.5z = -1.5 → z = 3. Înlocuiți z înapoi în R2, apoi x și y în R1.",
-                                step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
-                                result_title: "Răspuns Final",
-                                result: `\\text{Soluție: } x=1, y=2, z=3`
-                            },
-                            ex2: {
-                                title: "2. Soluții Infinite (Variabile Libere)",
-                                problem: "Găsiți soluția generală a sistemului:",
-                                system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
-                                step1_title: "Pasul 1: Reducerea Rândurilor",
-                                step1_desc: "Formați matricea extinsă și reduceți.",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
-                                step2_title: "Pasul 2: Identificați Variabilele Libere",
-                                step2_desc: "Rândurile 2 și 3 au devenit toate zerouri. Aceasta înseamnă că avem un singur pivot (pentru x). Variabilele y și z nu au pivoți, deci sunt variabile LIBERE.",
-                                step2_math: `\\text{Fie } y = s \\text{ și } z = t, \\text{ unde } s,t \\in \\mathbb{R}.`,
-                                step3_title: "Pasul 3: Exprimați Variabilele de Bază",
-                                step3_desc: "Rescrieți prima ecuație în funcție de variabilele libere.",
-                                step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
-                                result_title: "Răspuns Final (Formă Parametrică)",
-                                result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
-                            },
-                            ex3: {
-                                title: "3. Fără Soluție (Sistem Incompatibil)",
-                                problem: "Determinați soluția sistemului următor:",
-                                system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
-                                step1_title: "Pasul 1: Formați Matricea Extinsă",
-                                step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
-                                step2_title: "Pasul 2: Operații pe Rânduri",
-                                step2_desc: "Efectuați R2 = R2 - R1.",
-                                step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
-                                step3_title: "Pasul 3: Interpretați Rezultatul",
-                                step3_desc: "Priviți cu atenție rândul al doilea. Traducerea acestuia înapoi într-o ecuație ne dă:",
-                                step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
-                                result_title: "Concluzie Finală",
-                                result: `Deoarece 0 = 3 este o contradicție matematică, sistemul este Incompatibil (Fără Soluție). Geometric, aceasta reprezintă planuri paralele care nu se intersectează niciodată.`
-                            }
+                        title_ex: "Exemple cu Soluții Pas cu Pas",
+                        ex1: {
+                            title: "1. Soluție Unică (Gauss-Jordan)",
+                            problem: "Rezolvați următorul sistem folosind eliminarea Gauss-Jordan:",
+                            system_latex: `\\begin{cases} x + y + 2z = 9 \\\\ 2x + 4y - 3z = 1 \\\\ 3x + 6y - 5z = 0 \\end{cases}`,
+                            step1_title: "Pasul 1: Matricea Extinsă",
+                            step1_desc: "Convertiți sistemul într-o matrice extinsă [A|b].",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 2 & 4 & -3 & 1 \\\\ 3 & 6 & -5 & 0 \\end{array} \\right]`,
+                            step2_title: "Pasul 2: Creați Zerouri Sub Pivotul 1",
+                            step2_desc: "Folosiți 1 din stânga sus pentru a elimina intrările de sub el. (R2 = R2 - 2R1) și (R3 = R3 - 3R1).",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 2 & -7 & -17 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step3_title: "Pasul 3: Creați Pivotul 2",
+                            step3_desc: "Pentru a ușura calculele, să scalăm R2 cu 1/2 pentru a obține un 1 principal, sau să scădem R2 din R3. Să înmulțim R2 cu 0.5.",
+                            step3_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 3 & -11 & -27 \\end{array} \\right]`,
+                            step4_title: "Pasul 4: Creați Zerouri Sub Pivotul 2",
+                            step4_desc: "Efectuați (R3 = R3 - 3R2).",
+                            step4_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 2 & 9 \\\\ 0 & 1 & -3.5 & -8.5 \\\\ 0 & 0 & -0.5 & -1.5 \\end{array} \\right]`,
+                            step5_title: "Pasul 5: Rezolvați pentru variabile (Substituție Înapoi)",
+                            step5_desc: "Din R3: -0.5z = -1.5 → z = 3. Înlocuiți z înapoi în R2, apoi x și y în R1.",
+                            step5_math: `y - 3.5(3) = -8.5 \\Rightarrow y = 2 \\\\ x + 2 + 2(3) = 9 \\Rightarrow x = 1`,
+                            result_title: "Răspuns Final",
+                            result: `\\text{Soluție: } x=1, y=2, z=3`
+                        },
+                        ex2: {
+                            title: "2. Soluții Infinite (Variabile Libere)",
+                            problem: "Găsiți soluția generală a sistemului:",
+                            system_latex: `\\begin{cases} x - y + 2z = 4 \\\\ 2x - 2y + 4z = 8 \\\\ 3x - 3y + 6z = 12 \\end{cases}`,
+                            step1_title: "Pasul 1: Reducerea Rândurilor",
+                            step1_desc: "Formați matricea extinsă și reduceți.",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 2 & -2 & 4 & 8 \\\\ 3 & -3 & 6 & 12 \\end{array} \\right] \\xrightarrow{R_2-2R_1, R_3-3R_1} \\left[ \\begin{array}{ccc|c} 1 & -1 & 2 & 4 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array} \\right]`,
+                            step2_title: "Pasul 2: Identificați Variabilele Libere",
+                            step2_desc: "Rândurile 2 și 3 au devenit toate zerouri. Aceasta înseamnă că avem un singur pivot (pentru x). Variabilele y și z nu au pivoți, deci sunt variabile LIBERE.",
+                            step2_math: `\\text{Fie } y = s \\text{ și } z = t, \\text{ unde } s,t \\in \\mathbb{R}.`,
+                            step3_title: "Pasul 3: Exprimați Variabilele de Bază",
+                            step3_desc: "Rescrieți prima ecuație în funcție de variabilele libere.",
+                            step3_math: `x - y + 2z = 4 \\Rightarrow x = 4 + y - 2z \\Rightarrow x = 4 + s - 2t`,
+                            result_title: "Răspuns Final (Formă Parametrică)",
+                            result: `\\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} = \\begin{bmatrix} 4 \\\\ 0 \\\\ 0 \\end{bmatrix} + s\\begin{bmatrix} 1 \\\\ 1 \\\\ 0 \\end{bmatrix} + t\\begin{bmatrix} -2 \\\\ 0 \\\\ 1 \\end{bmatrix}`
+                        },
+                        ex3: {
+                            title: "3. Fără Soluție (Sistem Incompatibil)",
+                            problem: "Determinați soluția sistemului următor:",
+                            system_latex: `\\begin{cases} x + y + z = 2 \\\\ x + y + z = 5 \\\\ 2x + 3y + z = 4 \\end{cases}`,
+                            step1_title: "Pasul 1: Formați Matricea Extinsă",
+                            step1_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 1 & 1 & 5 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step2_title: "Pasul 2: Operații pe Rânduri",
+                            step2_desc: "Efectuați R2 = R2 - R1.",
+                            step2_math: `\\left[ \\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 0 & 0 & 3 \\\\ 2 & 3 & 1 & 4 \\end{array} \\right]`,
+                            step3_title: "Pasul 3: Interpretați Rezultatul",
+                            step3_desc: "Priviți cu atenție rândul al doilea. Traducerea acestuia înapoi într-o ecuație ne dă:",
+                            step3_math: `0x + 0y + 0z = 3 \\Rightarrow 0 = 3`,
+                            result_title: "Concluzie Finală",
+                            result: `Deoarece 0 = 3 este o contradicție matematică, sistemul este Incompatibil (Fără Soluție). Geometric, aceasta reprezintă planuri paralele care nu se intersectează niciodată.`
                         }
                     }
                 }
@@ -3892,6 +4362,102 @@ export const linearAlgebraCourse = {
                     }
                 }
             }
-        }      
+        },
+        eigenvalues: {
+            title: "Valori Proprii și Vectori Proprii",
+            description: "Învață cum să calculezi valorile proprii, vectorii proprii și să diagonalizezi matricele.",
+            lessons: {
+                lesson6_title: "Valori Proprii și Vectori Proprii",
+                lesson6: {
+                    section1: {
+                        title1: "Ce sunt Valorile Proprii și Vectorii Proprii?",
+                        def1_1: "Fie A o matrice pătratică n x n. O pereche proprie este o pereche (\\lambda, \\mathbf{v}) unde \\lambda este un scalar și \\mathbf{v} este un vector nenul astfel încât:",
+                        math1_1: `A\\mathbf{v} = \\lambda \\mathbf{v}`,
+                        def1_2: "Scalarul \\lambda se numește valoare proprie, iar vectorul \\mathbf{v} se numește vector propriu.",
+                        text1_1: "Geometric, înmulțirea lui \\mathbf{v} cu A nu îi schimbă direcția, ci doar lungimea (scalată cu \\lambda). Dacă \\lambda > 1, se întinde; dacă 0 < \\lambda < 1, se contractă; dacă \\lambda < 0, își inversează direcția.",
+                        simple_ex_title: "Exemplu Rapid",
+                        simple_ex_desc: "Considerați matricea A și vectorul v:",
+                        simple_ex_math: `A = \\begin{bmatrix} 1 & 6 \\\\ 5 & 2 \\end{bmatrix}, \\quad \\mathbf{v} = \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix} \\implies A\\mathbf{v} = \\begin{bmatrix} -24 \\\\ 20 \\end{bmatrix} = -4 \\begin{bmatrix} 6 \\\\ -5 \\end{bmatrix}`,
+                        simple_ex_conc: "Deoarece A\\mathbf{v} = -4\\mathbf{v}, \\lambda = -4 este o valoare proprie, iar \\mathbf{v} este un vector propriu."
+                    },
+                    section2: {
+                        title2: "Polinomul Caracteristic",
+                        description: "Instrumentul algebric folosit pentru a găsi valorile proprii.",
+                        def2_1: "Pentru a găsi valorile proprii, rescriem A\\mathbf{v} = \\lambda \\mathbf{v} ca (A - \\lambda I)\\mathbf{v} = \\mathbf{0}.",
+                        def2_2: "Pentru ca un vector nenul \\mathbf{v} să existe, matricea (A - \\lambda I) trebuie să fie neinversabilă (singulară). Aceasta duce la ecuația caracteristică:",
+                        math2_1: `\\det(A - \\lambda I) = 0`,
+                        text2_1: "Polinomul p(\\lambda) = \\det(A - \\lambda I) se numește polinomul caracteristic al lui A. Rădăcinile acestui polinom sunt valorile proprii ale lui A.",
+                        prop2_1_title: "Scurtătura Urmei și Determinantului",
+                        prop2_1_desc: "Pentru orice matrice n x n, suma valorilor proprii este egală cu urma (suma elementelor de pe diagonală), iar produsul valorilor proprii este egal cu determinantul.",
+                        math2_2: `\\sum \\lambda_i = \\text{Tr}(A), \\quad \\prod \\lambda_i = \\det(A)`
+                    },
+                    section3: {
+                        title3: "Găsirea Vectorilor Proprii și Subspațiilor Proprii",
+                        description: "Odată găsit \\lambda, cum găsim \\mathbf{v}?",
+                        def3_1: "După găsirea unei valori proprii \\lambda, vectorii proprii corespunzători sunt găsiți prin rezolvarea sistemului liniar omogen:",
+                        math3_1: `(A - \\lambda I)\\mathbf{v} = \\mathbf{0}`,
+                        def3_2: "Mulțimea tuturor soluțiilor (inclusiv vectorul zero) formează un subspațiu numit Subspațiul Propriu al lui A corespunzător lui \\lambda, notat E_{\\lambda}.",
+                        text3_1: "E_{\\lambda} este pur și simplu Spațiul Nul (Nucleul) al matricei (A - \\lambda I)."
+                    },
+                    section4: {
+                        title4: "Diagonalizare",
+                        description: "Descompunerea unei matrice într-o formă diagonală mai simplă.",
+                        def4_1: "O matrice pătratică A este diagonalizabilă dacă este similară cu o matrice diagonală D. Aceasta înseamnă că există o matrice inversabilă P astfel încât:",
+                        math4_1: `A = PDP^{-1} \\quad \\text{sau} \\quad D = P^{-1}AP`,
+                        text4_1: "Aici, D este o matrice diagonală care conține valorile proprii ale lui A, iar P este o matrice ale cărei coloane sunt vectorii proprii liniar independenți corespunzători.",
+                        cond4_1_title: "Când este o matrice diagonalizabilă?",
+                        cond4_1_desc: "O matrice n x n este diagonalizabilă dacă și numai dacă are n vectori proprii liniar independenți.",
+                        cond4_2_desc: "O condiție suficientă: Dacă A are n valori proprii distincte, este garantat să fie diagonalizabilă."
+                    },
+                    example_section: {
+                        title_ex: "Exemple cu Soluții Pas cu Pas",
+                        ex1: {
+                            title: "1. Găsirea Valorilor Proprii",
+                            problem: "Găsiți valorile proprii ale matricei A.",
+                            problem_math: `A = \\begin{bmatrix} 1 & 2 \\\\ 2 & 1 \\end{bmatrix}`,
+                            step1_title: "Pasul 1: Ecuația Caracteristică",
+                            step1_desc: "Calculați det(A - \\lambda I) = 0.",
+                            step1_math: `\\det \\begin{bmatrix} 1-\\lambda & 2 \\\\ 2 & 1-\\lambda \\end{bmatrix} = (1-\\lambda)(1-\\lambda) - (2)(2)`,
+                            step2_title: "Pasul 2: Rezolvați Polinomul",
+                            step2_desc: "Extindeți și rezolvați pentru \\lambda.",
+                            step2_math: `(1 - 2\\lambda + \\lambda^2) - 4 = \\lambda^2 - 2\\lambda - 3 = 0`,
+                            step3_title: "Pasul 3: Factorizare",
+                            step3_math: `(\\lambda - 3)(\\lambda + 1) = 0`,
+                            result_title: "Răspuns Final",
+                            result: `Valorile proprii sunt $\\lambda_{1} = 3$ și $\\lambda_{2} = -1$.`
+                        },
+                        ex2: {
+                            title: "2. Găsirea Vectorilor Proprii",
+                            problem: "Găsiți vectorii proprii pentru matricea A din Exemplul 1.",
+                            step1_title: "Pasul 1: Pentru $\\lambda = 3$",
+                            step1_desc: "Rezolvați (A - 3I)\\mathbf{v} = \\mathbf{0}. Scădeți 3 de pe diagonală.",
+                            step1_math: `\\begin{bmatrix} 1-3 & 2 \\\\ 2 & 1-3 \\end{bmatrix} \\mathbf{v} = \\begin{bmatrix} -2 & 2 \\\\ 2 & -2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}`,
+                            step2_title: "Pasul 2: Rezolvați Sistemul",
+                            step2_desc: "Ecuația se simplifică la -2x + 2y = 0, sau x = y. Fie y = 1, atunci x = 1.",
+                            step2_math: `\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}`,
+                            step3_title: "Pasul 3: Pentru $\\lambda = -1$",
+                            step3_desc: "Rezolvați (A - (-1)I)\\mathbf{v} = (A + I)\\mathbf{v} = \\mathbf{0}. Adăugați 1 la diagonală.",
+                            step3_math: `\\begin{bmatrix} 2 & 2 \\\\ 2 & 2 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix} \\Rightarrow 2x + 2y = 0 \\Rightarrow x = -y`,
+                            result_title: "Răspuns Final",
+                            result: `$\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}, \\quad \\mathbf{v}_2 = \\begin{bmatrix} 1 \\\\ -1 \\end{bmatrix}$`
+                        },
+                        ex3: {
+                            title: "3. Diagonalizare",
+                            problem: "Diagonalizați matricea A folosind rezultatele din Exemplele 1 și 2.",
+                            step1_title: "Pasul 1: Formați Matricea P",
+                            step1_desc: "Construiți P folosind vectorii proprii ca coloane.",
+                            step1_math: `P = \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}`,
+                            step2_title: "Pasul 2: Formați Matricea D",
+                            step2_desc: "Construiți D folosind valorile proprii corespunzătoare pe diagonală.",
+                            step2_math: `D = \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix}`,
+                            step3_title: "Pasul 3: Verificați $PDP^{-1}$ (Opțional dar recomandat)",
+                            step3_desc: "Ecuația de diagonalizare este A = PDP^{-1}.",
+                            result_title: "Răspuns Final",
+                            result: `A = $\\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix} \\begin{bmatrix} 3 & 0 \\\\ 0 & -1 \\end{bmatrix} \\begin{bmatrix} 1 & 1 \\\\ 1 & -1 \\end{bmatrix}^{-1}$`
+                        }
+                    }
+                }
+            }
+        }     
     }
 }
