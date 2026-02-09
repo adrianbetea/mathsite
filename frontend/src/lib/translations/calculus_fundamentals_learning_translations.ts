@@ -9,67 +9,7 @@ export const calculusFundamentalsLearningTranslations = {
       description: "Comprehensive examples and explanations covering limits, derivatives, integrals, and more",
       badge: "60+ Examples"
     },
-
-    sections: {
-      limits: {
-        title: "Limits",
-        description: "Understanding the foundation of calculus",
-        icon: "→",
-        topics: ["Definition of Limits", "One-Sided Limits", "Infinite Limits", "Limits at Infinity", "Continuity"]
-      },
-      derivatives: {
-        title: "Derivatives",
-        description: "Rate of change and slope of curves",
-        icon: "∂",
-        topics: ["Definition of Derivative", "Power Rule", "Product & Quotient Rules", "Chain Rule", "Implicit Differentiation"]
-      },
-      applications: {
-        title: "Applications of Derivatives",
-        description: "Using derivatives to solve problems",
-        icon: "📊",
-        topics: ["Optimization", "Related Rates", "Curve Sketching", "Mean Value Theorem", "L'Hôpital's Rule"]
-      },
-      integration: {
-        title: "Integration",
-        description: "Finding areas and antiderivatives",
-        icon: "∫",
-        topics: ["Antiderivatives", "Definite Integrals", "Fundamental Theorem", "U-Substitution", "Integration by Parts"]
-      },
-      series: {
-        title: "Series & Sequences",
-        description: "Infinite sums and convergence",
-        icon: "∑",
-        topics: ["Sequences", "Series Tests", "Power Series", "Taylor Series", "Maclaurin Series"]
-      },
-      differential: {
-        title: "Differential Equations",
-        description: "Solving equations with derivatives",
-        icon: "dy/dx",
-        topics: ["Separable Equations", "First-Order Linear", "Second-Order", "Applications", "Initial Value Problems"]
-      }
-    },
-
-    features: {
-      stepByStep: "Step-by-step solutions for every problem",
-      visualizations: "Interactive graphs and visualizations",
-      practice: "Practice problems to test your understanding"
-    },
-
-    comingSoon: "More examples coming soon!",
-    startLearning: "Start Learning"
-  },
-  
-  "en-us": {
-    title: "Calculus Fundamentals",
-    subtitle: "Master the foundations of calculus from limits to integrals",
-    backToLearning: "Back to Learning Materials",
-    
-    hero: {
-      title: "Learn Calculus Step by Step",
-      description: "Comprehensive examples and explanations covering limits, derivatives, integrals, and more",
-      badge: "60+ Examples"
-    },
-
+    topicsCovered: "Topics Covered",
     sections: {
       limits: {
         title: "Limits",
@@ -129,7 +69,7 @@ export const calculusFundamentalsLearningTranslations = {
       description: "Exemple și explicații cuprinzătoare acoperind limite, derivate, integrale și multe altele",
       badge: "60+ Exemple"
     },
-
+    topicsCovered: "Subiecte Acoperite",
     sections: {
       limits: {
         title: "Limite",
@@ -189,7 +129,7 @@ export const calculusFundamentalsLearningTranslations = {
       description: "Ejemplos y explicaciones completas que cubren límites, derivadas, integrales y más",
       badge: "60+ Ejemplos"
     },
-
+    topicsCovered: "Temas Cubiertos",
     sections: {
       limits: {
         title: "Límites",
@@ -249,7 +189,7 @@ export const calculusFundamentalsLearningTranslations = {
       description: "Exemples et explications complètes couvrant les limites, dérivées, intégrales et plus",
       badge: "60+ Exemples"
     },
-
+    topicsCovered: "Sujets Couvert",
     sections: {
       limits: {
         title: "Limites",
@@ -309,7 +249,7 @@ export const calculusFundamentalsLearningTranslations = {
       description: "Umfassende Beispiele und Erklärungen zu Grenzwerten, Ableitungen, Integralen und mehr",
       badge: "60+ Beispiele"
     },
-
+    topicsCovered: "Abgedeckte Themen",
     sections: {
       limits: {
         title: "Grenzwerte",
@@ -369,7 +309,7 @@ export const calculusFundamentalsLearningTranslations = {
       description: "Kompleksowe przykłady i wyjaśnienia obejmujące granice, pochodne, całki i więcej",
       badge: "60+ Przykładów"
     },
-
+    topicsCovered: "Omówione Tematy",
     sections: {
       limits: {
         title: "Granice",
