@@ -240,6 +240,156 @@ export const calculusFundamentalsCourse = {
                     }
                 }
             }
+        },      
+        applications_derivatives: {
+            title: "Applications of Derivatives",
+            description: "Using the power of calculus to analyze function behavior, solve real-world optimization challenges, and calculate rates of change.",
+            lessons: {
+                lesson3_title: "Analysis & Real-World Applications",
+                lesson3: {
+                    section1: {
+                        title1: "The Mean Value Theorem & L'Hôpital's Rule",
+                        def1_1: "Theoretical tools that link average rates to instantaneous rates and help solve complex limits.",
+                        plot1_title: "Visualizing Mean Value Theorem",
+                        plot1_desc: "The dashed blue line is the secant (average rate) between a and b. The red point c has a tangent line (green) parallel to the secant.",
+                        plot1_type: "mvt_visual", // Custom type for your renderer
+                        plot1_function: "-(x-2)^2 + 4", // Parabola: -x^2 + 4x
+                        plot1_domain: [0, 4], // a=0, b=4
+                        plot1_points: {
+                            a: { x: 0, y: 0, label: "a" },
+                            b: { x: 4, y: 0, label: "b" },
+                            c: { x: 2, y: 4, label: "c (Tangent)" } 
+                        },
+                        def1_2: "The Mean Value Theorem (MVT): If f(x) is continuous on [a, b] and differentiable on (a, b), there is at least one point c where:",
+                        math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
+                        text1_1: "In physics terms: At some point, your instantaneous speed must equal your average speed.",
+                        def1_3: "L'Hôpital's Rule: Used for indeterminate limits (0/0 or $\\infty/\\infty$).",
+                        ex1_1_title: "Example: The Limit of sin(x)/x",
+                        ex1_1_problem: "Find $\\lim_{x \\to 0} \\frac{\\sin x}{x}$. Direct substitution gives $0/0$.",
+                        ex1_1_step1: "Apply L'Hôpital's: Differentiate top and bottom separately.",
+                        ex1_1_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(\\sin x)}{\\frac{d}{dx}(x)} = \\lim_{x \\to 0} \\frac{\\cos x}{1}`,
+                        ex1_1_result: "Evaluate limit: $\\cos(0) = 1$.",
+                        math1_2: `\\lim_{x \\to c} \\frac{f(x)}{g(x)} = \\lim_{x \\to c} \\frac{f'(x)}{g'(x)}`,
+                        warning1: "Note: This is NOT the Quotient Rule. You derive the numerator and denominator separately."
+                    },
+                    section2: {
+                        title2: "Curve Sketching: Analysis of Functions",
+                        desc2_1: "We use the first and second derivatives to understand the exact shape of a graph without plotting points.",
+                        def2_1_title: "First Derivative Test (Increase/Decrease)",
+                        list2_1: "If $f'(x) > 0$, the function is increasing.",
+                        list2_2: "If $f'(x) < 0$, the function is decreasing.",
+                        list2_3: "Critical Points: Where $f'(x) = 0$ or is undefined (potential Max/Min).",
+                        plot2_title: "Visualizing Extrema",
+                        plot2_desc: "A cubic function showing a Local Maximum (hill) at x=-1 and a Local Minimum (valley) at x=1.",
+                        plot2_type: "extrema_visual",
+                        plot2_function: "x^3 - 3*x", // f(x) = x^3 - 3x
+                        plot2_domain: [-2.5, 2.5],
+                        plot2_points: [
+                            { x: -1, y: 2, label: "Local Max (-1, 2)", color: "red" },
+                            { x: 1, y: -2, label: "Local Min (1, -2)", color: "blue" }
+                        ],
+                        def2_2_title: "Second Derivative Test (Concavity)",
+                        list2_4: "If $f''(x) > 0$, the graph is Concave Up (like a cup).",
+                        list2_5: "If $f''(x) < 0$, the graph is Concave Down (frown).",
+                        list2_6: "Inflection Point: A point where concavity changes ($f''(x) = 0$)."
+                    },
+                    section3: {
+                        title3: "Optimization",
+                        def3_1: "Optimization involves finding the absolute maximum or minimum value of a function in a real-world context (e.g., maximizing profit, minimizing material cost).",
+                        plot3_title: "Optimization Visual: Open-Top Box",
+                        plot3_desc: "The curve shows how Volume changes as the cut size 'x' changes. The peak represents the maximum possible volume.",
+                        plot3_type: "optimization_box", 
+                        plot3_function: "x * (12 - 2*x)^2", // V(x) for a 12x12 sheet
+                        plot3_domain: [0, 6], // x cannot exceed half the width (6)
+                        plot3_points: [
+                            { x: 2, y: 128, label: "Max Volume (x=2)", color: "green" }
+                        ],
+                        strategy_title: "General Strategy:",
+                        step3_1: "1. Draw a picture and label variables.",
+                        step3_2: "2. Write a 'Primary Equation' for the quantity to be optimized.",
+                        step3_3: "3. Use a 'Constraint' to reduce the equation to one variable.",
+                        step3_4: "4. Take the derivative, set it to 0, and solve for critical points.",
+                        step3_5: "5. Verify using the First or Second Derivative test.",
+
+                        ex3_1_title: "Example (Max Volume)",
+                        ex3_1_problem: "A 12x12 sheet of cardboard has squares of side 'x' cut from each corner. Fold up the sides to make an open box. Find 'x' for maximum Volume.",
+                        ex3_1_step1: "Primary Equation: Volume $V = L \\cdot W \\cdot H$. Dimensions are $(12-2x)$, $(12-2x)$, and height $x$.",
+                        ex3_1_step2: "Function: $V(x) = x(12-2x)^2$. Expand: $V(x) = 144x - 48x^2 + 4x^3$.",
+                        ex3_1_step3: "Derivative: $V'(x) = 144 - 96x + 12x^2$. Set $V'(x) = 0$.",
+                        ex3_1_step4: "Solve: $12(x^2 - 8x + 12) = 0 \\implies (x-6)(x-2) = 0$. Critical points: $x=2, 6$.",
+                        ex3_1_solution: "Check: $x=6$ makes width 0. So, Max is at $x=2$. Volume = $2(8)(8) = 128$."
+                    },
+                    section4: {
+                        title4: "Related Rates",
+                        def4_1: "Problems where variables are changing with respect to time ($t$). We use Implicit Differentiation with respect to $t$.",
+                        plot4_title: "Related Rates Visual: Sliding Ladder",
+                        plot4_desc: "As the bottom of the ladder (x) slides away, the top (y) slides down. The length of the ladder (z) stays constant.",
+                        plot4_type: "related_rates_ladder",
+                        plot4_function: "Ladder length = 10",
+                        plot4_domain: [0, 10],
+                        plot4_points: [
+                            { x: 6, y: 8, label: "Current Position (x=6, y=8)", color: "orange" }
+                        ],
+                        math4_1: `\\text{Given } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
+                        text4_1: "The key is to recognize that every variable is actually a function of time $t(x)$.",
+                        ex4_1_title: "Example (Sliding Ladder)",
+                        ex4_1_problem: "A 10ft ladder leans against a wall. The bottom slides away at 2 ft/s. How fast is the top sliding down when the base is 6ft from the wall?",
+                        ex4_1_step1: "Equation: $x^2 + y^2 = 10^2$. Differentiate wrt time $t$: $2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0$.",
+                        ex4_1_step2: "Find missing variable ($y$): If $x=6$ and $z=10$, then $36 + y^2 = 100 \\implies y=8$.",
+                        ex4_1_step3: "Substitute: $2(6)(2) + 2(8)(\\frac{dy}{dt}) = 0$. (Note: $\\frac{dx}{dt}=2$).",
+                        ex4_1_step4: "Solve: $24 + 16\\frac{dy}{dt} = 0$.",
+                        ex4_1_solution: "Result: $16\\frac{dy}{dt} = -24 \\implies \\frac{dy}{dt} = -1.5$ ft/s."
+                    },
+                    example_section: {
+                        title_ex: "Examples with Step-by-Step Solutions",
+                        ex1: {
+                            title: "1. L'Hôpital's Rule",
+                            problem: "Evaluate the limit:",
+                            problem_math: `\\lim_{x \\to 0} \\frac{e^x - 1 - x}{x^2}`,
+                            step1_title: "Step 1: Check Form",
+                            step1_desc: "Plug in 0: $e^0 - 1 - 0 = 0$ and $0^2 = 0$. This is $\\frac{0}{0}$. Apply L'Hôpital.",
+                            step2_title: "Step 2: Differentiate Top and Bottom",
+                            step2_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1 - x)}{\\frac{d}{dx}(x^2)} = \\lim_{x \\to 0} \\frac{e^x - 1}{2x}`,
+                            step3_title: "Step 3: Check Again & Repeat",
+                            step3_desc: "Plug in 0 again: $\\frac{1-1}{0} = \\frac{0}{0}$. Apply L'Hôpital a second time.",
+                            step3_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1)}{\\frac{d}{dx}(2x)} = \\lim_{x \\to 0} \\frac{e^x}{2}`,
+                            result_title: "Final Answer",
+                            result: `$\\frac{e^0}{2} = \\frac{1}{2}$`
+                        },
+                        ex2: {
+                            title: "2. Optimization (Max Volume)",
+                            problem: "A box is made from a 12x12 inch sheet by cutting squares of size x from corners and folding up. Maximize the volume.",
+                            problem_math: `V(x) = length \\cdot width \\cdot height`,
+                            step1_title: "Step 1: Setup Equation",
+                            step1_desc: "Height is $x$. Width and Length are both $12 - 2x$.",
+                            step1_math: `V(x) = x(12 - 2x)^2`,
+                            step2_title: "Step 2: Differentiate",
+                            step2_desc: "Use Product Rule or expand first. Expanding: $V = x(144 - 48x + 4x^2) = 144x - 48x^2 + 4x^3$.",
+                            step2_math: `V'(x) = 144 - 96x + 12x^2`,
+                            step3_title: "Step 3: Find Critical Points",
+                            step3_desc: "Set $V'(x) = 0$. Divide by 12: $x^2 - 8x + 12 = 0$. Factor: $(x-6)(x-2)=0$.",
+                            step4_title: "Step 4: Analyze Solutions",
+                            step4_desc: "$x=6$ makes width 0 (minimum). $x=2$ is the logical maximum.",
+                            result_title: "Final Answer",
+                            result: "Cut 2-inch squares. Max Volume = $2(12-4)^2 = 2(64) = 128 \\text{ in}^3$."
+                        },
+                        ex3: {
+                            title: "3. Related Rates (Ladder Problem)",
+                            problem: "A 10ft ladder rests against a wall. The bottom slides away at 2 ft/s. How fast is the top falling when the bottom is 6ft from the wall?",
+                            problem_math: `x^2 + y^2 = 10^2`,
+                            step1_title: "Step 1: Differentiate w.r.t Time",
+                            step1_desc: "Implicit differentiation on Pythagorean theorem.",
+                            step1_math: `2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0 \\implies x\\frac{dx}{dt} + y\\frac{dy}{dt} = 0`,
+                            step2_title: "Step 2: Find Missing Values",
+                            step2_desc: "We know $\\frac{dx}{dt} = 2$ and $x = 6$. We need y. Use $6^2 + y^2 = 100$. $y = \\sqrt{64} = 8$.",
+                            step3_title: "Step 3: Solve for dy/dt",
+                            step3_math: `(6)(2) + (8)\\frac{dy}{dt} = 0 \\\\ 12 + 8\\frac{dy}{dt} = 0 \\\\ \\frac{dy}{dt} = -\\frac{12}{8}`,
+                            result_title: "Final Answer",
+                            result: "The top is sliding down at $\\frac{3}{2}$ or $1.5 \\text{ ft/s}$."
+                        }
+                    }
+                }
+            }
         },
     },
     es: {
@@ -479,6 +629,155 @@ export const calculusFundamentalsCourse = {
                             step3_math: `2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = \\frac{-2x}{2y}`,
                             result_title: "Respuesta Final",
                             result: `$\\frac{dy}{dx} = -\\frac{x}{y}$`
+                        }
+                    }
+                }
+            }
+        },
+        applications_derivatives: {
+            title: "Aplicaciones de las Derivadas",
+            description: "Usando el poder del cálculo para analizar el comportamiento de funciones, resolver desafíos de optimización del mundo real y calcular tasas de cambio.",
+            lessons: {
+                lesson3_title: "Análisis y Aplicaciones en el Mundo Real",
+                lesson3: {
+                    section1: {
+                        title1: "El Teorema del Valor Medio y la Regla de L'Hôpital",
+                        def1_1: "Herramientas teóricas que vinculan tasas promedio con tasas instantáneas y ayudan a resolver límites complejos.",
+                        plot1_title: "Visualizando el Teorema del Valor Medio",
+                        plot1_desc: "La línea azul discontinua es la secante (tasa promedio) entre a y b. El punto rojo c tiene una línea tangente (verde) paralela a la secante.",
+                        plot1_type: "mvt_visual",
+                        plot1_function: "-(x-2)^2 + 4",
+                        plot1_domain: [0, 4],
+                        plot1_points: {
+                            a: { x: 0, y: 0, label: "a" },
+                            b: { x: 4, y: 0, label: "b" },
+                            c: { x: 2, y: 4, label: "c (Tangente)" }
+                        },
+                        def1_2: "El Teorema del Valor Medio (TVM): Si f(x) es continua en [a, b] y diferenciable en (a, b), existe al menos un punto c donde:",
+                        math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
+                        text1_1: "En términos físicos: En algún punto, tu velocidad instantánea debe igualar a tu velocidad promedio.",
+                        def1_3: "Regla de L'Hôpital: Usada para límites indeterminados (0/0 o $\\infty/\\infty$).",
+                        ex1_1_title: "Ejemplo: El Límite de sin(x)/x",
+                        ex1_1_problem: "Encuentra $\\lim_{x \\to 0} \\frac{\\sin x}{x}$. La sustitución directa da $0/0$.",
+                        ex1_1_step1: "Aplica L'Hôpital: Diferencia el numerador y el denominador por separado.",
+                        ex1_1_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(\\sin x)}{\\frac{d}{dx}(x)} = \\lim_{x \\to 0} \\frac{\\cos x}{1}`,
+                        ex1_1_result: "Evalúa el límite: $\\cos(0) = 1$.",
+                        math1_2: `\\lim_{x \\to c} \\frac{f(x)}{g(x)} = \\lim_{x \\to c} \\frac{f'(x)}{g'(x)}`,
+                        warning1: "Nota: Esto NO es la Regla del Cociente. Derivas el numerador y el denominador por separado."
+                    },
+                    section2: {
+                        title2: "Trazado de Curvas: Análisis de Funciones",
+                        desc2_1: "Usamos la primera y segunda derivada para entender la forma exacta de un gráfico sin trazar puntos.",
+                        def2_1_title: "Criterio de la Primera Derivada (Crecimiento/Decrecimiento)",
+                        list2_1: "Si $f'(x) > 0$, la función es creciente.",
+                        list2_2: "Si $f'(x) < 0$, la función es decreciente.",
+                        list2_3: "Puntos Críticos: Donde $f'(x) = 0$ o está indefinida (potencial Máx/Mín).",
+                        plot2_title: "Visualizando Extremos",
+                        plot2_desc: "Una función cúbica mostrando un Máximo Local (cima) en x=-1 y un Mínimo Local (valle) en x=1.",
+                        plot2_type: "extrema_visual",
+                        plot2_function: "x^3 - 3*x",
+                        plot2_domain: [-2.5, 2.5],
+                        plot2_points: [
+                            { x: -1, y: 2, label: "Máx Local (-1, 2)", color: "red" },
+                            { x: 1, y: -2, label: "Mín Local (1, -2)", color: "blue" }
+                        ],
+                        def2_2_title: "Criterio de la Segunda Derivada (Concavidad)",
+                        list2_4: "Si $f''(x) > 0$, el gráfico es Cóncavo Hacia Arriba (como una taza).",
+                        list2_5: "Si $f''(x) < 0$, el gráfico es Cóncavo Hacia Abajo (triste).",
+                        list2_6: "Punto de Inflexión: Un punto donde la concavidad cambia ($f''(x) = 0$)."
+                    },
+                    section3: {
+                        title3: "Optimización",
+                        def3_1: "La optimización implica encontrar el valor máximo o mínimo absoluto de una función en un contexto real (ej. maximizar ganancias, minimizar costos de material).",
+                        plot3_title: "Visual de Optimización: Caja Abierta",
+                        plot3_desc: "La curva muestra cómo cambia el Volumen a medida que cambia el tamaño del corte 'x'. El pico representa el volumen máximo posible.",
+                        plot3_type: "optimization_box",
+                        plot3_function: "x * (12 - 2*x)^2",
+                        plot3_domain: [0, 6],
+                        plot3_points: [
+                            { x: 2, y: 128, label: "Volumen Máx (x=2)", color: "green" }
+                        ],
+                        strategy_title: "Estrategia General:",
+                        step3_1: "1. Dibuja una imagen y etiqueta las variables.",
+                        step3_2: "2. Escribe una 'Ecuación Primaria' para la cantidad a optimizar.",
+                        step3_3: "3. Usa una 'Restricción' para reducir la ecuación a una variable.",
+                        step3_4: "4. Toma la derivada, iguálala a 0 y resuelve para puntos críticos.",
+                        step3_5: "5. Verifica usando el Criterio de la Primera o Segunda Derivada.",
+                        ex3_1_title: "Ejemplo (Volumen Máximo)",
+                        ex3_1_problem: "Una hoja de cartón de 12x12 cm tiene cuadrados de lado 'x' cortados de cada esquina. Dobla los lados para hacer una caja abierta. Encuentra 'x' para el Volumen máximo.",
+                        ex3_1_step1: "Ecuación Primaria: Volumen $V = L \\cdot W \\cdot H$. Las dimensiones son $(12-2x)$, $(12-2x)$ y altura $x$.",
+                        ex3_1_step2: "Función: $V(x) = x(12-2x)^2$. Expande: $V(x) = 144x - 48x^2 + 4x^3$.",
+                        ex3_1_step3: "Derivada: $V'(x) = 144 - 96x + 12x^2$. Iguala $V'(x) = 0$.",
+                        ex3_1_step4: "Resuelve: $12(x^2 - 8x + 12) = 0 \\implies (x-6)(x-2) = 0$. Puntos críticos: $x=2, 6$.",
+                        ex3_1_solution: "Verifica: $x=6$ hace que el ancho sea 0. Entonces, el Máx está en $x=2$. Volumen = $2(8)(8) = 128$."
+                    },
+                    section4: {
+                        title4: "Razones de Cambio Relacionadas",
+                        def4_1: "Problemas donde las variables cambian con respecto al tiempo ($t$). Usamos Diferenciación Implícita con respecto a $t$.",
+                        plot4_title: "Visual de Razones Relacionadas: Escalera Deslizante",
+                        plot4_desc: "A medida que la base de la escalera (x) se aleja, la parte superior (y) se desliza hacia abajo. La longitud de la escalera (z) permanece constante.",
+                        plot4_type: "related_rates_ladder",
+                        plot4_function: "Longitud de escalera = 10",
+                        plot4_domain: [0, 10],
+                        plot4_points: [
+                            { x: 6, y: 8, label: "Posición Actual (x=6, y=8)", color: "orange" }
+                        ],
+                        math4_1: `\\text{Dado } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
+                        text4_1: "La clave es reconocer que cada variable es en realidad una función del tiempo $t(x)$.",
+                        ex4_1_title: "Ejemplo (Escalera Deslizante)",
+                        ex4_1_problem: "Una escalera de 10 metros se apoya contra una pared. La base se aleja a 2 m/s. ¿Qué tan rápido cae la parte superior cuando la base está a 6 m de la pared?",
+                        ex4_1_step1: "Ecuación: $x^2 + y^2 = 10^2$. Diferencia con respecto al tiempo $t$: $2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0$.",
+                        ex4_1_step2: "Encuentra la variable faltante ($y$): Si $x=6$ y $z=10$, entonces $36 + y^2 = 100 \\implies y=8$.",
+                        ex4_1_step3: "Sustituye: $2(6)(2) + 2(8)(\\frac{dy}{dt}) = 0$. (Nota: $\\frac{dx}{dt}=2$).",
+                        ex4_1_step4: "Resuelve: $24 + 16\\frac{dy}{dt} = 0$.",
+                        ex4_1_solution: "Resultado: $16\\frac{dy}{dt} = -24 \\implies \\frac{dy}{dt} = -1.5$ m/s."
+                    },
+                    example_section: {
+                        title_ex: "Ejemplos con Soluciones Paso a Paso",
+                        ex1: {
+                            title: "1. Regla de L'Hôpital",
+                            problem: "Evalúa el límite:",
+                            problem_math: `\\lim_{x \\to 0} \\frac{e^x - 1 - x}{x^2}`,
+                            step1_title: "Paso 1: Verificar Forma",
+                            step1_desc: "Sustituye 0: $e^0 - 1 - 0 = 0$ y $0^2 = 0$. Esto es $\\frac{0}{0}$. Aplica L'Hôpital.",
+                            step2_title: "Paso 2: Diferenciar Arriba y Abajo",
+                            step2_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1 - x)}{\\frac{d}{dx}(x^2)} = \\lim_{x \\to 0} \\frac{e^x - 1}{2x}`,
+                            step3_title: "Paso 3: Verificar de Nuevo y Repetir",
+                            step3_desc: "Sustituye 0 de nuevo: $\\frac{1-1}{0} = \\frac{0}{0}$. Aplica L'Hôpital por segunda vez.",
+                            step3_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1)}{\\frac{d}{dx}(2x)} = \\lim_{x \\to 0} \\frac{e^x}{2}`,
+                            result_title: "Respuesta Final",
+                            result: `$\\frac{e^0}{2} = \\frac{1}{2}$`
+                        },
+                        ex2: {
+                            title: "2. Optimización (Volumen Máximo)",
+                            problem: "Se hace una caja de una hoja de 12x12 cm cortando cuadrados de tamaño x de las esquinas y doblando hacia arriba. Maximiza el volumen.",
+                            problem_math: `V(x) = largo \\cdot ancho \\cdot alto`,
+                            step1_title: "Paso 1: Configurar Ecuación",
+                            step1_desc: "La altura es $x$. El ancho y el largo son ambos $12 - 2x$.",
+                            step1_math: `V(x) = x(12 - 2x)^2`,
+                            step2_title: "Paso 2: Diferenciar",
+                            step2_desc: "Usa la Regla del Producto o expande primero. Expandiendo: $V = x(144 - 48x + 4x^2) = 144x - 48x^2 + 4x^3$.",
+                            step2_math: `V'(x) = 144 - 96x + 12x^2`,
+                            step3_title: "Paso 3: Encontrar Puntos Críticos",
+                            step3_desc: "Iguala $V'(x) = 0$. Divide por 12: $x^2 - 8x + 12 = 0$. Factoriza: $(x-6)(x-2)=0$.",
+                            step4_title: "Paso 4: Analizar Soluciones",
+                            step4_desc: "$x=6$ hace el ancho 0 (mínimo). $x=2$ es el máximo lógico.",
+                            result_title: "Respuesta Final",
+                            result: "Corta cuadrados de 2 cm. Volumen Máx = $2(12-4)^2 = 2(64) = 128 \\text{ cm}^3$."
+                        },
+                        ex3: {
+                            title: "3. Razones Relacionadas (Problema de la Escalera)",
+                            problem: "Una escalera de 10 metros descansa contra una pared. La base se aleja a 2 m/s. ¿Qué tan rápido cae la parte superior cuando la base está a 6 metros de la pared?",
+                            problem_math: `x^2 + y^2 = 10^2`,
+                            step1_title: "Paso 1: Diferenciar con respecto al Tiempo",
+                            step1_desc: "Diferenciación implícita en el teorema de Pitágoras.",
+                            step1_math: `2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0 \\implies x\\frac{dx}{dt} + y\\frac{dy}{dt} = 0`,
+                            step2_title: "Paso 2: Encontrar Valores Faltantes",
+                            step2_desc: "Sabemos $\\frac{dx}{dt} = 2$ y $x = 6$. Necesitamos y. Usa $6^2 + y^2 = 100$. $y = \\sqrt{64} = 8$.",
+                            step3_title: "Paso 3: Resolver para dy/dt",
+                            step3_math: `(6)(2) + (8)\\frac{dy}{dt} = 0 \\\\ 12 + 8\\frac{dy}{dt} = 0 \\\\ \\frac{dy}{dt} = -\\frac{12}{8}`,
+                            result_title: "Respuesta Final",
+                            result: "La parte superior cae a $\\frac{3}{2}$ o $1.5 \\text{ m/s}$."
                         }
                     }
                 }
@@ -727,6 +1026,155 @@ export const calculusFundamentalsCourse = {
                 }
             }
         },
+        applications_derivatives: {
+            title: "Applications des Dérivées",
+            description: "Utiliser la puissance du calcul pour analyser le comportement des fonctions, résoudre des défis d'optimisation réels et calculer des taux de variation.",
+            lessons: {
+                lesson3_title: "Analyse et Applications Réelles",
+                lesson3: {
+                    section1: {
+                        title1: "Le Théorème de la Valeur Moyenne et la Règle de L'Hôpital",
+                        def1_1: "Outils théoriques qui lient les taux moyens aux taux instantanés et aident à résoudre des limites complexes.",
+                        plot1_title: "Visualisation du Théorème de la Valeur Moyenne",
+                        plot1_desc: "La ligne pointillée bleue est la sécante (taux moyen) entre a et b. Le point rouge c a une ligne tangente (verte) parallèle à la sécante.",
+                        plot1_type: "mvt_visual",
+                        plot1_function: "-(x-2)^2 + 4",
+                        plot1_domain: [0, 4],
+                        plot1_points: {
+                            a: { x: 0, y: 0, label: "a" },
+                            b: { x: 4, y: 0, label: "b" },
+                            c: { x: 2, y: 4, label: "c (Tangente)" }
+                        },
+                        def1_2: "Le Théorème de la Valeur Moyenne (TVM) : Si f(x) est continue sur [a, b] et dérivable sur (a, b), il existe au moins un point c où :",
+                        math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
+                        text1_1: "En termes physiques : À un moment donné, votre vitesse instantanée doit être égale à votre vitesse moyenne.",
+                        def1_3: "Règle de L'Hôpital : Utilisée pour les limites indéterminées (0/0 ou $\\infty/\\infty$).",
+                        ex1_1_title: "Exemple : La limite de sin(x)/x",
+                        ex1_1_problem: "Trouvez $\\lim_{x \\to 0} \\frac{\\sin x}{x}$. La substitution directe donne $0/0$.",
+                        ex1_1_step1: "Appliquer L'Hôpital : Dériver le haut et le bas séparément.",
+                        ex1_1_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(\\sin x)}{\\frac{d}{dx}(x)} = \\lim_{x \\to 0} \\frac{\\cos x}{1}`,
+                        ex1_1_result: "Évaluer la limite : $\\cos(0) = 1$.",
+                        math1_2: `\\lim_{x \\to c} \\frac{f(x)}{g(x)} = \\lim_{x \\to c} \\frac{f'(x)}{g'(x)}`,
+                        warning1: "Note : Ce n'est PAS la règle du quotient. Vous dérivez le numérateur et le dénominateur séparément."
+                    },
+                    section2: {
+                        title2: "Tracé de Courbes : Analyse de Fonctions",
+                        desc2_1: "Nous utilisons les dérivées première et seconde pour comprendre la forme exacte d'un graphique sans tracer de points.",
+                        def2_1_title: "Test de la Première Dérivée (Croissance/Décroissance)",
+                        list2_1: "Si $f'(x) > 0$, la fonction est croissante.",
+                        list2_2: "Si $f'(x) < 0$, la fonction est décroissante.",
+                        list2_3: "Points Critiques : Où $f'(x) = 0$ ou est indéfinie (Max/Min potentiels).",
+                        plot2_title: "Visualisation des Extrema",
+                        plot2_desc: "Une fonction cubique montrant un Maximum Local (colline) à x=-1 et un Minimum Local (vallée) à x=1.",
+                        plot2_type: "extrema_visual",
+                        plot2_function: "x^3 - 3*x",
+                        plot2_domain: [-2.5, 2.5],
+                        plot2_points: [
+                            { x: -1, y: 2, label: "Max Local (-1, 2)", color: "red" },
+                            { x: 1, y: -2, label: "Min Local (1, -2)", color: "blue" }
+                        ],
+                        def2_2_title: "Test de la Seconde Dérivée (Concavité)",
+                        list2_4: "Si $f''(x) > 0$, le graphique est Concave vers le haut (comme une tasse).",
+                        list2_5: "Si $f''(x) < 0$, le graphique est Concave vers le bas (triste).",
+                        list2_6: "Point d'Inflexion : Un point où la concavité change ($f''(x) = 0$)."
+                    },
+                    section3: {
+                        title3: "Optimisation",
+                        def3_1: "L'optimisation consiste à trouver la valeur maximale ou minimale absolue d'une fonction dans un contexte réel (ex. maximiser le profit, minimiser le coût des matériaux).",
+                        plot3_title: "Visuel d'Optimisation : Boîte Ouverte",
+                        plot3_desc: "La courbe montre comment le Volume change à mesure que la taille de coupe 'x' change. Le pic représente le volume maximum possible.",
+                        plot3_type: "optimization_box",
+                        plot3_function: "x * (12 - 2*x)^2",
+                        plot3_domain: [0, 6],
+                        plot3_points: [
+                            { x: 2, y: 128, label: "Volume Max (x=2)", color: "green" }
+                        ],
+                        strategy_title: "Stratégie Générale :",
+                        step3_1: "1. Dessinez une image et étiquetez les variables.",
+                        step3_2: "2. Écrivez une 'Équation Primaire' pour la quantité à optimiser.",
+                        step3_3: "3. Utilisez une 'Contrainte' pour réduire l'équation à une variable.",
+                        step3_4: "4. Prenez la dérivée, mettez-la à 0 et résolvez pour les points critiques.",
+                        step3_5: "5. Vérifiez en utilisant le Test de la Première ou Seconde Dérivée.",
+                        ex3_1_title: "Exemple (Volume Max)",
+                        ex3_1_problem: "Une feuille de carton de 12x12 cm a des carrés de côté 'x' coupés à chaque coin. Repliez les côtés pour faire une boîte ouverte. Trouvez 'x' pour le Volume maximum.",
+                        ex3_1_step1: "Équation Primaire : Volume $V = L \\cdot W \\cdot H$. Les dimensions sont $(12-2x)$, $(12-2x)$ et la hauteur $x$.",
+                        ex3_1_step2: "Fonction : $V(x) = x(12-2x)^2$. Développer : $V(x) = 144x - 48x^2 + 4x^3$.",
+                        ex3_1_step3: "Dérivée : $V'(x) = 144 - 96x + 12x^2$. Poser $V'(x) = 0$.",
+                        ex3_1_step4: "Résoudre : $12(x^2 - 8x + 12) = 0 \\implies (x-6)(x-2) = 0$. Points critiques : $x=2, 6$.",
+                        ex3_1_solution: "Vérifier : $x=6$ rend la largeur 0. Donc, le Max est à $x=2$. Volume = $2(8)(8) = 128$."
+                    },
+                    section4: {
+                        title4: "Taux Liés",
+                        def4_1: "Problèmes où les variables changent par rapport au temps ($t$). Nous utilisons la Dérivation Implicite par rapport à $t$.",
+                        plot4_title: "Visuel de Taux Liés : Échelle Glissante",
+                        plot4_desc: "À mesure que le bas de l'échelle (x) s'éloigne, le haut (y) glisse vers le bas. La longueur de l'échelle (z) reste constante.",
+                        plot4_type: "related_rates_ladder",
+                        plot4_function: "Longueur de l'échelle = 10",
+                        plot4_domain: [0, 10],
+                        plot4_points: [
+                            { x: 6, y: 8, label: "Position Actuelle (x=6, y=8)", color: "orange" }
+                        ],
+                        math4_1: `\\text{Donné } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
+                        text4_1: "La clé est de reconnaître que chaque variable est en fait une fonction du temps $t(x)$.",
+                        ex4_1_title: "Exemple (Échelle Glissante)",
+                        ex4_1_problem: "Une échelle de 10 mètres repose contre un mur. Le bas s'éloigne à 2 m/s. À quelle vitesse le haut descend-il lorsque la base est à 6 mètres du mur ?",
+                        ex4_1_step1: "Équation : $x^2 + y^2 = 10^2$. Dériver par rapport au temps $t$ : $2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0$.",
+                        ex4_1_step2: "Trouver la variable manquante ($y$) : Si $x=6$ et $z=10$, alors $36 + y^2 = 100 \\implies y=8$.",
+                        ex4_1_step3: "Substituer : $2(6)(2) + 2(8)(\\frac{dy}{dt}) = 0$. (Note : $\\frac{dx}{dt}=2$).",
+                        ex4_1_step4: "Résoudre : $24 + 16\\frac{dy}{dt} = 0$.",
+                        ex4_1_solution: "Résultat : $16\\frac{dy}{dt} = -24 \\implies \\frac{dy}{dt} = -1.5$ m/s."
+                    },
+                    example_section: {
+                        title_ex: "Exemples avec Solutions Étape par Étape",
+                        ex1: {
+                            title: "1. Règle de L'Hôpital",
+                            problem: "Évaluez la limite :",
+                            problem_math: `\\lim_{x \\to 0} \\frac{e^x - 1 - x}{x^2}`,
+                            step1_title: "Étape 1 : Vérifier la Forme",
+                            step1_desc: "Substituer 0 : $e^0 - 1 - 0 = 0$ et $0^2 = 0$. C'est $\\frac{0}{0}$. Appliquer L'Hôpital.",
+                            step2_title: "Étape 2 : Dériver le Haut et le Bas",
+                            step2_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1 - x)}{\\frac{d}{dx}(x^2)} = \\lim_{x \\to 0} \\frac{e^x - 1}{2x}`,
+                            step3_title: "Étape 3 : Vérifier à Nouveau et Répéter",
+                            step3_desc: "Substituer 0 à nouveau : $\\frac{1-1}{0} = \\frac{0}{0}$. Appliquer L'Hôpital une seconde fois.",
+                            step3_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1)}{\\frac{d}{dx}(2x)} = \\lim_{x \\to 0} \\frac{e^x}{2}`,
+                            result_title: "Réponse Finale",
+                            result: `$\\frac{e^0}{2} = \\frac{1}{2}$`
+                        },
+                        ex2: {
+                            title: "2. Optimisation (Volume Max)",
+                            problem: "Une boîte est faite à partir d'une feuille de 12x12 cm en coupant des carrés de taille x aux coins et en repliant. Maximisez le volume.",
+                            problem_math: `V(x) = longueur \\cdot largeur \\cdot hauteur`,
+                            step1_title: "Étape 1 : Configurer l'Équation",
+                            step1_desc: "La hauteur est $x$. La largeur et la longueur sont toutes deux $12 - 2x$.",
+                            step1_math: `V(x) = x(12 - 2x)^2`,
+                            step2_title: "Étape 2 : Dériver",
+                            step2_desc: "Utiliser la Règle du Produit ou développer d'abord. Développement : $V = x(144 - 48x + 4x^2) = 144x - 48x^2 + 4x^3$.",
+                            step2_math: `V'(x) = 144 - 96x + 12x^2`,
+                            step3_title: "Étape 3 : Trouver les Points Critiques",
+                            step3_desc: "Poser $V'(x) = 0$. Diviser par 12 : $x^2 - 8x + 12 = 0$. Factoriser : $(x-6)(x-2)=0$.",
+                            step4_title: "Étape 4 : Analyser les Solutions",
+                            step4_desc: "$x=6$ rend la largeur 0 (minimum). $x=2$ est le maximum logique.",
+                            result_title: "Réponse Finale",
+                            result: "Couper des carrés de 2 cm. Volume Max = $2(12-4)^2 = 2(64) = 128 \\text{ cm}^3$."
+                        },
+                        ex3: {
+                            title: "3. Taux Liés (Problème de l'Échelle)",
+                            problem: "Une échelle de 10 mètres repose contre un mur. Le bas s'éloigne à 2 m/s. À quelle vitesse le haut tombe-t-il lorsque le bas est à 6 mètres du mur ?",
+                            problem_math: `x^2 + y^2 = 10^2`,
+                            step1_title: "Étape 1 : Dériver par rapport au Temps",
+                            step1_desc: "Dérivation implicite sur le théorème de Pythagore.",
+                            step1_math: `2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0 \\implies x\\frac{dx}{dt} + y\\frac{dy}{dt} = 0`,
+                            step2_title: "Étape 2 : Trouver les Valeurs Manquantes",
+                            step2_desc: "Nous savons $\\frac{dx}{dt} = 2$ et $x = 6$. Nous avons besoin de y. Utiliser $6^2 + y^2 = 100$. $y = \\sqrt{64} = 8$.",
+                            step3_title: "Étape 3 : Résoudre pour dy/dt",
+                            step3_math: `(6)(2) + (8)\\frac{dy}{dt} = 0 \\\\ 12 + 8\\frac{dy}{dt} = 0 \\\\ \\frac{dy}{dt} = -\\frac{12}{8}`,
+                            result_title: "Réponse Finale",
+                            result: "Le haut glisse vers le bas à $\\frac{3}{2}$ ou $1.5 \\text{ m/s}$."
+                        }
+                    }
+                }
+            }
+        },
     },
     de: {
         limits: {
@@ -965,6 +1413,155 @@ export const calculusFundamentalsCourse = {
                             step3_math: `2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = \\frac{-2x}{2y}`,
                             result_title: "Endergebnis",
                             result: `$\\frac{dy}{dx} = -\\frac{x}{y}$`
+                        }
+                    }
+                }
+            }
+        },
+        applications_derivatives: {
+            title: "Anwendungen von Ableitungen",
+            description: "Nutzung der Kraft der Analysis, um das Verhalten von Funktionen zu analysieren, reale Optimierungsprobleme zu lösen und Änderungsraten zu berechnen.",
+            lessons: {
+                lesson3_title: "Analyse & Anwendungen in der realen Welt",
+                lesson3: {
+                    section1: {
+                        title1: "Der Mittelwertsatz & Die Regel von de l'Hôpital",
+                        def1_1: "Theoretische Werkzeuge, die durchschnittliche Raten mit momentanen Raten verknüpfen und helfen, komplexe Grenzwerte zu lösen.",
+                        plot1_title: "Visualisierung des Mittelwertsatzes",
+                        plot1_desc: "Die gestrichelte blaue Linie ist die Sekante (durchschnittliche Rate) zwischen a und b. Der rote Punkt c hat eine Tangente (grün), die parallel zur Sekante verläuft.",
+                        plot1_type: "mvt_visual",
+                        plot1_function: "-(x-2)^2 + 4",
+                        plot1_domain: [0, 4],
+                        plot1_points: {
+                            a: { x: 0, y: 0, label: "a" },
+                            b: { x: 4, y: 0, label: "b" },
+                            c: { x: 2, y: 4, label: "c (Tangente)" }
+                        },
+                        def1_2: "Der Mittelwertsatz (MWS): Wenn f(x) auf [a, b] stetig und auf (a, b) differenzierbar ist, gibt es mindestens einen Punkt c, an dem gilt:",
+                        math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
+                        text1_1: "In physikalischen Begriffen: An irgendeinem Punkt muss deine momentane Geschwindigkeit gleich deiner Durchschnittsgeschwindigkeit sein.",
+                        def1_3: "Regel von de l'Hôpital: Wird für unbestimmte Grenzwerte verwendet (0/0 oder $\\infty/\\infty$).",
+                        ex1_1_title: "Beispiel: Der Grenzwert von sin(x)/x",
+                        ex1_1_problem: "Finde $\\lim_{x \\to 0} \\frac{\\sin x}{x}$. Direkte Substitution ergibt $0/0$.",
+                        ex1_1_step1: "Wende de l'Hôpital an: Differenziere Zähler und Nenner separat.",
+                        ex1_1_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(\\sin x)}{\\frac{d}{dx}(x)} = \\lim_{x \\to 0} \\frac{\\cos x}{1}`,
+                        ex1_1_result: "Bewerte den Grenzwert: $\\cos(0) = 1$.",
+                        math1_2: `\\lim_{x \\to c} \\frac{f(x)}{g(x)} = \\lim_{x \\to c} \\frac{f'(x)}{g'(x)}`,
+                        warning1: "Hinweis: Dies ist NICHT die Quotientenregel. Du leitest den Zähler und den Nenner separat ab."
+                    },
+                    section2: {
+                        title2: "Kurvendiskussion: Analyse von Funktionen",
+                        desc2_1: "Wir verwenden die erste und zweite Ableitung, um die genaue Form eines Graphen zu verstehen, ohne Punkte zu plotten.",
+                        def2_1_title: "Erstes Ableitungskriterium (Steigen/Fallen)",
+                        list2_1: "Wenn $f'(x) > 0$, ist die Funktion steigend.",
+                        list2_2: "Wenn $f'(x) < 0$, ist die Funktion fallend.",
+                        list2_3: "Kritische Punkte: Wo $f'(x) = 0$ oder nicht definiert ist (potenzielles Max/Min).",
+                        plot2_title: "Visualisierung von Extrema",
+                        plot2_desc: "Eine kubische Funktion, die ein lokales Maximum (Berg) bei x=-1 und ein lokales Minimum (Tal) bei x=1 zeigt.",
+                        plot2_type: "extrema_visual",
+                        plot2_function: "x^3 - 3*x",
+                        plot2_domain: [-2.5, 2.5],
+                        plot2_points: [
+                            { x: -1, y: 2, label: "Lokales Max (-1, 2)", color: "red" },
+                            { x: 1, y: -2, label: "Lokales Min (1, -2)", color: "blue" }
+                        ],
+                        def2_2_title: "Zweites Ableitungskriterium (Krümmung)",
+                        list2_4: "Wenn $f''(x) > 0$, ist der Graph konvex (linksgekrümmt, wie eine Tasse).",
+                        list2_5: "Wenn $f''(x) < 0$, ist der Graph konkav (rechtsgekrümmt, traurig).",
+                        list2_6: "Wendepunkt: Ein Punkt, an dem sich die Krümmung ändert ($f''(x) = 0$)."
+                    },
+                    section3: {
+                        title3: "Optimierung",
+                        def3_1: "Optimierung beinhaltet das Finden des absoluten Maximums oder Minimums einer Funktion in einem realen Kontext (z.B. Gewinnmaximierung, Materialkostenminimierung).",
+                        plot3_title: "Optimierungsvisualisierung: Offene Box",
+                        plot3_desc: "Die Kurve zeigt, wie sich das Volumen ändert, wenn sich die Schnittgröße 'x' ändert. Der Spitzenwert repräsentiert das maximal mögliche Volumen.",
+                        plot3_type: "optimization_box",
+                        plot3_function: "x * (12 - 2*x)^2",
+                        plot3_domain: [0, 6],
+                        plot3_points: [
+                            { x: 2, y: 128, label: "Max Volumen (x=2)", color: "green" }
+                        ],
+                        strategy_title: "Allgemeine Strategie:",
+                        step3_1: "1. Zeichne ein Bild und beschrifte Variablen.",
+                        step3_2: "2. Schreibe eine 'Hauptgleichung' für die zu optimierende Größe.",
+                        step3_3: "3. Verwende eine 'Nebenbedingung', um die Gleichung auf eine Variable zu reduzieren.",
+                        step3_4: "4. Bilde die Ableitung, setze sie auf 0 und löse nach kritischen Punkten.",
+                        step3_5: "5. Überprüfe mit dem ersten oder zweiten Ableitungskriterium.",
+                        ex3_1_title: "Beispiel (Max Volumen)",
+                        ex3_1_problem: "Aus einem 12x12 cm Karton werden Quadrate der Seite 'x' aus jeder Ecke geschnitten. Falte die Seiten hoch, um eine offene Box zu machen. Finde 'x' für das maximale Volumen.",
+                        ex3_1_step1: "Hauptgleichung: Volumen $V = L \\cdot B \\cdot H$. Maße sind $(12-2x)$, $(12-2x)$ und Höhe $x$.",
+                        ex3_1_step2: "Funktion: $V(x) = x(12-2x)^2$. Ausmultiplizieren: $V(x) = 144x - 48x^2 + 4x^3$.",
+                        ex3_1_step3: "Ableitung: $V'(x) = 144 - 96x + 12x^2$. Setze $V'(x) = 0$.",
+                        ex3_1_step4: "Löse: $12(x^2 - 8x + 12) = 0 \\implies (x-6)(x-2) = 0$. Kritische Punkte: $x=2, 6$.",
+                        ex3_1_solution: "Prüfen: $x=6$ macht die Breite 0. Also ist das Max bei $x=2$. Volumen = $2(8)(8) = 128$."
+                    },
+                    section4: {
+                        title4: "Verwandte Änderungsraten",
+                        def4_1: "Probleme, bei denen sich Variablen in Bezug auf die Zeit ($t$) ändern. Wir verwenden implizite Differentiation in Bezug auf $t$.",
+                        plot4_title: "Visualisierung Verwandter Raten: Rutschende Leiter",
+                        plot4_desc: "Während das untere Ende der Leiter (x) wegrutscht, rutscht das obere Ende (y) nach unten. Die Länge der Leiter (z) bleibt konstant.",
+                        plot4_type: "related_rates_ladder",
+                        plot4_function: "Leiterlänge = 10",
+                        plot4_domain: [0, 10],
+                        plot4_points: [
+                            { x: 6, y: 8, label: "Aktuelle Position (x=6, y=8)", color: "orange" }
+                        ],
+                        math4_1: `\\text{Gegeben } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
+                        text4_1: "Der Schlüssel ist zu erkennen, dass jede Variable tatsächlich eine Funktion der Zeit $t(x)$ ist.",
+                        ex4_1_title: "Beispiel (Rutschende Leiter)",
+                        ex4_1_problem: "Eine 10-Meter-Leiter lehnt an einer Wand. Der Boden rutscht mit 2 m/s weg. Wie schnell rutscht die Spitze nach unten, wenn die Basis 6 m von der Wand entfernt ist?",
+                        ex4_1_step1: "Gleichung: $x^2 + y^2 = 10^2$. Differenziere nach der Zeit $t$: $2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0$.",
+                        ex4_1_step2: "Finde fehlende Variable ($y$): Wenn $x=6$ und $z=10$, dann $36 + y^2 = 100 \\implies y=8$.",
+                        ex4_1_step3: "Einsetzen: $2(6)(2) + 2(8)(\\frac{dy}{dt}) = 0$. (Hinweis: $\\frac{dx}{dt}=2$).",
+                        ex4_1_step4: "Lösen: $24 + 16\\frac{dy}{dt} = 0$.",
+                        ex4_1_solution: "Ergebnis: $16\\frac{dy}{dt} = -24 \\implies \\frac{dy}{dt} = -1.5$ m/s."
+                    },
+                    example_section: {
+                        title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                        ex1: {
+                            title: "1. Regel von de l'Hôpital",
+                            problem: "Berechne den Grenzwert:",
+                            problem_math: `\\lim_{x \\to 0} \\frac{e^x - 1 - x}{x^2}`,
+                            step1_title: "Schritt 1: Form prüfen",
+                            step1_desc: "Setze 0 ein: $e^0 - 1 - 0 = 0$ und $0^2 = 0$. Das ist $\\frac{0}{0}$. Wende de l'Hôpital an.",
+                            step2_title: "Schritt 2: Oben und Unten differenzieren",
+                            step2_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1 - x)}{\\frac{d}{dx}(x^2)} = \\lim_{x \\to 0} \\frac{e^x - 1}{2x}`,
+                            step3_title: "Schritt 3: Erneut prüfen & wiederholen",
+                            step3_desc: "Setze 0 erneut ein: $\\frac{1-1}{0} = \\frac{0}{0}$. Wende de l'Hôpital ein zweites Mal an.",
+                            step3_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1)}{\\frac{d}{dx}(2x)} = \\lim_{x \\to 0} \\frac{e^x}{2}`,
+                            result_title: "Endergebnis",
+                            result: `$\\frac{e^0}{2} = \\frac{1}{2}$`
+                        },
+                        ex2: {
+                            title: "2. Optimierung (Max Volumen)",
+                            problem: "Eine Box wird aus einem 12x12 cm Blatt hergestellt, indem Quadrate der Größe x aus den Ecken geschnitten und hochgefaltet werden. Maximiere das Volumen.",
+                            problem_math: `V(x) = Länge \\cdot Breite \\cdot Höhe`,
+                            step1_title: "Schritt 1: Gleichung aufstellen",
+                            step1_desc: "Höhe ist $x$. Breite und Länge sind beide $12 - 2x$.",
+                            step1_math: `V(x) = x(12 - 2x)^2`,
+                            step2_title: "Schritt 2: Differenzieren",
+                            step2_desc: "Verwende die Produktregel oder multipliziere zuerst aus. Ausmultipliziert: $V = x(144 - 48x + 4x^2) = 144x - 48x^2 + 4x^3$.",
+                            step2_math: `V'(x) = 144 - 96x + 12x^2`,
+                            step3_title: "Schritt 3: Kritische Punkte finden",
+                            step3_desc: "Setze $V'(x) = 0$. Teile durch 12: $x^2 - 8x + 12 = 0$. Faktorisiere: $(x-6)(x-2)=0$.",
+                            step4_title: "Schritt 4: Lösungen analysieren",
+                            step4_desc: "$x=6$ macht die Breite 0 (Minimum). $x=2$ ist das logische Maximum.",
+                            result_title: "Endergebnis",
+                            result: "Schneide 2-cm-Quadrate. Max Volumen = $2(12-4)^2 = 2(64) = 128 \\text{ cm}^3$."
+                        },
+                        ex3: {
+                            title: "3. Verwandte Raten (Leiterproblem)",
+                            problem: "Eine 10-Meter-Leiter lehnt an einer Wand. Der Boden rutscht mit 2 m/s weg. Wie schnell fällt die Spitze, wenn der Boden 6 m von der Wand entfernt ist?",
+                            problem_math: `x^2 + y^2 = 10^2`,
+                            step1_title: "Schritt 1: Differenzieren bzgl. Zeit",
+                            step1_desc: "Implizite Differentiation des Satzes des Pythagoras.",
+                            step1_math: `2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0 \\implies x\\frac{dx}{dt} + y\\frac{dy}{dt} = 0`,
+                            step2_title: "Schritt 2: Fehlende Werte finden",
+                            step2_desc: "Wir wissen $\\frac{dx}{dt} = 2$ und $x = 6$. Wir brauchen y. Verwende $6^2 + y^2 = 100$. $y = \\sqrt{64} = 8$.",
+                            step3_title: "Schritt 3: Nach dy/dt auflösen",
+                            step3_math: `(6)(2) + (8)\\frac{dy}{dt} = 0 \\\\ 12 + 8\\frac{dy}{dt} = 0 \\\\ \\frac{dy}{dt} = -\\frac{12}{8}`,
+                            result_title: "Endergebnis",
+                            result: "Die Spitze rutscht mit $\\frac{3}{2}$ oder $1.5 \\text{ m/s}$ nach unten."
                         }
                     }
                 }
@@ -1213,6 +1810,155 @@ export const calculusFundamentalsCourse = {
                 }
             }
         },
+        applications_derivatives: {
+            title: "Zastosowania Pochodnych",
+            description: "Wykorzystanie potęgi rachunku różniczkowego do analizy zachowania funkcji, rozwiązywania rzeczywistych problemów optymalizacyjnych i obliczania tempa zmian.",
+            lessons: {
+                lesson3_title: "Analiza i Zastosowania w Rzeczywistości",
+                lesson3: {
+                    section1: {
+                        title1: "Twierdzenie o Wartości Średniej i Reguła de l'Hôpitala",
+                        def1_1: "Narzędzia teoretyczne, które łączą średnie tempo zmian z chwilowym tempem i pomagają rozwiązywać złożone granice.",
+                        plot1_title: "Wizualizacja Twierdzenia o Wartości Średniej",
+                        plot1_desc: "Niebieska przerywana linia to sieczna (średnie tempo) między a i b. Czerwony punkt c ma styczną (zielona) równoległą do siecznej.",
+                        plot1_type: "mvt_visual",
+                        plot1_function: "-(x-2)^2 + 4",
+                        plot1_domain: [0, 4],
+                        plot1_points: {
+                            a: { x: 0, y: 0, label: "a" },
+                            b: { x: 4, y: 0, label: "b" },
+                            c: { x: 2, y: 4, label: "c (Styczna)" }
+                        },
+                        def1_2: "Twierdzenie o Wartości Średniej (MVT): Jeśli f(x) jest ciągła na [a, b] i różniczkowalna w (a, b), istnieje co najmniej jeden punkt c, gdzie:",
+                        math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
+                        text1_1: "W terminach fizycznych: W pewnym momencie twoja prędkość chwilowa musi być równa prędkości średniej.",
+                        def1_3: "Reguła de l'Hôpitala: Używana dla granic nieoznaczonych (0/0 lub $\\infty/\\infty$).",
+                        ex1_1_title: "Przykład: Granica sin(x)/x",
+                        ex1_1_problem: "Znajdź $\\lim_{x \\to 0} \\frac{\\sin x}{x}$. Bezpośrednie podstawienie daje $0/0$.",
+                        ex1_1_step1: "Zastosuj regułę de l'Hôpitala: Zróżniczkuj licznik i mianownik osobno.",
+                        ex1_1_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(\\sin x)}{\\frac{d}{dx}(x)} = \\lim_{x \\to 0} \\frac{\\cos x}{1}`,
+                        ex1_1_result: "Oblicz granicę: $\\cos(0) = 1$.",
+                        math1_2: `\\lim_{x \\to c} \\frac{f(x)}{g(x)} = \\lim_{x \\to c} \\frac{f'(x)}{g'(x)}`,
+                        warning1: "Uwaga: To NIE jest Reguła Ilorazu. Różniczkujesz licznik i mianownik oddzielnie."
+                    },
+                    section2: {
+                        title2: "Badanie Przebiegu Zmienności Funkcji",
+                        desc2_1: "Używamy pierwszej i drugiej pochodnej, aby zrozumieć dokładny kształt wykresu bez zaznaczania punktów.",
+                        def2_1_title: "Test Pierwszej Pochodnej (Monotoniczność)",
+                        list2_1: "Jeśli $f'(x) > 0$, funkcja jest rosnąca.",
+                        list2_2: "Jeśli $f'(x) < 0$, funkcja jest malejąca.",
+                        list2_3: "Punkty Krytyczne: Gdzie $f'(x) = 0$ lub jest nieokreślona (potencjalne Maks/Min).",
+                        plot2_title: "Wizualizacja Ekstremów",
+                        plot2_desc: "Funkcja sześcienna pokazująca Lokalne Maksimum (góra) w x=-1 i Lokalne Minimum (dolina) w x=1.",
+                        plot2_type: "extrema_visual",
+                        plot2_function: "x^3 - 3*x",
+                        plot2_domain: [-2.5, 2.5],
+                        plot2_points: [
+                            { x: -1, y: 2, label: "Lokalne Maks (-1, 2)", color: "red" },
+                            { x: 1, y: -2, label: "Lokalne Min (1, -2)", color: "blue" }
+                        ],
+                        def2_2_title: "Test Drugiej Pochodnej (Wypukłość)",
+                        list2_4: "Jeśli $f''(x) > 0$, wykres jest Wypukły w dół (jak kubek).",
+                        list2_5: "Jeśli $f''(x) < 0$, wykres jest Wypukły w górę (smutny).",
+                        list2_6: "Punkt Przegięcia: Punkt, w którym zmienia się wypukłość ($f''(x) = 0$)."
+                    },
+                    section3: {
+                        title3: "Optymalizacja",
+                        def3_1: "Optymalizacja polega na znalezieniu absolutnego maksimum lub minimum funkcji w kontekście rzeczywistym (np. maksymalizacja zysku, minimalizacja kosztów materiałów).",
+                        plot3_title: "Wizualizacja Optymalizacji: Pudełko Otwarte",
+                        plot3_desc: "Krzywa pokazuje, jak zmienia się Objętość wraz ze zmianą wielkości wycięcia 'x'. Szczyt reprezentuje maksymalną możliwą objętość.",
+                        plot3_type: "optimization_box",
+                        plot3_function: "x * (12 - 2*x)^2",
+                        plot3_domain: [0, 6],
+                        plot3_points: [
+                            { x: 2, y: 128, label: "Maks Objętość (x=2)", color: "green" }
+                        ],
+                        strategy_title: "Ogólna Strategia:",
+                        step3_1: "1. Narysuj obrazek i oznacz zmienne.",
+                        step3_2: "2. Napisz 'Równanie Podstawowe' dla wielkości, która ma być zoptymalizowana.",
+                        step3_3: "3. Użyj 'Ograniczenia', aby zredukować równanie do jednej zmiennej.",
+                        step3_4: "4. Oblicz pochodną, przyrównaj do 0 i rozwiąż dla punktów krytycznych.",
+                        step3_5: "5. Zweryfikuj za pomocą testu pierwszej lub drugiej pochodnej.",
+                        ex3_1_title: "Przykład (Maks Objętość)",
+                        ex3_1_problem: "Arkusz tektury 12x12 cm ma wycięte kwadraty o boku 'x' z każdego rogu. Zegnij boki, aby utworzyć otwarte pudełko. Znajdź 'x' dla maksymalnej objętości.",
+                        ex3_1_step1: "Równanie Podstawowe: Objętość $V = Dł \\cdot Szer \\cdot Wys$. Wymiary to $(12-2x)$, $(12-2x)$ i wysokość $x$.",
+                        ex3_1_step2: "Funkcja: $V(x) = x(12-2x)^2$. Rozwiń: $V(x) = 144x - 48x^2 + 4x^3$.",
+                        ex3_1_step3: "Pochodna: $V'(x) = 144 - 96x + 12x^2$. Ustaw $V'(x) = 0$.",
+                        ex3_1_step4: "Rozwiąż: $12(x^2 - 8x + 12) = 0 \\implies (x-6)(x-2) = 0$. Punkty krytyczne: $x=2, 6$.",
+                        ex3_1_solution: "Sprawdź: $x=6$ daje szerokość 0. Więc, Maks jest przy $x=2$. Objętość = $2(8)(8) = 128$."
+                    },
+                    section4: {
+                        title4: "Związane Tempa Zmian",
+                        def4_1: "Problemy, w których zmienne zmieniają się w czasie ($t$). Używamy różniczkowania uwikłanego względem $t$.",
+                        plot4_title: "Wizualizacja Związanych Zmian: Przesuwająca się Drabina",
+                        plot4_desc: "Gdy dół drabiny (x) odsuwa się, góra (y) przesuwa się w dół. Długość drabiny (z) pozostaje stała.",
+                        plot4_type: "related_rates_ladder",
+                        plot4_function: "Długość drabiny = 10",
+                        plot4_domain: [0, 10],
+                        plot4_points: [
+                            { x: 6, y: 8, label: "Obecna Pozycja (x=6, y=8)", color: "orange" }
+                        ],
+                        math4_1: `\\text{Dano } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
+                        text4_1: "Kluczem jest rozpoznanie, że każda zmienna jest w rzeczywistości funkcją czasu $t(x)$.",
+                        ex4_1_title: "Przykład (Przesuwająca się Drabina)",
+                        ex4_1_problem: "Drabina 10 metrów opiera się o ścianę. Dół odsuwa się z prędkością 2 m/s. Jak szybko góra spada, gdy podstawa jest 6 m od ściany?",
+                        ex4_1_step1: "Równanie: $x^2 + y^2 = 10^2$. Różniczkuj względem czasu $t$: $2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0$.",
+                        ex4_1_step2: "Znajdź brakującą zmienną ($y$): Jeśli $x=6$ i $z=10$, to $36 + y^2 = 100 \\implies y=8$.",
+                        ex4_1_step3: "Podstaw: $2(6)(2) + 2(8)(\\frac{dy}{dt}) = 0$. (Uwaga: $\\frac{dx}{dt}=2$).",
+                        ex4_1_step4: "Rozwiąż: $24 + 16\\frac{dy}{dt} = 0$.",
+                        ex4_1_solution: "Wynik: $16\\frac{dy}{dt} = -24 \\implies \\frac{dy}{dt} = -1.5$ m/s."
+                    },
+                    example_section: {
+                        title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
+                        ex1: {
+                            title: "1. Reguła de l'Hôpitala",
+                            problem: "Oblicz granicę:",
+                            problem_math: `\\lim_{x \\to 0} \\frac{e^x - 1 - x}{x^2}`,
+                            step1_title: "Krok 1: Sprawdź formę",
+                            step1_desc: "Podstaw 0: $e^0 - 1 - 0 = 0$ i $0^2 = 0$. To jest $\\frac{0}{0}$. Zastosuj de l'Hôpitala.",
+                            step2_title: "Krok 2: Zróżniczkuj górę i dół",
+                            step2_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1 - x)}{\\frac{d}{dx}(x^2)} = \\lim_{x \\to 0} \\frac{e^x - 1}{2x}`,
+                            step3_title: "Krok 3: Sprawdź ponownie i powtórz",
+                            step3_desc: "Podstaw 0 ponownie: $\\frac{1-1}{0} = \\frac{0}{0}$. Zastosuj de l'Hôpitala drugi raz.",
+                            step3_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1)}{\\frac{d}{dx}(2x)} = \\lim_{x \\to 0} \\frac{e^x}{2}`,
+                            result_title: "Odpowiedź Końcowa",
+                            result: `$\\frac{e^0}{2} = \\frac{1}{2}$`
+                        },
+                        ex2: {
+                            title: "2. Optymalizacja (Maks Objętość)",
+                            problem: "Pudełko jest wykonane z arkusza 12x12 cm przez wycięcie kwadratów o rozmiarze x z rogów i zagięcie. Zmaksymalizuj objętość.",
+                            problem_math: `V(x) = długość \\cdot szerokość \\cdot wysokość`,
+                            step1_title: "Krok 1: Ustaw równanie",
+                            step1_desc: "Wysokość to $x$. Szerokość i Długość to $12 - 2x$.",
+                            step1_math: `V(x) = x(12 - 2x)^2`,
+                            step2_title: "Krok 2: Zróżniczkuj",
+                            step2_desc: "Użyj reguły iloczynu lub najpierw rozwiń. Rozwinięcie: $V = x(144 - 48x + 4x^2) = 144x - 48x^2 + 4x^3$.",
+                            step2_math: `V'(x) = 144 - 96x + 12x^2`,
+                            step3_title: "Krok 3: Znajdź punkty krytyczne",
+                            step3_desc: "Ustaw $V'(x) = 0$. Podziel przez 12: $x^2 - 8x + 12 = 0$. Rozłóż na czynniki: $(x-6)(x-2)=0$.",
+                            step4_title: "Krok 4: Analizuj rozwiązania",
+                            step4_desc: "$x=6$ daje szerokość 0 (minimum). $x=2$ to logiczne maksimum.",
+                            result_title: "Odpowiedź Końcowa",
+                            result: "Wytnij kwadraty 2-cm. Maks Objętość = $2(12-4)^2 = 2(64) = 128 \\text{ cm}^3$."
+                        },
+                        ex3: {
+                            title: "3. Związane Tempa Zmian (Problem Drabiny)",
+                            problem: "Drabina 10 metrów opiera się o ścianę. Dół odsuwa się z prędkością 2 m/s. Jak szybko góra spada, gdy dół jest 6 metrów od ściany?",
+                            problem_math: `x^2 + y^2 = 10^2`,
+                            step1_title: "Krok 1: Zróżniczkuj względem czasu",
+                            step1_desc: "Różniczkowanie uwikłane na twierdzeniu Pitagorasa.",
+                            step1_math: `2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0 \\implies x\\frac{dx}{dt} + y\\frac{dy}{dt} = 0`,
+                            step2_title: "Krok 2: Znajdź brakujące wartości",
+                            step2_desc: "Wiemy $\\frac{dx}{dt} = 2$ i $x = 6$. Potrzebujemy y. Użyj $6^2 + y^2 = 100$. $y = \\sqrt{64} = 8$.",
+                            step3_title: "Krok 3: Rozwiąż dla dy/dt",
+                            step3_math: `(6)(2) + (8)\\frac{dy}{dt} = 0 \\\\ 12 + 8\\frac{dy}{dt} = 0 \\\\ \\frac{dy}{dt} = -\\frac{12}{8}`,
+                            result_title: "Odpowiedź Końcowa",
+                            result: "Góra przesuwa się w dół o $\\frac{3}{2}$ lub $1.5 \\text{ m/s}$."
+                        }
+                    }
+                }
+            }
+        },
     },
     ro: {
         limits: {
@@ -1451,6 +2197,155 @@ export const calculusFundamentalsCourse = {
                             step3_math: `2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = \\frac{-2x}{2y}`,
                             result_title: "Răspuns Final",
                             result: `$\\frac{dy}{dx} = -\\frac{x}{y}$`
+                        }
+                    }
+                }
+            }
+        },
+        applications_derivatives: {
+            title: "Aplicații ale Derivatelor",
+            description: "Folosirea puterii calculului pentru a analiza comportamentul funcțiilor, a rezolva provocări de optimizare din lumea reală și a calcula rate de schimbare.",
+            lessons: {
+                lesson3_title: "Analiză și Aplicații în Lumea Reală",
+                lesson3: {
+                    section1: {
+                        title1: "Teorema Valorii Medii și Regula lui L'Hôpital",
+                        def1_1: "Instrumente teoretice care leagă ratele medii de ratele instantanee și ajută la rezolvarea limitelor complexe.",
+                        plot1_title: "Vizualizarea Teoremei Valorii Medii",
+                        plot1_desc: "Linia albastră punctată este secanta (rata medie) între a și b. Punctul roșu c are o linie tangentă (verde) paralelă cu secanta.",
+                        plot1_type: "mvt_visual",
+                        plot1_function: "-(x-2)^2 + 4",
+                        plot1_domain: [0, 4],
+                        plot1_points: {
+                            a: { x: 0, y: 0, label: "a" },
+                            b: { x: 4, y: 0, label: "b" },
+                            c: { x: 2, y: 4, label: "c (Tangentă)" }
+                        },
+                        def1_2: "Teorema Valorii Medii (TVM): Dacă f(x) este continuă pe [a, b] și diferențiabilă pe (a, b), există cel puțin un punct c unde:",
+                        math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
+                        text1_1: "În termeni fizici: La un moment dat, viteza ta instantanee trebuie să fie egală cu viteza medie.",
+                        def1_3: "Regula lui L'Hôpital: Folosită pentru limite nedeterminate (0/0 sau $\\infty/\\infty$).",
+                        ex1_1_title: "Exemplu: Limita lui sin(x)/x",
+                        ex1_1_problem: "Găsește $\\lim_{x \\to 0} \\frac{\\sin x}{x}$. Substituția directă dă $0/0$.",
+                        ex1_1_step1: "Aplică L'Hôpital: Diferențiază numărătorul și numitorul separat.",
+                        ex1_1_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(\\sin x)}{\\frac{d}{dx}(x)} = \\lim_{x \\to 0} \\frac{\\cos x}{1}`,
+                        ex1_1_result: "Evaluează limita: $\\cos(0) = 1$.",
+                        math1_2: `\\lim_{x \\to c} \\frac{f(x)}{g(x)} = \\lim_{x \\to c} \\frac{f'(x)}{g'(x)}`,
+                        warning1: "Notă: Aceasta NU este Regula Câtului. Diferențiezi numărătorul și numitorul separat."
+                    },
+                    section2: {
+                        title2: "Trasarea Curbelor: Analiza Funcțiilor",
+                        desc2_1: "Folosim prima și a doua derivată pentru a înțelege forma exactă a unui grafic fără a trasa puncte.",
+                        def2_1_title: "Testul Primei Derivate (Creștere/Descreștere)",
+                        list2_1: "Dacă $f'(x) > 0$, funcția este crescătoare.",
+                        list2_2: "Dacă $f'(x) < 0$, funcția este descrescătoare.",
+                        list2_3: "Puncte Critice: Unde $f'(x) = 0$ sau este nedefinită (potențial Max/Min).",
+                        plot2_title: "Vizualizarea Extremelor",
+                        plot2_desc: "O funcție cubică arătând un Maxim Local (deal) la x=-1 și un Minim Local (vale) la x=1.",
+                        plot2_type: "extrema_visual",
+                        plot2_function: "x^3 - 3*x",
+                        plot2_domain: [-2.5, 2.5],
+                        plot2_points: [
+                            { x: -1, y: 2, label: "Max Local (-1, 2)", color: "red" },
+                            { x: 1, y: -2, label: "Min Local (1, -2)", color: "blue" }
+                        ],
+                        def2_2_title: "Testul Celei de-a Doua Derivate (Concavitate)",
+                        list2_4: "Dacă $f''(x) > 0$, graficul este Concav în Sus (ca o cană).",
+                        list2_5: "Dacă $f''(x) < 0$, graficul este Concav în Jos (trist).",
+                        list2_6: "Punct de Inflexiune: Un punct unde concavitatea se schimbă ($f''(x) = 0$)."
+                    },
+                    section3: {
+                        title3: "Optimizare",
+                        def3_1: "Optimizarea implică găsirea valorii maxime sau minime absolute a unei funcții într-un context real (de ex. maximizarea profitului, minimizarea costului materialelor).",
+                        plot3_title: "Vizual de Optimizare: Cutie Deschisă",
+                        plot3_desc: "Curba arată cum se schimbă Volumul pe măsură ce dimensiunea tăieturii 'x' se schimbă. Vârful reprezintă volumul maxim posibil.",
+                        plot3_type: "optimization_box",
+                        plot3_function: "x * (12 - 2*x)^2",
+                        plot3_domain: [0, 6],
+                        plot3_points: [
+                            { x: 2, y: 128, label: "Volum Max (x=2)", color: "green" }
+                        ],
+                        strategy_title: "Strategie Generală:",
+                        step3_1: "1. Desenează o imagine și etichetează variabilele.",
+                        step3_2: "2. Scrie o 'Ecuație Primară' pentru cantitatea de optimizat.",
+                        step3_3: "3. Folosește o 'Constrângere' pentru a reduce ecuația la o singură variabilă.",
+                        step3_4: "4. Ia derivata, egaleaz-o cu 0 și rezolvă pentru punctele critice.",
+                        step3_5: "5. Verifică folosind Testul Primei sau Celei de-a Doua Derivate.",
+                        ex3_1_title: "Exemplu (Volum Maxim)",
+                        ex3_1_problem: "O foaie de carton de 12x12 cm are pătrate de latură 'x' tăiate din fiecare colț. Îndoaie laturile pentru a face o cutie deschisă. Găsește 'x' pentru Volum maxim.",
+                        ex3_1_step1: "Ecuația Primară: Volum $V = L \\cdot l \\cdot h$. Dimensiunile sunt $(12-2x)$, $(12-2x)$ și înălțimea $x$.",
+                        ex3_1_step2: "Funcția: $V(x) = x(12-2x)^2$. Extinde: $V(x) = 144x - 48x^2 + 4x^3$.",
+                        ex3_1_step3: "Derivata: $V'(x) = 144 - 96x + 12x^2$. Setează $V'(x) = 0$.",
+                        ex3_1_step4: "Rezolvă: $12(x^2 - 8x + 12) = 0 \\implies (x-6)(x-2) = 0$. Puncte critice: $x=2, 6$.",
+                        ex3_1_solution: "Verifică: $x=6$ face lățimea 0. Deci, Max este la $x=2$. Volum = $2(8)(8) = 128$."
+                    },
+                    section4: {
+                        title4: "Rate Legate",
+                        def4_1: "Probleme unde variabilele se schimbă în raport cu timpul ($t$). Folosim Diferențierea Implicită în raport cu $t$.",
+                        plot4_title: "Vizual Rate Legate: Scară Alunecând",
+                        plot4_desc: "Pe măsură ce baza scării (x) alunecă, vârful (y) alunecă în jos. Lungimea scării (z) rămâne constantă.",
+                        plot4_type: "related_rates_ladder",
+                        plot4_function: "Lungime scară = 10",
+                        plot4_domain: [0, 10],
+                        plot4_points: [
+                            { x: 6, y: 8, label: "Poziția Curentă (x=6, y=8)", color: "orange" }
+                        ],
+                        math4_1: `\\text{Dat } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
+                        text4_1: "Cheia este să recunoști că fiecare variabilă este de fapt o funcție de timp $t(x)$.",
+                        ex4_1_title: "Exemplu (Scară Alunecând)",
+                        ex4_1_problem: "O scară de 10 metri se sprijină de un perete. Baza alunecă cu 2 m/s. Cât de repede cade vârful când baza este la 6 metri de perete?",
+                        ex4_1_step1: "Ecuația: $x^2 + y^2 = 10^2$. Diferențiază în raport cu timpul $t$: $2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0$.",
+                        ex4_1_step2: "Găsește variabila lipsă ($y$): Dacă $x=6$ și $z=10$, atunci $36 + y^2 = 100 \\implies y=8$.",
+                        ex4_1_step3: "Substituie: $2(6)(2) + 2(8)(\\frac{dy}{dt}) = 0$. (Notă: $\\frac{dx}{dt}=2$).",
+                        ex4_1_step4: "Rezolvă: $24 + 16\\frac{dy}{dt} = 0$.",
+                        ex4_1_solution: "Rezultat: $16\\frac{dy}{dt} = -24 \\implies \\frac{dy}{dt} = -1.5$ m/s."
+                    },
+                    example_section: {
+                        title_ex: "Exemple cu Soluții Pas cu Pas",
+                        ex1: {
+                            title: "1. Regula lui L'Hôpital",
+                            problem: "Evaluează limita:",
+                            problem_math: `\\lim_{x \\to 0} \\frac{e^x - 1 - x}{x^2}`,
+                            step1_title: "Pasul 1: Verifică Forma",
+                            step1_desc: "Substituie 0: $e^0 - 1 - 0 = 0$ și $0^2 = 0$. Aceasta este $\\frac{0}{0}$. Aplică L'Hôpital.",
+                            step2_title: "Pasul 2: Diferențiază Sus și Jos",
+                            step2_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1 - x)}{\\frac{d}{dx}(x^2)} = \\lim_{x \\to 0} \\frac{e^x - 1}{2x}`,
+                            step3_title: "Pasul 3: Verifică din Nou și Repetă",
+                            step3_desc: "Substituie 0 din nou: $\\frac{1-1}{0} = \\frac{0}{0}$. Aplică L'Hôpital a doua oară.",
+                            step3_math: `\\lim_{x \\to 0} \\frac{\\frac{d}{dx}(e^x - 1)}{\\frac{d}{dx}(2x)} = \\lim_{x \\to 0} \\frac{e^x}{2}`,
+                            result_title: "Răspuns Final",
+                            result: `$\\frac{e^0}{2} = \\frac{1}{2}$`
+                        },
+                        ex2: {
+                            title: "2. Optimizare (Volum Maxim)",
+                            problem: "O cutie este făcută dintr-o foaie de 12x12 cm tăind pătrate de mărimea x din colțuri și îndoind. Maximizează volumul.",
+                            problem_math: `V(x) = lungime \\cdot lățime \\cdot înălțime`,
+                            step1_title: "Pasul 1: Configurează Ecuația",
+                            step1_desc: "Înălțimea este $x$. Lățimea și Lungimea sunt ambele $12 - 2x$.",
+                            step1_math: `V(x) = x(12 - 2x)^2`,
+                            step2_title: "Pasul 2: Diferențiază",
+                            step2_desc: "Folosește Regula Produsului sau extinde mai întâi. Extindere: $V = x(144 - 48x + 4x^2) = 144x - 48x^2 + 4x^3$.",
+                            step2_math: `V'(x) = 144 - 96x + 12x^2`,
+                            step3_title: "Pasul 3: Găsește Puncte Critice",
+                            step3_desc: "Setează $V'(x) = 0$. Împarte la 12: $x^2 - 8x + 12 = 0$. Factorizează: $(x-6)(x-2)=0$.",
+                            step4_title: "Pasul 4: Analizează Soluțiile",
+                            step4_desc: "$x=6$ face lățimea 0 (minim). $x=2$ este maximul logic.",
+                            result_title: "Răspuns Final",
+                            result: "Taie pătrate de 2 cm. Volum Max = $2(12-4)^2 = 2(64) = 128 \\text{ cm}^3$."
+                        },
+                        ex3: {
+                            title: "3. Rate Legate (Problema Scării)",
+                            problem: "O scară de 10 metri se sprijină de un perete. Baza alunecă cu 2 m/s. Cât de repede cade vârful când baza este la 6 metri de perete?",
+                            problem_math: `x^2 + y^2 = 10^2`,
+                            step1_title: "Pasul 1: Diferențiază în raport cu Timpul",
+                            step1_desc: "Diferențiere implicită pe teorema lui Pitagora.",
+                            step1_math: `2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0 \\implies x\\frac{dx}{dt} + y\\frac{dy}{dt} = 0`,
+                            step2_title: "Pasul 2: Găsește Valori Lipsă",
+                            step2_desc: "Știm $\\frac{dx}{dt} = 2$ și $x = 6$. Avem nevoie de y. Folosește $6^2 + y^2 = 100$. $y = \\sqrt{64} = 8$.",
+                            step3_title: "Pasul 3: Rezolvă pentru dy/dt",
+                            step3_math: `(6)(2) + (8)\\frac{dy}{dt} = 0 \\\\ 12 + 8\\frac{dy}{dt} = 0 \\\\ \\frac{dy}{dt} = -\\frac{12}{8}`,
+                            result_title: "Răspuns Final",
+                            result: "Vârful alunecă în jos cu $\\frac{3}{2}$ sau $1.5 \\text{ m/s}$."
                         }
                     }
                 }
