@@ -7,7 +7,7 @@ export const polynomialsLearningTranslations = {
     hero: {
       title: "Learn Polynomials Step by Step",
       description: "Comprehensive examples covering operations, factoring, roots, and applications",
-      badge: "40+ Examples"
+      badge: "20+ Examples"
     },
 
     sections: {
@@ -67,7 +67,7 @@ export const polynomialsLearningTranslations = {
     hero: {
       title: "Learn Polynomials Step by Step",
       description: "Comprehensive examples covering operations, factoring, roots, and applications",
-      badge: "40+ Examples"
+      badge: "20+ Examples"
     },
 
     sections: {
@@ -127,7 +127,7 @@ export const polynomialsLearningTranslations = {
     hero: {
       title: "Învață Polinoame Pas cu Pas",
       description: "Exemple cuprinzătoare acoperind operații, factorizare, rădăcini și aplicații",
-      badge: "40+ Exemple"
+      badge: "20+ Exemple"
     },
 
     sections: {
@@ -187,7 +187,7 @@ export const polynomialsLearningTranslations = {
     hero: {
       title: "Aprende Polinomios Paso a Paso",
       description: "Ejemplos completos que cubren operaciones, factorización, raíces y aplicaciones",
-      badge: "40+ Ejemplos"
+      badge: "20+ Ejemplos"
     },
 
     sections: {
@@ -247,7 +247,7 @@ export const polynomialsLearningTranslations = {
     hero: {
       title: "Apprenez les Polynômes Étape par Étape",
       description: "Exemples complets couvrant les opérations, la factorisation, les racines et les applications",
-      badge: "40+ Exemples"
+      badge: "20+ Exemples"
     },
 
     sections: {
@@ -307,7 +307,7 @@ export const polynomialsLearningTranslations = {
     hero: {
       title: "Lernen Sie Polynome Schritt für Schritt",
       description: "Umfassende Beispiele zu Operationen, Faktorisierung, Wurzeln und Anwendungen",
-      badge: "40+ Beispiele"
+      badge: "20+ Beispiele"
     },
 
     sections: {
@@ -367,7 +367,7 @@ export const polynomialsLearningTranslations = {
     hero: {
       title: "Ucz Się Wielomianów Krok po Kroku",
       description: "Kompleksowe przykłady obejmujące operacje, faktoryzację, pierwiastki i zastosowania",
-      badge: "40+ Przykładów"
+      badge: "20+ Przykładów"
     },
 
     sections: {

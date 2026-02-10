@@ -106,6 +106,141 @@ export const calculusFundamentalsCourse = {
                 }
             }
         },
+        derivatives: {
+            title: "Derivatives - Differentiation Rules & Techniques",
+            description: "The study of how things change: calculating instantaneous rates of change and the slopes of tangent lines.",
+            lessons: {
+                lesson2_title: "Differentiation Rules & Techniques",
+                lesson2: {
+                    section1: {
+                        title1: "The Definition of the Derivative",
+                        def1_1: "Geometrically, the derivative represents the slope of the tangent line to a curve at a specific point. Physically, it represents instantaneous velocity.",
+                        def1_2: "Formal Limit Definition: The derivative of f(x), denoted as f'(x), is defined by:",
+                        math1_1: `f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}`,
+                        text1_1: "provided this limit exists. If it does, f is said to be differentiable at x.",
+                        def1_3: "Common Notation:",
+                        list1_1: "Lagrange's Notation: $f'(x)$ or $y'$",
+                        list1_2: "Leibniz's Notation: $\\frac{dy}{dx}$ or $\\frac{d}{dx}[f(x)]$",
+                        theorem1_1: "Theorem: Differentiability implies Continuity. If a function is differentiable at a point, it must be continuous there (no sharp corners or breaks).",
+                        plot1_title: "Example: Differentiable Function (Continuous & Smooth)",
+                        plot1_desc: "The function $f(x) = x^2$ is differentiable at x = 0. It is smooth with no breaks or corners.",
+                        plot1_function: "x^2",
+                        plot1_point: 0,
+                        plot2_title: "Example: Non-Differentiable Function (Sharp Corner)",
+                        plot2_desc: "The function $f(x) = |x|$ is NOT differentiable at x = 0. It has a sharp corner, even though it is continuous.",
+                        plot2_function: "|x|",
+                        plot2_point: 0
+                    },
+                    section2: {
+                        title2: "Basic Differentiation Rules",
+                        desc2_1: "Using the limit definition is tedious. We use specific rules to find derivatives quickly.",
+                        def2_1_title: "Power, Sum, and Constant Rules",
+                        list2_1: "1. Power Rule: $\\frac{d}{dx}(x^n) = nx^{n-1}$",
+                        list2_2: "2. Constant Multiple: $\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$",
+                        list2_3: "3. Sum/Difference: $\\frac{d}{dx}[f(x) \\pm g(x)] = f'(x) \\pm g'(x)$",
+                        ex2_1_title: "Example (Power & Sum Rules)",
+                        ex2_1_problem: "Find the derivative of $f(x) = 2x^3 - 4x + 5$",
+                        ex2_1_step1: "Apply Power Rule to terms: $\\frac{d}{dx}(2x^3) = 6x^2$ and $\\frac{d}{dx}(-4x) = -4$.",
+                        ex2_1_step2: "Constant Rule: $\\frac{d}{dx}(5) = 0$.",
+                        ex2_1_solution: "Result: $f'(x) = 6x^2 - 4$",
+                        def2_2_title: "Product & Quotient Rules",
+                        text2_1: "Used when functions are multiplied or divided.",
+                        list2_4: "Product Rule: $\\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$",
+                        list2_5: "Quotient Rule: $\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$",
+                        text2_2: "Mnemonic for Quotient: 'Lo d-Hi minus Hi d-Lo, over Lo Lo'.",
+                        ex2_2_title: "Example (Product Rule)",
+                        ex2_2_problem: "Differentiate $y = x^2(3x - 1)$",
+                        ex2_2_step1: "Identify parts: $f = x^2$ (so $f' = 2x$) and $g = 3x-1$ (so $g' = 3$).",
+                        ex2_2_step2: "Apply formula $f'g + fg'$: $(2x)(3x-1) + (x^2)(3)$.",
+                        ex2_2_solution: "Simplify: $6x^2 - 2x + 3x^2 = 9x^2 - 2x$."
+                    },
+                    section3: {
+                        title3: "The Chain Rule & Trigonometry",
+                        def3_1_title: "The Chain Rule (Composite Functions)",
+                        def3_1: "The Chain Rule is used for composite functions, $f(g(x))$. It states that you take the derivative of the outer function applied to the inner, multiplied by the derivative of the inner.",
+                        math3_1: `\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)`,
+                        text3_1: "In Leibniz notation: $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$",
+                        ex3_1_title: "Example (Chain Rule)",
+                        ex3_1_problem: "Find $y'$ for $y = (3x^2 + 1)^5$",
+                        ex3_1_step1: "Outer derivative (Power Rule): $5(\\dots)^4$.",
+                        ex3_1_step2: "Inner derivative ($3x^2+1$): $6x$.",
+                        ex3_1_solution: "Multiply them: $y' = 5(3x^2 + 1)^4 \\cdot (6x) = 30x(3x^2 + 1)^4$.",
+                        def3_2_title: "Trigonometric Derivatives",
+                        list3_1: "$\\frac{d}{dx}(\\sin x) = \\cos x$",
+                        list3_2: "$\\frac{d}{dx}(\\cos x) = -\\sin x$",
+                        list3_3: "$\\frac{d}{dx}(\\tan x) = \\sec^2 x$",
+                        ex3_2_title: "Example (Trig + Chain Rule)",
+                        ex3_2_problem: "Differentiate $y = \\cos(2x)$",
+                        ex3_2_step1: "Derivative of outer $\\cos(u)$ is $-\\sin(u)$.",
+                        ex3_2_step2: "Derivative of inner $2x$ is $2$.",
+                        ex3_2_solution: "Result: $y' = -\\sin(2x) \\cdot 2 = -2\\sin(2x)$."
+                    },
+                    section4: {
+                        title4: "Implicit Differentiation",
+                        def4_1: "Explicit functions are written as $y = f(x)$. Implicit functions have x and y mixed, like $x^2 + y^2 = 25$.",
+                        def4_2: "Technique:",
+                        cond4_1: "1. Differentiate both sides of the equation with respect to x.",
+                        cond4_2: "2. Apply the Chain Rule to y terms (multiply by $\\frac{dy}{dx}$ or $y'$).",
+                        cond4_3: "3. Isolate $\\frac{dy}{dx}$ algebraically.",
+                        types_title: "Common Pitfall",
+                        type1: "Remember: $\\frac{d}{dx}(y^3) \\neq 3y^2$. It is $3y^2 \\cdot \\frac{dy}{dx}$ because y is a function of x.",
+                        ex4_1_title: "Example (Circle Equation)",
+                        ex4_1_problem: "Find $\\frac{dy}{dx}$ for $x^2 + y^2 = 25$",
+                        ex4_1_step1: "Differentiate both sides: $\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)$.",
+                        ex4_1_step2: "Apply Chain Rule to $y$: $2x + 2y \\cdot \\frac{dy}{dx} = 0$.",
+                        ex4_1_solution: "Solve for $\\frac{dy}{dx}$: $2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = -\\frac{x}{y}$."
+                    },
+                    example_section: {
+                        title_ex: "Examples with Step-by-Step Solutions",
+                        ex1: {
+                            title: "1. Using the Quotient Rule",
+                            problem: "Find the derivative of:",
+                            problem_math: `f(x) = \\frac{x^2 + 2}{3x - 1}`,
+                            step1_title: "Step 1: Identify f(x) and g(x)",
+                            step1_desc: "Top (High) = $x^2 + 2$, Bottom (Low) = $3x - 1$.",
+                            step2_title: "Step 2: Differentiate Components",
+                            step2_math: `High' = 2x \\quad \\text{and} \\quad Low' = 3`,
+                            step3_title: "Step 3: Apply Formula",
+                            step3_desc: "$\\frac{Low \\cdot High' - High \\cdot Low'}{(Low)^2}$",
+                            step3_math: `f'(x) = \\frac{(3x - 1)(2x) - (x^2 + 2)(3)}{(3x - 1)^2}`,
+                            result_title: "Final Answer (Simplified)",
+                            result: `f'(x) = $\\frac{6x^2 - 2x - 3x^2 - 6}{(3x-1)^2} = \\frac{3x^2 - 2x - 6}{(3x - 1)^2}$`
+                        },
+                        ex2: {
+                            title: "2. The Chain Rule with Trigonometry",
+                            problem: "Differentiate the function:",
+                            problem_math: `y = \\cos(5x^3)`,
+                            step1_title: "Step 1: Identify Outer and Inner Functions",
+                            step1_desc: "Outer function is $\\cos(u)$. Inner function is $u = 5x^3$.",
+                            step2_title: "Step 2: Differentiate Outer Function",
+                            step2_desc: "The derivative of $\\cos(u)$ is $-\\sin(u)$. Keep the inside the same.",
+                            step2_math: `\\frac{dy}{du} = -\\sin(5x^3)`,
+                            step3_title: "Step 3: Differentiate Inner Function",
+                            step3_desc: "The derivative of $5x^3$ is $15x^2$.",
+                            step3_math: `\\frac{du}{dx} = 15x^2`,
+                            result_title: "Final Answer",
+                            result: "Multiply them: $y' = -\\sin(5x^3) \\cdot 15x^2 = -15x^2 \\sin(5x^3)$"
+                        },
+                        ex3: {
+                            title: "3. Implicit Differentiation",
+                            problem: "Find $\\frac{dy}{dx}$ for the circle:",
+                            problem_math: `x^2 + y^2 = 25`,
+                            step1_title: "Step 1: Differentiate Both Sides",
+                            step1_desc: "Differentiate with respect to x. Remember the Chain Rule for y.",
+                            step1_math: `\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)`,
+                            step2_title: "Step 2: Apply Derivatives",
+                            step2_desc: "$x^2$ becomes $2x$. $y^2$ becomes $2y \\cdot \\frac{dy}{dx}$. Constant becomes 0.",
+                            step2_math: `2x + 2y \\frac{dy}{dx} = 0`,
+                            step3_title: "Step 3: Isolate dy/dx",
+                            step3_desc: "Subtract 2x and divide by 2y.",
+                            step3_math: `2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = \\frac{-2x}{2y}`,
+                            result_title: "Final Answer",
+                            result: `$\\frac{dy}{dx} = -\\frac{x}{y}$`
+                        }
+                    }
+                }
+            }
+        },
     },
     es: {
        limits: {
@@ -213,7 +348,142 @@ export const calculusFundamentalsCourse = {
                     }
                 }
             }
-        } 
+        },
+        derivatives: {
+            title: "Derivadas - Reglas y Técnicas de Diferenciación",
+            description: "El estudio de cómo cambian las cosas: cálculo de tasas de cambio instantáneas y pendientes de rectas tangentes.",
+            lessons: {
+                lesson2_title: "Reglas y Técnicas de Diferenciación",
+                lesson2: {
+                    section1: {
+                        title1: "La Definición de la Derivada",
+                        def1_1: "Geométricamente, la derivada representa la pendiente de la recta tangente a una curva en un punto específico. Físicamente, representa la velocidad instantánea.",
+                        def1_2: "Definición Formal de Límite: La derivada de f(x), denotada como f'(x), se define por:",
+                        math1_1: `f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}`,
+                        text1_1: "siempre que este límite exista. Si existe, se dice que f es diferenciable en x.",
+                        def1_3: "Notación Común:",
+                        list1_1: "Notación de Lagrange: $f'(x)$ o $y'$",
+                        list1_2: "Notación de Leibniz: $\\frac{dy}{dx}$ o $\\frac{d}{dx}[f(x)]$",
+                        theorem1_1: "Teorema: La Diferenciabilidad implica Continuidad. Si una función es diferenciable en un punto, debe ser continua allí (sin esquinas afiladas ni interrupciones).",
+                        plot1_title: "Ejemplo: Función Diferenciable (Continua y Suave)",
+                        plot1_desc: "La función $f(x) = x^2$ es diferenciable en x = 0. Es suave, sin interrupciones ni esquinas.",
+                        plot1_function: "x^2",
+                        plot1_point: 0,
+                        plot2_title: "Ejemplo: Función No Diferenciable (Esquina Afilada)",
+                        plot2_desc: "La función $f(x) = |x|$ NO es diferenciable en x = 0. Tiene una esquina afilada, aunque es continua.",
+                        plot2_function: "|x|",
+                        plot2_point: 0
+                    },
+                    section2: {
+                        title2: "Reglas Básicas de Diferenciación",
+                        desc2_1: "Usar la definición de límite es tedioso. Usamos reglas específicas para encontrar derivadas rápidamente.",
+                        def2_1_title: "Reglas de Potencia, Suma y Constante",
+                        list2_1: "1. Regla de la Potencia: $\\frac{d}{dx}(x^n) = nx^{n-1}$",
+                        list2_2: "2. Múltiplo Constante: $\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$",
+                        list2_3: "3. Suma/Diferencia: $\\frac{d}{dx}[f(x) \\pm g(x)] = f'(x) \\pm g'(x)$",
+                        ex2_1_title: "Ejemplo (Reglas de Potencia y Suma)",
+                        ex2_1_problem: "Encuentra la derivada de $f(x) = 2x^3 - 4x + 5$",
+                        ex2_1_step1: "Aplica la Regla de la Potencia a los términos: $\\frac{d}{dx}(2x^3) = 6x^2$ y $\\frac{d}{dx}(-4x) = -4$.",
+                        ex2_1_step2: "Regla de la Constante: $\\frac{d}{dx}(5) = 0$.",
+                        ex2_1_solution: "Resultado: $f'(x) = 6x^2 - 4$",
+                        def2_2_title: "Reglas del Producto y Cociente",
+                        text2_1: "Se usan cuando las funciones se multiplican o dividen.",
+                        list2_4: "Regla del Producto: $\\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$",
+                        list2_5: "Regla del Cociente: $\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$",
+                        text2_2: "Mnemotecnia para Cociente: 'El de abajo por la derivada del de arriba, menos el de arriba por la derivada del de abajo, sobre el de abajo al cuadrado'.",
+                        ex2_2_title: "Ejemplo (Regla del Producto)",
+                        ex2_2_problem: "Diferencia $y = x^2(3x - 1)$",
+                        ex2_2_step1: "Identifica las partes: $f = x^2$ (entonces $f' = 2x$) y $g = 3x-1$ (entonces $g' = 3$).",
+                        ex2_2_step2: "Aplica la fórmula $f'g + fg'$: $(2x)(3x-1) + (x^2)(3)$.",
+                        ex2_2_solution: "Simplifica: $6x^2 - 2x + 3x^2 = 9x^2 - 2x$."
+                    },
+                    section3: {
+                        title3: "La Regla de la Cadena y Trigonometría",
+                        def3_1_title: "La Regla de la Cadena (Funciones Compuestas)",
+                        def3_1: "La Regla de la Cadena se usa para funciones compuestas, $f(g(x))$. Establece que tomas la derivada de la función externa aplicada a la interna, multiplicada por la derivada de la interna.",
+                        math3_1: `\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)`,
+                        text3_1: "En notación de Leibniz: $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$",
+                        ex3_1_title: "Ejemplo (Regla de la Cadena)",
+                        ex3_1_problem: "Encuentra $y'$ para $y = (3x^2 + 1)^5$",
+                        ex3_1_step1: "Derivada externa (Regla de la Potencia): $5(\\dots)^4$.",
+                        ex3_1_step2: "Derivada interna ($3x^2+1$): $6x$.",
+                        ex3_1_solution: "Multiplícalos: $y' = 5(3x^2 + 1)^4 \\cdot (6x) = 30x(3x^2 + 1)^4$.",
+                        def3_2_title: "Derivadas Trigonométricas",
+                        list3_1: "$\\frac{d}{dx}(\\sin x) = \\cos x$",
+                        list3_2: "$\\frac{d}{dx}(\\cos x) = -\\sin x$",
+                        list3_3: "$\\frac{d}{dx}(\\tan x) = \\sec^2 x$",
+                        ex3_2_title: "Ejemplo (Trig + Regla de la Cadena)",
+                        ex3_2_problem: "Diferencia $y = \\cos(2x)$",
+                        ex3_2_step1: "La derivada de la externa $\\cos(u)$ es $-\\sin(u)$.",
+                        ex3_2_step2: "La derivada de la interna $2x$ es $2$.",
+                        ex3_2_solution: "Resultado: $y' = -\\sin(2x) \\cdot 2 = -2\\sin(2x)$."
+                    },
+                    section4: {
+                        title4: "Diferenciación Implícita",
+                        def4_1: "Las funciones explícitas se escriben como $y = f(x)$. Las funciones implícitas tienen x e y mezcladas, como $x^2 + y^2 = 25$.",
+                        def4_2: "Técnica:",
+                        cond4_1: "1. Diferencia ambos lados de la ecuación con respecto a x.",
+                        cond4_2: "2. Aplica la Regla de la Cadena a los términos con y (multiplica por $\\frac{dy}{dx}$ o $y'$).",
+                        cond4_3: "3. Aísla $\\frac{dy}{dx}$ algebraicamente.",
+                        types_title: "Error Común",
+                        type1: "Recuerda: $\\frac{d}{dx}(y^3) \\neq 3y^2$. Es $3y^2 \\cdot \\frac{dy}{dx}$ porque y es una función de x.",
+                        ex4_1_title: "Ejemplo (Ecuación del Círculo)",
+                        ex4_1_problem: "Encuentra $\\frac{dy}{dx}$ para $x^2 + y^2 = 25$",
+                        ex4_1_step1: "Diferencia ambos lados: $\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)$.",
+                        ex4_1_step2: "Aplica la Regla de la Cadena a $y$: $2x + 2y \\cdot \\frac{dy}{dx} = 0$.",
+                        ex4_1_solution: "Resuelve para $\\frac{dy}{dx}$: $2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = -\\frac{x}{y}$."
+                    },
+                    example_section: {
+                        title_ex: "Ejemplos con Soluciones Paso a Paso",
+                        ex1: {
+                            title: "1. Usando la Regla del Cociente",
+                            problem: "Encuentra la derivada de:",
+                            problem_math: `f(x) = \\frac{x^2 + 2}{3x - 1}`,
+                            step1_title: "Paso 1: Identificar f(x) y g(x)",
+                            step1_desc: "Arriba (High) = $x^2 + 2$, Abajo (Low) = $3x - 1$.",
+                            step2_title: "Paso 2: Diferenciar Componentes",
+                            step2_math: `High' = 2x \\quad \\text{y} \\quad Low' = 3`,
+                            step3_title: "Paso 3: Aplicar Fórmula",
+                            step3_desc: "$\\frac{Low \\cdot High' - High \\cdot Low'}{(Low)^2}$",
+                            step3_math: `f'(x) = \\frac{(3x - 1)(2x) - (x^2 + 2)(3)}{(3x - 1)^2}`,
+                            result_title: "Respuesta Final (Simplificada)",
+                            result: `f'(x) = $\\frac{6x^2 - 2x - 3x^2 - 6}{(3x-1)^2} = \\frac{3x^2 - 2x - 6}{(3x - 1)^2}$`
+                        },
+                        ex2: {
+                            title: "2. La Regla de la Cadena con Trigonometría",
+                            problem: "Diferencia la función:",
+                            problem_math: `y = \\cos(5x^3)`,
+                            step1_title: "Paso 1: Identificar Funciones Externa e Interna",
+                            step1_desc: "La función externa es $\\cos(u)$. La función interna es $u = 5x^3$.",
+                            step2_title: "Paso 2: Diferenciar Función Externa",
+                            step2_desc: "La derivada de $\\cos(u)$ es $-\\sin(u)$. Mantén el interior igual.",
+                            step2_math: `\\frac{dy}{du} = -\\sin(5x^3)`,
+                            step3_title: "Paso 3: Diferenciar Función Interna",
+                            step3_desc: "La derivada de $5x^3$ es $15x^2$.",
+                            step3_math: `\\frac{du}{dx} = 15x^2`,
+                            result_title: "Respuesta Final",
+                            result: "Multiplícalos: $y' = -\\sin(5x^3) \\cdot 15x^2 = -15x^2 \\sin(5x^3)$"
+                        },
+                        ex3: {
+                            title: "3. Diferenciación Implícita",
+                            problem: "Encuentra $\\frac{dy}{dx}$ para el círculo:",
+                            problem_math: `x^2 + y^2 = 25`,
+                            step1_title: "Paso 1: Diferenciar Ambos Lados",
+                            step1_desc: "Diferencia con respecto a x. Recuerda la Regla de la Cadena para y.",
+                            step1_math: `\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)`,
+                            step2_title: "Paso 2: Aplicar Derivadas",
+                            step2_desc: "$x^2$ se convierte en $2x$. $y^2$ se convierte en $2y \\cdot \\frac{dy}{dx}$. La constante se convierte en 0.",
+                            step2_math: `2x + 2y \\frac{dy}{dx} = 0`,
+                            step3_title: "Paso 3: Aislar dy/dx",
+                            step3_desc: "Resta 2x y divide por 2y.",
+                            step3_math: `2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = \\frac{-2x}{2y}`,
+                            result_title: "Respuesta Final",
+                            result: `$\\frac{dy}{dx} = -\\frac{x}{y}$`
+                        }
+                    }
+                }
+            }
+        },
     },
     fr: {
         limits: {
@@ -321,7 +591,142 @@ export const calculusFundamentalsCourse = {
                     }
                 }
             }
-        }
+        },
+        derivatives: {
+            title: "Dérivées - Règles et techniques de dérivation",
+            description: "L'étude de la façon dont les choses changent : calcul des taux de variation instantanés et des pentes des tangentes.",
+            lessons: {
+                lesson2_title: "Règles et techniques de dérivation",
+                lesson2: {
+                    section1: {
+                        title1: "La définition de la dérivée",
+                        def1_1: "Géométriquement, la dérivée représente la pente de la tangente à une courbe en un point donné. Physiquement, elle représente la vitesse instantanée.",
+                        def1_2: "Définition formelle par limite : La dérivée de f(x), notée f'(x), est définie par :",
+                        math1_1: `f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}`,
+                        text1_1: "à condition que cette limite existe. Si c'est le cas, f est dite dérivable en x.",
+                        def1_3: "Notation courante :",
+                        list1_1: "Notation de Lagrange : $f'(x)$ ou $y'$",
+                        list1_2: "Notation de Leibniz : $\\frac{dy}{dx}$ ou $\\frac{d}{dx}[f(x)]$",
+                        theorem1_1: "Théorème : La dérivabilité implique la continuité. Si une fonction est dérivable en un point, elle doit y être continue (pas de coins pointus ni de ruptures).",
+                        plot1_title: "Exemple : Fonction dérivable (Continue et lisse)",
+                        plot1_desc: "La fonction $f(x) = x^2$ est dérivable en x = 0. Elle est lisse, sans ruptures ni coins.",
+                        plot1_function: "x^2",
+                        plot1_point: 0,
+                        plot2_title: "Exemple : Fonction non dérivable (Coin pointu)",
+                        plot2_desc: "La fonction $f(x) = |x|$ n'est PAS dérivable en x = 0. Elle a un coin pointu, même si elle est continue.",
+                        plot2_function: "|x|",
+                        plot2_point: 0
+                    },
+                    section2: {
+                        title2: "Règles de dérivation de base",
+                        desc2_1: "Utiliser la définition par limite est fastidieux. Nous utilisons des règles spécifiques pour trouver les dérivées rapidement.",
+                        def2_1_title: "Règles de puissance, somme et constante",
+                        list2_1: "1. Règle de puissance : $\\frac{d}{dx}(x^n) = nx^{n-1}$",
+                        list2_2: "2. Multiple constant : $\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$",
+                        list2_3: "3. Somme/Différence : $\\frac{d}{dx}[f(x) \\pm g(x)] = f'(x) \\pm g'(x)$",
+                        ex2_1_title: "Exemple (Règles de puissance et somme)",
+                        ex2_1_problem: "Trouvez la dérivée de $f(x) = 2x^3 - 4x + 5$",
+                        ex2_1_step1: "Appliquer la règle de puissance aux termes : $\\frac{d}{dx}(2x^3) = 6x^2$ et $\\frac{d}{dx}(-4x) = -4$.",
+                        ex2_1_step2: "Règle de la constante : $\\frac{d}{dx}(5) = 0$.",
+                        ex2_1_solution: "Résultat : $f'(x) = 6x^2 - 4$",
+                        def2_2_title: "Règles du produit et du quotient",
+                        text2_1: "Utilisées lorsque les fonctions sont multipliées ou divisées.",
+                        list2_4: "Règle du produit : $\\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$",
+                        list2_5: "Règle du quotient : $\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$",
+                        text2_2: "Moyen mnémotechnique pour le quotient : 'Bas d-Haut moins Haut d-Bas, sur Bas Bas'.",
+                        ex2_2_title: "Exemple (Règle du produit)",
+                        ex2_2_problem: "Dériver $y = x^2(3x - 1)$",
+                        ex2_2_step1: "Identifier les parties : $f = x^2$ (donc $f' = 2x$) et $g = 3x-1$ (donc $g' = 3$).",
+                        ex2_2_step2: "Appliquer la formule $f'g + fg'$ : $(2x)(3x-1) + (x^2)(3)$.",
+                        ex2_2_solution: "Simplifier : $6x^2 - 2x + 3x^2 = 9x^2 - 2x$."
+                    },
+                    section3: {
+                        title3: "La règle de la chaîne et trigonométrie",
+                        def3_1_title: "La règle de la chaîne (Fonctions composées)",
+                        def3_1: "La règle de la chaîne est utilisée pour les fonctions composées, $f(g(x))$. Elle stipule que vous prenez la dérivée de la fonction externe appliquée à l'interne, multipliée par la dérivée de l'interne.",
+                        math3_1: `\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)`,
+                        text3_1: "En notation de Leibniz : $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$",
+                        ex3_1_title: "Exemple (Règle de la chaîne)",
+                        ex3_1_problem: "Trouvez $y'$ pour $y = (3x^2 + 1)^5$",
+                        ex3_1_step1: "Dérivée externe (Règle de puissance) : $5(\\dots)^4$.",
+                        ex3_1_step2: "Dérivée interne ($3x^2+1$) : $6x$.",
+                        ex3_1_solution: "Multiplier : $y' = 5(3x^2 + 1)^4 \\cdot (6x) = 30x(3x^2 + 1)^4$.",
+                        def3_2_title: "Dérivées trigonométriques",
+                        list3_1: "$\\frac{d}{dx}(\\sin x) = \\cos x$",
+                        list3_2: "$\\frac{d}{dx}(\\cos x) = -\\sin x$",
+                        list3_3: "$\\frac{d}{dx}(\\tan x) = \\sec^2 x$",
+                        ex3_2_title: "Exemple (Trig + Règle de la chaîne)",
+                        ex3_2_problem: "Dériver $y = \\cos(2x)$",
+                        ex3_2_step1: "La dérivée de l'externe $\\cos(u)$ est $-\\sin(u)$.",
+                        ex3_2_step2: "La dérivée de l'interne $2x$ est $2$.",
+                        ex3_2_solution: "Résultat : $y' = -\\sin(2x) \\cdot 2 = -2\\sin(2x)$."
+                    },
+                    section4: {
+                        title4: "Dérivation implicite",
+                        def4_1: "Les fonctions explicites s'écrivent sous la forme $y = f(x)$. Les fonctions implicites mélangent x et y, comme $x^2 + y^2 = 25$.",
+                        def4_2: "Technique :",
+                        cond4_1: "1. Dériver les deux côtés de l'équation par rapport à x.",
+                        cond4_2: "2. Appliquer la règle de la chaîne aux termes en y (multiplier par $\\frac{dy}{dx}$ ou $y'$).",
+                        cond4_3: "3. Isoler $\\frac{dy}{dx}$ algébriquement.",
+                        types_title: "Piège courant",
+                        type1: "Rappel : $\\frac{d}{dx}(y^3) \\neq 3y^2$. C'est $3y^2 \\cdot \\frac{dy}{dx}$ car y est une fonction de x.",
+                        ex4_1_title: "Exemple (Équation du cercle)",
+                        ex4_1_problem: "Trouvez $\\frac{dy}{dx}$ pour $x^2 + y^2 = 25$",
+                        ex4_1_step1: "Dériver les deux côtés : $\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)$.",
+                        ex4_1_step2: "Appliquer la règle de la chaîne à $y$ : $2x + 2y \\cdot \\frac{dy}{dx} = 0$.",
+                        ex4_1_solution: "Résoudre pour $\\frac{dy}{dx}$ : $2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = -\\frac{x}{y}$."
+                    },
+                    example_section: {
+                        title_ex: "Exemples avec solutions étape par étape",
+                        ex1: {
+                            title: "1. Utilisation de la règle du quotient",
+                            problem: "Trouvez la dérivée de :",
+                            problem_math: `f(x) = \\frac{x^2 + 2}{3x - 1}`,
+                            step1_title: "Étape 1 : Identifier f(x) et g(x)",
+                            step1_desc: "Haut (High) = $x^2 + 2$, Bas (Low) = $3x - 1$.",
+                            step2_title: "Étape 2 : Dériver les composants",
+                            step2_math: `High' = 2x \\quad \\text{et} \\quad Low' = 3`,
+                            step3_title: "Étape 3 : Appliquer la formule",
+                            step3_desc: "$\\frac{Low \\cdot High' - High \\cdot Low'}{(Low)^2}$",
+                            step3_math: `f'(x) = \\frac{(3x - 1)(2x) - (x^2 + 2)(3)}{(3x - 1)^2}`,
+                            result_title: "Réponse finale (Simplifiée)",
+                            result: `f'(x) = $\\frac{6x^2 - 2x - 3x^2 - 6}{(3x-1)^2} = \\frac{3x^2 - 2x - 6}{(3x - 1)^2}$`
+                        },
+                        ex2: {
+                            title: "2. La règle de la chaîne avec trigonométrie",
+                            problem: "Dériver la fonction :",
+                            problem_math: `y = \\cos(5x^3)`,
+                            step1_title: "Étape 1 : Identifier les fonctions externe et interne",
+                            step1_desc: "La fonction externe est $\\cos(u)$. La fonction interne est $u = 5x^3$.",
+                            step2_title: "Étape 2 : Dériver la fonction externe",
+                            step2_desc: "La dérivée de $\\cos(u)$ est $-\\sin(u)$. Garder l'intérieur identique.",
+                            step2_math: `\\frac{dy}{du} = -\\sin(5x^3)`,
+                            step3_title: "Étape 3 : Dériver la fonction interne",
+                            step3_desc: "La dérivée de $5x^3$ est $15x^2$.",
+                            step3_math: `\\frac{du}{dx} = 15x^2`,
+                            result_title: "Réponse finale",
+                            result: "Multiplier : $y' = -\\sin(5x^3) \\cdot 15x^2 = -15x^2 \\sin(5x^3)$"
+                        },
+                        ex3: {
+                            title: "3. Dérivation implicite",
+                            problem: "Trouvez $\\frac{dy}{dx}$ pour le cercle :",
+                            problem_math: `x^2 + y^2 = 25`,
+                            step1_title: "Étape 1 : Dériver les deux côtés",
+                            step1_desc: "Dériver par rapport à x. Se rappeler de la règle de la chaîne pour y.",
+                            step1_math: `\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)`,
+                            step2_title: "Étape 2 : Appliquer les dérivées",
+                            step2_desc: "$x^2$ devient $2x$. $y^2$ devient $2y \\cdot \\frac{dy}{dx}$. La constante devient 0.",
+                            step2_math: `2x + 2y \\frac{dy}{dx} = 0`,
+                            step3_title: "Étape 3 : Isoler dy/dx",
+                            step3_desc: "Soustraire 2x et diviser par 2y.",
+                            step3_math: `2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = \\frac{-2x}{2y}`,
+                            result_title: "Réponse finale",
+                            result: `$\\frac{dy}{dx} = -\\frac{x}{y}$`
+                        }
+                    }
+                }
+            }
+        },
     },
     de: {
         limits: {
@@ -429,7 +834,142 @@ export const calculusFundamentalsCourse = {
                     }
                 }
             }
-        }
+        },
+        derivatives: {
+            title: "Ableitungen - Regeln und Techniken",
+            description: "Die Lehre der Veränderung: Berechnung momentaner Änderungsraten und der Steigungen von Tangenten.",
+            lessons: {
+                lesson2_title: "Differenziationsregeln & Techniken",
+                lesson2: {
+                    section1: {
+                        title1: "Die Definition der Ableitung",
+                        def1_1: "Geometrisch repräsentiert die Ableitung die Steigung der Tangente an eine Kurve an einem bestimmten Punkt. Physikalisch repräsentiert sie die momentane Geschwindigkeit.",
+                        def1_2: "Formale Grenzwertdefinition: Die Ableitung von f(x), bezeichnet als f'(x), ist definiert durch:",
+                        math1_1: `f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}`,
+                        text1_1: "vorausgesetzt, dieser Grenzwert existiert. Wenn er existiert, heißt f differenzierbar bei x.",
+                        def1_3: "Übliche Notation:",
+                        list1_1: "Lagrange-Notation: $f'(x)$ oder $y'$",
+                        list1_2: "Leibniz-Notation: $\\frac{dy}{dx}$ oder $\\frac{d}{dx}[f(x)]$",
+                        theorem1_1: "Theorem: Differenzierbarkeit impliziert Stetigkeit. Wenn eine Funktion an einem Punkt differenzierbar ist, muss sie dort stetig sein (keine scharfen Ecken oder Sprünge).",
+                        plot1_title: "Beispiel: Differenzierbare Funktion (Stetig & Glatt)",
+                        plot1_desc: "Die Funktion $f(x) = x^2$ ist bei x = 0 differenzierbar. Sie ist glatt ohne Sprünge oder Ecken.",
+                        plot1_function: "x^2",
+                        plot1_point: 0,
+                        plot2_title: "Beispiel: Nicht-differenzierbare Funktion (Scharfe Ecke)",
+                        plot2_desc: "Die Funktion $f(x) = |x|$ ist bei x = 0 NICHT differenzierbar. Sie hat eine scharfe Ecke, obwohl sie stetig ist.",
+                        plot2_function: "|x|",
+                        plot2_point: 0
+                    },
+                    section2: {
+                        title2: "Grundlegende Ableitungsregeln",
+                        desc2_1: "Die Verwendung der Grenzwertdefinition ist mühsam. Wir verwenden spezielle Regeln, um Ableitungen schnell zu finden.",
+                        def2_1_title: "Potenz-, Summen- und Faktorregeln",
+                        list2_1: "1. Potenzregel: $\\frac{d}{dx}(x^n) = nx^{n-1}$",
+                        list2_2: "2. Faktorregel: $\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$",
+                        list2_3: "3. Summenregel: $\\frac{d}{dx}[f(x) \\pm g(x)] = f'(x) \\pm g'(x)$",
+                        ex2_1_title: "Beispiel (Potenz- & Summenregeln)",
+                        ex2_1_problem: "Finde die Ableitung von $f(x) = 2x^3 - 4x + 5$",
+                        ex2_1_step1: "Wende die Potenzregel auf die Terme an: $\\frac{d}{dx}(2x^3) = 6x^2$ und $\\frac{d}{dx}(-4x) = -4$.",
+                        ex2_1_step2: "Konstantenregel: $\\frac{d}{dx}(5) = 0$.",
+                        ex2_1_solution: "Ergebnis: $f'(x) = 6x^2 - 4$",
+                        def2_2_title: "Produkt- & Quotientenregeln",
+                        text2_1: "Wird verwendet, wenn Funktionen multipliziert oder dividiert werden.",
+                        list2_4: "Produktregel: $\\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$",
+                        list2_5: "Quotientenregel: $\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$",
+                        text2_2: "Merkspruch für Quotienten: 'Nenner mal Ableitung Zähler minus Zähler mal Ableitung Nenner, durch Nenner zum Quadrat'.",
+                        ex2_2_title: "Beispiel (Produktregel)",
+                        ex2_2_problem: "Differenziere $y = x^2(3x - 1)$",
+                        ex2_2_step1: "Identifiziere Teile: $f = x^2$ (also $f' = 2x$) und $g = 3x-1$ (also $g' = 3$).",
+                        ex2_2_step2: "Wende Formel $f'g + fg'$ an: $(2x)(3x-1) + (x^2)(3)$.",
+                        ex2_2_solution: "Vereinfachen: $6x^2 - 2x + 3x^2 = 9x^2 - 2x$."
+                    },
+                    section3: {
+                        title3: "Die Kettenregel & Trigonometrie",
+                        def3_1_title: "Die Kettenregel (Verkettete Funktionen)",
+                        def3_1: "Die Kettenregel wird für verkettete Funktionen $f(g(x))$ verwendet. Sie besagt, dass man die Ableitung der äußeren Funktion angewendet auf die innere nimmt, multipliziert mit der Ableitung der inneren.",
+                        math3_1: `\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)`,
+                        text3_1: "In Leibniz-Notation: $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$",
+                        ex3_1_title: "Beispiel (Kettenregel)",
+                        ex3_1_problem: "Finde $y'$ für $y = (3x^2 + 1)^5$",
+                        ex3_1_step1: "Äußere Ableitung (Potenzregel): $5(\\dots)^4$.",
+                        ex3_1_step2: "Innere Ableitung ($3x^2+1$): $6x$.",
+                        ex3_1_solution: "Multiplizieren: $y' = 5(3x^2 + 1)^4 \\cdot (6x) = 30x(3x^2 + 1)^4$.",
+                        def3_2_title: "Trigonometrische Ableitungen",
+                        list3_1: "$\\frac{d}{dx}(\\sin x) = \\cos x$",
+                        list3_2: "$\\frac{d}{dx}(\\cos x) = -\\sin x$",
+                        list3_3: "$\\frac{d}{dx}(\\tan x) = \\sec^2 x$",
+                        ex3_2_title: "Beispiel (Trig + Kettenregel)",
+                        ex3_2_problem: "Differenziere $y = \\cos(2x)$",
+                        ex3_2_step1: "Ableitung der äußeren $\\cos(u)$ ist $-\\sin(u)$.",
+                        ex3_2_step2: "Ableitung der inneren $2x$ ist $2$.",
+                        ex3_2_solution: "Ergebnis: $y' = -\\sin(2x) \\cdot 2 = -2\\sin(2x)$."
+                    },
+                    section4: {
+                        title4: "Implizite Differenziation",
+                        def4_1: "Explizite Funktionen werden als $y = f(x)$ geschrieben. Implizite Funktionen haben x und y gemischt, wie $x^2 + y^2 = 25$.",
+                        def4_2: "Technik:",
+                        cond4_1: "1. Differenziere beide Seiten der Gleichung nach x.",
+                        cond4_2: "2. Wende die Kettenregel auf y-Terme an (multipliziere mit $\\frac{dy}{dx}$ oder $y'$).",
+                        cond4_3: "3. Isoliere $\\frac{dy}{dx}$ algebraisch.",
+                        types_title: "Häufiger Fehler",
+                        type1: "Denke daran: $\\frac{d}{dx}(y^3) \\neq 3y^2$. Es ist $3y^2 \\cdot \\frac{dy}{dx}$, weil y eine Funktion von x ist.",
+                        ex4_1_title: "Beispiel (Kreisgleichung)",
+                        ex4_1_problem: "Finde $\\frac{dy}{dx}$ für $x^2 + y^2 = 25$",
+                        ex4_1_step1: "Differenziere beide Seiten: $\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)$.",
+                        ex4_1_step2: "Wende Kettenregel auf $y$ an: $2x + 2y \\cdot \\frac{dy}{dx} = 0$.",
+                        ex4_1_solution: "Löse nach $\\frac{dy}{dx}$ auf: $2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = -\\frac{x}{y}$."
+                    },
+                    example_section: {
+                        title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                        ex1: {
+                            title: "1. Verwendung der Quotientenregel",
+                            problem: "Finde die Ableitung von:",
+                            problem_math: `f(x) = \\frac{x^2 + 2}{3x - 1}`,
+                            step1_title: "Schritt 1: Identifiziere f(x) und g(x)",
+                            step1_desc: "Oben (High) = $x^2 + 2$, Unten (Low) = $3x - 1$.",
+                            step2_title: "Schritt 2: Komponenten differenzieren",
+                            step2_math: `High' = 2x \\quad \\text{und} \\quad Low' = 3`,
+                            step3_title: "Schritt 3: Formel anwenden",
+                            step3_desc: "$\\frac{Low \\cdot High' - High \\cdot Low'}{(Low)^2}$",
+                            step3_math: `f'(x) = \\frac{(3x - 1)(2x) - (x^2 + 2)(3)}{(3x - 1)^2}`,
+                            result_title: "Endergebnis (Vereinfacht)",
+                            result: `f'(x) = $\\frac{6x^2 - 2x - 3x^2 - 6}{(3x-1)^2} = \\frac{3x^2 - 2x - 6}{(3x - 1)^2}$`
+                        },
+                        ex2: {
+                            title: "2. Die Kettenregel mit Trigonometrie",
+                            problem: "Differenziere die Funktion:",
+                            problem_math: `y = \\cos(5x^3)`,
+                            step1_title: "Schritt 1: Äußere und innere Funktionen identifizieren",
+                            step1_desc: "Äußere Funktion ist $\\cos(u)$. Innere Funktion ist $u = 5x^3$.",
+                            step2_title: "Schritt 2: Äußere Funktion differenzieren",
+                            step2_desc: "Die Ableitung von $\\cos(u)$ ist $-\\sin(u)$. Das Innere bleibt gleich.",
+                            step2_math: `\\frac{dy}{du} = -\\sin(5x^3)`,
+                            step3_title: "Schritt 3: Innere Funktion differenzieren",
+                            step3_desc: "Die Ableitung von $5x^3$ ist $15x^2$.",
+                            step3_math: `\\frac{du}{dx} = 15x^2`,
+                            result_title: "Endergebnis",
+                            result: "Multiplizieren: $y' = -\\sin(5x^3) \\cdot 15x^2 = -15x^2 \\sin(5x^3)$"
+                        },
+                        ex3: {
+                            title: "3. Implizite Differenziation",
+                            problem: "Finde $\\frac{dy}{dx}$ für den Kreis:",
+                            problem_math: `x^2 + y^2 = 25`,
+                            step1_title: "Schritt 1: Beide Seiten differenzieren",
+                            step1_desc: "Differenziere nach x. Denke an die Kettenregel für y.",
+                            step1_math: `\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)`,
+                            step2_title: "Schritt 2: Ableitungen anwenden",
+                            step2_desc: "$x^2$ wird $2x$. $y^2$ wird $2y \\cdot \\frac{dy}{dx}$. Konstante wird 0.",
+                            step2_math: `2x + 2y \\frac{dy}{dx} = 0`,
+                            step3_title: "Schritt 3: dy/dx isolieren",
+                            step3_desc: "Subtrahiere 2x und teile durch 2y.",
+                            step3_math: `2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = \\frac{-2x}{2y}`,
+                            result_title: "Endergebnis",
+                            result: `$\\frac{dy}{dx} = -\\frac{x}{y}$`
+                        }
+                    }
+                }
+            }
+        },
     },
     pl: {
         limits: {
@@ -537,7 +1077,142 @@ export const calculusFundamentalsCourse = {
                     }
                 }
             }
-        }
+        },
+        derivatives: {
+            title: "Pochodne - Reguły i techniki różniczkowania",
+            description: "Badanie zmian: obliczanie chwilowych prędkości zmian i nachylenia stycznych.",
+            lessons: {
+                lesson2_title: "Reguły i techniki różniczkowania",
+                lesson2: {
+                    section1: {
+                        title1: "Definicja pochodnej",
+                        def1_1: "Geometrycznie pochodna reprezentuje nachylenie stycznej do krzywej w określonym punkcie. Fizycznie reprezentuje prędkość chwilową.",
+                        def1_2: "Formalna definicja graniczna: Pochodna f(x), oznaczana jako f'(x), jest zdefiniowana przez:",
+                        math1_1: `f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}`,
+                        text1_1: "pod warunkiem, że ta granica istnieje. Jeśli tak, f jest różniczkowalna w x.",
+                        def1_3: "Powszechna notacja:",
+                        list1_1: "Notacja Lagrange'a: $f'(x)$ lub $y'$",
+                        list1_2: "Notacja Leibniza: $\\frac{dy}{dx}$ lub $\\frac{d}{dx}[f(x)]$",
+                        theorem1_1: "Twierdzenie: Różniczkowalność implikuje ciągłość. Jeśli funkcja jest różniczkowalna w punkcie, musi być tam ciągła (bez ostrych narożników lub przerw).",
+                        plot1_title: "Przykład: Funkcja różniczkowalna (Ciągła i gładka)",
+                        plot1_desc: "Funkcja $f(x) = x^2$ jest różniczkowalna w x = 0. Jest gładka, bez przerw i narożników.",
+                        plot1_function: "x^2",
+                        plot1_point: 0,
+                        plot2_title: "Przykład: Funkcja nieróżniczkowalna (Ostry narożnik)",
+                        plot2_desc: "Funkcja $f(x) = |x|$ NIE jest różniczkowalna w x = 0. Ma ostry narożnik, mimo że jest ciągła.",
+                        plot2_function: "|x|",
+                        plot2_point: 0
+                    },
+                    section2: {
+                        title2: "Podstawowe reguły różniczkowania",
+                        desc2_1: "Używanie definicji granicznej jest żmudne. Używamy konkretnych reguł, aby szybko znajdować pochodne.",
+                        def2_1_title: "Reguły potęgi, sumy i stałej",
+                        list2_1: "1. Reguła potęgi: $\\frac{d}{dx}(x^n) = nx^{n-1}$",
+                        list2_2: "2. Stała wielokrotność: $\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$",
+                        list2_3: "3. Suma/Różnica: $\\frac{d}{dx}[f(x) \\pm g(x)] = f'(x) \\pm g'(x)$",
+                        ex2_1_title: "Przykład (Reguły potęgi i sumy)",
+                        ex2_1_problem: "Znajdź pochodną $f(x) = 2x^3 - 4x + 5$",
+                        ex2_1_step1: "Zastosuj regułę potęgi do wyrazów: $\\frac{d}{dx}(2x^3) = 6x^2$ i $\\frac{d}{dx}(-4x) = -4$.",
+                        ex2_1_step2: "Reguła stałej: $\\frac{d}{dx}(5) = 0$.",
+                        ex2_1_solution: "Wynik: $f'(x) = 6x^2 - 4$",
+                        def2_2_title: "Reguły iloczynu i ilorazu",
+                        text2_1: "Używane, gdy funkcje są mnożone lub dzielone.",
+                        list2_4: "Reguła iloczynu: $\\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$",
+                        list2_5: "Reguła ilorazu: $\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$",
+                        text2_2: "Mnemotechnika dla ilorazu: 'Dół d-Góra minus Góra d-Dół, przez Dół Dół'.",
+                        ex2_2_title: "Przykład (Reguła iloczynu)",
+                        ex2_2_problem: "Zróżniczkuj $y = x^2(3x - 1)$",
+                        ex2_2_step1: "Zidentyfikuj części: $f = x^2$ (więc $f' = 2x$) i $g = 3x-1$ (więc $g' = 3$).",
+                        ex2_2_step2: "Zastosuj wzór $f'g + fg'$: $(2x)(3x-1) + (x^2)(3)$.",
+                        ex2_2_solution: "Uprość: $6x^2 - 2x + 3x^2 = 9x^2 - 2x$."
+                    },
+                    section3: {
+                        title3: "Reguła łańcuchowa i trygonometria",
+                        def3_1_title: "Reguła łańcuchowa (Funkcje złożone)",
+                        def3_1: "Reguła łańcuchowa jest używana dla funkcji złożonych, $f(g(x))$. Mówi ona, że bierzesz pochodną funkcji zewnętrznej zastosowanej do wewnętrznej, pomnożoną przez pochodną wewnętrznej.",
+                        math3_1: `\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)`,
+                        text3_1: "W notacji Leibniza: $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$",
+                        ex3_1_title: "Przykład (Reguła łańcuchowa)",
+                        ex3_1_problem: "Znajdź $y'$ dla $y = (3x^2 + 1)^5$",
+                        ex3_1_step1: "Pochodna zewnętrzna (Reguła potęgi): $5(\\dots)^4$.",
+                        ex3_1_step2: "Pochodna wewnętrzna ($3x^2+1$): $6x$.",
+                        ex3_1_solution: "Pomnóż je: $y' = 5(3x^2 + 1)^4 \\cdot (6x) = 30x(3x^2 + 1)^4$.",
+                        def3_2_title: "Pochodne trygonometryczne",
+                        list3_1: "$\\frac{d}{dx}(\\sin x) = \\cos x$",
+                        list3_2: "$\\frac{d}{dx}(\\cos x) = -\\sin x$",
+                        list3_3: "$\\frac{d}{dx}(\\tan x) = \\sec^2 x$",
+                        ex3_2_title: "Przykład (Trygonometria + Reguła łańcuchowa)",
+                        ex3_2_problem: "Zróżniczkuj $y = \\cos(2x)$",
+                        ex3_2_step1: "Pochodna zewnętrznej $\\cos(u)$ to $-\\sin(u)$.",
+                        ex3_2_step2: "Pochodna wewnętrznej $2x$ to $2$.",
+                        ex3_2_solution: "Wynik: $y' = -\\sin(2x) \\cdot 2 = -2\\sin(2x)$."
+                    },
+                    section4: {
+                        title4: "Różniczkowanie uwikłane",
+                        def4_1: "Funkcje jawne są zapisywane jako $y = f(x)$. Funkcje uwikłane mają x i y wymieszane, jak $x^2 + y^2 = 25$.",
+                        def4_2: "Technika:",
+                        cond4_1: "1. Zróżniczkuj obie strony równania względem x.",
+                        cond4_2: "2. Zastosuj regułę łańcuchową do wyrazów z y (pomnóż przez $\\frac{dy}{dx}$ lub $y'$).",
+                        cond4_3: "3. Wyizoluj $\\frac{dy}{dx}$ algebraicznie.",
+                        types_title: "Częsty błąd",
+                        type1: "Pamiętaj: $\\frac{d}{dx}(y^3) \\neq 3y^2$. To jest $3y^2 \\cdot \\frac{dy}{dx}$, ponieważ y jest funkcją x.",
+                        ex4_1_title: "Przykład (Równanie okręgu)",
+                        ex4_1_problem: "Znajdź $\\frac{dy}{dx}$ dla $x^2 + y^2 = 25$",
+                        ex4_1_step1: "Zróżniczkuj obie strony: $\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)$.",
+                        ex4_1_step2: "Zastosuj regułę łańcuchową do $y$: $2x + 2y \\cdot \\frac{dy}{dx} = 0$.",
+                        ex4_1_solution: "Rozwiąż dla $\\frac{dy}{dx}$: $2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = -\\frac{x}{y}$."
+                    },
+                    example_section: {
+                        title_ex: "Przykłady z rozwiązaniami krok po kroku",
+                        ex1: {
+                            title: "1. Użycie reguły ilorazu",
+                            problem: "Znajdź pochodną:",
+                            problem_math: `f(x) = \\frac{x^2 + 2}{3x - 1}`,
+                            step1_title: "Krok 1: Zidentyfikuj f(x) i g(x)",
+                            step1_desc: "Góra (High) = $x^2 + 2$, Dół (Low) = $3x - 1$.",
+                            step2_title: "Krok 2: Zróżniczkuj składniki",
+                            step2_math: `High' = 2x \\quad \\text{i} \\quad Low' = 3`,
+                            step3_title: "Krok 3: Zastosuj wzór",
+                            step3_desc: "$\\frac{Low \\cdot High' - High \\cdot Low'}{(Low)^2}$",
+                            step3_math: `f'(x) = \\frac{(3x - 1)(2x) - (x^2 + 2)(3)}{(3x - 1)^2}`,
+                            result_title: "Odpowiedź końcowa (Uproszczona)",
+                            result: `f'(x) = $\\frac{6x^2 - 2x - 3x^2 - 6}{(3x-1)^2} = \\frac{3x^2 - 2x - 6}{(3x - 1)^2}$`
+                        },
+                        ex2: {
+                            title: "2. Reguła łańcuchowa z trygonometrią",
+                            problem: "Zróżniczkuj funkcję:",
+                            problem_math: `y = \\cos(5x^3)`,
+                            step1_title: "Krok 1: Zidentyfikuj funkcje zewnętrzną i wewnętrzną",
+                            step1_desc: "Funkcja zewnętrzna to $\\cos(u)$. Funkcja wewnętrzna to $u = 5x^3$.",
+                            step2_title: "Krok 2: Zróżniczkuj funkcję zewnętrzną",
+                            step2_desc: "Pochodna $\\cos(u)$ to $-\\sin(u)$. Zachowaj wnętrze bez zmian.",
+                            step2_math: `\\frac{dy}{du} = -\\sin(5x^3)`,
+                            step3_title: "Krok 3: Zróżniczkuj funkcję wewnętrzną",
+                            step3_desc: "Pochodna $5x^3$ to $15x^2$.",
+                            step3_math: `\\frac{du}{dx} = 15x^2`,
+                            result_title: "Odpowiedź końcowa",
+                            result: "Pomnóż je: $y' = -\\sin(5x^3) \\cdot 15x^2 = -15x^2 \\sin(5x^3)$"
+                        },
+                        ex3: {
+                            title: "3. Różniczkowanie uwikłane",
+                            problem: "Znajdź $\\frac{dy}{dx}$ dla okręgu:",
+                            problem_math: `x^2 + y^2 = 25`,
+                            step1_title: "Krok 1: Zróżniczkuj obie strony",
+                            step1_desc: "Zróżniczkuj względem x. Pamiętaj o regule łańcuchowej dla y.",
+                            step1_math: `\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)`,
+                            step2_title: "Krok 2: Zastosuj pochodne",
+                            step2_desc: "$x^2$ staje się $2x$. $y^2$ staje się $2y \\cdot \\frac{dy}{dx}$. Stała staje się 0.",
+                            step2_math: `2x + 2y \\frac{dy}{dx} = 0`,
+                            step3_title: "Krok 3: Wyizoluj dy/dx",
+                            step3_desc: "Odejmij 2x i podziel przez 2y.",
+                            step3_math: `2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = \\frac{-2x}{2y}`,
+                            result_title: "Odpowiedź końcowa",
+                            result: `$\\frac{dy}{dx} = -\\frac{x}{y}$`
+                        }
+                    }
+                }
+            }
+        },
     },
     ro: {
         limits: {
@@ -645,6 +1320,141 @@ export const calculusFundamentalsCourse = {
                     }
                 }
             }
-        }
+        },
+        derivatives: {
+            title: "Derivate - Reguli și Tehnici de Diferențiere",
+            description: "Studiul modului în care se schimbă lucrurile: calcularea ratelor instantanee de schimbare și pantele dreptelor tangente.",
+            lessons: {
+                lesson2_title: "Reguli și Tehnici de Diferențiere",
+                lesson2: {
+                    section1: {
+                        title1: "Definiția Derivatei",
+                        def1_1: "Geometric, derivata reprezintă panta dreptei tangente la o curbă într-un punct specific. Fizic, reprezintă viteza instantanee.",
+                        def1_2: "Definiția Formală cu Limită: Derivata lui f(x), notată ca f'(x), este definită prin:",
+                        math1_1: `f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}`,
+                        text1_1: "cu condiția ca această limită să existe. Dacă există, f se numește diferențiabilă în x.",
+                        def1_3: "Notație Comună:",
+                        list1_1: "Notația lui Lagrange: $f'(x)$ sau $y'$",
+                        list1_2: "Notația lui Leibniz: $\\frac{dy}{dx}$ sau $\\frac{d}{dx}[f(x)]$",
+                        theorem1_1: "Teoremă: Diferențiabilitatea implică Continuitate. Dacă o funcție este diferențiabilă într-un punct, ea trebuie să fie continuă acolo (fără colțuri ascuțite sau întreruperi).",
+                        plot1_title: "Exemplu: Funcție Diferențiabilă (Continuă și Netedă)",
+                        plot1_desc: "Funcția $f(x) = x^2$ este diferențiabilă în x = 0. Este netedă, fără întreruperi sau colțuri.",
+                        plot1_function: "x^2",
+                        plot1_point: 0,
+                        plot2_title: "Exemplu: Funcție Nediferențiabilă (Colț Ascuțit)",
+                        plot2_desc: "Funcția $f(x) = |x|$ NU este diferențiabilă în x = 0. Are un colț ascuțit, chiar dacă este continuă.",
+                        plot2_function: "|x|",
+                        plot2_point: 0
+                    },
+                    section2: {
+                        title2: "Reguli de Bază de Diferențiere",
+                        desc2_1: "Folosirea definiției cu limită este laborioasă. Folosim reguli specifice pentru a găsi derivatele rapid.",
+                        def2_1_title: "Regulile Puterii, Sumei și Constantei",
+                        list2_1: "1. Regula Puterii: $\\frac{d}{dx}(x^n) = nx^{n-1}$",
+                        list2_2: "2. Multiplu Constant: $\\frac{d}{dx}[c \\cdot f(x)] = c \\cdot f'(x)$",
+                        list2_3: "3. Sumă/Diferență: $\\frac{d}{dx}[f(x) \\pm g(x)] = f'(x) \\pm g'(x)$",
+                        ex2_1_title: "Exemplu (Regulile Puterii și Sumei)",
+                        ex2_1_problem: "Găsește derivata funcției $f(x) = 2x^3 - 4x + 5$",
+                        ex2_1_step1: "Aplică Regula Puterii termenilor: $\\frac{d}{dx}(2x^3) = 6x^2$ și $\\frac{d}{dx}(-4x) = -4$.",
+                        ex2_1_step2: "Regula Constantei: $\\frac{d}{dx}(5) = 0$.",
+                        ex2_1_solution: "Rezultat: $f'(x) = 6x^2 - 4$",
+                        def2_2_title: "Regulile Produsului și Câtului",
+                        text2_1: "Folosite atunci când funcțiile sunt înmulțite sau împărțite.",
+                        list2_4: "Regula Produsului: $\\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$",
+                        list2_5: "Regula Câtului: $\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$",
+                        text2_2: "Mnemonic pentru Cât: 'Jos d-Sus minus Sus d-Jos, supra Jos Jos'.",
+                        ex2_2_title: "Exemplu (Regula Produsului)",
+                        ex2_2_problem: "Diferențiază $y = x^2(3x - 1)$",
+                        ex2_2_step1: "Identifică părțile: $f = x^2$ (deci $f' = 2x$) și $g = 3x-1$ (deci $g' = 3$).",
+                        ex2_2_step2: "Aplică formula $f'g + fg'$: $(2x)(3x-1) + (x^2)(3)$.",
+                        ex2_2_solution: "Simplifică: $6x^2 - 2x + 3x^2 = 9x^2 - 2x$."
+                    },
+                    section3: {
+                        title3: "Regula Înlănțuită și Trigonometria",
+                        def3_1_title: "Regula Înlănțuită (Funcții Compuse)",
+                        def3_1: "Regula Înlănțuită este folosită pentru funcții compuse, $f(g(x))$. Aceasta afirmă că iei derivata funcției exterioare aplicată celei interioare, înmulțită cu derivata celei interioare.",
+                        math3_1: `\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)`,
+                        text3_1: "În notația lui Leibniz: $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$",
+                        ex3_1_title: "Exemplu (Regula Înlănțuită)",
+                        ex3_1_problem: "Găsește $y'$ pentru $y = (3x^2 + 1)^5$",
+                        ex3_1_step1: "Derivata exterioară (Regula Puterii): $5(\\dots)^4$.",
+                        ex3_1_step2: "Derivata interioară ($3x^2+1$): $6x$.",
+                        ex3_1_solution: "Înmulțește-le: $y' = 5(3x^2 + 1)^4 \\cdot (6x) = 30x(3x^2 + 1)^4$.",
+                        def3_2_title: "Derivate Trigonometrice",
+                        list3_1: "$\\frac{d}{dx}(\\sin x) = \\cos x$",
+                        list3_2: "$\\frac{d}{dx}(\\cos x) = -\\sin x$",
+                        list3_3: "$\\frac{d}{dx}(\\tan x) = \\sec^2 x$",
+                        ex3_2_title: "Exemplu (Trig + Regula Înlănțuită)",
+                        ex3_2_problem: "Diferențiază $y = \\cos(2x)$",
+                        ex3_2_step1: "Derivata exterioarei $\\cos(u)$ este $-\\sin(u)$.",
+                        ex3_2_step2: "Derivata interioarei $2x$ este $2$.",
+                        ex3_2_solution: "Rezultat: $y' = -\\sin(2x) \\cdot 2 = -2\\sin(2x)$."
+                    },
+                    section4: {
+                        title4: "Derivarea Implicită",
+                        def4_1: "Funcțiile explicite sunt scrise ca $y = f(x)$. Funcțiile implicite au x și y amestecate, cum ar fi $x^2 + y^2 = 25$.",
+                        def4_2: "Tehnică:",
+                        cond4_1: "1. Diferențiază ambele părți ale ecuației în raport cu x.",
+                        cond4_2: "2. Aplică Regula Înlănțuită pentru termenii cu y (înmulțește cu $\\frac{dy}{dx}$ sau $y'$).",
+                        cond4_3: "3. Izolează $\\frac{dy}{dx}$ algebric.",
+                        types_title: "Greșeală Comună",
+                        type1: "Reține: $\\frac{d}{dx}(y^3) \\neq 3y^2$. Este $3y^2 \\cdot \\frac{dy}{dx}$ deoarece y este o funcție de x.",
+                        ex4_1_title: "Exemplu (Ecuația Cercului)",
+                        ex4_1_problem: "Găsește $\\frac{dy}{dx}$ pentru $x^2 + y^2 = 25$",
+                        ex4_1_step1: "Diferențiază ambele părți: $\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)$.",
+                        ex4_1_step2: "Aplică Regula Înlănțuită la $y$: $2x + 2y \\cdot \\frac{dy}{dx} = 0$.",
+                        ex4_1_solution: "Rezolvă pentru $\\frac{dy}{dx}$: $2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = -\\frac{x}{y}$."
+                    },
+                    example_section: {
+                        title_ex: "Exemple cu Soluții Pas cu Pas",
+                        ex1: {
+                            title: "1. Folosirea Regulii Câtului",
+                            problem: "Găsește derivata pentru:",
+                            problem_math: `f(x) = \\frac{x^2 + 2}{3x - 1}`,
+                            step1_title: "Pasul 1: Identifică f(x) și g(x)",
+                            step1_desc: "Sus (High) = $x^2 + 2$, Jos (Low) = $3x - 1$.",
+                            step2_title: "Pasul 2: Diferențiază Componentele",
+                            step2_math: `High' = 2x \\quad \\text{și} \\quad Low' = 3`,
+                            step3_title: "Pasul 3: Aplică Formula",
+                            step3_desc: "$\\frac{Low \\cdot High' - High \\cdot Low'}{(Low)^2}$",
+                            step3_math: `f'(x) = \\frac{(3x - 1)(2x) - (x^2 + 2)(3)}{(3x - 1)^2}`,
+                            result_title: "Răspuns Final (Simplificat)",
+                            result: `f'(x) = $\\frac{6x^2 - 2x - 3x^2 - 6}{(3x-1)^2} = \\frac{3x^2 - 2x - 6}{(3x - 1)^2}$`
+                        },
+                        ex2: {
+                            title: "2. Regula Înlănțuită cu Trigonometrie",
+                            problem: "Diferențiază funcția:",
+                            problem_math: `y = \\cos(5x^3)`,
+                            step1_title: "Pasul 1: Identifică Funcțiile Exterioară și Interioară",
+                            step1_desc: "Funcția exterioară este $\\cos(u)$. Funcția interioară este $u = 5x^3$.",
+                            step2_title: "Pasul 2: Diferențiază Funcția Exterioară",
+                            step2_desc: "Derivata lui $\\cos(u)$ este $-\\sin(u)$. Păstrează interiorul la fel.",
+                            step2_math: `\\frac{dy}{du} = -\\sin(5x^3)`,
+                            step3_title: "Pasul 3: Diferențiază Funcția Interioară",
+                            step3_desc: "Derivata lui $5x^3$ este $15x^2$.",
+                            step3_math: `\\frac{du}{dx} = 15x^2`,
+                            result_title: "Răspuns Final",
+                            result: "Înmulțește-le: $y' = -\\sin(5x^3) \\cdot 15x^2 = -15x^2 \\sin(5x^3)$"
+                        },
+                        ex3: {
+                            title: "3. Derivarea Implicită",
+                            problem: "Găsește $\\frac{dy}{dx}$ pentru cercul:",
+                            problem_math: `x^2 + y^2 = 25`,
+                            step1_title: "Pasul 1: Diferențiază Ambele Părți",
+                            step1_desc: "Diferențiază în raport cu x. Amintește-ți Regula Înlănțuită pentru y.",
+                            step1_math: `\\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(25)`,
+                            step2_title: "Pasul 2: Aplică Derivatele",
+                            step2_desc: "$x^2$ devine $2x$. $y^2$ devine $2y \\cdot \\frac{dy}{dx}$. Constanta devine 0.",
+                            step2_math: `2x + 2y \\frac{dy}{dx} = 0`,
+                            step3_title: "Pasul 3: Izolează dy/dx",
+                            step3_desc: "Scade 2x și împarte la 2y.",
+                            step3_math: `2y \\frac{dy}{dx} = -2x \\implies \\frac{dy}{dx} = \\frac{-2x}{2y}`,
+                            result_title: "Răspuns Final",
+                            result: `$\\frac{dy}{dx} = -\\frac{x}{y}$`
+                        }
+                    }
+                }
+            }
+        },
     }
 };

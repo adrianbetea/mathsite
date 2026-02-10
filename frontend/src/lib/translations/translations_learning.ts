@@ -19,14 +19,14 @@ export const learningTranslations = {
         description: "From limits to integrals - complete examples and explanations",
         topics: "Topics: Limits, Derivatives, Integration, Series, Differential Equations",
         level: "Beginner to Intermediate",
-        materials: "60+ Examples"
+        materials: "20+ Examples"
       },
       polynomials: {
         title: "Polynomial Mathematics",
         description: "Deep dive into polynomial functions with practical examples",
         topics: "Topics: Polynomial Operations, Factoring, Root Finding, Polynomial Equations",
         level: "Beginner",
-        materials: "40+ Examples"
+        materials: "20+ Examples"
       }
     },
     features: {

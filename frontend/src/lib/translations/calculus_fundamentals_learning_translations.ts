@@ -7,7 +7,7 @@ export const calculusFundamentalsLearningTranslations = {
     hero: {
       title: "Learn Calculus Step by Step",
       description: "Comprehensive examples and explanations covering limits, derivatives, integrals, and more",
-      badge: "60+ Examples"
+      badge: "20+ Examples"
     },
     topicsCovered: "Topics Covered",
     sections: {
@@ -67,7 +67,7 @@ export const calculusFundamentalsLearningTranslations = {
     hero: {
       title: "Învață Calcul Pas cu Pas",
       description: "Exemple și explicații cuprinzătoare acoperind limite, derivate, integrale și multe altele",
-      badge: "60+ Exemple"
+      badge: "20+ Exemple"
     },
     topicsCovered: "Subiecte Acoperite",
     sections: {
@@ -127,7 +127,7 @@ export const calculusFundamentalsLearningTranslations = {
     hero: {
       title: "Aprende Cálculo Paso a Paso",
       description: "Ejemplos y explicaciones completas que cubren límites, derivadas, integrales y más",
-      badge: "60+ Ejemplos"
+      badge: "20+ Ejemplos"
     },
     topicsCovered: "Temas Cubiertos",
     sections: {
@@ -187,7 +187,7 @@ export const calculusFundamentalsLearningTranslations = {
     hero: {
       title: "Apprenez le Calcul Étape par Étape",
       description: "Exemples et explications complètes couvrant les limites, dérivées, intégrales et plus",
-      badge: "60+ Exemples"
+      badge: "20+ Exemples"
     },
     topicsCovered: "Sujets Couvert",
     sections: {
@@ -247,7 +247,7 @@ export const calculusFundamentalsLearningTranslations = {
     hero: {
       title: "Lernen Sie Analysis Schritt für Schritt",
       description: "Umfassende Beispiele und Erklärungen zu Grenzwerten, Ableitungen, Integralen und mehr",
-      badge: "60+ Beispiele"
+      badge: "20+ Beispiele"
     },
     topicsCovered: "Abgedeckte Themen",
     sections: {
@@ -307,7 +307,7 @@ export const calculusFundamentalsLearningTranslations = {
     hero: {
       title: "Ucz Się Analizy Krok po Kroku",
       description: "Kompleksowe przykłady i wyjaśnienia obejmujące granice, pochodne, całki i więcej",
-      badge: "60+ Przykładów"
+      badge: "20+ Przykładów"
     },
     topicsCovered: "Omówione Tematy",
     sections: {
