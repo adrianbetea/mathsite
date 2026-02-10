@@ -23,6 +23,7 @@ const CalculusLearning = () => {
   const lesson2 = (course as any).derivatives.lessons.lesson2;
   const lesson3 = (course as any).applications_derivatives.lessons.lesson3;
   const lesson4 = (course as any).integration.lessons.lesson4;
+  const lesson5 = (course as any).sequences_series.lessons.lesson5;
 
   const scrollToLesson = (lessonId: string) => {
     const element = document.getElementById(lessonId);
@@ -696,7 +697,7 @@ const CalculusLearning = () => {
                           <line x1="-2" y1="0" x2="2" y2="0" stroke="rgb(34, 197, 94)" strokeWidth="0.1" strokeDasharray="0.2,0.2" />
                         </svg>
                       </div>
-                      <p className="text-xs text-center mt-2 text-green-600 dark:text-green-400">✓ Differentiable (smooth curve)</p>
+                      <p className="text-xs text-center mt-2 text-green-600 dark:text-green-400">✓ {lesson2.section1.plot1_simple_desc}</p>
                     </div>
 
                     {/* Plot 2: Non-Differentiable Function */}
@@ -726,7 +727,7 @@ const CalculusLearning = () => {
                           <line x1="0" y1="0" x2="2" y2="-2" stroke="rgb(251, 146, 60)" strokeWidth="0.1" strokeDasharray="0.2,0.2" />
                         </svg>
                       </div>
-                      <p className="text-xs text-center mt-2 text-red-600 dark:text-red-400">✗ Not differentiable (sharp corner)</p>
+                      <p className="text-xs text-center mt-2 text-red-600 dark:text-red-400">X {lesson2.section1.plot2_simple_desc}</p>
                     </div>
                   </div>
                 )}
@@ -1490,10 +1491,6 @@ const CalculusLearning = () => {
         <div id="lesson-integration" className="max-w-4xl mx-auto mb-12">
           <Badge className="mb-3">Lesson 4</Badge>
           <div className="flex items-center gap-3 mb-6">
-            
-            <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center text-2xl font-bold">
-              ∫
-            </div>
             <h2 className="text-2xl sm:text-3xl font-bold">{(course as any).integration.lessons.lesson4_title}</h2>
           </div>
           
@@ -1679,10 +1676,10 @@ const CalculusLearning = () => {
                         <line x1="2" y1="3" x2="2" y2="1" stroke="rgb(34, 197, 94)" strokeWidth="0.04" strokeDasharray="0.05,0.05" />
                         
                         {/* Label */}
-                        <text x="0.8" y="2.2" fontSize="0.25" fill="rgb(34, 197, 94)" fontWeight="bold">Area=2</text>
+                        <text x="0.8" y="2.2" fontSize="0.25" fill="rgb(34, 197, 94)" fontWeight="bold">{lesson4.section3.plot3_description}</text>
                       </svg>
                     </div>
-                    <p className="text-xs text-center mt-2 text-green-600 dark:text-green-400">f(x) = x forms a triangle</p>
+                    <p className="text-xs text-center mt-2 text-green-600 dark:text-green-400">f(x) = {lesson4.section3.plot3_description}</p>
                   </div>
                 )}
 
@@ -1964,6 +1961,361 @@ const CalculusLearning = () => {
                     <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
                       <p className="font-semibold text-lg text-green-700 dark:text-green-400">{lesson4.example_section.ex3.result_title}</p>
                       <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson4.example_section.ex3.result) }} />
+                    </div>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+
+        {/* Lesson 5: Series & Sequences */}
+        <div id="lesson-series" className="max-w-4xl mx-auto mb-12">
+          <Badge className="mb-3">Lesson 4</Badge>
+          <div className="flex items-center gap-3 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold">{(course as any).sequences_series.lessons.lesson5_title}</h2>
+          </div>
+          
+          <Accordion type="single" collapsible className="space-y-4">
+            {/* Section 1: Sequences */}
+            <AccordionItem value="section5-1" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="font-semibold text-lg">{lesson5.section1.title1}</span>
+              </AccordionTrigger>
+              <AccordionContent className="pt-4 space-y-4">
+                <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.def1_1) }} />
+
+                {/* Sequence Convergence Plot */}
+                {lesson5.section1.plot1_title && (
+                  <div className="border rounded-lg p-4 bg-card mt-4 max-w-2xl mx-auto">
+                    <h5 className="font-semibold text-sm mb-2">{lesson5.section1.plot1_title}</h5>
+                    <p className="text-xs text-muted-foreground mb-3" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.plot1_desc) }} />
+                    <div className="w-full bg-muted/20 rounded-lg flex items-center justify-center p-4">
+                      <svg viewBox="-1 0 12 3" className="w-full max-w-2xl" preserveAspectRatio="xMidYMid meet">
+                        {/* Axes */}
+                        <line x1="0" y1="2.5" x2="11" y2="2.5" stroke="currentColor" strokeWidth="0.03" />
+                        <line x1="0" y1="0" x2="0" y2="2.8" stroke="currentColor" strokeWidth="0.03" />
+                        
+                        {/* Axis labels */}
+                        <text x="10.5" y="2.8" fontSize="0.25" fill="currentColor">n</text>
+                        <text x="0.2" y="0.3" fontSize="0.25" fill="currentColor">aₙ</text>
+                        
+                        {/* Limit line at y=1 */}
+                        <line x1="0" y1="1.5" x2="11" y2="1.5" stroke="rgb(239, 68, 68)" strokeWidth="0.04" strokeDasharray="0.1,0.1" />
+                        <text x="9.5" y="1.3" fontSize="0.25" fill="rgb(239, 68, 68)">L=1</text>
+                        
+                        {/* Sequence points: a_n = 1 + 1/n */}
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => {
+                          const an = 1 + 1/n;
+                          const y = 2.5 - an; // flip for SVG
+                          return (
+                            <circle key={n} cx={n} cy={y} r="0.08" fill="rgb(59, 130, 246)" />
+                          );
+                        })}
+                        
+                        {/* X-axis ticks */}
+                        <line x1="2" y1="2.5" x2="2" y2="2.6" stroke="currentColor" strokeWidth="0.02" />
+                        <text x="1.9" y="2.85" fontSize="0.2" fill="currentColor">2</text>
+                        <line x1="5" y1="2.5" x2="5" y2="2.6" stroke="currentColor" strokeWidth="0.02" />
+                        <text x="4.9" y="2.85" fontSize="0.2" fill="currentColor">5</text>
+                        <line x1="10" y1="2.5" x2="10" y2="2.6" stroke="currentColor" strokeWidth="0.02" />
+                        <text x="9.8" y="2.85" fontSize="0.2" fill="currentColor">10</text>
+                        
+                        {/* Y-axis ticks */}
+                        <line x1="0" y1="1.5" x2="-0.1" y2="1.5" stroke="currentColor" strokeWidth="0.02" />
+                        <text x="-0.5" y="1.6" fontSize="0.2" fill="currentColor">1</text>
+                        <line x1="0" y1="0.5" x2="-0.1" y2="0.5" stroke="currentColor" strokeWidth="0.02" />
+                        <text x="-0.5" y="0.6" fontSize="0.2" fill="currentColor">2</text>
+                      </svg>
+                    </div>
+                    <p className="text-xs text-center mt-2 text-blue-600 dark:text-blue-400">{lesson5.section1.plot1_description}</p>
+                  </div>
+                )}
+
+                <h4 className="font-semibold text-lg mt-4">{lesson5.section1.def1_2}</h4>
+                <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.text1_1) }} />
+                <div className="my-4 p-4 bg-muted/30 rounded-lg overflow-x-auto">
+                  <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section1.math1_1) }} />
+                </div>
+                <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section1.text1_2) }} />
+                
+                <div className="mt-4 p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
+                  <p className="text-muted-foreground text-lg">{lesson5.section1.theorem1_1}</p>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Section 2: Series Tests */}
+            <AccordionItem value="section5-2" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="font-semibold text-lg">{lesson5.section2.title2}</span>
+              </AccordionTrigger>
+              <AccordionContent className="pt-4 space-y-4">
+                <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.def2_1) }} />
+                <h4 className="font-semibold text-lg mt-4">{lesson5.section2.def2_2_title}</h4>
+                <ul className="list-none space-y-3 ml-0">
+                  <li className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.list2_1) }} />
+                  <li className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.list2_2) }} />
+                  
+                  {/* Geometric Example inline */}
+                  <div className="my-4 p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg ml-6">
+                    <h5 className="font-semibold text-blue-700 dark:text-blue-400 mb-2">{lesson5.section2.ex2_1_title}</h5>
+                    <p className="text-muted-foreground text-lg mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.ex2_1_problem) }} />
+                    <div className="space-y-1">
+                      <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.ex2_1_step1) }} />
+                      <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.ex2_1_step2) }} />
+                      <p className="font-semibold text-lg text-green-700 dark:text-green-400 mt-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.ex2_1_solution) }} />
+                    </div>
+                  </div>
+                  
+                  <li className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.list2_3) }} />
+                  <li className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section2.list2_4) }} />
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Section 3: Power Series */}
+            <AccordionItem value="section5-3" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="font-semibold text-lg">{lesson5.section3.title3}</span>
+              </AccordionTrigger>
+              <AccordionContent className="pt-4 space-y-4">
+                <p className="text-muted-foreground text-lg">{lesson5.section3.def3_1}</p>
+                <div className="my-4 p-4 bg-muted/30 rounded-lg overflow-x-auto">
+                  <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section3.math3_1) }} />
+                </div>
+                <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.text3_1) }} />
+                
+                <h4 className="font-semibold text-lg mt-4">{lesson5.section3.def3_2}</h4>
+                <p className="text-muted-foreground text-lg">{lesson5.section3.text3_2}</p>
+
+                {/* Convergence Interval Plot */}
+                {lesson5.section3.plot3_title && (
+                  <div className="border rounded-lg p-4 bg-card mt-4 max-w-lg mx-auto">
+                    <h5 className="font-semibold text-sm mb-2">{lesson5.section3.plot3_title}</h5>
+                    <p className="text-xs text-muted-foreground mb-3">{lesson5.section3.plot3_desc}</p>
+                    <div className="w-full bg-muted/20 rounded-lg flex items-center justify-center p-4">
+                      <svg viewBox="-2.5 -0.5 5 2" className="w-full max-w-lg" preserveAspectRatio="xMidYMid meet">
+                        {/* Number line */}
+                        <line x1="-2.5" y1="0.5" x2="2.5" y2="0.5" stroke="currentColor" strokeWidth="0.04" />
+                        
+                        {/* Convergence interval (green) */}
+                        <line x1="-1" y1="0.5" x2="1" y2="0.5" stroke="rgb(34, 197, 94)" strokeWidth="0.15" />
+                        
+                        {/* Center point (a=0) */}
+                        <circle cx="0" cy="0.5" r="0.08" fill="black" />
+                        <text x="0.15" y="0.3" fontSize="0.25" fill="currentColor">a</text>
+                        
+                        {/* Left endpoint (a-R) */}
+                        <circle cx="-1" cy="0.5" r="0.08" fill="rgb(239, 68, 68)" />
+                        <text x="-1.3" y="0.3" fontSize="0.25" fill="rgb(239, 68, 68)">a-R</text>
+                        
+                        {/* Right endpoint (a+R) */}
+                        <circle cx="1" cy="0.5" r="0.08" fill="rgb(239, 68, 68)" />
+                        <text x="0.8" y="0.3" fontSize="0.25" fill="rgb(239, 68, 68)">a+R</text>
+                        
+                        {/* Labels */}
+                        <text x="-0.3" y="0.9" fontSize="0.2" fill="rgb(34, 197, 94)" fontWeight="bold">{lesson5.section3.plot3_label_center}</text>
+                        <text x="-2.3" y="0.9" fontSize="0.2" fill="rgb(239, 68, 68)">{lesson5.section3.plot3_label_left}</text>
+                        <text x="1.5" y="0.9" fontSize="0.2" fill="rgb(239, 68, 68)">{lesson5.section3.plot3_label_right}</text>
+                      </svg>
+                    </div>
+                    <p className="text-xs text-center mt-2 text-green-600 dark:text-green-400">{lesson5.section3.plot3_description}</p>
+                  </div>
+                )}
+
+                {/* Power Series Example inline */}
+                <div className="my-4 p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg">
+                  <h5 className="font-semibold text-blue-700 dark:text-blue-400 mb-2">{lesson5.section3.ex3_1_title}</h5>
+                  <p className="text-muted-foreground text-lg mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.ex3_1_problem) }} />
+                  <div className="space-y-1">
+                    <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.ex3_1_step1) }} />
+                    <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.ex3_1_step2) }} />
+                    <p className="font-semibold text-lg text-green-700 dark:text-green-400 mt-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section3.ex3_1_solution) }} />
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Section 4: Taylor & Maclaurin Series */}
+            <AccordionItem value="section5-4" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="font-semibold text-lg">{lesson5.section4.title4}</span>
+              </AccordionTrigger>
+              <AccordionContent className="pt-4 space-y-4">
+                <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.def4_1) }} />
+
+                {/* Taylor Approximation Plot */}
+                {lesson5.section4.plot4_title && (
+                  <div className="border rounded-lg p-4 bg-card mt-4 max-w-lg mx-auto">
+                    <h5 className="font-semibold text-sm mb-2">{lesson5.section4.plot4_title}</h5>
+                    <p className="text-xs text-muted-foreground mb-3" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.plot4_desc) }} />
+                    <div className="w-full bg-muted/20 rounded-lg flex items-center justify-center p-4">
+                      <svg viewBox="-7 -1.5 14 3" className="w-full max-w-lg" preserveAspectRatio="xMidYMid meet">
+                        {/* Axes */}
+                        <line x1="-7" y1="0" x2="7" y2="0" stroke="currentColor" strokeWidth="0.03" />
+                        <line x1="0" y1="-1.5" x2="0" y2="1.5" stroke="currentColor" strokeWidth="0.03" />
+                        
+                        {/* sin(x) - red curve */}
+                        <path
+                          d={Array.from({ length: 141 }, (_, i) => {
+                            const x = (i - 70) / 10;
+                            const y = -Math.sin(x);
+                            return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
+                          }).join(' ')}
+                          stroke="rgb(239, 68, 68)"
+                          strokeWidth="0.08"
+                          fill="none"
+                        />
+                        
+                        {/* Approximation n=1: x (blue line) */}
+                        <line x1="-2" y1="2" x2="2" y2="-2" stroke="rgb(59, 130, 246)" strokeWidth="0.06" strokeDasharray="0.1,0.05" />
+                        
+                        {/* Approximation n=3: x - x^3/6 (green) */}
+                        <path
+                          d={Array.from({ length: 81 }, (_, i) => {
+                            const x = (i - 40) / 10;
+                            const y = -(x - (x*x*x)/6);
+                            return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
+                          }).join(' ')}
+                          stroke="rgb(34, 197, 94)"
+                          strokeWidth="0.06"
+                          fill="none"
+                        />
+                        
+                        {/* Labels */}
+                        <text x="5.5" y="-0.8" fontSize="0.3" fill="rgb(239, 68, 68)">sin(x)</text>
+                        <text x="2.2" y="-0.5" fontSize="0.25" fill="rgb(59, 130, 246)">n=1</text>
+                        <text x="3.5" y="0.8" fontSize="0.25" fill="rgb(34, 197, 94)">n=3</text>
+                      </svg>
+                    </div>
+                    <p className="text-xs text-center mt-2 text-orange-600 dark:text-orange-400">{lesson5.section4.plot4_description}</p>
+                  </div>
+                )}
+
+                <h4 className="font-semibold text-lg mt-4">{lesson5.section4.def4_2}</h4>
+                <div className="my-4 p-4 bg-muted/30 rounded-lg overflow-x-auto">
+                  <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section4.math4_1) }} />
+                </div>
+                
+                <h4 className="font-semibold text-lg mt-4">{lesson5.section4.def4_3}</h4>
+                <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.text4_1) }} />
+                <div className="my-4 p-4 bg-muted/30 rounded-lg overflow-x-auto">
+                  <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.section4.math4_2) }} />
+                </div>
+
+                {/* Maclaurin Example inline */}
+                <div className="my-4 p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg">
+                  <h5 className="font-semibold text-blue-700 dark:text-blue-400 mb-2">{lesson5.section4.ex4_1_title}</h5>
+                  <p className="text-muted-foreground text-lg mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.ex4_1_problem) }} />
+                  <div className="space-y-1">
+                    <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.ex4_1_step1) }} />
+                    <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.ex4_1_step2) }} />
+                    <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.ex4_1_step3) }} />
+                    <p className="font-semibold text-lg text-green-700 dark:text-green-400 mt-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.section4.ex4_1_result) }} />
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Examples Section */}
+            <AccordionItem value="section5-examples" className="border rounded-lg px-6 bg-card">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="font-semibold text-lg">{lesson5.example_section.title_ex}</span>
+              </AccordionTrigger>
+              <AccordionContent className="pt-4">
+                {/* Example 1 */}
+                <div className="mb-6 pb-6 border-b">
+                  <h3 className="text-lg font-bold mb-2">{lesson5.example_section.ex1.title}</h3>
+                  <p className="text-muted-foreground text-lg mb-2">{lesson5.example_section.ex1.problem}</p>
+                  <div className="my-3 p-3 bg-muted/30 rounded-lg overflow-x-auto">
+                    <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex1.problem_math) }} />
+                  </div>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="font-semibold text-lg">{lesson5.example_section.ex1.step1_title}</p>
+                      <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex1.step1_desc) }} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-lg">{lesson5.example_section.ex1.step2_title}</p>
+                      <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex1.step2_desc) }} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-lg">{lesson5.example_section.ex1.step3_title}</p>
+                      <div className="my-2 p-3 bg-muted/30 rounded-lg overflow-x-auto">
+                        <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex1.step3_math) }} />
+                      </div>
+                    </div>
+                    <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                      <p className="font-semibold text-lg text-green-700 dark:text-green-400">{lesson5.example_section.ex1.result_title}</p>
+                      <p className="text-muted-foreground text-lg">{lesson5.example_section.ex1.result}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Example 2 */}
+                <div className="mb-6 pb-6 border-b">
+                  <h3 className="text-lg font-bold mb-2">{lesson5.example_section.ex2.title}</h3>
+                  <p className="text-muted-foreground text-lg mb-2">{lesson5.example_section.ex2.problem}</p>
+                  <div className="my-3 p-3 bg-muted/30 rounded-lg overflow-x-auto">
+                    <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex2.problem_math) }} />
+                  </div>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="font-semibold text-lg">{lesson5.example_section.ex2.step1_title}</p>
+                      <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex2.step1_desc) }} />
+                      <div className="my-2 p-3 bg-muted/30 rounded-lg overflow-x-auto">
+                        <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex2.step1_math) }} />
+                      </div>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-lg">{lesson5.example_section.ex2.step2_title}</p>
+                      <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex2.step2_desc) }} />
+                      <div className="my-2 p-3 bg-muted/30 rounded-lg overflow-x-auto">
+                        <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex2.step2_math) }} />
+                      </div>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-lg">{lesson5.example_section.ex2.step3_title}</p>
+                      <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex2.step3_desc) }} />
+                    </div>
+                    <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                      <p className="font-semibold text-lg text-green-700 dark:text-green-400">{lesson5.example_section.ex2.result_title}</p>
+                      <p className="text-muted-foreground text-lg">{lesson5.example_section.ex2.result}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Example 3 */}
+                <div>
+                  <h3 className="text-lg font-bold mb-2">{lesson5.example_section.ex3.title}</h3>
+                  <p className="text-muted-foreground text-lg mb-2" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex3.problem) }} />
+                  <div className="my-3 p-3 bg-muted/30 rounded-lg overflow-x-auto">
+                    <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex3.problem_math) }} />
+                  </div>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="font-semibold text-lg">{lesson5.example_section.ex3.step1_title}</p>
+                      <div className="my-2 p-3 bg-muted/30 rounded-lg overflow-x-auto">
+                        <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex3.step1_math) }} />
+                      </div>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-lg">{lesson5.example_section.ex3.step2_title}</p>
+                      <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex3.step2_desc) }} />
+                      <div className="my-2 p-3 bg-muted/30 rounded-lg overflow-x-auto">
+                        <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex3.step2_math) }} />
+                      </div>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-lg">{lesson5.example_section.ex3.step3_title}</p>
+                      <div className="my-2 p-3 bg-muted/30 rounded-lg overflow-x-auto">
+                        <div dangerouslySetInnerHTML={{ __html: renderMath(lesson5.example_section.ex3.step3_math) }} />
+                      </div>
+                    </div>
+                    <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                      <p className="font-semibold text-lg text-green-700 dark:text-green-400">{lesson5.example_section.ex3.result_title}</p>
+                      <p className="text-muted-foreground text-lg" dangerouslySetInnerHTML={{ __html: renderTextWithMath(lesson5.example_section.ex3.result) }} />
                     </div>
                   </div>
                 </div>

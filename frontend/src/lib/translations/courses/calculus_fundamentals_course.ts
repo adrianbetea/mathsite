@@ -124,10 +124,12 @@ export const calculusFundamentalsCourse = {
                         theorem1_1: "Theorem: Differentiability implies Continuity. If a function is differentiable at a point, it must be continuous there (no sharp corners or breaks).",
                         plot1_title: "Example: Differentiable Function (Continuous & Smooth)",
                         plot1_desc: "The function $f(x) = x^2$ is differentiable at x = 0. It is smooth with no breaks or corners.",
+                        plot1_simple_desc: "Differentiable (smooth curve)",
                         plot1_function: "x^2",
                         plot1_point: 0,
                         plot2_title: "Example: Non-Differentiable Function (Sharp Corner)",
                         plot2_desc: "The function $f(x) = |x|$ is NOT differentiable at x = 0. It has a sharp corner, even though it is continuous.",
+                        plot2_simple_desc: "Not differentiable (sharp corner)", 
                         plot2_function: "|x|",
                         plot2_point: 0
                     },
@@ -439,6 +441,7 @@ export const calculusFundamentalsCourse = {
                         plot3_domain: [0, 3], // View window
                         plot3_range: [0, 2],  // Integration bounds a=0, b=2
                         plot3_label: "Area = 2",
+                        plot3_description: "x forms a triangle",
                         math3_1: `\\int_{a}^{b} f(x) dx = F(b) - F(a) = [F(x)]_a^b`,
                         text3_1: "Where F is any antiderivative of f.",
                         ex3_1_title: "Example Calculation",
@@ -590,6 +593,149 @@ export const calculusFundamentalsCourse = {
                 }
             }
         },
+        sequences_series: {
+            title: "Series & Sequences",
+            description: "Infinite sums and convergence: analyzing patterns and approximating complex functions with polynomials.",
+            lessons: {
+                lesson5_title: "Infinite Sums & Function Approximation",
+                lesson5: {
+                    section1: {
+                        title1: "Sequences",
+                        def1_1: "A sequence is an ordered list of numbers, denoted as $\{a_n\}$. We study its 'end behavior' as $n$ approaches infinity.",
+                        plot1_title: "Visualizing Convergence",
+                        plot1_desc: "The sequence $a_n = 1 + \\frac{1}{n}$ (blue dots) approaches the limit $L=1$ (dashed line) as n increases.",
+                        plot1_type: "sequence_convergence",
+                        plot1_function: "1 + 1/x", // Discrete points at x=1, 2, 3...
+                        plot1_domain: [1, 10], // n from 1 to 10
+                        plot1_range: [0, 2.5],
+                        plot1_label: "Limit L = 1",
+                        plot1_description: "Sequence converges to L=1",
+                        def1_2: "Convergence vs Divergence:",
+                        text1_1: "If $\\lim_{n \\to \\infty} a_n = L$ (a finite number), the sequence **converges**. If the limit is infinite or does not exist, it **diverges**.",
+                        math1_1: `\\lim_{n \\to \\infty} \\frac{1}{n} = 0 \\quad (\\text{Convergent})`,
+                        text1_2: "Example: The geometric sequence $1, 2, 4, 8, \\dots$ ($a_n = 2^{n-1}$) **diverges** to infinity because the terms grow without bound.",
+                        theorem1_1: "Monotonic Sequence Theorem: A sequence that is monotonic (always increasing/decreasing) and bounded must converge."
+                    },
+                    section2: {
+                        title2: "Series Tests",
+                        def2_1: "A series is the sum of the terms of a sequence: $\\sum a_n$. It implies adding infinitely many numbers.",
+                        def2_2_title: "How do we know if the sum is finite?",
+                        list2_1: "1. n-th Term Test: If $\\lim_{n \\to \\infty} a_n \\neq 0$, the series **Diverges**.",
+                        list2_2: "2. Geometric Series: $\\sum ar^n$ converges if $|r| < 1$. Sum = $\\frac{a}{1-r}$.",
+                        ex2_1_title: "Example (Geometric)",
+                        ex2_1_problem: "Sum the series $3 + \\frac{3}{2} + \\frac{3}{4} + \\dots$",
+                        ex2_1_step1: "Identify $a=3$ and ratio $r = \\frac{1}{2}$.",
+                        ex2_1_step2: "Since $|\\frac{1}{2}| < 1$, it converges.",
+                        ex2_1_solution: "Sum = $\\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6$.",
+                        list2_3: "3. Ratio Test: Useful for factorials. If $\\lim |\\frac{a_{n+1}}{a_n}| < 1$, it converges.",
+                        list2_4: "4. P-Series: $\\sum \\frac{1}{n^p}$ converges if $p > 1$ (like $\\frac{1}{n^2}$). It diverges if $p \\leq 1$ (like the Harmonic Series $\\frac{1}{n}$)."
+                    },
+                    section3: {
+                        title3: "Power Series",
+                        def3_1: "A Power Series is an infinite polynomial in terms of x:",
+                        math3_1: `\\sum_{n=0}^{\\infty} c_n x^n = c_0 + c_1 x + c_2 x^2 + \\dots`,
+                        text3_1: "This function is defined only for $x$-values where the series converges.",
+                        def3_2: "Radius of Convergence (R):",
+                        text3_2: "The range of x-values where the series works. Inside this interval, the series acts just like a function.",
+                        plot3_title: "Visualizing Convergence Interval",
+                        plot3_desc: "The series converges for x-values inside the green interval $(a-R, a+R)$. It diverges (fails) outside.",
+                        plot3_type: "number_line_interval",
+                        plot3_function: "Convergence", 
+                        plot3_domain: [-2, 2],
+                        plot3_points: [
+                            { x: 0, label: "Center (a)", color: "black" },
+                            { x: -1, label: "a-R", color: "red" },
+                            { x: 1, label: "a+R", color: "red" }
+                        ],
+                        plot3_regions: [
+                            { start: -1, end: 1, color: "green", label: "Converges" }
+                        ],
+                        plot3_label_left: "Diverges",
+                        plot3_label_right: "Diverges",
+                        plot3_label_center: "Converges",
+                        plot3_description: "Radius of Convergence R",
+
+                        // Example: Power Series Interval
+                        ex3_1_title: "Example (Interval)",
+                        ex3_1_problem: "For $\\sum x^n$, where does it converge?",
+                        ex3_1_step1: "This is a geometric series with $r=x$.",
+                        ex3_1_step2: "It converges if $|x| < 1$.",
+                        ex3_1_solution: "The Interval of Convergence is $(-1, 1)$. The Radius is $R=1$."
+                    },
+                    section4: {
+                        title4: "Taylor & Maclaurin Series",
+                        def4_1: "We can express functions like $e^x$, $\\sin(x)$, or $\\ln(x)$ as infinite polynomials.",
+                        plot4_title: "Visualizing Taylor Approximation",
+                        plot4_desc: "The red curve is $\\sin(x)$. The blue/green curves are polynomial approximations. As we add terms (higher degree), the approximation fits the wave further out.",
+                        plot4_type: "taylor_series_sin",
+                        plot4_function: "sin(x)",
+                        plot4_domain: [-6, 6],
+                        plot4_approximations: [
+                            { func: "x", label: "n=1 (Line)", color: "blue" },
+                            { func: "x - x^3/6", label: "n=3 (Cubic)", color: "green" },
+                            { func: "x - x^3/6 + x^5/120", label: "n=5", color: "orange" }
+                        ],
+                        plot4_description: "Higher degree = better approximation",
+                        def4_2: "Taylor Series Formula (centered at a):",
+                        math4_1: `f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n`,
+                        def4_3: "Maclaurin Series (centered at 0):",
+                        text4_1: "This is a Taylor Series where $a = 0$. It is the most common form.",
+                        math4_2: `f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\frac{f'''(0)}{3!}x^3 + \\dots`,
+                        ex4_1_title: "Example (Maclaurin for $e^x$)",
+                        ex4_1_problem: "Find the Maclaurin series for $f(x) = e^x$.",
+                        ex4_1_step1: "Derivatives: $f(x) = e^x$, $f'(x) = e^x$, $f''(x) = e^x$.",
+                        ex4_1_step2: "Evaluate at $x=0$: $f(0) = 1$, $f'(0) = 1$, $f''(0) = 1$.",
+                        ex4_1_step3: "Plug into formula: $1 + 1x + \\frac{1}{2!}x^2 + \\frac{1}{3!}x^3 + \\dots$",
+                        ex4_1_result: "Series: $\\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$"
+                    },
+                    example_section: {
+                        title_ex: "Examples with Step-by-Step Solutions",
+                        ex1: {
+                            title: "1. Geometric Series",
+                            problem: "Does the series converge? If so, find the sum.",
+                            problem_math: `\\sum_{n=0}^{\\infty} 3 \\left(\\frac{1}{2}\\right)^n`,
+                            step1_title: "Step 1: Identify Parameters",
+                            step1_desc: "This is a geometric series $\\sum ar^n$ with $a = 3$ and $r = \\frac{1}{2}$.",
+                            step2_title: "Step 2: Check Condition",
+                            step2_desc: "Is $|r| < 1$? Yes, $|0.5| < 1$. The series converges.",
+                            step3_title: "Step 3: Calculate Sum",
+                            step3_math: `S = \\frac{a}{1 - r} = \\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6`,
+                            result_title: "Final Answer",
+                            result: "The series converges to 6."
+                        },
+                        ex2: {
+                            title: "2. The Ratio Test",
+                            problem: "Check convergence for:",
+                            problem_math: `\\sum_{n=1}^{\\infty} \\frac{n}{2^n}`,
+                            step1_title: "Step 1: Setup Limit",
+                            step1_desc: "Evaluate $L = \\lim_{n \\to \\infty} \\left| \\frac{a_{n+1}}{a_n} \\right|$.",
+                            step1_math: `\\frac{n+1}{2^{n+1}} \\cdot \\frac{2^n}{n}`,
+                            step2_title: "Step 2: Simplify",
+                            step2_desc: "Cancel common terms: $\\frac{2^n}{2^{n+1}} = \\frac{1}{2}$.",
+                            step2_math: `\\lim_{n \\to \\infty} \\frac{1}{2} \\cdot \\frac{n+1}{n} = \\frac{1}{2} \\cdot 1 = 0.5`,
+                            step3_title: "Step 3: Conclusion",
+                            step3_desc: "Since $L = 0.5 < 1$, the test passes.",
+                            result_title: "Final Answer",
+                            result: "The series converges."
+                        },
+                        ex3: {
+                            title: "3. Constructing a Maclaurin Series",
+                            problem: "Find the first three non-zero terms for $f(x) = \\sin(x)$.",
+                            problem_math: `\\text{Center } a = 0`,
+                            step1_title: "Step 1: Derivatives at x=0",
+                            step1_math: `f(0) = \\sin(0) = 0 \\\\ f'(0) = \\cos(0) = 1 \\\\ f''(0) = -\\sin(0) = 0 \\\\ f'''(0) = -\\cos(0) = -1`,
+                            step2_title: "Step 2: Apply Formula",
+                            step2_desc: "Use coefficients $\\frac{f^{(n)}(0)}{n!}$.",
+                            step2_math: `0 + 1 \\cdot x + \\frac{0}{2!}x^2 + \\frac{-1}{3!}x^3 + \\dots`,
+                            step3_title: "Step 3: Simplify",
+                            step3_math: `x - \\frac{x^3}{6} + \\frac{x^5}{120} - \\dots`,
+                            result_title: "Final Answer",
+                            result: `$\\sin(x) \\approx x - \\frac{x^3}{3!} + \\frac{x^5}{5!}$`
+                        }
+                    }
+                }
+            }
+        },
     },
     es: {
        limits: {
@@ -716,10 +862,12 @@ export const calculusFundamentalsCourse = {
                         theorem1_1: "Teorema: La Diferenciabilidad implica Continuidad. Si una función es diferenciable en un punto, debe ser continua allí (sin esquinas afiladas ni interrupciones).",
                         plot1_title: "Ejemplo: Función Diferenciable (Continua y Suave)",
                         plot1_desc: "La función $f(x) = x^2$ es diferenciable en x = 0. Es suave, sin interrupciones ni esquinas.",
+                        plot1_simple_desc: "Diferenciable (curva suave)",
                         plot1_function: "x^2",
                         plot1_point: 0,
                         plot2_title: "Ejemplo: Función No Diferenciable (Esquina Afilada)",
                         plot2_desc: "La función $f(x) = |x|$ NO es diferenciable en x = 0. Tiene una esquina afilada, aunque es continua.",
+                        plot2_simple_desc: "No diferenciable (esquina afilada)",
                         plot2_function: "|x|",
                         plot2_point: 0
                     },
@@ -1030,6 +1178,7 @@ export const calculusFundamentalsCourse = {
                         plot3_domain: [0, 3],
                         plot3_range: [0, 2],
                         plot3_label: "Área = 2",
+                        plot3_description: "x forma un triángulo",
                         math3_1: `\\int_{a}^{b} f(x) dx = F(b) - F(a) = [F(x)]_a^b`,
                         text3_1: "Donde F es cualquier antiderivada de f.",
                         ex3_1_title: "Cálculo de Ejemplo",
@@ -1153,6 +1302,147 @@ export const calculusFundamentalsCourse = {
                             step3_math: `x e^x - \\int e^x dx`,
                             result_title: "Respuesta Final",
                             result: `$x e^x - e^x + C = e^x(x - 1) + C$`
+                        }
+                    }
+                }
+            }
+        },
+        sequences_series: {
+            title: "Series y Sucesiones",
+            description: "Sumas infinitas y convergencia: analizando patrones y aproximando funciones complejas con polinomios.",
+            lessons: {
+                lesson5_title: "Sumas Infinitas y Aproximación de Funciones",
+                lesson5: {
+                    section1: {
+                        title1: "Sucesiones",
+                        def1_1: "Una sucesión es una lista ordenada de números, denotada como $\{a_n\}$. Estudiamos su 'comportamiento final' a medida que $n$ se acerca al infinito.",
+                        plot1_title: "Visualizando la Convergencia",
+                        plot1_desc: "La sucesión $a_n = 1 + \\frac{1}{n}$ (puntos azules) se acerca al límite $L=1$ (línea discontinua) a medida que n aumenta.",
+                        plot1_type: "sequence_convergence",
+                        plot1_function: "1 + 1/x",
+                        plot1_domain: [1, 10],
+                        plot1_range: [0, 2.5],
+                        plot1_label: "Límite L = 1",
+                        plot1_description: "La sucesión converge a L=1",
+                        def1_2: "Convergencia vs Divergencia:",
+                        text1_1: "Si $\\lim_{n \\to \\infty} a_n = L$ (un número finito), la sucesión **converge**. Si el límite es infinito o no existe, **diverge**.",
+                        math1_1: `\\lim_{n \\to \\infty} \\frac{1}{n} = 0 \\quad (\\text{Convergente})`,
+                        text1_2: "Ejemplo: La sucesión geométrica $1, 2, 4, 8, \\dots$ ($a_n = 2^{n-1}$) **diverge** al infinito porque los términos crecen sin límite.",
+                        theorem1_1: "Teorema de la Sucesión Monótona: Una sucesión que es monótona (siempre creciente/decreciente) y acotada debe converger."
+                    },
+                    section2: {
+                        title2: "Pruebas de Series",
+                        def2_1: "Una serie es la suma de los términos de una sucesión: $\\sum a_n$. Implica sumar infinitos números.",
+                        def2_2_title: "¿Cómo sabemos si la suma es finita?",
+                        list2_1: "1. Prueba del n-ésimo Término: Si $\\lim_{n \\to \\infty} a_n \\neq 0$, la serie **Diverge**.",
+                        list2_2: "2. Serie Geométrica: $\\sum ar^n$ converge si $|r| < 1$. Suma = $\\frac{a}{1-r}$.",
+                        ex2_1_title: "Ejemplo (Geométrica)",
+                        ex2_1_problem: "Suma la serie $3 + \\frac{3}{2} + \\frac{3}{4} + \\dots$",
+                        ex2_1_step1: "Identifica $a=3$ y la razón $r = \\frac{1}{2}$.",
+                        ex2_1_step2: "Como $|\\frac{1}{2}| < 1$, converge.",
+                        ex2_1_solution: "Suma = $\\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6$.",
+                        list2_3: "3. Prueba de la Razón: Útil para factoriales. Si $\\lim |\\frac{a_{n+1}}{a_n}| < 1$, converge.",
+                        list2_4: "4. Serie P: $\\sum \\frac{1}{n^p}$ converge si $p > 1$ (como $\\frac{1}{n^2}$). Diverge si $p \\leq 1$ (como la Serie Armónica $\\frac{1}{n}$)."
+                    },
+                    section3: {
+                        title3: "Series de Potencias",
+                        def3_1: "Una Serie de Potencias es un polinomio infinito en términos de x:",
+                        math3_1: `\\sum_{n=0}^{\\infty} c_n x^n = c_0 + c_1 x + c_2 x^2 + \\dots`,
+                        text3_1: "Esta función está definida solo para valores de $x$ donde la serie converge.",
+                        def3_2: "Radio de Convergencia (R):",
+                        text3_2: "El rango de valores de x donde funciona la serie. Dentro de este intervalo, la serie actúa como una función.",
+                        plot3_title: "Visualizando el Intervalo de Convergencia",
+                        plot3_desc: "La serie converge para valores de x dentro del intervalo verde $(a-R, a+R)$. Diverge (falla) fuera.",
+                        plot3_type: "number_line_interval",
+                        plot3_function: "Convergencia",
+                        plot3_domain: [-2, 2],
+                        plot3_points: [
+                            { x: 0, label: "Centro (a)", color: "black" },
+                            { x: -1, label: "a-R", color: "red" },
+                            { x: 1, label: "a+R", color: "red" }
+                        ],
+                        plot3_regions: [
+                            { start: -1, end: 1, color: "green", label: "Converge" }
+                        ],
+                        plot3_label_left: "Diverge",
+                        plot3_label_right: "Diverge",
+                        plot3_label_center: "Converge",
+                        plot3_description: "Radio de Convergencia R",
+                        ex3_1_title: "Ejemplo (Intervalo)",
+                        ex3_1_problem: "Para $\\sum x^n$, ¿dónde converge?",
+                        ex3_1_step1: "Esta es una serie geométrica con $r=x$.",
+                        ex3_1_step2: "Converge si $|x| < 1$.",
+                        ex3_1_solution: "El Intervalo de Convergencia es $(-1, 1)$. El Radio es $R=1$."
+                    },
+                    section4: {
+                        title4: "Series de Taylor y Maclaurin",
+                        def4_1: "Podemos expresar funciones como $e^x$, $\\sin(x)$ o $\\ln(x)$ como polinomios infinitos.",
+                        plot4_title: "Visualizando la Aproximación de Taylor",
+                        plot4_desc: "La curva roja es $\\sin(x)$. Las curvas azul/verde son aproximaciones polinómicas. A medida que agregamos términos (mayor grado), la aproximación se ajusta mejor a la onda.",
+                        plot4_type: "taylor_series_sin",
+                        plot4_function: "sin(x)",
+                        plot4_domain: [-6, 6],
+                        plot4_approximations: [
+                            { func: "x", label: "n=1 (Línea)", color: "blue" },
+                            { func: "x - x^3/6", label: "n=3 (Cúbica)", color: "green" },
+                            { func: "x - x^3/6 + x^5/120", label: "n=5", color: "orange" }
+                        ],
+                        plot4_description: "Mayor grado = mejor aproximación",
+                        def4_2: "Fórmula de la Serie de Taylor (centrada en a):",
+                        math4_1: `f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n`,
+                        def4_3: "Serie de Maclaurin (centrada en 0):",
+                        text4_1: "Esta es una Serie de Taylor donde $a = 0$. Es la forma más común.",
+                        math4_2: `f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\frac{f'''(0)}{3!}x^3 + \\dots`,
+                        ex4_1_title: "Ejemplo (Maclaurin para $e^x$)",
+                        ex4_1_problem: "Encuentra la serie de Maclaurin para $f(x) = e^x$.",
+                        ex4_1_step1: "Derivadas: $f(x) = e^x$, $f'(x) = e^x$, $f''(x) = e^x$.",
+                        ex4_1_step2: "Evalúa en $x=0$: $f(0) = 1$, $f'(0) = 1$, $f''(0) = 1$.",
+                        ex4_1_step3: "Sustituye en la fórmula: $1 + 1x + \\frac{1}{2!}x^2 + \\frac{1}{3!}x^3 + \\dots$",
+                        ex4_1_result: "Serie: $\\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$"
+                    },
+                    example_section: {
+                        title_ex: "Ejemplos con Soluciones Paso a Paso",
+                        ex1: {
+                            title: "1. Serie Geométrica",
+                            problem: "¿Converge la serie? Si es así, encuentra la suma.",
+                            problem_math: `\\sum_{n=0}^{\\infty} 3 \\left(\\frac{1}{2}\\right)^n`,
+                            step1_title: "Paso 1: Identificar Parámetros",
+                            step1_desc: "Esta es una serie geométrica $\\sum ar^n$ con $a = 3$ y $r = \\frac{1}{2}$.",
+                            step2_title: "Paso 2: Verificar Condición",
+                            step2_desc: "¿Es $|r| < 1$? Sí, $|0.5| < 1$. La serie converge.",
+                            step3_title: "Paso 3: Calcular Suma",
+                            step3_math: `S = \\frac{a}{1 - r} = \\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6`,
+                            result_title: "Respuesta Final",
+                            result: "La serie converge a 6."
+                        },
+                        ex2: {
+                            title: "2. La Prueba de la Razón",
+                            problem: "Verifica la convergencia para:",
+                            problem_math: `\\sum_{n=1}^{\\infty} \\frac{n}{2^n}`,
+                            step1_title: "Paso 1: Configurar Límite",
+                            step1_desc: "Evalúa $L = \\lim_{n \\to \\infty} \\left| \\frac{a_{n+1}}{a_n} \\right|$.",
+                            step1_math: `\\frac{n+1}{2^{n+1}} \\cdot \\frac{2^n}{n}`,
+                            step2_title: "Paso 2: Simplificar",
+                            step2_desc: "Cancela términos comunes: $\\frac{2^n}{2^{n+1}} = \\frac{1}{2}$.",
+                            step2_math: `\\lim_{n \\to \\infty} \\frac{1}{2} \\cdot \\frac{n+1}{n} = \\frac{1}{2} \\cdot 1 = 0.5`,
+                            step3_title: "Paso 3: Conclusión",
+                            step3_desc: "Como $L = 0.5 < 1$, la prueba pasa.",
+                            result_title: "Respuesta Final",
+                            result: "La serie converge."
+                        },
+                        ex3: {
+                            title: "3. Construyendo una Serie de Maclaurin",
+                            problem: "Encuentra los primeros tres términos no nulos para $f(x) = \\sin(x)$.",
+                            problem_math: `\\text{Centro } a = 0`,
+                            step1_title: "Paso 1: Derivadas en x=0",
+                            step1_math: `f(0) = \\sin(0) = 0 \\\\ f'(0) = \\cos(0) = 1 \\\\ f''(0) = -\\sin(0) = 0 \\\\ f'''(0) = -\\cos(0) = -1`,
+                            step2_title: "Paso 2: Aplicar Fórmula",
+                            step2_desc: "Usa coeficientes $\\frac{f^{(n)}(0)}{n!}$.",
+                            step2_math: `0 + 1 \\cdot x + \\frac{0}{2!}x^2 + \\frac{-1}{3!}x^3 + \\dots`,
+                            step3_title: "Paso 3: Simplificar",
+                            step3_math: `x - \\frac{x^3}{6} + \\frac{x^5}{120} - \\dots`,
+                            result_title: "Respuesta Final",
+                            result: `$\\sin(x) \\approx x - \\frac{x^3}{3!} + \\frac{x^5}{5!}$`
                         }
                     }
                 }
@@ -1284,10 +1574,12 @@ export const calculusFundamentalsCourse = {
                         theorem1_1: "Théorème : La dérivabilité implique la continuité. Si une fonction est dérivable en un point, elle doit y être continue (pas de coins pointus ni de ruptures).",
                         plot1_title: "Exemple : Fonction dérivable (Continue et lisse)",
                         plot1_desc: "La fonction $f(x) = x^2$ est dérivable en x = 0. Elle est lisse, sans ruptures ni coins.",
+                        plot1_simple_desc: "Différentiable (courbe lisse)",
                         plot1_function: "x^2",
                         plot1_point: 0,
                         plot2_title: "Exemple : Fonction non dérivable (Coin pointu)",
                         plot2_desc: "La fonction $f(x) = |x|$ n'est PAS dérivable en x = 0. Elle a un coin pointu, même si elle est continue.",
+                        plot2_simple_desc: "Non différentiable (coin pointu)",
                         plot2_function: "|x|",
                         plot2_point: 0
                     },
@@ -1598,6 +1890,7 @@ export const calculusFundamentalsCourse = {
                         plot3_domain: [0, 3],
                         plot3_range: [0, 2],
                         plot3_label: "Aire = 2",
+                        plot3_description: "x forme un triangle",
                         math3_1: `\\int_{a}^{b} f(x) dx = F(b) - F(a) = [F(x)]_a^b`,
                         text3_1: "Où F est n'importe quelle primitive de f.",
                         ex3_1_title: "Exemple de Calcul",
@@ -1721,6 +2014,147 @@ export const calculusFundamentalsCourse = {
                             step3_math: `x e^x - \\int e^x dx`,
                             result_title: "Réponse Finale",
                             result: `$x e^x - e^x + C = e^x(x - 1) + C$`
+                        }
+                    }
+                }
+            }
+        },
+        sequences_series: {
+            title: "Séries et Suites",
+            description: "Sommes infinies et convergence : analyse des modèles et approximation de fonctions complexes avec des polynômes.",
+            lessons: {
+                lesson5_title: "Sommes Infinies et Approximation de Fonctions",
+                lesson5: {
+                    section1: {
+                        title1: "Suites",
+                        def1_1: "Une suite est une liste ordonnée de nombres, notée $\{a_n\}$. Nous étudions son 'comportement final' lorsque $n$ tend vers l'infini.",
+                        plot1_title: "Visualisation de la Convergence",
+                        plot1_desc: "La suite $a_n = 1 + \\frac{1}{n}$ (points bleus) s'approche de la limite $L=1$ (ligne pointillée) à mesure que n augmente.",
+                        plot1_type: "sequence_convergence",
+                        plot1_function: "1 + 1/x",
+                        plot1_domain: [1, 10],
+                        plot1_range: [0, 2.5],
+                        plot1_label: "Limite L = 1",
+                        plot1_description: "La suite converge vers L=1",
+                        def1_2: "Convergence vs Divergence :",
+                        text1_1: "Si $\\lim_{n \\to \\infty} a_n = L$ (un nombre fini), la suite **converge**. Si la limite est infinie ou n'existe pas, elle **diverge**.",
+                        math1_1: `\\lim_{n \\to \\infty} \\frac{1}{n} = 0 \\quad (\\text{Convergente})`,
+                        text1_2: "Exemple : La suite géométrique $1, 2, 4, 8, \\dots$ ($a_n = 2^{n-1}$) **diverge** vers l'infini car les termes croissent sans borne.",
+                        theorem1_1: "Théorème de la Suite Monotone : Une suite qui est monotone (toujours croissante/décroissante) et bornée doit converger."
+                    },
+                    section2: {
+                        title2: "Tests de Séries",
+                        def2_1: "Une série est la somme des termes d'une suite : $\\sum a_n$. Cela implique d'additionner une infinité de nombres.",
+                        def2_2_title: "Comment savoir si la somme est finie ?",
+                        list2_1: "1. Test du n-ième Terme : Si $\\lim_{n \\to \\infty} a_n \\neq 0$, la série **Diverge**.",
+                        list2_2: "2. Série Géométrique : $\\sum ar^n$ converge si $|r| < 1$. Somme = $\\frac{a}{1-r}$.",
+                        ex2_1_title: "Exemple (Géométrique)",
+                        ex2_1_problem: "Sommez la série $3 + \\frac{3}{2} + \\frac{3}{4} + \\dots$",
+                        ex2_1_step1: "Identifier $a=3$ et la raison $r = \\frac{1}{2}$.",
+                        ex2_1_step2: "Puisque $|\\frac{1}{2}| < 1$, elle converge.",
+                        ex2_1_solution: "Somme = $\\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6$.",
+                        list2_3: "3. Test du Rapport : Utile pour les factorielles. Si $\\lim |\\frac{a_{n+1}}{a_n}| < 1$, elle converge.",
+                        list2_4: "4. Série-P : $\\sum \\frac{1}{n^p}$ converge si $p > 1$ (comme $\\frac{1}{n^2}$). Elle diverge si $p \\leq 1$ (comme la Série Harmonique $\\frac{1}{n}$)."
+                    },
+                    section3: {
+                        title3: "Séries Entières",
+                        def3_1: "Une Série Entière est un polynôme infini en termes de x :",
+                        math3_1: `\\sum_{n=0}^{\\infty} c_n x^n = c_0 + c_1 x + c_2 x^2 + \\dots`,
+                        text3_1: "Cette fonction est définie uniquement pour les valeurs de $x$ où la série converge.",
+                        def3_2: "Rayon de Convergence (R) :",
+                        text3_2: "La plage de valeurs de x où la série fonctionne. À l'intérieur de cet intervalle, la série agit comme une fonction.",
+                        plot3_title: "Visualisation de l'Intervalle de Convergence",
+                        plot3_desc: "La série converge pour les valeurs de x à l'intérieur de l'intervalle vert $(a-R, a+R)$. Elle diverge (échoue) à l'extérieur.",
+                        plot3_type: "number_line_interval",
+                        plot3_function: "Convergence",
+                        plot3_domain: [-2, 2],
+                        plot3_points: [
+                            { x: 0, label: "Centre (a)", color: "black" },
+                            { x: -1, label: "a-R", color: "red" },
+                            { x: 1, label: "a+R", color: "red" }
+                        ],
+                        plot3_regions: [
+                            { start: -1, end: 1, color: "green", label: "Converge" }
+                        ],
+                        plot3_label_left: "Diverge",
+                        plot3_label_right: "Diverge",
+                        plot3_label_center: "Converge",
+                        plot3_description: "Rayon de Convergence R",
+                        ex3_1_title: "Exemple (Intervalle)",
+                        ex3_1_problem: "Pour $\\sum x^n$, où converge-t-elle ?",
+                        ex3_1_step1: "C'est une série géométrique avec $r=x$.",
+                        ex3_1_step2: "Elle converge si $|x| < 1$.",
+                        ex3_1_solution: "L'Intervalle de Convergence est $(-1, 1)$. Le Rayon est $R=1$."
+                    },
+                    section4: {
+                        title4: "Séries de Taylor et Maclaurin",
+                        def4_1: "Nous pouvons exprimer des fonctions comme $e^x$, $\\sin(x)$ ou $\\ln(x)$ sous forme de polynômes infinis.",
+                        plot4_title: "Visualisation de l'Approximation de Taylor",
+                        plot4_desc: "La courbe rouge est $\\sin(x)$. Les courbes bleue/verte sont des approximations polynomiales. À mesure que nous ajoutons des termes (degré supérieur), l'approximation s'ajuste mieux à l'onde.",
+                        plot4_type: "taylor_series_sin",
+                        plot4_function: "sin(x)",
+                        plot4_domain: [-6, 6],
+                        plot4_approximations: [
+                            { func: "x", label: "n=1 (Ligne)", color: "blue" },
+                            { func: "x - x^3/6", label: "n=3 (Cubique)", color: "green" },
+                            { func: "x - x^3/6 + x^5/120", label: "n=5", color: "orange" }
+                        ],
+                        plot4_description: "Degré plus élevé = meilleure approximation",
+                        def4_2: "Formule de la Série de Taylor (centrée en a) :",
+                        math4_1: `f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n`,
+                        def4_3: "Série de Maclaurin (centrée en 0) :",
+                        text4_1: "C'est une Série de Taylor où $a = 0$. C'est la forme la plus courante.",
+                        math4_2: `f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\frac{f'''(0)}{3!}x^3 + \\dots`,
+                        ex4_1_title: "Exemple (Maclaurin pour $e^x$)",
+                        ex4_1_problem: "Trouvez la série de Maclaurin pour $f(x) = e^x$.",
+                        ex4_1_step1: "Dérivées : $f(x) = e^x$, $f'(x) = e^x$, $f''(x) = e^x$.",
+                        ex4_1_step2: "Évaluer en $x=0$ : $f(0) = 1$, $f'(0) = 1$, $f''(0) = 1$.",
+                        ex4_1_step3: "Insérer dans la formule : $1 + 1x + \\frac{1}{2!}x^2 + \\frac{1}{3!}x^3 + \\dots$",
+                        ex4_1_result: "Série : $\\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$"
+                    },
+                    example_section: {
+                        title_ex: "Exemples avec Solutions Étape par Étape",
+                        ex1: {
+                            title: "1. Série Géométrique",
+                            problem: "La série converge-t-elle ? Si oui, trouvez la somme.",
+                            problem_math: `\\sum_{n=0}^{\\infty} 3 \\left(\\frac{1}{2}\\right)^n`,
+                            step1_title: "Étape 1 : Identifier les Paramètres",
+                            step1_desc: "C'est une série géométrique $\\sum ar^n$ avec $a = 3$ et $r = \\frac{1}{2}$.",
+                            step2_title: "Étape 2 : Vérifier la Condition",
+                            step2_desc: "Est-ce que $|r| < 1$ ? Oui, $|0.5| < 1$. La série converge.",
+                            step3_title: "Étape 3 : Calculer la Somme",
+                            step3_math: `S = \\frac{a}{1 - r} = \\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6`,
+                            result_title: "Réponse Finale",
+                            result: "La série converge vers 6."
+                        },
+                        ex2: {
+                            title: "2. Le Test du Rapport",
+                            problem: "Vérifiez la convergence pour :",
+                            problem_math: `\\sum_{n=1}^{\\infty} \\frac{n}{2^n}`,
+                            step1_title: "Étape 1 : Configurer la Limite",
+                            step1_desc: "Évaluez $L = \\lim_{n \\to \\infty} \\left| \\frac{a_{n+1}}{a_n} \\right|$.",
+                            step1_math: `\\frac{n+1}{2^{n+1}} \\cdot \\frac{2^n}{n}`,
+                            step2_title: "Étape 2 : Simplifier",
+                            step2_desc: "Annulez les termes communs : $\\frac{2^n}{2^{n+1}} = \\frac{1}{2}$.",
+                            step2_math: `\\lim_{n \\to \\infty} \\frac{1}{2} \\cdot \\frac{n+1}{n} = \\frac{1}{2} \\cdot 1 = 0.5`,
+                            step3_title: "Étape 3 : Conclusion",
+                            step3_desc: "Puisque $L = 0.5 < 1$, le test réussit.",
+                            result_title: "Réponse Finale",
+                            result: "La série converge."
+                        },
+                        ex3: {
+                            title: "3. Construire une Série de Maclaurin",
+                            problem: "Trouvez les trois premiers termes non nuls pour $f(x) = \\sin(x)$.",
+                            problem_math: `\\text{Centre } a = 0`,
+                            step1_title: "Étape 1 : Dérivées en x=0",
+                            step1_math: `f(0) = \\sin(0) = 0 \\\\ f'(0) = \\cos(0) = 1 \\\\ f''(0) = -\\sin(0) = 0 \\\\ f'''(0) = -\\cos(0) = -1`,
+                            step2_title: "Étape 2 : Appliquer la Formule",
+                            step2_desc: "Utiliser les coefficients $\\frac{f^{(n)}(0)}{n!}$.",
+                            step2_math: `0 + 1 \\cdot x + \\frac{0}{2!}x^2 + \\frac{-1}{3!}x^3 + \\dots`,
+                            step3_title: "Étape 3 : Simplifier",
+                            step3_math: `x - \\frac{x^3}{6} + \\frac{x^5}{120} - \\dots`,
+                            result_title: "Réponse Finale",
+                            result: `$\\sin(x) \\approx x - \\frac{x^3}{3!} + \\frac{x^5}{5!}$`
                         }
                     }
                 }
@@ -1852,10 +2286,12 @@ export const calculusFundamentalsCourse = {
                         theorem1_1: "Theorem: Differenzierbarkeit impliziert Stetigkeit. Wenn eine Funktion an einem Punkt differenzierbar ist, muss sie dort stetig sein (keine scharfen Ecken oder Sprünge).",
                         plot1_title: "Beispiel: Differenzierbare Funktion (Stetig & Glatt)",
                         plot1_desc: "Die Funktion $f(x) = x^2$ ist bei x = 0 differenzierbar. Sie ist glatt ohne Sprünge oder Ecken.",
+                        plot1_simple_desc: "Differenzierbar (glatte Kurve)",
                         plot1_function: "x^2",
                         plot1_point: 0,
                         plot2_title: "Beispiel: Nicht-differenzierbare Funktion (Scharfe Ecke)",
                         plot2_desc: "Die Funktion $f(x) = |x|$ ist bei x = 0 NICHT differenzierbar. Sie hat eine scharfe Ecke, obwohl sie stetig ist.",
+                        plot2_simple_desc: "Nicht differenzierbar (scharfe Ecke)",
                         plot2_function: "|x|",
                         plot2_point: 0
                     },
@@ -2166,7 +2602,7 @@ export const calculusFundamentalsCourse = {
                         plot3_domain: [0, 3],
                         plot3_range: [0, 2],
                         plot3_label: "Fläche = 2",
-                        math3_1: `\\int_{a}^{b} f(x) dx = F(b) - F(a) = [F(x)]_a^b`,
+                        plot3_description: "x bildet ein Dreieck",                        math3_1: `\\int_{a}^{b} f(x) dx = F(b) - F(a) = [F(x)]_a^b`,
                         text3_1: "Wobei F eine beliebige Stammfunktion von f ist.",
                         ex3_1_title: "Beispielrechnung",
                         ex3_1_problem: "Werte $\\int_{0}^{2} x \\, dx$ aus.",
@@ -2289,6 +2725,147 @@ export const calculusFundamentalsCourse = {
                             step3_math: `x e^x - \\int e^x dx`,
                             result_title: "Endergebnis",
                             result: `$x e^x - e^x + C = e^x(x - 1) + C$`
+                        }
+                    }
+                }
+            }
+        },
+        sequences_series: {
+            title: "Reihen & Folgen",
+            description: "Unendliche Summen und Konvergenz: Analyse von Mustern und Approximation komplexer Funktionen durch Polynome.",
+            lessons: {
+                lesson5_title: "Unendliche Summen & Funktionsapproximation",
+                lesson5: {
+                    section1: {
+                        title1: "Folgen",
+                        def1_1: "Eine Folge ist eine geordnete Liste von Zahlen, bezeichnet als $\{a_n\}$. Wir untersuchen ihr 'Endverhalten', wenn $n$ gegen unendlich geht.",
+                        plot1_title: "Visualisierung der Konvergenz",
+                        plot1_desc: "Die Folge $a_n = 1 + \\frac{1}{n}$ (blaue Punkte) nähert sich dem Grenzwert $L=1$ (gestrichelte Linie), wenn n zunimmt.",
+                        plot1_type: "sequence_convergence",
+                        plot1_function: "1 + 1/x",
+                        plot1_domain: [1, 10],
+                        plot1_range: [0, 2.5],
+                        plot1_label: "Grenzwert L = 1",
+                        plot1_description: "Die Folge konvergiert gegen L=1",
+                        def1_2: "Konvergenz vs Divergenz:",
+                        text1_1: "Wenn $\\lim_{n \\to \\infty} a_n = L$ (eine endliche Zahl), **konvergiert** die Folge. Wenn der Grenzwert unendlich ist oder nicht existiert, **divergiert** sie.",
+                        math1_1: `\\lim_{n \\to \\infty} \\frac{1}{n} = 0 \\quad (\\text{Konvergent})`,
+                        text1_2: "Beispiel: Die geometrische Folge $1, 2, 4, 8, \\dots$ ($a_n = 2^{n-1}$) **divergiert** gegen unendlich, da die Terme ohne Schranke wachsen.",
+                        theorem1_1: "Satz über monotone Folgen: Eine Folge, die monoton (immer steigend/fallend) und beschränkt ist, muss konvergieren."
+                    },
+                    section2: {
+                        title2: "Reihentests",
+                        def2_1: "Eine Reihe ist die Summe der Terme einer Folge: $\\sum a_n$. Es bedeutet das Addieren unendlich vieler Zahlen.",
+                        def2_2_title: "Wie wissen wir, ob die Summe endlich ist?",
+                        list2_1: "1. n-ter Term Test: Wenn $\\lim_{n \\to \\infty} a_n \\neq 0$, **divergiert** die Reihe.",
+                        list2_2: "2. Geometrische Reihe: $\\sum ar^n$ konvergiert, wenn $|r| < 1$. Summe = $\\frac{a}{1-r}$.",
+                        ex2_1_title: "Beispiel (Geometrisch)",
+                        ex2_1_problem: "Summiere die Reihe $3 + \\frac{3}{2} + \\frac{3}{4} + \\dots$",
+                        ex2_1_step1: "Identifiziere $a=3$ und Verhältnis $r = \\frac{1}{2}$.",
+                        ex2_1_step2: "Da $|\\frac{1}{2}| < 1$, konvergiert sie.",
+                        ex2_1_solution: "Summe = $\\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6$.",
+                        list2_3: "3. Quotientenkriterium: Nützlich für Fakultäten. Wenn $\\lim |\\frac{a_{n+1}}{a_n}| < 1$, konvergiert sie.",
+                        list2_4: "4. P-Reihe: $\\sum \\frac{1}{n^p}$ konvergiert, wenn $p > 1$ (wie $\\frac{1}{n^2}$). Sie divergiert, wenn $p \\leq 1$ (wie die harmonische Reihe $\\frac{1}{n}$)."
+                    },
+                    section3: {
+                        title3: "Potenzreihen",
+                        def3_1: "Eine Potenzreihe ist ein unendliches Polynom in Bezug auf x:",
+                        math3_1: `\\sum_{n=0}^{\\infty} c_n x^n = c_0 + c_1 x + c_2 x^2 + \\dots`,
+                        text3_1: "Diese Funktion ist nur für $x$-Werte definiert, bei denen die Reihe konvergiert.",
+                        def3_2: "Konvergenzradius (R):",
+                        text3_2: "Der Bereich von x-Werten, in dem die Reihe funktioniert. Innerhalb dieses Intervalls verhält sich die Reihe wie eine Funktion.",
+                        plot3_title: "Visualisierung des Konvergenzintervalls",
+                        plot3_desc: "Die Reihe konvergiert für x-Werte innerhalb des grünen Intervalls $(a-R, a+R)$. Sie divergiert (scheitert) außerhalb.",
+                        plot3_type: "number_line_interval",
+                        plot3_function: "Konvergenz",
+                        plot3_domain: [-2, 2],
+                        plot3_points: [
+                            { x: 0, label: "Zentrum (a)", color: "black" },
+                            { x: -1, label: "a-R", color: "red" },
+                            { x: 1, label: "a+R", color: "red" }
+                        ],
+                        plot3_regions: [
+                            { start: -1, end: 1, color: "grün", label: "Konvergiert" }
+                        ],
+                        plot3_label_left: "Divergiert",
+                        plot3_label_right: "Divergiert",
+                        plot3_label_center: "Konvergiert",
+                        plot3_description: "Konvergenzradius R",
+                        ex3_1_title: "Beispiel (Intervall)",
+                        ex3_1_problem: "Für $\\sum x^n$, wo konvergiert sie?",
+                        ex3_1_step1: "Dies ist eine geometrische Reihe mit $r=x$.",
+                        ex3_1_step2: "Sie konvergiert, wenn $|x| < 1$.",
+                        ex3_1_solution: "Das Konvergenzintervall ist $(-1, 1)$. Der Radius ist $R=1$."
+                    },
+                    section4: {
+                        title4: "Taylor- & Maclaurin-Reihen",
+                        def4_1: "Wir können Funktionen wie $e^x$, $\\sin(x)$ oder $\\ln(x)$ als unendliche Polynome ausdrücken.",
+                        plot4_title: "Visualisierung der Taylor-Approximation",
+                        plot4_desc: "Die rote Kurve ist $\\sin(x)$. Die blau/grünen Kurven sind polynomische Approximationen. Wenn wir Terme hinzufügen (höherer Grad), passt sich die Approximation der Welle weiter außen besser an.",
+                        plot4_type: "taylor_series_sin",
+                        plot4_function: "sin(x)",
+                        plot4_domain: [-6, 6],
+                        plot4_approximations: [
+                            { func: "x", label: "n=1 (Linie)", color: "blau" },
+                            { func: "x - x^3/6", label: "n=3 (Kubisch)", color: "grün" },
+                            { func: "x - x^3/6 + x^5/120", label: "n=5", color: "orange" }
+                        ],
+                        plot4_description: "Höherer Grad = bessere Approximation",
+                        def4_2: "Taylor-Reihenformel (zentriert bei a):",
+                        math4_1: `f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n`,
+                        def4_3: "Maclaurin-Reihe (zentriert bei 0):",
+                        text4_1: "Dies ist eine Taylor-Reihe, bei der $a = 0$. Es ist die gebräuchlichste Form.",
+                        math4_2: `f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\frac{f'''(0)}{3!}x^3 + \\dots`,
+                        ex4_1_title: "Beispiel (Maclaurin für $e^x$)",
+                        ex4_1_problem: "Finde die Maclaurin-Reihe für $f(x) = e^x$.",
+                        ex4_1_step1: "Ableitungen: $f(x) = e^x$, $f'(x) = e^x$, $f''(x) = e^x$.",
+                        ex4_1_step2: "Bei $x=0$ auswerten: $f(0) = 1$, $f'(0) = 1$, $f''(0) = 1$.",
+                        ex4_1_step3: "In die Formel einsetzen: $1 + 1x + \\frac{1}{2!}x^2 + \\frac{1}{3!}x^3 + \\dots$",
+                        ex4_1_result: "Reihe: $\\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$"
+                    },
+                    example_section: {
+                        title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                        ex1: {
+                            title: "1. Geometrische Reihe",
+                            problem: "Konvergiert die Reihe? Wenn ja, finde die Summe.",
+                            problem_math: `\\sum_{n=0}^{\\infty} 3 \\left(\\frac{1}{2}\\right)^n`,
+                            step1_title: "Schritt 1: Parameter identifizieren",
+                            step1_desc: "Dies ist eine geometrische Reihe $\\sum ar^n$ mit $a = 3$ und $r = \\frac{1}{2}$.",
+                            step2_title: "Schritt 2: Bedingung prüfen",
+                            step2_desc: "Ist $|r| < 1$? Ja, $|0.5| < 1$. Die Reihe konvergiert.",
+                            step3_title: "Schritt 3: Summe berechnen",
+                            step3_math: `S = \\frac{a}{1 - r} = \\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6`,
+                            result_title: "Endergebnis",
+                            result: "Die Reihe konvergiert gegen 6."
+                        },
+                        ex2: {
+                            title: "2. Das Quotientenkriterium",
+                            problem: "Prüfe auf Konvergenz:",
+                            problem_math: `\\sum_{n=1}^{\\infty} \\frac{n}{2^n}`,
+                            step1_title: "Schritt 1: Grenzwert aufstellen",
+                            step1_desc: "Werte $L = \\lim_{n \\to \\infty} \\left| \\frac{a_{n+1}}{a_n} \\right|$ aus.",
+                            step1_math: `\\frac{n+1}{2^{n+1}} \\cdot \\frac{2^n}{n}`,
+                            step2_title: "Schritt 2: Vereinfachen",
+                            step2_desc: "Kürze gemeinsame Terme: $\\frac{2^n}{2^{n+1}} = \\frac{1}{2}$.",
+                            step2_math: `\\lim_{n \\to \\infty} \\frac{1}{2} \\cdot \\frac{n+1}{n} = \\frac{1}{2} \\cdot 1 = 0.5`,
+                            step3_title: "Schritt 3: Schlussfolgerung",
+                            step3_desc: "Da $L = 0.5 < 1$, ist der Test bestanden.",
+                            result_title: "Endergebnis",
+                            result: "Die Reihe konvergiert."
+                        },
+                        ex3: {
+                            title: "3. Konstruktion einer Maclaurin-Reihe",
+                            problem: "Finde die ersten drei nicht-null Terme für $f(x) = \\sin(x)$.",
+                            problem_math: `\\text{Zentrum } a = 0`,
+                            step1_title: "Schritt 1: Ableitungen bei x=0",
+                            step1_math: `f(0) = \\sin(0) = 0 \\\\ f'(0) = \\cos(0) = 1 \\\\ f''(0) = -\\sin(0) = 0 \\\\ f'''(0) = -\\cos(0) = -1`,
+                            step2_title: "Schritt 2: Formel anwenden",
+                            step2_desc: "Verwende Koeffizienten $\\frac{f^{(n)}(0)}{n!}$.",
+                            step2_math: `0 + 1 \\cdot x + \\frac{0}{2!}x^2 + \\frac{-1}{3!}x^3 + \\dots`,
+                            step3_title: "Schritt 3: Vereinfachen",
+                            step3_math: `x - \\frac{x^3}{6} + \\frac{x^5}{120} - \\dots`,
+                            result_title: "Endergebnis",
+                            result: `$\\sin(x) \\approx x - \\frac{x^3}{3!} + \\frac{x^5}{5!}$`
                         }
                     }
                 }
@@ -2420,10 +2997,12 @@ export const calculusFundamentalsCourse = {
                         theorem1_1: "Twierdzenie: Różniczkowalność implikuje ciągłość. Jeśli funkcja jest różniczkowalna w punkcie, musi być tam ciągła (bez ostrych narożników lub przerw).",
                         plot1_title: "Przykład: Funkcja różniczkowalna (Ciągła i gładka)",
                         plot1_desc: "Funkcja $f(x) = x^2$ jest różniczkowalna w x = 0. Jest gładka, bez przerw i narożników.",
+                        plot1_simple_desc: "Różniczkowalna (gładka krzywa)",
                         plot1_function: "x^2",
                         plot1_point: 0,
                         plot2_title: "Przykład: Funkcja nieróżniczkowalna (Ostry narożnik)",
                         plot2_desc: "Funkcja $f(x) = |x|$ NIE jest różniczkowalna w x = 0. Ma ostry narożnik, mimo że jest ciągła.",
+                        plot2_simple_desc: "Nieróżniczkowalna (ostry narożnik)",
                         plot2_function: "|x|",
                         plot2_point: 0
                     },
@@ -2734,6 +3313,7 @@ export const calculusFundamentalsCourse = {
                         plot3_domain: [0, 3],
                         plot3_range: [0, 2],
                         plot3_label: "Pole = 2",
+                        plot3_description: "x tworzy trójkąt",
                         math3_1: `\\int_{a}^{b} f(x) dx = F(b) - F(a) = [F(x)]_a^b`,
                         text3_1: "Gdzie F jest dowolną funkcją pierwotną f.",
                         ex3_1_title: "Przykładowe Obliczenie",
@@ -2857,6 +3437,147 @@ export const calculusFundamentalsCourse = {
                             step3_math: `x e^x - \\int e^x dx`,
                             result_title: "Odpowiedź Końcowa",
                             result: `$x e^x - e^x + C = e^x(x - 1) + C$`
+                        }
+                    }
+                }
+            }
+        },
+        sequences_series: {
+            title: "Szeregi i Ciągi",
+            description: "Sumy nieskończone i zbieżność: analiza wzorców i przybliżanie funkcji złożonych wielomianami.",
+            lessons: {
+                lesson5_title: "Sumy Nieskończone i Przybliżanie Funkcji",
+                lesson5: {
+                    section1: {
+                        title1: "Ciągi",
+                        def1_1: "Ciąg to uporządkowana lista liczb, oznaczana jako $\{a_n\}$. Badamy jego 'zachowanie końcowe', gdy $n$ dąży do nieskończoności.",
+                        plot1_title: "Wizualizacja Zbieżności",
+                        plot1_desc: "Ciąg $a_n = 1 + \\frac{1}{n}$ (niebieskie kropki) zbliża się do granicy $L=1$ (linia przerywana) wraz ze wzrostem n.",
+                        plot1_type: "sequence_convergence",
+                        plot1_function: "1 + 1/x",
+                        plot1_domain: [1, 10],
+                        plot1_range: [0, 2.5],
+                        plot1_label: "Granica L = 1",
+                        plot1_description: "Ciąg jest zbieżny do L=1",
+                        def1_2: "Zbieżność vs Rozbieżność:",
+                        text1_1: "Jeśli $\\lim_{n \\to \\infty} a_n = L$ (liczba skończona), ciąg jest **zbieżny**. Jeśli granica jest nieskończona lub nie istnieje, jest **rozbieżny**.",
+                        math1_1: `\\lim_{n \\to \\infty} \\frac{1}{n} = 0 \\quad (\\text{Zbieżny})`,
+                        text1_2: "Przykład: Ciąg geometryczny $1, 2, 4, 8, \\dots$ ($a_n = 2^{n-1}$) jest **rozbieżny** do nieskończoności, ponieważ wyrazy rosną bez ograniczeń.",
+                        theorem1_1: "Twierdzenie o Ciągu Monotonicznym: Ciąg, który jest monotoniczny (zawsze rosnący/malejący) i ograniczony, musi być zbieżny."
+                    },
+                    section2: {
+                        title2: "Testy Szeregów",
+                        def2_1: "Szereg to suma wyrazów ciągu: $\\sum a_n$. Oznacza dodawanie nieskończenie wielu liczb.",
+                        def2_2_title: "Skąd wiemy, czy suma jest skończona?",
+                        list2_1: "1. Test n-tego wyrazu: Jeśli $\\lim_{n \\to \\infty} a_n \\neq 0$, szereg jest **Rozbieżny**.",
+                        list2_2: "2. Szereg Geometryczny: $\\sum ar^n$ jest zbieżny, jeśli $|r| < 1$. Suma = $\\frac{a}{1-r}$.",
+                        ex2_1_title: "Przykład (Geometryczny)",
+                        ex2_1_problem: "Zsumuj szereg $3 + \\frac{3}{2} + \\frac{3}{4} + \\dots$",
+                        ex2_1_step1: "Zidentyfikuj $a=3$ i iloraz $r = \\frac{1}{2}$.",
+                        ex2_1_step2: "Ponieważ $|\\frac{1}{2}| < 1$, jest zbieżny.",
+                        ex2_1_solution: "Suma = $\\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6$.",
+                        list2_3: "3. Kryterium d'Alemberta (ilorazowe): Przydatne dla silni. Jeśli $\\lim |\\frac{a_{n+1}}{a_n}| < 1$, jest zbieżny.",
+                        list2_4: "4. Szereg P: $\\sum \\frac{1}{n^p}$ jest zbieżny, jeśli $p > 1$ (jak $\\frac{1}{n^2}$). Jest rozbieżny, jeśli $p \\leq 1$ (jak Szereg Harmoniczny $\\frac{1}{n}$)."
+                    },
+                    section3: {
+                        title3: "Szeregi Potęgowe",
+                        def3_1: "Szereg Potęgowy to nieskończony wielomian względem x:",
+                        math3_1: `\\sum_{n=0}^{\\infty} c_n x^n = c_0 + c_1 x + c_2 x^2 + \\dots`,
+                        text3_1: "Ta funkcja jest zdefiniowana tylko dla wartości $x$, dla których szereg jest zbieżny.",
+                        def3_2: "Promień Zbieżności (R):",
+                        text3_2: "Zakres wartości x, w którym szereg działa. Wewnątrz tego przedziału szereg zachowuje się jak funkcja.",
+                        plot3_title: "Wizualizacja Przedziału Zbieżności",
+                        plot3_desc: "Szereg jest zbieżny dla wartości x wewnątrz zielonego przedziału $(a-R, a+R)$. Jest rozbieżny na zewnątrz.",
+                        plot3_type: "number_line_interval",
+                        plot3_function: "Zbieżność",
+                        plot3_domain: [-2, 2],
+                        plot3_points: [
+                            { x: 0, label: "Środek (a)", color: "black" },
+                            { x: -1, label: "a-R", color: "red" },
+                            { x: 1, label: "a+R", color: "red" }
+                        ],
+                        plot3_regions: [
+                            { start: -1, end: 1, color: "green", label: "Zbieżny" }
+                        ],
+                        plot3_label_left: "Rozbieżny",
+                        plot3_label_right: "Rozbieżny",
+                        plot3_label_center: "Zbieżny",
+                        plot3_description: "Promień Zbieżności R",
+                        ex3_1_title: "Przykład (Przedział)",
+                        ex3_1_problem: "Dla $\\sum x^n$, gdzie jest zbieżny?",
+                        ex3_1_step1: "To jest szereg geometryczny z $r=x$.",
+                        ex3_1_step2: "Jest zbieżny, jeśli $|x| < 1$.",
+                        ex3_1_solution: "Przedział Zbieżności to $(-1, 1)$. Promień wynosi $R=1$."
+                    },
+                    section4: {
+                        title4: "Szeregi Taylora i Maclaurina",
+                        def4_1: "Możemy wyrazić funkcje takie jak $e^x$, $\\sin(x)$ lub $\\ln(x)$ jako nieskończone wielomiany.",
+                        plot4_title: "Wizualizacja Aproksymacji Taylora",
+                        plot4_desc: "Czerwona krzywa to $\\sin(x)$. Niebieskie/zielone krzywe to aproksymacje wielomianowe. Dodając wyrazy (wyższy stopień), aproksymacja lepiej pasuje do fali.",
+                        plot4_type: "taylor_series_sin",
+                        plot4_function: "sin(x)",
+                        plot4_domain: [-6, 6],
+                        plot4_approximations: [
+                            { func: "x", label: "n=1 (Linia)", color: "blue" },
+                            { func: "x - x^3/6", label: "n=3 (Sześcienna)", color: "green" },
+                            { func: "x - x^3/6 + x^5/120", label: "n=5", color: "orange" }
+                        ],
+                        plot4_description: "Wyższy stopień = lepsza aproksymacja",
+                        def4_2: "Wzór Szeregu Taylora (wyśrodkowany w a):",
+                        math4_1: `f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n`,
+                        def4_3: "Szereg Maclaurina (wyśrodkowany w 0):",
+                        text4_1: "To jest Szereg Taylora, gdzie $a = 0$. To najczęstsza postać.",
+                        math4_2: `f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\frac{f'''(0)}{3!}x^3 + \\dots`,
+                        ex4_1_title: "Przykład (Maclaurin dla $e^x$)",
+                        ex4_1_problem: "Znajdź szereg Maclaurina dla $f(x) = e^x$.",
+                        ex4_1_step1: "Pochodne: $f(x) = e^x$, $f'(x) = e^x$, $f''(x) = e^x$.",
+                        ex4_1_step2: "Oblicz w $x=0$: $f(0) = 1$, $f'(0) = 1$, $f''(0) = 1$.",
+                        ex4_1_step3: "Podstaw do wzoru: $1 + 1x + \\frac{1}{2!}x^2 + \\frac{1}{3!}x^3 + \\dots$",
+                        ex4_1_result: "Szereg: $\\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$"
+                    },
+                    example_section: {
+                        title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
+                        ex1: {
+                            title: "1. Szereg Geometryczny",
+                            problem: "Czy szereg jest zbieżny? Jeśli tak, znajdź sumę.",
+                            problem_math: `\\sum_{n=0}^{\\infty} 3 \\left(\\frac{1}{2}\\right)^n`,
+                            step1_title: "Krok 1: Zidentyfikuj Parametry",
+                            step1_desc: "To jest szereg geometryczny $\\sum ar^n$ z $a = 3$ i $r = \\frac{1}{2}$.",
+                            step2_title: "Krok 2: Sprawdź Warunek",
+                            step2_desc: "Czy $|r| < 1$? Tak, $|0.5| < 1$. Szereg jest zbieżny.",
+                            step3_title: "Krok 3: Oblicz Sumę",
+                            step3_math: `S = \\frac{a}{1 - r} = \\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6`,
+                            result_title: "Odpowiedź Końcowa",
+                            result: "Szereg jest zbieżny do 6."
+                        },
+                        ex2: {
+                            title: "2. Kryterium d'Alemberta",
+                            problem: "Sprawdź zbieżność dla:",
+                            problem_math: `\\sum_{n=1}^{\\infty} \\frac{n}{2^n}`,
+                            step1_title: "Krok 1: Ustaw Granicę",
+                            step1_desc: "Oblicz $L = \\lim_{n \\to \\infty} \\left| \\frac{a_{n+1}}{a_n} \\right|$.",
+                            step1_math: `\\frac{n+1}{2^{n+1}} \\cdot \\frac{2^n}{n}`,
+                            step2_title: "Krok 2: Uprość",
+                            step2_desc: "Skróć wspólne wyrazy: $\\frac{2^n}{2^{n+1}} = \\frac{1}{2}$.",
+                            step2_math: `\\lim_{n \\to \\infty} \\frac{1}{2} \\cdot \\frac{n+1}{n} = \\frac{1}{2} \\cdot 1 = 0.5`,
+                            step3_title: "Krok 3: Wniosek",
+                            step3_desc: "Ponieważ $L = 0.5 < 1$, test przeszedł pomyślnie.",
+                            result_title: "Odpowiedź Końcowa",
+                            result: "Szereg jest zbieżny."
+                        },
+                        ex3: {
+                            title: "3. Konstrukcja Szeregu Maclaurina",
+                            problem: "Znajdź pierwsze trzy niezerowe wyrazy dla $f(x) = \\sin(x)$.",
+                            problem_math: `\\text{Środek } a = 0`,
+                            step1_title: "Krok 1: Pochodne w x=0",
+                            step1_math: `f(0) = \\sin(0) = 0 \\\\ f'(0) = \\cos(0) = 1 \\\\ f''(0) = -\\sin(0) = 0 \\\\ f'''(0) = -\\cos(0) = -1`,
+                            step2_title: "Krok 2: Zastosuj Wzór",
+                            step2_desc: "Użyj współczynników $\\frac{f^{(n)}(0)}{n!}$.",
+                            step2_math: `0 + 1 \\cdot x + \\frac{0}{2!}x^2 + \\frac{-1}{3!}x^3 + \\dots`,
+                            step3_title: "Krok 3: Uprość",
+                            step3_math: `x - \\frac{x^3}{6} + \\frac{x^5}{120} - \\dots`,
+                            result_title: "Odpowiedź Końcowa",
+                            result: `$\\sin(x) \\approx x - \\frac{x^3}{3!} + \\frac{x^5}{5!}$`
                         }
                     }
                 }
@@ -2988,10 +3709,12 @@ export const calculusFundamentalsCourse = {
                         theorem1_1: "Teoremă: Diferențiabilitatea implică Continuitate. Dacă o funcție este diferențiabilă într-un punct, ea trebuie să fie continuă acolo (fără colțuri ascuțite sau întreruperi).",
                         plot1_title: "Exemplu: Funcție Diferențiabilă (Continuă și Netedă)",
                         plot1_desc: "Funcția $f(x) = x^2$ este diferențiabilă în x = 0. Este netedă, fără întreruperi sau colțuri.",
+                        plot1_simple_desc: "Diferențiabilă (curbă netedă)",
                         plot1_function: "x^2",
                         plot1_point: 0,
                         plot2_title: "Exemplu: Funcție Nediferențiabilă (Colț Ascuțit)",
                         plot2_desc: "Funcția $f(x) = |x|$ NU este diferențiabilă în x = 0. Are un colț ascuțit, chiar dacă este continuă.",
+                        plot2_simple_desc: "Nediferențiabilă (colț ascuțit)",
                         plot2_function: "|x|",
                         plot2_point: 0
                     },
@@ -3302,6 +4025,7 @@ export const calculusFundamentalsCourse = {
                         plot3_domain: [0, 3],
                         plot3_range: [0, 2],
                         plot3_label: "Aria = 2",
+                        plot3_description: "x formează un triunghi",
                         math3_1: `\\int_{a}^{b} f(x) dx = F(b) - F(a) = [F(x)]_a^b`,
                         text3_1: "Unde F este orice primitivă a lui f.",
                         ex3_1_title: "Exemplu de Calcul",
@@ -3425,6 +4149,147 @@ export const calculusFundamentalsCourse = {
                             step3_math: `x e^x - \\int e^x dx`,
                             result_title: "Răspuns Final",
                             result: `$x e^x - e^x + C = e^x(x - 1) + C$`
+                        }
+                    }
+                }
+            }
+        },
+        sequences_series: {
+            title: "Serii și Șiruri",
+            description: "Sume infinite și convergență: analizarea tiparelor și aproximarea funcțiilor complexe cu polinoame.",
+            lessons: {
+                lesson5_title: "Sume Infinite și Aproximarea Funcțiilor",
+                lesson5: {
+                    section1: {
+                        title1: "Șiruri",
+                        def1_1: "Un șir este o listă ordonată de numere, notată ca $\{a_n\}$. Studiem 'comportamentul final' pe măsură ce $n$ se apropie de infinit.",
+                        plot1_title: "Vizualizarea Convergenței",
+                        plot1_desc: "Șirul $a_n = 1 + \\frac{1}{n}$ (puncte albastre) se apropie de limita $L=1$ (linie punctată) pe măsură ce n crește.",
+                        plot1_type: "sequence_convergence",
+                        plot1_function: "1 + 1/x",
+                        plot1_domain: [1, 10],
+                        plot1_range: [0, 2.5],
+                        plot1_label: "Limita L = 1",
+                        plot1_description: "Șirul converge la L=1",
+                        def1_2: "Convergență vs Divergență:",
+                        text1_1: "Dacă $\\lim_{n \\to \\infty} a_n = L$ (un număr finit), șirul **converge**. Dacă limita este infinită sau nu există, **diverge**.",
+                        math1_1: `\\lim_{n \\to \\infty} \\frac{1}{n} = 0 \\quad (\\text{Convergent})`,
+                        text1_2: "Exemplu: Șirul geometric $1, 2, 4, 8, \\dots$ ($a_n = 2^{n-1}$) **diverge** la infinit deoarece termenii cresc fără limită.",
+                        theorem1_1: "Teorema Șirului Monoton: Un șir care este monoton (mereu crescător/descrescător) și mărginit trebuie să conveargă."
+                    },
+                    section2: {
+                        title2: "Teste de Serii",
+                        def2_1: "O serie este suma termenilor unui șir: $\\sum a_n$. Implică adunarea a infinit de multe numere.",
+                        def2_2_title: "Cum știm dacă suma este finită?",
+                        list2_1: "1. Testul termenului n: Dacă $\\lim_{n \\to \\infty} a_n \\neq 0$, seria **Diverge**.",
+                        list2_2: "2. Serie Geometrică: $\\sum ar^n$ converge dacă $|r| < 1$. Suma = $\\frac{a}{1-r}$.",
+                        ex2_1_title: "Exemplu (Geometrică)",
+                        ex2_1_problem: "Însumează seria $3 + \\frac{3}{2} + \\frac{3}{4} + \\dots$",
+                        ex2_1_step1: "Identifică $a=3$ și rația $r = \\frac{1}{2}$.",
+                        ex2_1_step2: "Deoarece $|\\frac{1}{2}| < 1$, converge.",
+                        ex2_1_solution: "Suma = $\\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6$.",
+                        list2_3: "3. Testul Raportului: Util pentru factoriale. Dacă $\\lim |\\frac{a_{n+1}}{a_n}| < 1$, converge.",
+                        list2_4: "4. Serie-P: $\\sum \\frac{1}{n^p}$ converge dacă $p > 1$ (ca $\\frac{1}{n^2}$). Diverge dacă $p \\leq 1$ (ca Seria Armonică $\\frac{1}{n}$)."
+                    },
+                    section3: {
+                        title3: "Serii de Puteri",
+                        def3_1: "O Serie de Puteri este un polinom infinit în termeni de x:",
+                        math3_1: `\\sum_{n=0}^{\\infty} c_n x^n = c_0 + c_1 x + c_2 x^2 + \\dots`,
+                        text3_1: "Această funcție este definită doar pentru valorile lui $x$ unde seria converge.",
+                        def3_2: "Raza de Convergență (R):",
+                        text3_2: "Intervalul de valori x unde seria funcționează. În interiorul acestui interval, seria acționează exact ca o funcție.",
+                        plot3_title: "Vizualizarea Intervalului de Convergență",
+                        plot3_desc: "Seria converge pentru valorile x în interiorul intervalului verde $(a-R, a+R)$. Diverge (eșuează) în afară.",
+                        plot3_type: "number_line_interval",
+                        plot3_function: "Convergență",
+                        plot3_domain: [-2, 2],
+                        plot3_points: [
+                            { x: 0, label: "Centru (a)", color: "black" },
+                            { x: -1, label: "a-R", color: "red" },
+                            { x: 1, label: "a+R", color: "red" }
+                        ],
+                        plot3_regions: [
+                            { start: -1, end: 1, color: "green", label: "Converge" }
+                        ],
+                        plot3_label_left: "Diverge",
+                        plot3_label_right: "Diverge",
+                        plot3_label_center: "Converge",
+                        plot3_description: "Raza de Convergență R",
+                        ex3_1_title: "Exemplu (Interval)",
+                        ex3_1_problem: "Pentru $\\sum x^n$, unde converge?",
+                        ex3_1_step1: "Aceasta este o serie geometrică cu $r=x$.",
+                        ex3_1_step2: "Converge dacă $|x| < 1$.",
+                        ex3_1_solution: "Intervalul de Convergență este $(-1, 1)$. Raza este $R=1$."
+                    },
+                    section4: {
+                        title4: "Serii Taylor și Maclaurin",
+                        def4_1: "Putem exprima funcții precum $e^x$, $\\sin(x)$ sau $\\ln(x)$ ca polinoame infinite.",
+                        plot4_title: "Vizualizarea Aproximării Taylor",
+                        plot4_desc: "Curba roșie este $\\sin(x)$. Curbele albastre/verzi sunt aproximări polinomiale. Pe măsură ce adăugăm termeni (grad mai mare), aproximarea se potrivește mai bine cu unda.",
+                        plot4_type: "taylor_series_sin",
+                        plot4_function: "sin(x)",
+                        plot4_domain: [-6, 6],
+                        plot4_approximations: [
+                            { func: "x", label: "n=1 (Linie)", color: "blue" },
+                            { func: "x - x^3/6", label: "n=3 (Cubică)", color: "green" },
+                            { func: "x - x^3/6 + x^5/120", label: "n=5", color: "orange" }
+                        ],
+                        plot4_description: "Grad mai mare = aproximare mai bună",
+                        def4_2: "Formula Seriei Taylor (centrată în a):",
+                        math4_1: `f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n`,
+                        def4_3: "Seria Maclaurin (centrată în 0):",
+                        text4_1: "Aceasta este o Serie Taylor unde $a = 0$. Este cea mai comună formă.",
+                        math4_2: `f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\frac{f'''(0)}{3!}x^3 + \\dots`,
+                        ex4_1_title: "Exemplu (Maclaurin pentru $e^x$)",
+                        ex4_1_problem: "Găsește seria Maclaurin pentru $f(x) = e^x$.",
+                        ex4_1_step1: "Derivate: $f(x) = e^x$, $f'(x) = e^x$, $f''(x) = e^x$.",
+                        ex4_1_step2: "Evaluează la $x=0$: $f(0) = 1$, $f'(0) = 1$, $f''(0) = 1$.",
+                        ex4_1_step3: "Înlocuiește în formulă: $1 + 1x + \\frac{1}{2!}x^2 + \\frac{1}{3!}x^3 + \\dots$",
+                        ex4_1_result: "Serie: $\\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$"
+                    },
+                    example_section: {
+                        title_ex: "Exemple cu Soluții Pas cu Pas",
+                        ex1: {
+                            title: "1. Serie Geometrică",
+                            problem: "Seria converge? Dacă da, găsește suma.",
+                            problem_math: `\\sum_{n=0}^{\\infty} 3 \\left(\\frac{1}{2}\\right)^n`,
+                            step1_title: "Pasul 1: Identifică Parametrii",
+                            step1_desc: "Aceasta este o serie geometrică $\\sum ar^n$ cu $a = 3$ și $r = \\frac{1}{2}$.",
+                            step2_title: "Pasul 2: Verifică Condiția",
+                            step2_desc: "Este $|r| < 1$? Da, $|0.5| < 1$. Seria converge.",
+                            step3_title: "Pasul 3: Calculează Suma",
+                            step3_math: `S = \\frac{a}{1 - r} = \\frac{3}{1 - 0.5} = \\frac{3}{0.5} = 6`,
+                            result_title: "Răspuns Final",
+                            result: "Seria converge la 6."
+                        },
+                        ex2: {
+                            title: "2. Testul Raportului",
+                            problem: "Verifică convergența pentru:",
+                            problem_math: `\\sum_{n=1}^{\\infty} \\frac{n}{2^n}`,
+                            step1_title: "Pasul 1: Configurează Limita",
+                            step1_desc: "Evaluează $L = \\lim_{n \\to \\infty} \\left| \\frac{a_{n+1}}{a_n} \\right|$.",
+                            step1_math: `\\frac{n+1}{2^{n+1}} \\cdot \\frac{2^n}{n}`,
+                            step2_title: "Pasul 2: Simplifică",
+                            step2_desc: "Anulează termenii comuni: $\\frac{2^n}{2^{n+1}} = \\frac{1}{2}$.",
+                            step2_math: `\\lim_{n \\to \\infty} \\frac{1}{2} \\cdot \\frac{n+1}{n} = \\frac{1}{2} \\cdot 1 = 0.5`,
+                            step3_title: "Pasul 3: Concluzie",
+                            step3_desc: "Deoarece $L = 0.5 < 1$, testul trece.",
+                            result_title: "Răspuns Final",
+                            result: "Seria converge."
+                        },
+                        ex3: {
+                            title: "3. Construirea unei Serii Maclaurin",
+                            problem: "Găsește primii trei termeni nenuli pentru $f(x) = \\sin(x)$.",
+                            problem_math: `\\text{Centru } a = 0`,
+                            step1_title: "Pasul 1: Derivate la x=0",
+                            step1_math: `f(0) = \\sin(0) = 0 \\\\ f'(0) = \\cos(0) = 1 \\\\ f''(0) = -\\sin(0) = 0 \\\\ f'''(0) = -\\cos(0) = -1`,
+                            step2_title: "Pasul 2: Aplică Formula",
+                            step2_desc: "Folosește coeficienții $\\frac{f^{(n)}(0)}{n!}$.",
+                            step2_math: `0 + 1 \\cdot x + \\frac{0}{2!}x^2 + \\frac{-1}{3!}x^3 + \\dots`,
+                            step3_title: "Pasul 3: Simplifică",
+                            step3_math: `x - \\frac{x^3}{6} + \\frac{x^5}{120} - \\dots`,
+                            result_title: "Răspuns Final",
+                            result: `$\\sin(x) \\approx x - \\frac{x^3}{3!} + \\frac{x^5}{5!}$`
                         }
                     }
                 }
