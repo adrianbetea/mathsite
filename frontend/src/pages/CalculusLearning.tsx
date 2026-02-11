@@ -2332,7 +2332,7 @@ const CalculusLearning = () => {
             <h2 className="text-2xl sm:text-3xl font-bold">{(course as any).differential_equations.lessons.lesson1_title}</h2>
           </div>
 
-          <Accordion type="multiple" defaultValue={["section6-1"]} className="space-y-4">
+          <Accordion type="multiple" className="space-y-4">
             {/* Section 1: Introduction & Separable Equations */}
             <AccordionItem value="section6-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
