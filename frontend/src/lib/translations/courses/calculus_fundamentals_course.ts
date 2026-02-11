@@ -61,7 +61,7 @@ export const calculusFundamentalsCourse = {
                     example_section: {
                         title_ex: "Examples with Step-by-Step Solutions",
                         ex1: {
-                            title: "1. Solving an Indeterminate Form ($\\frac{0}{0}$)",
+                            title: "1. Solving an Indeterminate Form 0/0",
                             problem: "Evaluate the limit:",
                             problem_math: `\\lim_{x \\to 3} \\frac{x^2 - 9}{x^2 - 2x - 3}`,
                             step1_title: "Step 1: Attempt Direct Substitution",
@@ -262,6 +262,7 @@ export const calculusFundamentalsCourse = {
                             b: { x: 4, y: 0, label: "b" },
                             c: { x: 2, y: 4, label: "c (Tangent)" } 
                         },
+                        plot1_description: "Secant (blue) and Tangent (green) have same slope",
                         def1_2: "The Mean Value Theorem (MVT): If f(x) is continuous on [a, b] and differentiable on (a, b), there is at least one point c where:",
                         math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
                         text1_1: "In physics terms: At some point, your instantaneous speed must equal your average speed.",
@@ -290,6 +291,7 @@ export const calculusFundamentalsCourse = {
                             { x: -1, y: 2, label: "Local Max (-1, 2)", color: "red" },
                             { x: 1, y: -2, label: "Local Min (1, -2)", color: "blue" }
                         ],
+                        plot2_description: "f(x) = x³ - 3x with critical points",
                         def2_2_title: "Second Derivative Test (Concavity)",
                         list2_4: "If $f''(x) > 0$, the graph is Concave Up (like a cup).",
                         list2_5: "If $f''(x) < 0$, the graph is Concave Down (frown).",
@@ -306,6 +308,7 @@ export const calculusFundamentalsCourse = {
                         plot3_points: [
                             { x: 2, y: 128, label: "Max Volume (x=2)", color: "green" }
                         ],
+                        plot3_description: "Maximum volume x = 2",
                         strategy_title: "General Strategy:",
                         step3_1: "1. Draw a picture and label variables.",
                         step3_2: "2. Write a 'Primary Equation' for the quantity to be optimized.",
@@ -332,6 +335,8 @@ export const calculusFundamentalsCourse = {
                         plot4_points: [
                             { x: 6, y: 8, label: "Current Position (x=6, y=8)", color: "orange" }
                         ],
+                        distance: "feet",
+                        plot4_description: "Pythagorean theorem",
                         math4_1: `\\text{Given } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
                         text4_1: "The key is to recognize that every variable is actually a function of time $t(x)$.",
                         ex4_1_title: "Example (Sliding Ladder)",
@@ -597,7 +602,7 @@ export const calculusFundamentalsCourse = {
             title: "Series & Sequences",
             description: "Infinite sums and convergence: analyzing patterns and approximating complex functions with polynomials.",
             lessons: {
-                lesson5_title: "Infinite Sums & Function Approximation",
+                lesson5_title: "Series & Sequences",
                 lesson5: {
                     section1: {
                         title1: "Sequences",
@@ -736,6 +741,147 @@ export const calculusFundamentalsCourse = {
                 }
             }
         },
+        differential_equations: {
+            title: "Differential Equations",
+            description: "Solving equations that relate a function to its derivatives: the language of modeling change in the physical world.",
+            lessons: {
+                lesson1_title: "Solving Techniques & Applications",
+                lesson1: {
+                    section1: {
+                        title1: "Introduction & Separable Equations",
+                        def1_1: "A Differential Equation (DE) is an equation involving a function and its derivatives. The 'Order' is the highest derivative present.",
+                        plot1_title: "Visualizing a Slope Field",
+                        plot1_desc: "The small segments show the slope (direction) of the solution at each point. The blue curve is one specific solution ($y = x^2/2 + 1$) following the flow.",
+                        plot1_type: "slope_field",
+                        plot1_function: "x", // dy/dx = x (Simple slope field)
+                        plot1_domain: [-3, 3],
+                        plot1_range: [-3, 3],
+                        plot1_solution_curve: { start_x: 0, start_y: 1, color: "blue" }, // Curve passing through (0,1)def1_2: "Separable Equations:",
+                        plot1_description: "Solution curve following slope field",
+                        def1_2: "Separable Equations:",
+                        text1_1: "The simplest type of DE. You can algebraically move all 'y' terms to one side and all 'x' terms to the other, then integrate both.",
+                        math1_1: `N(y) \\, dy = M(x) \\, dx \\implies \\int N(y) \\, dy = \\int M(x) \\, dx`,
+                        ex1_1_title: "Example (Separable)",
+                        ex1_1_problem: "Solve the differential equation $\\frac{dy}{dx} = \\frac{x}{y}$.",
+                        ex1_1_step1: "Separate variables: Multiply by $y$ and $dx$.",
+                        ex1_1_math: `y \\, dy = x \\, dx`,
+                        ex1_1_step2: "Integrate both sides:",
+                        ex1_1_math2: `\\int y \\, dy = \\int x \\, dx \\implies \\frac{y^2}{2} = \\frac{x^2}{2} + C`,
+                        ex1_1_solution: "Implicit General Solution: $y^2 - x^2 = C$ (Hyperbolas).",
+                        warning1: "Don't forget the constant of integration (+C) immediately after integrating!"
+                    },
+                    section2: {
+                        title2: "First-Order Linear Equations",
+                        def2_1: "Standard Form: $y' + P(x)y = Q(x)$.",
+                        text2_1: "These cannot always be separated. We use an 'Integrating Factor' to solve them.",
+                        def2_2_title: "The Integrating Factor Method",
+                        step2_1: "1. Calculate the factor $\\mu(x) = e^{\\int P(x)dx}$.",
+                        step2_2: "2. Multiply the entire equation by $\\mu(x)$.",
+                        step2_3: "3. The Left Hand Side becomes the derivative of a product: $\\frac{d}{dx}[\\mu(x)y]$.",
+                        step2_4: "4. Integrate both sides and solve for y.",
+                        ex2_1_title: "Example (Integrating Factor)",
+                        ex2_1_problem: "Solve $y' + 2y = e^x$.",
+                        ex2_1_step1: "Here $P(x) = 2$. Factor $\\mu(x) = e^{\\int 2 dx} = e^{2x}$.",
+                        ex2_1_step2: "Multiply equation by $e^{2x}$: $e^{2x}y' + 2e^{2x}y = e^{3x}$.",
+                        ex2_1_step3: "Simplify LHS: $\\frac{d}{dx}[e^{2x}y] = e^{3x}$.",
+                        ex2_1_step4: "Integrate: $e^{2x}y = \\int e^{3x} dx = \\frac{1}{3}e^{3x} + C$.",
+                        ex2_1_solution: "Solve for y: $y = \\frac{1}{3}e^x + Ce^{-2x}$."
+                    },
+                    section3: {
+                        title3: "Second-Order Equations",
+                        def3_1: "Equations involving the second derivative ($y''$). Common in physics (springs, circuits).",
+                        math3_1: `ay'' + by' + cy = 0`,
+                        text3_1: "For linear homogeneous equations with constant coefficients, we guess a solution of the form $y = e^{rx}$.",
+                        plot3_title: "Damped Harmonic Motion",
+                        plot3_desc: "The solution to a second-order DE with complex roots often models oscillation that fades over time (e.g., a car shock absorber).",
+                        plot3_type: "damped_oscillation",
+                        plot3_function: "e^(-0.5*x) * cos(3*x)", 
+                        plot3_domain: [0, 10],
+                        plot3_range: [-1, 1],
+                        plot3_label: "Underdamped System",
+                        def3_2: "The Characteristic Equation:",
+                        math3_2: `ar^2 + br + c = 0`,
+                        text3_2: "Solve for $r$. If roots are real/distinct, solution is $y = c_1 e^{r_1x} + c_2 e^{r_2x}$. If roots are complex, the solution involves sine and cosine.",
+                        ex3_1_title: "Example (Real Distinct Roots)",
+                        ex3_1_problem: "Solve $y'' - 5y' + 6y = 0$.",
+                        ex3_1_step1: "Characteristic Equation: $r^2 - 5r + 6 = 0$.",
+                        ex3_1_step2: "Factor: $(r-2)(r-3) = 0$. Roots are $r_1 = 2, r_2 = 3$.",
+                        ex3_1_solution: "General Solution: $y = c_1 e^{2x} + c_2 e^{3x}$."
+                    },
+                    section4: {
+                        title4: "Initial Value Problems (IVP) & Applications",
+                        def4_1: "General Solution vs. Particular Solution",
+                        text4_1: "Integration gives a 'General Solution' with constants ($C$). An IVP provides specific points (e.g., $y(0)=5$) to find the exact value of $C$.",
+                        plot4_title: "Visualizing Harmonic Motion",
+                        plot4_desc: "A mass on a spring oscillating over time. The starting position y(0) determines the specific curve (particular solution).",
+                        plot4_type: "spring_mass",
+                        plot4_function: "3 * cos(2*x)", // y = 3cos(2t), Amplitude 3
+                        plot4_domain: [0, 10], // Time t from 0 to 10
+                        plot4_range: [-4, 4],
+                        plot4_label: "y(0) = 3",
+                        def4_2_title: "Common Applications",
+                        list4_1: "Exponential Growth/Decay: $\\frac{dy}{dt} = ky$",
+                        list4_2: "Newton's Law of Cooling: Rate of cooling is proportional to temperature difference.",
+                        list4_3: "Harmonic Motion: Springs and Pendulums ($y'' = -k y$).",
+
+                        ex4_1_title: "Example (Initial Value Problem)",
+                        ex4_1_problem: "Solve the decay equation $\\frac{dy}{dt} = -0.5y$ given $y(0) = 10$.",
+                        ex4_1_step1: "General Solution: Separating variables gives $y(t) = Ce^{-0.5t}$.",
+                        ex4_1_step2: "Apply Initial Condition: Plug in $t=0$ and $y=10$.",
+                        ex4_1_math: `10 = C e^{-0.5(0)} \\implies 10 = C(1) \\implies C = 10`,
+                        ex4_1_solution: "Particular Solution: $y(t) = 10e^{-0.5t}$."
+                    },
+                    example_section: {
+                        title_ex: "Examples with Step-by-Step Solutions",
+                        ex1: {
+                            title: "1. Solving a Separable Equation",
+                            problem: "Find the general solution:",
+                            problem_math: `\\frac{dy}{dx} = \\frac{2x}{y}`,
+                            step1_title: "Step 1: Separate Variables",
+                            step1_desc: "Multiply by $y$ and $dx$ to separate terms.",
+                            step1_math: `y \\, dy = 2x \\, dx`,
+                            step2_title: "Step 2: Integrate Both Sides",
+                            step2_math: `\\int y \\, dy = \\int 2x \\, dx \\implies \\frac{1}{2}y^2 = x^2 + C`,
+                            step3_title: "Step 3: Explicit Form (Optional)",
+                            step3_desc: "Multiply by 2. (Note: $2C$ is just a new constant $C_1$).",
+                            result_title: "Final Answer",
+                            result: `y^2 = 2x^2 + C_1 \\implies y = \\pm\\sqrt{2x^2 + C_1}`
+                        },
+                        ex2: {
+                            title: "2. First-Order Linear (IVP)",
+                            problem: "Solve the Initial Value Problem:",
+                            problem_math: `y' + y = e^x, \\quad y(0) = 1`,
+                            step1_title: "Step 1: Integrating Factor",
+                            step1_desc: "Here $P(x) = 1$. The factor is $e^{\\int 1 dx} = e^x$.",
+                            step2_title: "Step 2: Multiply and Simplify",
+                            step2_desc: "Multiply equation by $e^x$. LHS becomes product derivative.",
+                            step2_math: `e^x y' + e^x y = e^x e^x \\implies \\frac{d}{dx}[e^x y] = e^{2x}`,
+                            step3_title: "Step 3: Integrate and Solve for C",
+                            step3_math: `e^x y = \\int e^{2x} dx = \\frac{1}{2}e^{2x} + C`,
+                            step4_title: "Step 4: Apply Initial Condition",
+                            step4_desc: "Use $y(0)=1$. $e^0(1) = \\frac{1}{2}e^0 + C \\implies 1 = 0.5 + C \\implies C = 0.5$.",
+                            result_title: "Final Answer",
+                            result: `y = \\frac{1}{2}e^x + \\frac{1}{2}e^{-x}`
+                        },
+                        ex3: {
+                            title: "3. Second-Order Homogeneous",
+                            problem: "Find the general solution:",
+                            problem_math: `y'' - 5y' + 6y = 0`,
+                            step1_title: "Step 1: Characteristic Equation",
+                            step1_desc: "Replace derivatives with powers of $r$.",
+                            step1_math: `r^2 - 5r + 6 = 0`,
+                            step2_title: "Step 2: Find Roots",
+                            step2_desc: "Factor the quadratic.",
+                            step2_math: `(r - 2)(r - 3) = 0 \\implies r_1 = 2, r_2 = 3`,
+                            step3_title: "Step 3: Write Solution",
+                            step3_desc: "Since roots are distinct real numbers, use the exponential form.",
+                            result_title: "Final Answer",
+                            result: `y = c_1 e^{2x} + c_2 e^{3x}`
+                        }
+                    }
+                }
+            }
+        },
     },
     es: {
        limits: {
@@ -799,7 +945,7 @@ export const calculusFundamentalsCourse = {
                     example_section: {
                         title_ex: "Ejemplos con Soluciones Paso a Paso",
                         ex1: {
-                            title: "1. Resolviendo una Forma Indeterminada ($\\frac{0}{0}$)",
+                            title: "1. Resolviendo una Forma Indeterminada 0/0",
                             problem: "Evaluar el límite:",
                             problem_math: `\\lim_{x \\to 3} \\frac{x^2 - 9}{x^2 - 2x - 3}`,
                             step1_title: "Paso 1: Intentar Sustitución Directa",
@@ -1000,6 +1146,7 @@ export const calculusFundamentalsCourse = {
                             b: { x: 4, y: 0, label: "b" },
                             c: { x: 2, y: 4, label: "c (Tangente)" }
                         },
+                        plot1_description: "La secante (azul) y la tangente (verde) tienen la misma pendiente",
                         def1_2: "El Teorema del Valor Medio (TVM): Si f(x) es continua en [a, b] y diferenciable en (a, b), existe al menos un punto c donde:",
                         math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
                         text1_1: "En términos físicos: En algún punto, tu velocidad instantánea debe igualar a tu velocidad promedio.",
@@ -1028,6 +1175,7 @@ export const calculusFundamentalsCourse = {
                             { x: -1, y: 2, label: "Máx Local (-1, 2)", color: "red" },
                             { x: 1, y: -2, label: "Mín Local (1, -2)", color: "blue" }
                         ],
+                        plot2_description: "f(x) = x³ - 3x con puntos críticos",
                         def2_2_title: "Criterio de la Segunda Derivada (Concavidad)",
                         list2_4: "Si $f''(x) > 0$, el gráfico es Cóncavo Hacia Arriba (como una taza).",
                         list2_5: "Si $f''(x) < 0$, el gráfico es Cóncavo Hacia Abajo (triste).",
@@ -1044,6 +1192,7 @@ export const calculusFundamentalsCourse = {
                         plot3_points: [
                             { x: 2, y: 128, label: "Volumen Máx (x=2)", color: "green" }
                         ],
+                        plot3_description: "Volumen máximo x = 2",
                         strategy_title: "Estrategia General:",
                         step3_1: "1. Dibuja una imagen y etiqueta las variables.",
                         step3_2: "2. Escribe una 'Ecuación Primaria' para la cantidad a optimizar.",
@@ -1069,6 +1218,8 @@ export const calculusFundamentalsCourse = {
                         plot4_points: [
                             { x: 6, y: 8, label: "Posición Actual (x=6, y=8)", color: "orange" }
                         ],
+                        distance: "metros",
+                        plot4_description: "teorema de Pitágoras",
                         math4_1: `\\text{Dado } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
                         text4_1: "La clave es reconocer que cada variable es en realidad una función del tiempo $t(x)$.",
                         ex4_1_title: "Ejemplo (Escalera Deslizante)",
@@ -1311,7 +1462,7 @@ export const calculusFundamentalsCourse = {
             title: "Series y Sucesiones",
             description: "Sumas infinitas y convergencia: analizando patrones y aproximando funciones complejas con polinomios.",
             lessons: {
-                lesson5_title: "Sumas Infinitas y Aproximación de Funciones",
+                lesson5_title: "Series y Sucesiones",
                 lesson5: {
                     section1: {
                         title1: "Sucesiones",
@@ -1448,6 +1599,146 @@ export const calculusFundamentalsCourse = {
                 }
             }
         },
+        differential_equations: {
+            title: "Ecuaciones Diferenciales",
+            description: "Resolviendo ecuaciones que relacionan una función con sus derivadas: el lenguaje para modelar el cambio en el mundo físico.",
+            lessons: {
+                lesson1_title: "Técnicas de Solución y Aplicaciones",
+                lesson1: {
+                    section1: {
+                        title1: "Introducción y Ecuaciones Separables",
+                        def1_1: "Una Ecuación Diferencial (ED) es una ecuación que involucra una función y sus derivadas. El 'Orden' es la derivada más alta presente.",
+                        plot1_title: "Visualizando un Campo de Pendientes",
+                        plot1_desc: "Los segmentos pequeños muestran la pendiente (dirección) de la solución en cada punto. La curva azul es una solución específica ($y = x^2/2 + 1$) siguiendo el flujo.",
+                        plot1_type: "slope_field",
+                        plot1_function: "x", // dy/dx = x (Campo de pendientes simple)
+                        plot1_domain: [-3, 3],
+                        plot1_range: [-3, 3],
+                        plot1_solution_curve: { start_x: 0, start_y: 1, color: "blue" }, // Curva pasando por (0,1)
+                        plot1_description: "Curva solución siguiendo el campo de pendientes",
+                        def1_2: "Ecuaciones Separables:",
+                        text1_1: "El tipo más simple de ED. Puedes mover algebraicamente todos los términos con 'y' a un lado y todos los términos con 'x' al otro, luego integrar ambos.",
+                        math1_1: `N(y) \\, dy = M(x) \\, dx \\implies \\int N(y) \\, dy = \\int M(x) \\, dx`,
+                        ex1_1_title: "Ejemplo (Separable)",
+                        ex1_1_problem: "Resuelve la ecuación diferencial $\\frac{dy}{dx} = \\frac{x}{y}$.",
+                        ex1_1_step1: "Separa variables: Multiplica por $y$ y $dx$.",
+                        ex1_1_math: `y \\, dy = x \\, dx`,
+                        ex1_1_step2: "Integra ambos lados:",
+                        ex1_1_math2: `\\int y \\, dy = \\int x \\, dx \\implies \\frac{y^2}{2} = \\frac{x^2}{2} + C`,
+                        ex1_1_solution: "Solución General Implícita: $y^2 - x^2 = C$ (Hipérbolas).",
+                        warning1: "¡No olvides la constante de integración (+C) inmediatamente después de integrar!"
+                    },
+                    section2: {
+                        title2: "Ecuaciones Lineales de Primer Orden",
+                        def2_1: "Forma Estándar: $y' + P(x)y = Q(x)$.",
+                        text2_1: "Estas no siempre pueden separarse. Usamos un 'Factor Integrante' para resolverlas.",
+                        def2_2_title: "El Método del Factor Integrante",
+                        step2_1: "1. Calcula el factor $\\mu(x) = e^{\\int P(x)dx}$.",
+                        step2_2: "2. Multiplica toda la ecuación por $\\mu(x)$.",
+                        step2_3: "3. El Lado Izquierdo se convierte en la derivada de un producto: $\\frac{d}{dx}[\\mu(x)y]$.",
+                        step2_4: "4. Integra ambos lados y resuelve para y.",
+                        ex2_1_title: "Ejemplo (Factor Integrante)",
+                        ex2_1_problem: "Resuelve $y' + 2y = e^x$.",
+                        ex2_1_step1: "Aquí $P(x) = 2$. Factor $\\mu(x) = e^{\\int 2 dx} = e^{2x}$.",
+                        ex2_1_step2: "Multiplica la ecuación por $e^{2x}$: $e^{2x}y' + 2e^{2x}y = e^{3x}$.",
+                        ex2_1_step3: "Simplifica el LI: $\\frac{d}{dx}[e^{2x}y] = e^{3x}$.",
+                        ex2_1_step4: "Integra: $e^{2x}y = \\int e^{3x} dx = \\frac{1}{3}e^{3x} + C$.",
+                        ex2_1_solution: "Resuelve para y: $y = \\frac{1}{3}e^x + Ce^{-2x}$."
+                    },
+                    section3: {
+                        title3: "Ecuaciones de Segundo Orden",
+                        def3_1: "Ecuaciones que involucran la segunda derivada ($y''$). Comunes en física (resortes, circuitos).",
+                        math3_1: `ay'' + by' + cy = 0`,
+                        text3_1: "Para ecuaciones homogéneas lineales con coeficientes constantes, adivinamos una solución de la forma $y = e^{rx}$.",
+                        plot3_title: "Movimiento Armónico Amortiguado",
+                        plot3_desc: "La solución a una ED de segundo orden con raíces complejas a menudo modela oscilación que se desvanece con el tiempo (ej. un amortiguador de auto).",
+                        plot3_type: "damped_oscillation",
+                        plot3_function: "e^(-0.5*x) * cos(3*x)", 
+                        plot3_domain: [0, 10],
+                        plot3_range: [-1, 1],
+                        plot3_label: "Sistema Subamortiguado",
+                        def3_2: "La Ecuación Característica:",
+                        math3_2: `ar^2 + br + c = 0`,
+                        text3_2: "Resuelve para $r$. Si las raíces son reales/distintas, la solución es $y = c_1 e^{r_1x} + c_2 e^{r_2x}$. Si las raíces son complejas, la solución involucra seno y coseno.",
+                        ex3_1_title: "Ejemplo (Raíces Reales Distintas)",
+                        ex3_1_problem: "Resuelve $y'' - 5y' + 6y = 0$.",
+                        ex3_1_step1: "Ecuación Característica: $r^2 - 5r + 6 = 0$.",
+                        ex3_1_step2: "Factoriza: $(r-2)(r-3) = 0$. Raíces son $r_1 = 2, r_2 = 3$.",
+                        ex3_1_solution: "Solución General: $y = c_1 e^{2x} + c_2 e^{3x}$."
+                    },
+                    section4: {
+                        title4: "Problemas de Valor Inicial (PVI) y Aplicaciones",
+                        def4_1: "Solución General vs. Solución Particular",
+                        text4_1: "La integración da una 'Solución General' con constantes ($C$). Un PVI proporciona puntos específicos (ej. $y(0)=5$) para encontrar el valor exacto de $C$.",
+                        plot4_title: "Visualizando Movimiento Armónico",
+                        plot4_desc: "Una masa en un resorte oscilando con el tiempo. La posición inicial y(0) determina la curva específica (solución particular).",
+                        plot4_type: "spring_mass",
+                        plot4_function: "3 * cos(2*x)", // y = 3cos(2t), Amplitud 3
+                        plot4_domain: [0, 10], // Tiempo t de 0 a 10
+                        plot4_range: [-4, 4],
+                        plot4_label: "y(0) = 3",
+                        def4_2_title: "Aplicaciones Comunes",
+                        list4_1: "Crecimiento/Decaimiento Exponencial: $\\frac{dy}{dt} = ky$",
+                        list4_2: "Ley de Enfriamiento de Newton: La tasa de enfriamiento es proporcional a la diferencia de temperatura.",
+                        list4_3: "Movimiento Armónico: Resortes y Péndulos ($y'' = -k y$).",
+                        ex4_1_title: "Ejemplo (Problema de Valor Inicial)",
+                        ex4_1_problem: "Resuelve la ecuación de decaimiento $\\frac{dy}{dt} = -0.5y$ dado $y(0) = 10$.",
+                        ex4_1_step1: "Solución General: Separando variables da $y(t) = Ce^{-0.5t}$.",
+                        ex4_1_step2: "Aplica Condición Inicial: Sustituye $t=0$ y $y=10$.",
+                        ex4_1_math: `10 = C e^{-0.5(0)} \\implies 10 = C(1) \\implies C = 10`,
+                        ex4_1_solution: "Solución Particular: $y(t) = 10e^{-0.5t}$."
+                    },
+                    example_section: {
+                        title_ex: "Ejemplos con Soluciones Paso a Paso",
+                        ex1: {
+                            title: "1. Resolviendo una Ecuación Separable",
+                            problem: "Encuentra la solución general:",
+                            problem_math: `\\frac{dy}{dx} = \\frac{2x}{y}`,
+                            step1_title: "Paso 1: Separar Variables",
+                            step1_desc: "Multiplica por $y$ y $dx$ para separar términos.",
+                            step1_math: `y \\, dy = 2x \\, dx`,
+                            step2_title: "Paso 2: Integrar Ambos Lados",
+                            step2_math: `\\int y \\, dy = \\int 2x \\, dx \\implies \\frac{1}{2}y^2 = x^2 + C`,
+                            step3_title: "Paso 3: Forma Explícita (Opcional)",
+                            step3_desc: "Multiplica por 2. (Nota: $2C$ es solo una nueva constante $C_1$).",
+                            result_title: "Respuesta Final",
+                            result: `y^2 = 2x^2 + C_1 \\implies y = \\pm\\sqrt{2x^2 + C_1}`
+                        },
+                        ex2: {
+                            title: "2. Lineal de Primer Orden (PVI)",
+                            problem: "Resuelve el Problema de Valor Inicial:",
+                            problem_math: `y' + y = e^x, \\quad y(0) = 1`,
+                            step1_title: "Paso 1: Factor Integrante",
+                            step1_desc: "Aquí $P(x) = 1$. El factor es $e^{\\int 1 dx} = e^x$.",
+                            step2_title: "Paso 2: Multiplicar y Simplificar",
+                            step2_desc: "Multiplica la ecuación por $e^x$. El LI se convierte en la derivada del producto.",
+                            step2_math: `e^x y' + e^x y = e^x e^x \\implies \\frac{d}{dx}[e^x y] = e^{2x}`,
+                            step3_title: "Paso 3: Integrar y Resolver para C",
+                            step3_math: `e^x y = \\int e^{2x} dx = \\frac{1}{2}e^{2x} + C`,
+                            step4_title: "Paso 4: Aplicar Condición Inicial",
+                            step4_desc: "Usa $y(0)=1$. $e^0(1) = \\frac{1}{2}e^0 + C \\implies 1 = 0.5 + C \\implies C = 0.5$.",
+                            result_title: "Respuesta Final",
+                            result: `y = \\frac{1}{2}e^x + \\frac{1}{2}e^{-x}`
+                        },
+                        ex3: {
+                            title: "3. Homogénea de Segundo Orden",
+                            problem: "Encuentra la solución general:",
+                            problem_math: `y'' - 5y' + 6y = 0`,
+                            step1_title: "Paso 1: Ecuación Característica",
+                            step1_desc: "Reemplaza derivadas con potencias de $r$.",
+                            step1_math: `r^2 - 5r + 6 = 0`,
+                            step2_title: "Paso 2: Encontrar Raíces",
+                            step2_desc: "Factoriza la cuadrática.",
+                            step2_math: `(r - 2)(r - 3) = 0 \\implies r_1 = 2, r_2 = 3`,
+                            step3_title: "Paso 3: Escribir Solución",
+                            step3_desc: "Como las raíces son números reales distintos, usa la forma exponencial.",
+                            result_title: "Respuesta Final",
+                            result: `y = c_1 e^{2x} + c_2 e^{3x}`
+                        }
+                    }
+                }
+            }
+        },
     },
     fr: {
         limits: {
@@ -1511,7 +1802,7 @@ export const calculusFundamentalsCourse = {
                     example_section: {
                         title_ex: "Exemples avec Solutions Étape par Étape",
                         ex1: {
-                            title: "1. Résoudre une Forme Indéterminée ($\\frac{0}{0}$)",
+                            title: "1. Résoudre une Forme Indéterminée 0/0",
                             problem: "Évaluer la limite :",
                             problem_math: `\\lim_{x \\to 3} \\frac{x^2 - 9}{x^2 - 2x - 3}`,
                             step1_title: "Étape 1 : Essayer la Substitution Directe",
@@ -1712,6 +2003,7 @@ export const calculusFundamentalsCourse = {
                             b: { x: 4, y: 0, label: "b" },
                             c: { x: 2, y: 4, label: "c (Tangente)" }
                         },
+                        plot1_description: "La sécante (bleue) et la tangente (verte) ont la même pente",
                         def1_2: "Le Théorème de la Valeur Moyenne (TVM) : Si f(x) est continue sur [a, b] et dérivable sur (a, b), il existe au moins un point c où :",
                         math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
                         text1_1: "En termes physiques : À un moment donné, votre vitesse instantanée doit être égale à votre vitesse moyenne.",
@@ -1740,6 +2032,7 @@ export const calculusFundamentalsCourse = {
                             { x: -1, y: 2, label: "Max Local (-1, 2)", color: "red" },
                             { x: 1, y: -2, label: "Min Local (1, -2)", color: "blue" }
                         ],
+                        plot2_description: "f(x) = x³ - 3x avec points critiques",
                         def2_2_title: "Test de la Seconde Dérivée (Concavité)",
                         list2_4: "Si $f''(x) > 0$, le graphique est Concave vers le haut (comme une tasse).",
                         list2_5: "Si $f''(x) < 0$, le graphique est Concave vers le bas (triste).",
@@ -1756,6 +2049,7 @@ export const calculusFundamentalsCourse = {
                         plot3_points: [
                             { x: 2, y: 128, label: "Volume Max (x=2)", color: "green" }
                         ],
+                        plot3_description: "Volume maximum x = 2",
                         strategy_title: "Stratégie Générale :",
                         step3_1: "1. Dessinez une image et étiquetez les variables.",
                         step3_2: "2. Écrivez une 'Équation Primaire' pour la quantité à optimiser.",
@@ -1781,6 +2075,8 @@ export const calculusFundamentalsCourse = {
                         plot4_points: [
                             { x: 6, y: 8, label: "Position Actuelle (x=6, y=8)", color: "orange" }
                         ],
+                        distance: "mètres",
+                        plot4_description: "théorème de Pythagore",
                         math4_1: `\\text{Donné } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
                         text4_1: "La clé est de reconnaître que chaque variable est en fait une fonction du temps $t(x)$.",
                         ex4_1_title: "Exemple (Échelle Glissante)",
@@ -2023,7 +2319,7 @@ export const calculusFundamentalsCourse = {
             title: "Séries et Suites",
             description: "Sommes infinies et convergence : analyse des modèles et approximation de fonctions complexes avec des polynômes.",
             lessons: {
-                lesson5_title: "Sommes Infinies et Approximation de Fonctions",
+                lesson5_title: "Séries et Suites",
                 lesson5: {
                     section1: {
                         title1: "Suites",
@@ -2160,6 +2456,146 @@ export const calculusFundamentalsCourse = {
                 }
             }
         },
+        differential_equations: {
+            title: "Équations Différentielles",
+            description: "Résoudre des équations reliant une fonction à ses dérivées : le langage pour modéliser le changement dans le monde physique.",
+            lessons: {
+                lesson1_title: "Techniques de Résolution & Applications",
+                lesson1: {
+                    section1: {
+                        title1: "Introduction & Équations Séparables",
+                        def1_1: "Une Équation Différentielle (ED) est une équation impliquant une fonction et ses dérivées. L''Ordre' est la dérivée la plus élevée présente.",
+                        plot1_title: "Visualisation d'un Champ de Pentes",
+                        plot1_desc: "Les petits segments montrent la pente (direction) de la solution à chaque point. La courbe bleue est une solution spécifique ($y = x^2/2 + 1$) suivant le flux.",
+                        plot1_type: "slope_field",
+                        plot1_function: "x", // dy/dx = x (Champ de pentes simple)
+                        plot1_domain: [-3, 3],
+                        plot1_range: [-3, 3],
+                        plot1_solution_curve: { start_x: 0, start_y: 1, color: "blue" }, // Courbe passant par (0,1)
+                        plot1_description: "Courbe solution suivant le champ de pentes",
+                        def1_2: "Équations Séparables :",
+                        text1_1: "Le type d'ED le plus simple. Vous pouvez algébriquement déplacer tous les termes 'y' d'un côté et tous les termes 'x' de l'autre, puis intégrer les deux.",
+                        math1_1: `N(y) \\, dy = M(x) \\, dx \\implies \\int N(y) \\, dy = \\int M(x) \\, dx`,
+                        ex1_1_title: "Exemple (Séparable)",
+                        ex1_1_problem: "Résoudre l'équation différentielle $\\frac{dy}{dx} = \\frac{x}{y}$.",
+                        ex1_1_step1: "Séparer les variables : Multiplier par $y$ et $dx$.",
+                        ex1_1_math: `y \\, dy = x \\, dx`,
+                        ex1_1_step2: "Intégrer les deux côtés :",
+                        ex1_1_math2: `\\int y \\, dy = \\int x \\, dx \\implies \\frac{y^2}{2} = \\frac{x^2}{2} + C`,
+                        ex1_1_solution: "Solution Générale Implicite : $y^2 - x^2 = C$ (Hyperboles).",
+                        warning1: "N'oubliez pas la constante d'intégration (+C) immédiatement après l'intégration !"
+                    },
+                    section2: {
+                        title2: "Équations Linéaires du Premier Ordre",
+                        def2_1: "Forme Standard : $y' + P(x)y = Q(x)$.",
+                        text2_1: "Celles-ci ne peuvent pas toujours être séparées. Nous utilisons un 'Facteur Intégrant' pour les résoudre.",
+                        def2_2_title: "La Méthode du Facteur Intégrant",
+                        step2_1: "1. Calculer le facteur $\\mu(x) = e^{\\int P(x)dx}$.",
+                        step2_2: "2. Multiplier toute l'équation par $\\mu(x)$.",
+                        step2_3: "3. Le Côté Gauche devient la dérivée d'un produit : $\\frac{d}{dx}[\\mu(x)y]$.",
+                        step2_4: "4. Intégrer les deux côtés et résoudre pour y.",
+                        ex2_1_title: "Exemple (Facteur Intégrant)",
+                        ex2_1_problem: "Résoudre $y' + 2y = e^x$.",
+                        ex2_1_step1: "Ici $P(x) = 2$. Facteur $\\mu(x) = e^{\\int 2 dx} = e^{2x}$.",
+                        ex2_1_step2: "Multiplier l'équation par $e^{2x}$ : $e^{2x}y' + 2e^{2x}y = e^{3x}$.",
+                        ex2_1_step3: "Simplifier le CG : $\\frac{d}{dx}[e^{2x}y] = e^{3x}$.",
+                        ex2_1_step4: "Intégrer : $e^{2x}y = \\int e^{3x} dx = \\frac{1}{3}e^{3x} + C$.",
+                        ex2_1_solution: "Résoudre pour y : $y = \\frac{1}{3}e^x + Ce^{-2x}$."
+                    },
+                    section3: {
+                        title3: "Équations du Second Ordre",
+                        def3_1: "Équations impliquant la dérivée seconde ($y''$). Courantes en physique (ressorts, circuits).",
+                        math3_1: `ay'' + by' + cy = 0`,
+                        text3_1: "Pour les équations homogènes linéaires à coefficients constants, nous devinons une solution de la forme $y = e^{rx}$.",
+                        plot3_title: "Mouvement Harmonique Amorti",
+                        plot3_desc: "La solution à une ED du second ordre avec des racines complexes modélise souvent une oscillation qui s'atténue avec le temps (ex. un amortisseur de voiture).",
+                        plot3_type: "damped_oscillation",
+                        plot3_function: "e^(-0.5*x) * cos(3*x)", 
+                        plot3_domain: [0, 10],
+                        plot3_range: [-1, 1],
+                        plot3_label: "Système Sous-amorti",
+                        def3_2: "L'Équation Caractéristique :",
+                        math3_2: `ar^2 + br + c = 0`,
+                        text3_2: "Résoudre pour $r$. Si les racines sont réelles/distinctes, la solution est $y = c_1 e^{r_1x} + c_2 e^{r_2x}$. Si les racines sont complexes, la solution implique sinus et cosinus.",
+                        ex3_1_title: "Exemple (Racines Réelles Distinctes)",
+                        ex3_1_problem: "Résoudre $y'' - 5y' + 6y = 0$.",
+                        ex3_1_step1: "Équation Caractéristique : $r^2 - 5r + 6 = 0$.",
+                        ex3_1_step2: "Factoriser : $(r-2)(r-3) = 0$. Les racines sont $r_1 = 2, r_2 = 3$.",
+                        ex3_1_solution: "Solution Générale : $y = c_1 e^{2x} + c_2 e^{3x}$."
+                    },
+                    section4: {
+                        title4: "Problèmes à Valeur Initiale (PVI) & Applications",
+                        def4_1: "Solution Générale vs Solution Particulière",
+                        text4_1: "L'intégration donne une 'Solution Générale' avec des constantes ($C$). Un PVI fournit des points spécifiques (ex. $y(0)=5$) pour trouver la valeur exacte de $C$.",
+                        plot4_title: "Visualisation du Mouvement Harmonique",
+                        plot4_desc: "Une masse sur un ressort oscillant avec le temps. La position initiale y(0) détermine la courbe spécifique (solution particulière).",
+                        plot4_type: "spring_mass",
+                        plot4_function: "3 * cos(2*x)", // y = 3cos(2t), Amplitude 3
+                        plot4_domain: [0, 10], // Temps t de 0 à 10
+                        plot4_range: [-4, 4],
+                        plot4_label: "y(0) = 3",
+                        def4_2_title: "Applications Courantes",
+                        list4_1: "Croissance/Décroissance Exponentielle : $\\frac{dy}{dt} = ky$",
+                        list4_2: "Loi de Refroidissement de Newton : Le taux de refroidissement est proportionnel à la différence de température.",
+                        list4_3: "Mouvement Harmonique : Ressorts et Pendules ($y'' = -k y$).",
+                        ex4_1_title: "Exemple (Problème à Valeur Initiale)",
+                        ex4_1_problem: "Résoudre l'équation de décroissance $\\frac{dy}{dt} = -0.5y$ sachant $y(0) = 10$.",
+                        ex4_1_step1: "Solution Générale : Séparer les variables donne $y(t) = Ce^{-0.5t}$.",
+                        ex4_1_step2: "Appliquer la Condition Initiale : Remplacer $t=0$ et $y=10$.",
+                        ex4_1_math: `10 = C e^{-0.5(0)} \\implies 10 = C(1) \\implies C = 10`,
+                        ex4_1_solution: "Solution Particulière : $y(t) = 10e^{-0.5t}$."
+                    },
+                    example_section: {
+                        title_ex: "Exemples avec Solutions Étape par Étape",
+                        ex1: {
+                            title: "1. Résoudre une Équation Séparable",
+                            problem: "Trouvez la solution générale :",
+                            problem_math: `\\frac{dy}{dx} = \\frac{2x}{y}`,
+                            step1_title: "Étape 1 : Séparer les Variables",
+                            step1_desc: "Multiplier par $y$ et $dx$ pour séparer les termes.",
+                            step1_math: `y \\, dy = 2x \\, dx`,
+                            step2_title: "Étape 2 : Intégrer les Deux Côtés",
+                            step2_math: `\\int y \\, dy = \\int 2x \\, dx \\implies \\frac{1}{2}y^2 = x^2 + C`,
+                            step3_title: "Étape 3 : Forme Explicite (Optionnel)",
+                            step3_desc: "Multiplier par 2. (Note : $2C$ est juste une nouvelle constante $C_1$).",
+                            result_title: "Réponse Finale",
+                            result: `y^2 = 2x^2 + C_1 \\implies y = \\pm\\sqrt{2x^2 + C_1}`
+                        },
+                        ex2: {
+                            title: "2. Linéaire du Premier Ordre (PVI)",
+                            problem: "Résoudre le Problème à Valeur Initiale :",
+                            problem_math: `y' + y = e^x, \\quad y(0) = 1`,
+                            step1_title: "Étape 1 : Facteur Intégrant",
+                            step1_desc: "Ici $P(x) = 1$. Le facteur est $e^{\\int 1 dx} = e^x$.",
+                            step2_title: "Étape 2 : Multiplier et Simplifier",
+                            step2_desc: "Multiplier l'équation par $e^x$. Le CG devient la dérivée du produit.",
+                            step2_math: `e^x y' + e^x y = e^x e^x \\implies \\frac{d}{dx}[e^x y] = e^{2x}`,
+                            step3_title: "Étape 3 : Intégrer et Résoudre pour C",
+                            step3_math: `e^x y = \\int e^{2x} dx = \\frac{1}{2}e^{2x} + C`,
+                            step4_title: "Étape 4 : Appliquer la Condition Initiale",
+                            step4_desc: "Utiliser $y(0)=1$. $e^0(1) = \\frac{1}{2}e^0 + C \\implies 1 = 0.5 + C \\implies C = 0.5$.",
+                            result_title: "Réponse Finale",
+                            result: `y = \\frac{1}{2}e^x + \\frac{1}{2}e^{-x}`
+                        },
+                        ex3: {
+                            title: "3. Homogène du Second Ordre",
+                            problem: "Trouvez la solution générale :",
+                            problem_math: `y'' - 5y' + 6y = 0`,
+                            step1_title: "Étape 1 : Équation Caractéristique",
+                            step1_desc: "Remplacer les dérivées par des puissances de $r$.",
+                            step1_math: `r^2 - 5r + 6 = 0`,
+                            step2_title: "Étape 2 : Trouver les Racines",
+                            step2_desc: "Factoriser la quadratique.",
+                            step2_math: `(r - 2)(r - 3) = 0 \\implies r_1 = 2, r_2 = 3`,
+                            step3_title: "Étape 3 : Écrire la Solution",
+                            step3_desc: "Puisque les racines sont des nombres réels distincts, utiliser la forme exponentielle.",
+                            result_title: "Réponse Finale",
+                            result: `y = c_1 e^{2x} + c_2 e^{3x}`
+                        }
+                    }
+                }
+            }
+        },
     },
     de: {
         limits: {
@@ -2223,7 +2659,7 @@ export const calculusFundamentalsCourse = {
                     example_section: {
                         title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
                         ex1: {
-                            title: "1. Lösen einer unbestimmten Form ($\\frac{0}{0}$)",
+                            title: "1. Lösen einer unbestimmten Form 0/0",
                             problem: "Berechne den Grenzwert:",
                             problem_math: `\\lim_{x \\to 3} \\frac{x^2 - 9}{x^2 - 2x - 3}`,
                             step1_title: "Schritt 1: Versuch der direkten Substitution",
@@ -2424,6 +2860,7 @@ export const calculusFundamentalsCourse = {
                             b: { x: 4, y: 0, label: "b" },
                             c: { x: 2, y: 4, label: "c (Tangente)" }
                         },
+                        plot1_description: "Sekante (blau) und Tangente (grün) haben die gleiche Steigung",
                         def1_2: "Der Mittelwertsatz (MWS): Wenn f(x) auf [a, b] stetig und auf (a, b) differenzierbar ist, gibt es mindestens einen Punkt c, an dem gilt:",
                         math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
                         text1_1: "In physikalischen Begriffen: An irgendeinem Punkt muss deine momentane Geschwindigkeit gleich deiner Durchschnittsgeschwindigkeit sein.",
@@ -2452,6 +2889,7 @@ export const calculusFundamentalsCourse = {
                             { x: -1, y: 2, label: "Lokales Max (-1, 2)", color: "red" },
                             { x: 1, y: -2, label: "Lokales Min (1, -2)", color: "blue" }
                         ],
+                        plot2_description: "f(x) = x³ - 3x mit kritischen Punkten",
                         def2_2_title: "Zweites Ableitungskriterium (Krümmung)",
                         list2_4: "Wenn $f''(x) > 0$, ist der Graph konvex (linksgekrümmt, wie eine Tasse).",
                         list2_5: "Wenn $f''(x) < 0$, ist der Graph konkav (rechtsgekrümmt, traurig).",
@@ -2468,6 +2906,7 @@ export const calculusFundamentalsCourse = {
                         plot3_points: [
                             { x: 2, y: 128, label: "Max Volumen (x=2)", color: "green" }
                         ],
+                        plot3_description: "Maximales Volumen x = 2",
                         strategy_title: "Allgemeine Strategie:",
                         step3_1: "1. Zeichne ein Bild und beschrifte Variablen.",
                         step3_2: "2. Schreibe eine 'Hauptgleichung' für die zu optimierende Größe.",
@@ -2493,6 +2932,8 @@ export const calculusFundamentalsCourse = {
                         plot4_points: [
                             { x: 6, y: 8, label: "Aktuelle Position (x=6, y=8)", color: "orange" }
                         ],
+                        distance: "Meter",
+                        plot4_description: "Satz des Pythagoras",
                         math4_1: `\\text{Gegeben } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
                         text4_1: "Der Schlüssel ist zu erkennen, dass jede Variable tatsächlich eine Funktion der Zeit $t(x)$ ist.",
                         ex4_1_title: "Beispiel (Rutschende Leiter)",
@@ -2734,7 +3175,7 @@ export const calculusFundamentalsCourse = {
             title: "Reihen & Folgen",
             description: "Unendliche Summen und Konvergenz: Analyse von Mustern und Approximation komplexer Funktionen durch Polynome.",
             lessons: {
-                lesson5_title: "Unendliche Summen & Funktionsapproximation",
+                lesson5_title: "Reihen & Folgen",
                 lesson5: {
                     section1: {
                         title1: "Folgen",
@@ -2871,6 +3312,146 @@ export const calculusFundamentalsCourse = {
                 }
             }
         },
+        differential_equations: {
+            title: "Differentialgleichungen",
+            description: "Gleichungen lösen, die eine Funktion mit ihren Ableitungen in Beziehung setzen: die Sprache zur Modellierung von Veränderungen in der physischen Welt.",
+            lessons: {
+                lesson1_title: "Lösungstechniken & Anwendungen",
+                lesson1: {
+                    section1: {
+                        title1: "Einführung & Trennbare Gleichungen",
+                        def1_1: "Eine Differentialgleichung (DGL) ist eine Gleichung, die eine Funktion und ihre Ableitungen beinhaltet. Die 'Ordnung' ist die höchste vorkommende Ableitung.",
+                        plot1_title: "Visualisierung eines Richtungsfeldes",
+                        plot1_desc: "Die kleinen Segmente zeigen die Steigung (Richtung) der Lösung an jedem Punkt. Die blaue Kurve ist eine spezifische Lösung ($y = x^2/2 + 1$), die dem Fluss folgt.",
+                        plot1_type: "slope_field",
+                        plot1_function: "x", // dy/dx = x (Einfaches Richtungsfeld)
+                        plot1_domain: [-3, 3],
+                        plot1_range: [-3, 3],
+                        plot1_solution_curve: { start_x: 0, start_y: 1, color: "blue" }, // Kurve durch (0,1)
+                        plot1_description: "Lösungskurve folgt dem Richtungsfeld",
+                        def1_2: "Trennbare Gleichungen:",
+                        text1_1: "Der einfachste Typ von DGL. Du kannst algebraisch alle 'y'-Terme auf eine Seite und alle 'x'-Terme auf die andere bringen und dann beide integrieren.",
+                        math1_1: `N(y) \\, dy = M(x) \\, dx \\implies \\int N(y) \\, dy = \\int M(x) \\, dx`,
+                        ex1_1_title: "Beispiel (Trennbar)",
+                        ex1_1_problem: "Löse die Differentialgleichung $\\frac{dy}{dx} = \\frac{x}{y}$.",
+                        ex1_1_step1: "Variablen trennen: Multipliziere mit $y$ und $dx$.",
+                        ex1_1_math: `y \\, dy = x \\, dx`,
+                        ex1_1_step2: "Beide Seiten integrieren:",
+                        ex1_1_math2: `\\int y \\, dy = \\int x \\, dx \\implies \\frac{y^2}{2} = \\frac{x^2}{2} + C`,
+                        ex1_1_solution: "Implizite Allgemeine Lösung: $y^2 - x^2 = C$ (Hyperbeln).",
+                        warning1: "Vergiss nicht die Integrationskonstante (+C) sofort nach dem Integrieren!"
+                    },
+                    section2: {
+                        title2: "Lineare Gleichungen Erster Ordnung",
+                        def2_1: "Standardform: $y' + P(x)y = Q(x)$.",
+                        text2_1: "Diese können nicht immer getrennt werden. Wir verwenden einen 'Integrierenden Faktor', um sie zu lösen.",
+                        def2_2_title: "Die Methode des Integrierenden Faktors",
+                        step2_1: "1. Berechne den Faktor $\\mu(x) = e^{\\int P(x)dx}$.",
+                        step2_2: "2. Multipliziere die gesamte Gleichung mit $\\mu(x)$.",
+                        step2_3: "3. Die linke Seite wird zur Ableitung eines Produkts: $\\frac{d}{dx}[\\mu(x)y]$.",
+                        step2_4: "4. Integriere beide Seiten und löse nach y auf.",
+                        ex2_1_title: "Beispiel (Integrierender Faktor)",
+                        ex2_1_problem: "Löse $y' + 2y = e^x$.",
+                        ex2_1_step1: "Hier $P(x) = 2$. Faktor $\\mu(x) = e^{\\int 2 dx} = e^{2x}$.",
+                        ex2_1_step2: "Multipliziere Gleichung mit $e^{2x}$: $e^{2x}y' + 2e^{2x}y = e^{3x}$.",
+                        ex2_1_step3: "Vereinfache LS: $\\frac{d}{dx}[e^{2x}y] = e^{3x}$.",
+                        ex2_1_step4: "Integriere: $e^{2x}y = \\int e^{3x} dx = \\frac{1}{3}e^{3x} + C$.",
+                        ex2_1_solution: "Löse nach y auf: $y = \\frac{1}{3}e^x + Ce^{-2x}$."
+                    },
+                    section3: {
+                        title3: "Gleichungen Zweiter Ordnung",
+                        def3_1: "Gleichungen, die die zweite Ableitung ($y''$) beinhalten. Häufig in der Physik (Federn, Schaltkreise).",
+                        math3_1: `ay'' + by' + cy = 0`,
+                        text3_1: "Für lineare homogene Gleichungen mit konstanten Koeffizienten raten wir eine Lösung der Form $y = e^{rx}$.",
+                        plot3_title: "Gedämpfte Harmonische Bewegung",
+                        plot3_desc: "Die Lösung einer DGL zweiter Ordnung mit komplexen Wurzeln modelliert oft eine Schwingung, die mit der Zeit abklingt (z.B. ein Stoßdämpfer).",
+                        plot3_type: "damped_oscillation",
+                        plot3_function: "e^(-0.5*x) * cos(3*x)", 
+                        plot3_domain: [0, 10],
+                        plot3_range: [-1, 1],
+                        plot3_label: "Unterdämpftes System",
+                        def3_2: "Die Charakteristische Gleichung:",
+                        math3_2: `ar^2 + br + c = 0`,
+                        text3_2: "Löse nach $r$ auf. Wenn Wurzeln reell/verschieden sind, ist die Lösung $y = c_1 e^{r_1x} + c_2 e^{r_2x}$. Wenn Wurzeln komplex sind, beinhaltet die Lösung Sinus und Cosinus.",
+                        ex3_1_title: "Beispiel (Reelle Verschiedene Wurzeln)",
+                        ex3_1_problem: "Löse $y'' - 5y' + 6y = 0$.",
+                        ex3_1_step1: "Charakteristische Gleichung: $r^2 - 5r + 6 = 0$.",
+                        ex3_1_step2: "Faktorisiere: $(r-2)(r-3) = 0$. Wurzeln sind $r_1 = 2, r_2 = 3$.",
+                        ex3_1_solution: "Allgemeine Lösung: $y = c_1 e^{2x} + c_2 e^{3x}$."
+                    },
+                    section4: {
+                        title4: "Anfangswertprobleme (AWP) & Anwendungen",
+                        def4_1: "Allgemeine Lösung vs. Partikuläre Lösung",
+                        text4_1: "Integration ergibt eine 'Allgemeine Lösung' mit Konstanten ($C$). Ein AWP liefert spezifische Punkte (z.B. $y(0)=5$), um den exakten Wert von $C$ zu finden.",
+                        plot4_title: "Visualisierung Harmonischer Bewegung",
+                        plot4_desc: "Eine Masse an einer Feder, die über die Zeit schwingt. Die Startposition y(0) bestimmt die spezifische Kurve (partikuläre Lösung).",
+                        plot4_type: "spring_mass",
+                        plot4_function: "3 * cos(2*x)", // y = 3cos(2t), Amplitude 3
+                        plot4_domain: [0, 10], // Zeit t von 0 bis 10
+                        plot4_range: [-4, 4],
+                        plot4_label: "y(0) = 3",
+                        def4_2_title: "Häufige Anwendungen",
+                        list4_1: "Exponentielles Wachstum/Zerfall: $\\frac{dy}{dt} = ky$",
+                        list4_2: "Newtonsches Abkühlungsgesetz: Abkühlungsrate ist proportional zur Temperaturdifferenz.",
+                        list4_3: "Harmonische Bewegung: Federn und Pendel ($y'' = -k y$).",
+                        ex4_1_title: "Beispiel (Anfangswertproblem)",
+                        ex4_1_problem: "Löse die Zerfallsgleichung $\\frac{dy}{dt} = -0.5y$ gegeben $y(0) = 10$.",
+                        ex4_1_step1: "Allgemeine Lösung: Variablentrennung ergibt $y(t) = Ce^{-0.5t}$.",
+                        ex4_1_step2: "Wende Anfangsbedingung an: Setze $t=0$ und $y=10$ ein.",
+                        ex4_1_math: `10 = C e^{-0.5(0)} \\implies 10 = C(1) \\implies C = 10`,
+                        ex4_1_solution: "Partikuläre Lösung: $y(t) = 10e^{-0.5t}$."
+                    },
+                    example_section: {
+                        title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                        ex1: {
+                            title: "1. Lösen einer trennbaren Gleichung",
+                            problem: "Finde die allgemeine Lösung:",
+                            problem_math: `\\frac{dy}{dx} = \\frac{2x}{y}`,
+                            step1_title: "Schritt 1: Variablen trennen",
+                            step1_desc: "Multipliziere mit $y$ und $dx$, um Terme zu trennen.",
+                            step1_math: `y \\, dy = 2x \\, dx`,
+                            step2_title: "Schritt 2: Beide Seiten integrieren",
+                            step2_math: `\\int y \\, dy = \\int 2x \\, dx \\implies \\frac{1}{2}y^2 = x^2 + C`,
+                            step3_title: "Schritt 3: Explizite Form (Optional)",
+                            step3_desc: "Multipliziere mit 2. (Hinweis: $2C$ ist nur eine neue Konstante $C_1$).",
+                            result_title: "Endergebnis",
+                            result: `y^2 = 2x^2 + C_1 \\implies y = \\pm\\sqrt{2x^2 + C_1}`
+                        },
+                        ex2: {
+                            title: "2. Linear Erster Ordnung (AWP)",
+                            problem: "Löse das Anfangswertproblem:",
+                            problem_math: `y' + y = e^x, \\quad y(0) = 1`,
+                            step1_title: "Schritt 1: Integrierender Faktor",
+                            step1_desc: "Hier $P(x) = 1$. Der Faktor ist $e^{\\int 1 dx} = e^x$.",
+                            step2_title: "Schritt 2: Multiplizieren und Vereinfachen",
+                            step2_desc: "Multipliziere Gleichung mit $e^x$. LS wird zur Produktableitung.",
+                            step2_math: `e^x y' + e^x y = e^x e^x \\implies \\frac{d}{dx}[e^x y] = e^{2x}`,
+                            step3_title: "Schritt 3: Integrieren und nach C auflösen",
+                            step3_math: `e^x y = \\int e^{2x} dx = \\frac{1}{2}e^{2x} + C`,
+                            step4_title: "Schritt 4: Anfangsbedingung anwenden",
+                            step4_desc: "Verwende $y(0)=1$. $e^0(1) = \\frac{1}{2}e^0 + C \\implies 1 = 0.5 + C \\implies C = 0.5$.",
+                            result_title: "Endergebnis",
+                            result: `y = \\frac{1}{2}e^x + \\frac{1}{2}e^{-x}`
+                        },
+                        ex3: {
+                            title: "3. Homogen Zweiter Ordnung",
+                            problem: "Finde die allgemeine Lösung:",
+                            problem_math: `y'' - 5y' + 6y = 0`,
+                            step1_title: "Schritt 1: Charakteristische Gleichung",
+                            step1_desc: "Ersetze Ableitungen durch Potenzen von $r$.",
+                            step1_math: `r^2 - 5r + 6 = 0`,
+                            step2_title: "Schritt 2: Wurzeln finden",
+                            step2_desc: "Faktorisiere die Quadratische Gleichung.",
+                            step2_math: `(r - 2)(r - 3) = 0 \\implies r_1 = 2, r_2 = 3`,
+                            step3_title: "Schritt 3: Lösung schreiben",
+                            step3_desc: "Da Wurzeln reelle verschiedene Zahlen sind, verwende die Exponentialform.",
+                            result_title: "Endergebnis",
+                            result: `y = c_1 e^{2x} + c_2 e^{3x}`
+                        }
+                    }
+                }
+            }
+        },
     },
     pl: {
         limits: {
@@ -2934,7 +3515,7 @@ export const calculusFundamentalsCourse = {
                     example_section: {
                         title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
                         ex1: {
-                            title: "1. Rozwiązywanie Symbolu Nieoznaczonego ($\\frac{0}{0}$)",
+                            title: "1. Rozwiązywanie Symbolu Nieoznaczonego 0/0",
                             problem: "Oblicz granicę:",
                             problem_math: `\\lim_{x \\to 3} \\frac{x^2 - 9}{x^2 - 2x - 3}`,
                             step1_title: "Krok 1: Próba Bezpośredniego Podstawienia",
@@ -3135,6 +3716,7 @@ export const calculusFundamentalsCourse = {
                             b: { x: 4, y: 0, label: "b" },
                             c: { x: 2, y: 4, label: "c (Styczna)" }
                         },
+                        plot1_description: "Sieczna (niebieska) i styczna (zielona) mają takie samo nachylenie",
                         def1_2: "Twierdzenie o Wartości Średniej (MVT): Jeśli f(x) jest ciągła na [a, b] i różniczkowalna w (a, b), istnieje co najmniej jeden punkt c, gdzie:",
                         math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
                         text1_1: "W terminach fizycznych: W pewnym momencie twoja prędkość chwilowa musi być równa prędkości średniej.",
@@ -3163,6 +3745,7 @@ export const calculusFundamentalsCourse = {
                             { x: -1, y: 2, label: "Lokalne Maks (-1, 2)", color: "red" },
                             { x: 1, y: -2, label: "Lokalne Min (1, -2)", color: "blue" }
                         ],
+                        plot2_description: "f(x) = x³ - 3x z punktami krytycznymi",
                         def2_2_title: "Test Drugiej Pochodnej (Wypukłość)",
                         list2_4: "Jeśli $f''(x) > 0$, wykres jest Wypukły w dół (jak kubek).",
                         list2_5: "Jeśli $f''(x) < 0$, wykres jest Wypukły w górę (smutny).",
@@ -3179,6 +3762,7 @@ export const calculusFundamentalsCourse = {
                         plot3_points: [
                             { x: 2, y: 128, label: "Maks Objętość (x=2)", color: "green" }
                         ],
+                        plot3_description: "Maksymalna objętość x = 2",
                         strategy_title: "Ogólna Strategia:",
                         step3_1: "1. Narysuj obrazek i oznacz zmienne.",
                         step3_2: "2. Napisz 'Równanie Podstawowe' dla wielkości, która ma być zoptymalizowana.",
@@ -3204,6 +3788,8 @@ export const calculusFundamentalsCourse = {
                         plot4_points: [
                             { x: 6, y: 8, label: "Obecna Pozycja (x=6, y=8)", color: "orange" }
                         ],
+                        distance: "metry",
+                        plot4_description: "twierdzenie Pitagorasa",
                         math4_1: `\\text{Dano } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
                         text4_1: "Kluczem jest rozpoznanie, że każda zmienna jest w rzeczywistości funkcją czasu $t(x)$.",
                         ex4_1_title: "Przykład (Przesuwająca się Drabina)",
@@ -3446,7 +4032,7 @@ export const calculusFundamentalsCourse = {
             title: "Szeregi i Ciągi",
             description: "Sumy nieskończone i zbieżność: analiza wzorców i przybliżanie funkcji złożonych wielomianami.",
             lessons: {
-                lesson5_title: "Sumy Nieskończone i Przybliżanie Funkcji",
+                lesson5_title: "Szeregi i Ciągi",
                 lesson5: {
                     section1: {
                         title1: "Ciągi",
@@ -3583,6 +4169,146 @@ export const calculusFundamentalsCourse = {
                 }
             }
         },
+        differential_equations: {
+            title: "Równania Różniczkowe",
+            description: "Rozwiązywanie równań wiążących funkcję z jej pochodnymi: język modelowania zmian w świecie fizycznym.",
+            lessons: {
+                lesson1_title: "Techniki Rozwiązywania i Zastosowania",
+                lesson1: {
+                    section1: {
+                        title1: "Wprowadzenie i Równania o Zmiennych Rozdzielonych",
+                        def1_1: "Równanie Różniczkowe (RR) to równanie zawierające funkcję i jej pochodne. 'Rząd' to najwyższa występująca pochodna.",
+                        plot1_title: "Wizualizacja Pola Kierunków",
+                        plot1_desc: "Małe odcinki pokazują nachylenie (kierunek) rozwiązania w każdym punkcie. Niebieska krzywa to konkretne rozwiązanie ($y = x^2/2 + 1$) podążające za przepływem.",
+                        plot1_type: "slope_field",
+                        plot1_function: "x", // dy/dx = x (Proste pole kierunków)
+                        plot1_domain: [-3, 3],
+                        plot1_range: [-3, 3],
+                        plot1_solution_curve: { start_x: 0, start_y: 1, color: "blue" }, // Krzywa przechodząca przez (0,1)
+                        plot1_description: "Krzywa rozwiązania podążająca za polem kierunków",
+                        def1_2: "Równania o Zmiennych Rozdzielonych:",
+                        text1_1: "Najprostszy typ RR. Możesz algebraicznie przenieść wszystkie wyrazy z 'y' na jedną stronę, a wszystkie z 'x' na drugą, a następnie scałkować obie strony.",
+                        math1_1: `N(y) \\, dy = M(x) \\, dx \\implies \\int N(y) \\, dy = \\int M(x) \\, dx`,
+                        ex1_1_title: "Przykład (Rozdzielone Zmienne)",
+                        ex1_1_problem: "Rozwiąż równanie różniczkowe $\\frac{dy}{dx} = \\frac{x}{y}$.",
+                        ex1_1_step1: "Rozdziel zmienne: Pomnóż przez $y$ i $dx$.",
+                        ex1_1_math: `y \\, dy = x \\, dx`,
+                        ex1_1_step2: "Scałkuj obie strony:",
+                        ex1_1_math2: `\\int y \\, dy = \\int x \\, dx \\implies \\frac{y^2}{2} = \\frac{x^2}{2} + C`,
+                        ex1_1_solution: "Niejawne Rozwiązanie Ogólne: $y^2 - x^2 = C$ (Hiperbole).",
+                        warning1: "Nie zapomnij o stałej całkowania (+C) natychmiast po całkowaniu!"
+                    },
+                    section2: {
+                        title2: "Równania Liniowe Pierwszego Rzędu",
+                        def2_1: "Postać Standardowa: $y' + P(x)y = Q(x)$.",
+                        text2_1: "Nie zawsze da się je rozdzielić. Używamy 'Czynnika Całkującego' do ich rozwiązania.",
+                        def2_2_title: "Metoda Czynnika Całkującego",
+                        step2_1: "1. Oblicz czynnik $\\mu(x) = e^{\\int P(x)dx}$.",
+                        step2_2: "2. Pomnóż całe równanie przez $\\mu(x)$.",
+                        step2_3: "3. Lewa Strona staje się pochodną iloczynu: $\\frac{d}{dx}[\\mu(x)y]$.",
+                        step2_4: "4. Scałkuj obie strony i rozwiąż dla y.",
+                        ex2_1_title: "Przykład (Czynnik Całkujący)",
+                        ex2_1_problem: "Rozwiąż $y' + 2y = e^x$.",
+                        ex2_1_step1: "Tutaj $P(x) = 2$. Czynnik $\\mu(x) = e^{\\int 2 dx} = e^{2x}$.",
+                        ex2_1_step2: "Pomnóż równanie przez $e^{2x}$: $e^{2x}y' + 2e^{2x}y = e^{3x}$.",
+                        ex2_1_step3: "Uprość LS: $\\frac{d}{dx}[e^{2x}y] = e^{3x}$.",
+                        ex2_1_step4: "Scałkuj: $e^{2x}y = \\int e^{3x} dx = \\frac{1}{3}e^{3x} + C$.",
+                        ex2_1_solution: "Rozwiąż dla y: $y = \\frac{1}{3}e^x + Ce^{-2x}$."
+                    },
+                    section3: {
+                        title3: "Równania Drugiego Rzędu",
+                        def3_1: "Równania zawierające drugą pochodną ($y''$). Powszechne w fizyce (sprężyny, obwody).",
+                        math3_1: `ay'' + by' + cy = 0`,
+                        text3_1: "Dla liniowych równań jednorodnych o stałych współczynnikach zgadujemy rozwiązanie postaci $y = e^{rx}$.",
+                        plot3_title: "Tłumiony Ruch Harmoniczny",
+                        plot3_desc: "Rozwiązanie RR drugiego rzędu z pierwiastkami zespolonymi często modeluje oscylację zanikającą w czasie (np. amortyzator samochodowy).",
+                        plot3_type: "damped_oscillation",
+                        plot3_function: "e^(-0.5*x) * cos(3*x)", 
+                        plot3_domain: [0, 10],
+                        plot3_range: [-1, 1],
+                        plot3_label: "Układ Podkrytyczny",
+                        def3_2: "Równanie Charakterystyczne:",
+                        math3_2: `ar^2 + br + c = 0`,
+                        text3_2: "Rozwiąż dla $r$. Jeśli pierwiastki są rzeczywiste/różne, rozwiązaniem jest $y = c_1 e^{r_1x} + c_2 e^{r_2x}$. Jeśli pierwiastki są zespolone, rozwiązanie zawiera sinus i cosinus.",
+                        ex3_1_title: "Przykład (Rzeczywiste Różne Pierwiastki)",
+                        ex3_1_problem: "Rozwiąż $y'' - 5y' + 6y = 0$.",
+                        ex3_1_step1: "Równanie Charakterystyczne: $r^2 - 5r + 6 = 0$.",
+                        ex3_1_step2: "Rozłóż na czynniki: $(r-2)(r-3) = 0$. Pierwiastki to $r_1 = 2, r_2 = 3$.",
+                        ex3_1_solution: "Rozwiązanie Ogólne: $y = c_1 e^{2x} + c_2 e^{3x}$."
+                    },
+                    section4: {
+                        title4: "Problemy Początkowe (IVP) i Zastosowania",
+                        def4_1: "Rozwiązanie Ogólne vs. Rozwiązanie Szczególne",
+                        text4_1: "Całkowanie daje 'Rozwiązanie Ogólne' ze stałymi ($C$). IVP dostarcza konkretne punkty (np. $y(0)=5$), aby znaleźć dokładną wartość $C$.",
+                        plot4_title: "Wizualizacja Ruchu Harmonicznego",
+                        plot4_desc: "Masa na sprężynie oscylująca w czasie. Pozycja początkowa y(0) określa konkretną krzywą (rozwiązanie szczególne).",
+                        plot4_type: "spring_mass",
+                        plot4_function: "3 * cos(2*x)", // y = 3cos(2t), Amplituda 3
+                        plot4_domain: [0, 10], // Czas t od 0 do 10
+                        plot4_range: [-4, 4],
+                        plot4_label: "y(0) = 3",
+                        def4_2_title: "Powszechne Zastosowania",
+                        list4_1: "Wzrost/Zanik Wykładniczy: $\\frac{dy}{dt} = ky$",
+                        list4_2: "Prawo stygnięcia Newtona: Szybkość stygnięcia jest proporcjonalna do różnicy temperatur.",
+                        list4_3: "Ruch Harmoniczny: Sprężyny i Wahadła ($y'' = -k y$).",
+                        ex4_1_title: "Przykład (Problem Początkowy)",
+                        ex4_1_problem: "Rozwiąż równanie zaniku $\\frac{dy}{dt} = -0.5y$ dane $y(0) = 10$.",
+                        ex4_1_step1: "Rozwiązanie Ogólne: Rozdzielenie zmiennych daje $y(t) = Ce^{-0.5t}$.",
+                        ex4_1_step2: "Zastosuj Warunek Początkowy: Podstaw $t=0$ i $y=10$.",
+                        ex4_1_math: `10 = C e^{-0.5(0)} \\implies 10 = C(1) \\implies C = 10`,
+                        ex4_1_solution: "Rozwiązanie Szczególne: $y(t) = 10e^{-0.5t}$."
+                    },
+                    example_section: {
+                        title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
+                        ex1: {
+                            title: "1. Rozwiązywanie Równania o Zmiennych Rozdzielonych",
+                            problem: "Znajdź rozwiązanie ogólne:",
+                            problem_math: `\\frac{dy}{dx} = \\frac{2x}{y}`,
+                            step1_title: "Krok 1: Rozdziel Zmienne",
+                            step1_desc: "Pomnóż przez $y$ i $dx$, aby rozdzielić wyrazy.",
+                            step1_math: `y \\, dy = 2x \\, dx`,
+                            step2_title: "Krok 2: Scałkuj Obie Strony",
+                            step2_math: `\\int y \\, dy = \\int 2x \\, dx \\implies \\frac{1}{2}y^2 = x^2 + C`,
+                            step3_title: "Krok 3: Postać Jawna (Opcjonalnie)",
+                            step3_desc: "Pomnóż przez 2. (Uwaga: $2C$ to po prostu nowa stała $C_1$).",
+                            result_title: "Odpowiedź Końcowa",
+                            result: `y^2 = 2x^2 + C_1 \\implies y = \\pm\\sqrt{2x^2 + C_1}`
+                        },
+                        ex2: {
+                            title: "2. Liniowe Pierwszego Rzędu (IVP)",
+                            problem: "Rozwiąż Problem Początkowy:",
+                            problem_math: `y' + y = e^x, \\quad y(0) = 1`,
+                            step1_title: "Krok 1: Czynnik Całkujący",
+                            step1_desc: "Tutaj $P(x) = 1$. Czynnik to $e^{\\int 1 dx} = e^x$.",
+                            step2_title: "Krok 2: Pomnóż i Uprość",
+                            step2_desc: "Pomnóż równanie przez $e^x$. LS staje się pochodną iloczynu.",
+                            step2_math: `e^x y' + e^x y = e^x e^x \\implies \\frac{d}{dx}[e^x y] = e^{2x}`,
+                            step3_title: "Krok 3: Scałkuj i Rozwiąż dla C",
+                            step3_math: `e^x y = \\int e^{2x} dx = \\frac{1}{2}e^{2x} + C`,
+                            step4_title: "Krok 4: Zastosuj Warunek Początkowy",
+                            step4_desc: "Użyj $y(0)=1$. $e^0(1) = \\frac{1}{2}e^0 + C \\implies 1 = 0.5 + C \\implies C = 0.5$.",
+                            result_title: "Odpowiedź Końcowa",
+                            result: `y = \\frac{1}{2}e^x + \\frac{1}{2}e^{-x}`
+                        },
+                        ex3: {
+                            title: "3. Jednorodne Drugiego Rzędu",
+                            problem: "Znajdź rozwiązanie ogólne:",
+                            problem_math: `y'' - 5y' + 6y = 0`,
+                            step1_title: "Krok 1: Równanie Charakterystyczne",
+                            step1_desc: "Zastąp pochodne potęgami $r$.",
+                            step1_math: `r^2 - 5r + 6 = 0`,
+                            step2_title: "Krok 2: Znajdź Pierwiastki",
+                            step2_desc: "Rozłóż na czynniki równanie kwadratowe.",
+                            step2_math: `(r - 2)(r - 3) = 0 \\implies r_1 = 2, r_2 = 3`,
+                            step3_title: "Krok 3: Napisz Rozwiązanie",
+                            step3_desc: "Ponieważ pierwiastki są rzeczywistymi różnymi liczbami, użyj postaci wykładniczej.",
+                            result_title: "Odpowiedź Końcowa",
+                            result: `y = c_1 e^{2x} + c_2 e^{3x}`
+                        }
+                    }
+                }
+            }
+        },
     },
     ro: {
         limits: {
@@ -3646,7 +4372,7 @@ export const calculusFundamentalsCourse = {
                     example_section: {
                         title_ex: "Exemple cu Soluții Pas cu Pas",
                         ex1: {
-                            title: "1. Rezolvarea unei Forme Nedeterminate ($\\frac{0}{0}$)",
+                            title: "1. Rezolvarea unei Forme Nedeterminate 0/0",
                             problem: "Evaluați limita:",
                             problem_math: `\\lim_{x \\to 3} \\frac{x^2 - 9}{x^2 - 2x - 3}`,
                             step1_title: "Pasul 1: Încercați Substituția Directă",
@@ -3847,6 +4573,7 @@ export const calculusFundamentalsCourse = {
                             b: { x: 4, y: 0, label: "b" },
                             c: { x: 2, y: 4, label: "c (Tangentă)" }
                         },
+                        plot1_description: "Secanta (albastră) și tangenta (verde) au aceeași pantă",
                         def1_2: "Teorema Valorii Medii (TVM): Dacă f(x) este continuă pe [a, b] și diferențiabilă pe (a, b), există cel puțin un punct c unde:",
                         math1_1: `f'(c) = \\frac{f(b) - f(a)}{b - a}`,
                         text1_1: "În termeni fizici: La un moment dat, viteza ta instantanee trebuie să fie egală cu viteza medie.",
@@ -3875,6 +4602,7 @@ export const calculusFundamentalsCourse = {
                             { x: -1, y: 2, label: "Max Local (-1, 2)", color: "red" },
                             { x: 1, y: -2, label: "Min Local (1, -2)", color: "blue" }
                         ],
+                        plot2_description: "f(x) = x³ - 3x cu puncte critice",
                         def2_2_title: "Testul Celei de-a Doua Derivate (Concavitate)",
                         list2_4: "Dacă $f''(x) > 0$, graficul este Concav în Sus (ca o cană).",
                         list2_5: "Dacă $f''(x) < 0$, graficul este Concav în Jos (trist).",
@@ -3891,6 +4619,7 @@ export const calculusFundamentalsCourse = {
                         plot3_points: [
                             { x: 2, y: 128, label: "Volum Max (x=2)", color: "green" }
                         ],
+                        plot3_description: "Volum maxim x = 2",
                         strategy_title: "Strategie Generală:",
                         step3_1: "1. Desenează o imagine și etichetează variabilele.",
                         step3_2: "2. Scrie o 'Ecuație Primară' pentru cantitatea de optimizat.",
@@ -3916,6 +4645,8 @@ export const calculusFundamentalsCourse = {
                         plot4_points: [
                             { x: 6, y: 8, label: "Poziția Curentă (x=6, y=8)", color: "orange" }
                         ],
+                        distance: "metri",
+                        plot4_description: "teorema lui Pitagora",
                         math4_1: `\\text{Dat } x^2 + y^2 = z^2 \\implies 2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 2z\\frac{dz}{dt}`,
                         text4_1: "Cheia este să recunoști că fiecare variabilă este de fapt o funcție de timp $t(x)$.",
                         ex4_1_title: "Exemplu (Scară Alunecând)",
@@ -4158,7 +4889,7 @@ export const calculusFundamentalsCourse = {
             title: "Serii și Șiruri",
             description: "Sume infinite și convergență: analizarea tiparelor și aproximarea funcțiilor complexe cu polinoame.",
             lessons: {
-                lesson5_title: "Sume Infinite și Aproximarea Funcțiilor",
+                lesson5_title: "Serii și Șiruri",
                 lesson5: {
                     section1: {
                         title1: "Șiruri",
@@ -4290,6 +5021,146 @@ export const calculusFundamentalsCourse = {
                             step3_math: `x - \\frac{x^3}{6} + \\frac{x^5}{120} - \\dots`,
                             result_title: "Răspuns Final",
                             result: `$\\sin(x) \\approx x - \\frac{x^3}{3!} + \\frac{x^5}{5!}$`
+                        }
+                    }
+                }
+            }
+        },
+        differential_equations: {
+            title: "Ecuații Diferențiale",
+            description: "Rezolvarea ecuațiilor care leagă o funcție de derivatele sale: limbajul modelării schimbării în lumea fizică.",
+            lessons: {
+                lesson1_title: "Tehnici de Rezolvare și Aplicații",
+                lesson1: {
+                    section1: {
+                        title1: "Introducere și Ecuații Separabile",
+                        def1_1: "O Ecuație Diferențială (ED) este o ecuație care implică o funcție și derivatele sale. 'Ordinul' este cea mai înaltă derivată prezentă.",
+                        plot1_title: "Vizualizarea unui Câmp de Pante",
+                        plot1_desc: "Segmentele mici arată panta (direcția) soluției în fiecare punct. Curba albastră este o soluție specifică ($y = x^2/2 + 1$) urmând fluxul.",
+                        plot1_type: "slope_field",
+                        plot1_function: "x", // dy/dx = x (Câmp de pante simplu)
+                        plot1_domain: [-3, 3],
+                        plot1_range: [-3, 3],
+                        plot1_solution_curve: { start_x: 0, start_y: 1, color: "blue" }, // Curbă trecând prin (0,1)
+                        plot1_description: "Curba soluției urmând câmpul de pante",
+                        def1_2: "Ecuații Separabile:",
+                        text1_1: "Cel mai simplu tip de ED. Poți muta algebric toți termenii 'y' într-o parte și toți termenii 'x' în cealaltă, apoi integrezi ambele părți.",
+                        math1_1: `N(y) \\, dy = M(x) \\, dx \\implies \\int N(y) \\, dy = \\int M(x) \\, dx`,
+                        ex1_1_title: "Exemplu (Separabilă)",
+                        ex1_1_problem: "Rezolvă ecuația diferențială $\\frac{dy}{dx} = \\frac{x}{y}$.",
+                        ex1_1_step1: "Separă variabilele: Înmulțește cu $y$ și $dx$.",
+                        ex1_1_math: `y \\, dy = x \\, dx`,
+                        ex1_1_step2: "Integrează ambele părți:",
+                        ex1_1_math2: `\\int y \\, dy = \\int x \\, dx \\implies \\frac{y^2}{2} = \\frac{x^2}{2} + C`,
+                        ex1_1_solution: "Soluție Generală Implicită: $y^2 - x^2 = C$ (Hiperbole).",
+                        warning1: "Nu uita constanta de integrare (+C) imediat după integrare!"
+                    },
+                    section2: {
+                        title2: "Ecuații Liniare de Ordinul Întâi",
+                        def2_1: "Forma Standard: $y' + P(x)y = Q(x)$.",
+                        text2_1: "Acestea nu pot fi întotdeauna separate. Folosim un 'Factor Integrant' pentru a le rezolva.",
+                        def2_2_title: "Metoda Factorului Integrant",
+                        step2_1: "1. Calculează factorul $\\mu(x) = e^{\\int P(x)dx}$.",
+                        step2_2: "2. Înmulțește întreaga ecuație cu $\\mu(x)$.",
+                        step2_3: "3. Partea Stângă devine derivata unui produs: $\\frac{d}{dx}[\\mu(x)y]$.",
+                        step2_4: "4. Integrează ambele părți și rezolvă pentru y.",
+                        ex2_1_title: "Exemplu (Factor Integrant)",
+                        ex2_1_problem: "Rezolvă $y' + 2y = e^x$.",
+                        ex2_1_step1: "Aici $P(x) = 2$. Factorul $\\mu(x) = e^{\\int 2 dx} = e^{2x}$.",
+                        ex2_1_step2: "Înmulțește ecuația cu $e^{2x}$: $e^{2x}y' + 2e^{2x}y = e^{3x}$.",
+                        ex2_1_step3: "Simplifică membrul stâng: $\\frac{d}{dx}[e^{2x}y] = e^{3x}$.",
+                        ex2_1_step4: "Integrează: $e^{2x}y = \\int e^{3x} dx = \\frac{1}{3}e^{3x} + C$.",
+                        ex2_1_solution: "Rezolvă pentru y: $y = \\frac{1}{3}e^x + Ce^{-2x}$."
+                    },
+                    section3: {
+                        title3: "Ecuații de Ordinul Doi",
+                        def3_1: "Ecuații care implică derivata a doua ($y''$). Comune în fizică (arcuri, circuite).",
+                        math3_1: `ay'' + by' + cy = 0`,
+                        text3_1: "Pentru ecuații omogene liniare cu coeficienți constanți, ghicim o soluție de forma $y = e^{rx}$.",
+                        plot3_title: "Mișcare Armonică Amortizată",
+                        plot3_desc: "Soluția unei ED de ordinul doi cu rădăcini complexe modelează adesea o oscilație care se stinge în timp (de ex. un amortizor auto).",
+                        plot3_type: "damped_oscillation",
+                        plot3_function: "e^(-0.5*x) * cos(3*x)", 
+                        plot3_domain: [0, 10],
+                        plot3_range: [-1, 1],
+                        plot3_label: "Sistem Subamortizat",
+                        def3_2: "Ecuația Caracteristică:",
+                        math3_2: `ar^2 + br + c = 0`,
+                        text3_2: "Rezolvă pentru $r$. Dacă rădăcinile sunt reale/distincte, soluția este $y = c_1 e^{r_1x} + c_2 e^{r_2x}$. Dacă rădăcinile sunt complexe, soluția implică sinus și cosinus.",
+                        ex3_1_title: "Exemplu (Rădăcini Reale Distincte)",
+                        ex3_1_problem: "Rezolvă $y'' - 5y' + 6y = 0$.",
+                        ex3_1_step1: "Ecuația Caracteristică: $r^2 - 5r + 6 = 0$.",
+                        ex3_1_step2: "Factorizează: $(r-2)(r-3) = 0$. Rădăcinile sunt $r_1 = 2, r_2 = 3$.",
+                        ex3_1_solution: "Soluția Generală: $y = c_1 e^{2x} + c_2 e^{3x}$."
+                    },
+                    section4: {
+                        title4: "Probleme cu Valori Inițiale (PVI) și Aplicații",
+                        def4_1: "Soluție Generală vs. Soluție Particulară",
+                        text4_1: "Integrarea dă o 'Soluție Generală' cu constante ($C$). Un PVI oferă puncte specifice (de ex. $y(0)=5$) pentru a găsi valoarea exactă a lui $C$.",
+                        plot4_title: "Vizualizarea Mișcării Armonice",
+                        plot4_desc: "O masă pe un arc oscilând în timp. Poziția inițială y(0) determină curba specifică (soluția particulară).",
+                        plot4_type: "spring_mass",
+                        plot4_function: "3 * cos(2*x)", // y = 3cos(2t), Amplitudine 3
+                        plot4_domain: [0, 10], // Timp t de la 0 la 10
+                        plot4_range: [-4, 4],
+                        plot4_label: "y(0) = 3",
+                        def4_2_title: "Aplicații Comune",
+                        list4_1: "Creștere/Descreștere Exponențială: $\\frac{dy}{dt} = ky$",
+                        list4_2: "Legea Răcirii a lui Newton: Rata de răcire este proporțională cu diferența de temperatură.",
+                        list4_3: "Mișcare Armonică: Arcuri și Pendule ($y'' = -k y$).",
+                        ex4_1_title: "Exemplu (Problemă cu Valori Inițiale)",
+                        ex4_1_problem: "Rezolvă ecuația de descreștere $\\frac{dy}{dt} = -0.5y$ dat fiind $y(0) = 10$.",
+                        ex4_1_step1: "Soluția Generală: Separarea variabilelor dă $y(t) = Ce^{-0.5t}$.",
+                        ex4_1_step2: "Aplică Condiția Inițială: Înlocuiește $t=0$ și $y=10$.",
+                        ex4_1_math: `10 = C e^{-0.5(0)} \\implies 10 = C(1) \\implies C = 10`,
+                        ex4_1_solution: "Soluția Particulară: $y(t) = 10e^{-0.5t}$."
+                    },
+                    example_section: {
+                        title_ex: "Exemple cu Soluții Pas cu Pas",
+                        ex1: {
+                            title: "1. Rezolvarea unei Ecuații Separabile",
+                            problem: "Găsește soluția generală:",
+                            problem_math: `\\frac{dy}{dx} = \\frac{2x}{y}`,
+                            step1_title: "Pasul 1: Separă Variabilele",
+                            step1_desc: "Înmulțește cu $y$ și $dx$ pentru a separa termenii.",
+                            step1_math: `y \\, dy = 2x \\, dx`,
+                            step2_title: "Pasul 2: Integrează Ambele Părți",
+                            step2_math: `\\int y \\, dy = \\int 2x \\, dx \\implies \\frac{1}{2}y^2 = x^2 + C`,
+                            step3_title: "Pasul 3: Forma Explicită (Opțional)",
+                            step3_desc: "Înmulțește cu 2. (Notă: $2C$ este doar o nouă constantă $C_1$).",
+                            result_title: "Răspuns Final",
+                            result: `y^2 = 2x^2 + C_1 \\implies y = \\pm\\sqrt{2x^2 + C_1}`
+                        },
+                        ex2: {
+                            title: "2. Liniară de Ordinul Întâi (PVI)",
+                            problem: "Rezolvă Problema cu Valori Inițiale:",
+                            problem_math: `y' + y = e^x, \\quad y(0) = 1`,
+                            step1_title: "Pasul 1: Factor Integrant",
+                            step1_desc: "Aici $P(x) = 1$. Factorul este $e^{\\int 1 dx} = e^x$.",
+                            step2_title: "Pasul 2: Înmulțește și Simplifică",
+                            step2_desc: "Înmulțește ecuația cu $e^x$. Membrul stâng devine derivata produsului.",
+                            step2_math: `e^x y' + e^x y = e^x e^x \\implies \\frac{d}{dx}[e^x y] = e^{2x}`,
+                            step3_title: "Pasul 3: Integrează și Rezolvă pentru C",
+                            step3_math: `e^x y = \\int e^{2x} dx = \\frac{1}{2}e^{2x} + C`,
+                            step4_title: "Pasul 4: Aplică Condiția Inițială",
+                            step4_desc: "Folosește $y(0)=1$. $e^0(1) = \\frac{1}{2}e^0 + C \\implies 1 = 0.5 + C \\implies C = 0.5$.",
+                            result_title: "Răspuns Final",
+                            result: `y = \\frac{1}{2}e^x + \\frac{1}{2}e^{-x}`
+                        },
+                        ex3: {
+                            title: "3. Omogenă de Ordinul Doi",
+                            problem: "Găsește soluția generală:",
+                            problem_math: `y'' - 5y' + 6y = 0`,
+                            step1_title: "Pasul 1: Ecuația Caracteristică",
+                            step1_desc: "Înlocuiește derivatele cu puteri ale lui $r$.",
+                            step1_math: `r^2 - 5r + 6 = 0`,
+                            step2_title: "Pasul 2: Găsește Rădăcinile",
+                            step2_desc: "Factorizează ecuația pătratică.",
+                            step2_math: `(r - 2)(r - 3) = 0 \\implies r_1 = 2, r_2 = 3`,
+                            step3_title: "Pasul 3: Scrie Soluția",
+                            step3_desc: "Deoarece rădăcinile sunt numere reale distincte, folosește forma exponențială.",
+                            result_title: "Răspuns Final",
+                            result: `y = c_1 e^{2x} + c_2 e^{3x}`
                         }
                     }
                 }

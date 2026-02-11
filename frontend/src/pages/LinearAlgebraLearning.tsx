@@ -409,7 +409,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{course.matrixBasics.description}</p>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="multiple" className="space-y-4">
             {/* Section 1: What is a Matrix? */}
             <AccordionItem value="section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -648,7 +648,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{course.determinants.description}</p>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="multiple" className="space-y-4">
             {/* Section 1: Introduction to Determinants */}
             <AccordionItem value="det-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -892,7 +892,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{(course as any).matrixInverse.description}</p>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="multiple" className="space-y-4">
             {/* Section 1: Definition of Matrix Inverse */}
             <AccordionItem value="inv-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -1312,7 +1312,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{(course as any).linearEquations.description}</p>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="multiple" className="space-y-4">
             {/* Section 1: Introduction */}
             <AccordionItem value="sys-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -1645,7 +1645,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{(course as any).vectorSpaces.description}</p>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="multiple" className="space-y-4">
             {/* Section 1: What is a Vector Space? */}
             <AccordionItem value="vec-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -2047,7 +2047,7 @@ const LinearAlgebraLearning = () => {
           </div>
           
           
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="multiple" className="space-y-4">
             {/* Section 1: What are Eigenvalues and Eigenvectors */}
             <AccordionItem value="section6-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
