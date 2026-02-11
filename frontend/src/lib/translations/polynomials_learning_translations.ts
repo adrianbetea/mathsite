@@ -3,67 +3,7 @@ export const polynomialsLearningTranslations = {
     title: "Polynomial Mathematics",
     subtitle: "Master polynomial functions from basics to advanced techniques",
     backToLearning: "Back to Learning Materials",
-    
-    hero: {
-      title: "Learn Polynomials Step by Step",
-      description: "Comprehensive examples covering operations, factoring, roots, and applications",
-      badge: "20+ Examples"
-    },
-
-    sections: {
-      basics: {
-        title: "Polynomial Basics",
-        description: "Understanding polynomial structure",
-        icon: "𝑥",
-        topics: ["Definition & Terminology", "Degree & Leading Coefficient", "Standard Form", "Types of Polynomials", "Polynomial Equality"]
-      },
-      operations: {
-        title: "Polynomial Operations",
-        description: "Adding, subtracting, and multiplying",
-        icon: "±",
-        topics: ["Addition & Subtraction", "Multiplication", "Division", "Long Division", "Synthetic Division"]
-      },
-      factoring: {
-        title: "Factoring Techniques",
-        description: "Breaking polynomials into factors",
-        icon: "✂",
-        topics: ["Common Factors", "Difference of Squares", "Perfect Square Trinomials", "Factor by Grouping", "Advanced Factoring"]
-      },
-      roots: {
-        title: "Roots & Zeros",
-        description: "Finding solutions to polynomials",
-        icon: "√",
-        topics: ["Fundamental Theorem", "Rational Root Theorem", "Complex Roots", "Multiplicity", "Factor Theorem"]
-      },
-      equations: {
-        title: "Polynomial Equations",
-        description: "Solving polynomial equations",
-        icon: "=",
-        topics: ["Linear Equations", "Quadratic Equations", "Cubic Equations", "Higher Degree", "Word Problems"]
-      },
-      applications: {
-        title: "Real-World Applications",
-        description: "Using polynomials in practice",
-        icon: "🌍",
-        topics: ["Area & Volume", "Motion Problems", "Business Applications", "Engineering", "Data Modeling"]
-      }
-    },
-
-    features: {
-      stepByStep: "Clear step-by-step solutions for every problem",
-      visualizations: "Graph visualizations to understand behavior",
-      practice: "Practice problems to master each technique"
-    },
-
-    comingSoon: "More examples coming soon!",
-    startLearning: "Start Learning"
-  },
-
-  "en-us": {
-    title: "Polynomial Mathematics",
-    subtitle: "Master polynomial functions from basics to advanced techniques",
-    backToLearning: "Back to Learning Materials",
-    
+    topicsCovered: "Topics Covered",
     hero: {
       title: "Learn Polynomials Step by Step",
       description: "Comprehensive examples covering operations, factoring, roots, and applications",
@@ -123,7 +63,7 @@ export const polynomialsLearningTranslations = {
     title: "Matematica Polinoamelor",
     subtitle: "Stăpânește funcțiile polinomiale de la bază la tehnici avansate",
     backToLearning: "Înapoi la Materiale de Învățare",
-    
+    topicsCovered: "Subiecte Acoperite",
     hero: {
       title: "Învață Polinoame Pas cu Pas",
       description: "Exemple cuprinzătoare acoperind operații, factorizare, rădăcini și aplicații",
@@ -183,7 +123,7 @@ export const polynomialsLearningTranslations = {
     title: "Matemáticas de Polinomios",
     subtitle: "Domina las funciones polinómicas desde lo básico hasta técnicas avanzadas",
     backToLearning: "Volver a Materiales de Aprendizaje",
-    
+    topicsCovered: "Temas Cubiertos",
     hero: {
       title: "Aprende Polinomios Paso a Paso",
       description: "Ejemplos completos que cubren operaciones, factorización, raíces y aplicaciones",
@@ -243,7 +183,7 @@ export const polynomialsLearningTranslations = {
     title: "Mathématiques des Polynômes",
     subtitle: "Maîtrisez les fonctions polynomiales des bases aux techniques avancées",
     backToLearning: "Retour aux Matériaux d'Apprentissage",
-    
+    topicsCovered: "Sujets Couvertes",
     hero: {
       title: "Apprenez les Polynômes Étape par Étape",
       description: "Exemples complets couvrant les opérations, la factorisation, les racines et les applications",
@@ -303,7 +243,7 @@ export const polynomialsLearningTranslations = {
     title: "Polynomial-Mathematik",
     subtitle: "Meistern Sie polynomiale Funktionen von Grundlagen bis zu fortgeschrittenen Techniken",
     backToLearning: "Zurück zu Lernmaterialien",
-    
+    topicsCovered: "Abgedeckte Themen",
     hero: {
       title: "Lernen Sie Polynome Schritt für Schritt",
       description: "Umfassende Beispiele zu Operationen, Faktorisierung, Wurzeln und Anwendungen",
@@ -363,7 +303,7 @@ export const polynomialsLearningTranslations = {
     title: "Matematyka Wielomianów",
     subtitle: "Opanuj funkcje wielomianowe od podstaw do zaawansowanych technik",
     backToLearning: "Powrót do Materiałów Edukacyjnych",
-    
+    topicsCovered: "Omówione Tematy",
     hero: {
       title: "Ucz Się Wielomianów Krok po Kroku",
       description: "Kompleksowe przykłady obejmujące operacje, faktoryzację, pierwiastki i zastosowania",

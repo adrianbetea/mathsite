@@ -75,21 +75,10 @@ const PolynomialsLearning = () => {
           </p>
         </div>
 
-        {/* Coming Soon Notice */}
-        <div className="max-w-3xl mx-auto mb-12">
-          <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20 p-6 text-center">
-            <BookOpen className="w-12 h-12 mx-auto mb-3 text-primary" />
-            <h3 className="text-xl font-semibold mb-2">{t.comingSoon}</h3>
-            <p className="text-sm text-muted-foreground">
-              We're preparing comprehensive examples and explanations for each topic below.
-            </p>
-          </Card>
-        </div>
-
         {/* Topics Grid */}
         <div className="max-w-6xl mx-auto mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
-            Topics Covered
+            {t.topicsCovered}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {sections.map((section, index) => {
