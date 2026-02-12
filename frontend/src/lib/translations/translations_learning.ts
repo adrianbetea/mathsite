@@ -76,14 +76,14 @@ export const learningTranslations = {
         description: "De límites a integrales - ejemplos y explicaciones completas",
         topics: "Temas: Límites, Derivadas, Integración, Series, Ecuaciones Diferenciales",
         level: "Principiante a Intermedio",
-        materials: "60+ Ejemplos"
+        materials: "20+ Ejemplos"
       },
       polynomials: {
         title: "Matemáticas de Polinomios",
         description: "Inmersión profunda en funciones polinómicas con ejemplos prácticos",
         topics: "Temas: Operaciones con Polinomios, Factorización, Búsqueda de Raíces, Ecuaciones Polinómicas",
         level: "Principiante",
-        materials: "40+ Ejemplos"
+        materials: "20+ Ejemplos"
       }
     },
     features: {
@@ -133,14 +133,14 @@ export const learningTranslations = {
         description: "Des limites aux intégrales - exemples et explications complètes",
         topics: "Sujets: Limites, Dérivées, Intégration, Séries, Équations Différentielles",
         level: "Débutant à Intermédiaire",
-        materials: "60+ Exemples"
+        materials: "20+ Exemples"
       },
       polynomials: {
         title: "Mathématiques des Polynômes",
         description: "Plongée profonde dans les fonctions polynomiales avec des exemples pratiques",
         topics: "Sujets: Opérations sur les Polynômes, Factorisation, Recherche de Racines, Équations Polynomiales",
         level: "Débutant",
-        materials: "40+ Exemples"
+        materials: "20+ Exemples"
       }
     },
     features: {
@@ -190,14 +190,14 @@ export const learningTranslations = {
         description: "Von Grenzwerten zu Integralen - vollständige Beispiele und Erklärungen",
         topics: "Themen: Grenzwerte, Ableitungen, Integration, Reihen, Differentialgleichungen",
         level: "Anfänger bis Mittelstufe",
-        materials: "60+ Beispiele"
+        materials: "20+ Beispiele"
       },
       polynomials: {
         title: "Polynom-Mathematik",
         description: "Tiefgehender Einblick in Polynomfunktionen mit praktischen Beispielen",
         topics: "Themen: Polynom-Operationen, Faktorisierung, Nullstellensuche, Polynomgleichungen",
         level: "Anfänger",
-        materials: "40+ Beispiele"
+        materials: "20+ Beispiele"
       }
     },
     features: {
@@ -247,14 +247,14 @@ export const learningTranslations = {
         description: "Od granic do całek - kompletne przykłady i wyjaśnienia",
         topics: "Tematy: Granice, Pochodne, Całkowanie, Szeregi, Równania Różniczkowe",
         level: "Początkujący do Średniozaawansowanego",
-        materials: "60+ Przykładów"
+        materials: "20+ Przykładów"
       },
       polynomials: {
         title: "Matematyka Wielomianów",
         description: "Głębokie zanurzenie w funkcje wielomianowe z praktycznymi przykładami",
         topics: "Tematy: Operacje na Wielomianach, Faktoryzacja, Znajdowanie Pierwiastków, Równania Wielomianowe",
         level: "Początkujący",
-        materials: "40+ Przykładów"
+        materials: "20+ Przykładów"
       }
     },
     features: {
@@ -304,14 +304,14 @@ export const learningTranslations = {
         description: "De la limite la integrale - exemple și explicații complete",
         topics: "Subiecte: Limite, Derivate, Integrare, Serii, Ecuații Diferențiale",
         level: "Începător la Intermediar",
-        materials: "60+ Exemple"
+        materials: "20+ Exemple"
       },
       polynomials: {
         title: "Matematica Polinoamelor",
         description: "Explorare aprofundată a funcțiilor polinomiale cu exemple practice",
         topics: "Subiecte: Operații cu Polinoame, Factorizare, Găsirea Rădăcinilor, Ecuații Polinomiale",
         level: "Începător",
-        materials: "40+ Exemple"
+        materials: "20+ Exemple"
       }
     },
     features: {
