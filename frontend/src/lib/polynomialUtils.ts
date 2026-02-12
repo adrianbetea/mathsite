@@ -12,11 +12,10 @@ export interface Root {
   isComplex: boolean;
 }
 
-// Parse a polynomial string into terms
-export const parsePolynomial = (expr: string): Term[] => {
+// Parse simple expanded polynomial string into terms (no parentheses)
+const parseSimplePolynomial = (expr: string): Term[] => {
   const terms: Term[] = [];
-  
-  // Clean up the expression
+
   let cleanExpr = expr
     .replace(/\s+/g, '')
     .replace(/(\d)([a-zA-Z])/g, '$1*$2')  // 2x -> 2*x
@@ -26,14 +25,14 @@ export const parsePolynomial = (expr: string): Term[] => {
 
   // Split by + and - while keeping the sign
   const termStrings = cleanExpr.split(/(?=[+-])/);
-  
+
   for (const termStr of termStrings) {
     const trimmed = termStr.trim();
     if (!trimmed) continue;
-    
+
     // Match patterns like: 3*x^2, -2*x, x^3, 5, -x
     const match = trimmed.match(/^([+-]?\d*\.?\d*)\*?x(?:\^([+-]?\d+))?$|^([+-]?\d+\.?\d*)$/i);
-    
+
     if (match) {
       if (match[3] !== undefined) {
         // Constant term
@@ -48,8 +47,188 @@ export const parsePolynomial = (expr: string): Term[] => {
       }
     }
   }
-  
+
   return terms;
+};
+
+// Expand expression using mathjs then collect polynomial terms
+const expandAndParse = (expr: string): Term[] => {
+  try {
+    // Use mathjs to parse and expand the expression
+    const node = parse(expr);
+    const expanded = simplify(node, [
+      // Expand products and powers
+      'n*(n1+n2) -> n*n1 + n*n2',
+      '(n1+n2)*n -> n1*n + n2*n',
+      '(n1+n2)*(n3+n4) -> n1*n3 + n1*n4 + n2*n3 + n2*n4',
+    ]);
+    const expandedStr = expanded.toString();
+
+    // Collect terms by evaluating coefficients at each power
+    // Find the degree by checking powers of x
+    const terms: Term[] = [];
+    const coeffMap = new Map<number, number>();
+
+    // Evaluate the polynomial at enough points to determine coefficients
+    // First, find the maximum power by testing
+    let maxPow = 0;
+    for (let p = 20; p >= 0; p--) {
+      try {
+        // Build a scope to evaluate
+        const scope = { x: 1.123456789 }; // Use an irrational-ish number
+        const val = expanded.evaluate(scope);
+        if (isFinite(val)) {
+          // We know it evaluates, now find degree
+          // Try evaluating at multiple points and fitting
+          break;
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    // Use Vandermonde approach: evaluate at n+1 points to find n-degree polynomial
+    // First estimate degree
+    const testPoints = [];
+    for (let i = 0; i <= 20; i++) {
+      try {
+        const val = expanded.evaluate({ x: i });
+        if (isFinite(val)) {
+          testPoints.push({ x: i, y: val as number });
+        }
+      } catch {
+        break;
+      }
+    }
+
+    if (testPoints.length === 0) return [];
+
+    // Estimate degree by finite differences
+    let diffs: number[] = testPoints.map(p => p.y);
+    let degree = 0;
+    for (let d = 0; d < Math.min(20, diffs.length - 1); d++) {
+      const allZero = diffs.every(v => Math.abs(v) < 1e-8);
+      if (allZero) break;
+      degree = d;
+      const newDiffs: number[] = [];
+      for (let i = 0; i < diffs.length - 1; i++) {
+        newDiffs.push(diffs[i + 1] - diffs[i]);
+      }
+      diffs = newDiffs;
+    }
+    // Check if the remaining diffs are all zero (constant finite difference)
+    if (diffs.length > 0 && diffs.some(v => Math.abs(v) > 1e-8)) {
+      degree++;
+    }
+
+    // Now solve for coefficients using least-squares at distinct points
+    // Evaluate at degree+1 well-separated points
+    const n = degree + 1;
+    const points: { x: number; y: number }[] = [];
+    for (let i = 0; i < Math.max(n, 2); i++) {
+      const xVal = i - Math.floor(n / 2); // center around 0
+      try {
+        const yVal = expanded.evaluate({ x: xVal });
+        if (isFinite(yVal as number)) {
+          points.push({ x: xVal, y: yVal as number });
+        }
+      } catch {
+        // skip
+      }
+    }
+    // If we didn't get enough points, add more
+    let extra = n + 1;
+    while (points.length < n && extra < 50) {
+      try {
+        const yVal = expanded.evaluate({ x: extra });
+        if (isFinite(yVal as number)) {
+          points.push({ x: extra, y: yVal as number });
+        }
+      } catch { /* skip */ }
+      extra++;
+    }
+
+    if (points.length < n) return [];
+
+    // Solve Vandermonde system using Gaussian elimination
+    const size = n;
+    const matrix: number[][] = [];
+    const rhs: number[] = [];
+    for (let i = 0; i < size; i++) {
+      const row: number[] = [];
+      for (let j = 0; j < size; j++) {
+        row.push(Math.pow(points[i].x, j));
+      }
+      matrix.push(row);
+      rhs.push(points[i].y);
+    }
+
+    // Gaussian elimination with partial pivoting
+    for (let col = 0; col < size; col++) {
+      let maxRow = col;
+      for (let row = col + 1; row < size; row++) {
+        if (Math.abs(matrix[row][col]) > Math.abs(matrix[maxRow][col])) {
+          maxRow = row;
+        }
+      }
+      [matrix[col], matrix[maxRow]] = [matrix[maxRow], matrix[col]];
+      [rhs[col], rhs[maxRow]] = [rhs[maxRow], rhs[col]];
+
+      if (Math.abs(matrix[col][col]) < 1e-12) continue;
+
+      for (let row = col + 1; row < size; row++) {
+        const factor = matrix[row][col] / matrix[col][col];
+        for (let j = col; j < size; j++) {
+          matrix[row][j] -= factor * matrix[col][j];
+        }
+        rhs[row] -= factor * rhs[col];
+      }
+    }
+
+    // Back substitution
+    const coeffs = new Array(size).fill(0);
+    for (let i = size - 1; i >= 0; i--) {
+      if (Math.abs(matrix[i][i]) < 1e-12) continue;
+      let sum = rhs[i];
+      for (let j = i + 1; j < size; j++) {
+        sum -= matrix[i][j] * coeffs[j];
+      }
+      coeffs[i] = sum / matrix[i][i];
+    }
+
+    // Build terms, rounding near-integer coefficients
+    for (let power = 0; power < coeffs.length; power++) {
+      let c = coeffs[power];
+      // Round to nearest integer if very close
+      if (Math.abs(c - Math.round(c)) < 1e-6) {
+        c = Math.round(c);
+      }
+      if (Math.abs(c) > 1e-10) {
+        terms.push({ coefficient: c, power });
+      }
+    }
+
+    return terms.sort((a, b) => b.power - a.power);
+  } catch {
+    return [];
+  }
+};
+
+// Parse a polynomial string into terms
+export const parsePolynomial = (expr: string): Term[] => {
+  if (!expr || !expr.trim()) return [];
+
+  // Check if the expression contains parentheses or other complex structures
+  // that the simple parser can't handle
+  const hasComplexStructure = /[()]/.test(expr);
+
+  if (hasComplexStructure) {
+    const terms = expandAndParse(expr);
+    if (terms.length > 0) return terms;
+  }
+
+  // Fall back to simple parser for basic expressions like "x^2 - 5x + 6"
+  return parseSimplePolynomial(expr);
 };
 
 // Format terms back to a string
