@@ -1,4 +1,4 @@
-import { ArrowLeft, BookOpen, CheckCircle } from "lucide-react";
+import { ArrowLeft, ArrowDown, BookOpen, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -37,6 +37,13 @@ const LinearAlgebraLearning = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth'
+    });
   };
 
   const renderMath = (latex: string, displayMode: boolean = true) => {
@@ -401,6 +408,15 @@ const LinearAlgebraLearning = () => {
           </p>
         </div>
 
+        {/* Floating Scroll to Bottom Button */}
+        <button
+          onClick={scrollToBottom}
+          className="hidden md:block fixed right-6 bottom-6 z-50 p-4 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+          aria-label="Scroll to bottom"
+        >
+          <ArrowDown className="w-6 h-6" />
+        </button>
+
         {/* Lesson 1: Matrix Basics */}
         <div id="lesson-matrices" className="max-w-4xl mx-auto mb-12">
           <div className="mb-6">
@@ -409,7 +425,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{course.matrixBasics.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section1"]} className="space-y-4">
             {/* Section 1: What is a Matrix? */}
             <AccordionItem value="section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -648,7 +664,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{course.determinants.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["det-section1"]} className="space-y-4">
             {/* Section 1: Introduction to Determinants */}
             <AccordionItem value="det-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -892,7 +908,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{(course as any).matrixInverse.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["inv-section1"]} className="space-y-4">
             {/* Section 1: Definition of Matrix Inverse */}
             <AccordionItem value="inv-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -1312,7 +1328,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{(course as any).linearEquations.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["sys-section1"]} className="space-y-4">
             {/* Section 1: Introduction */}
             <AccordionItem value="sys-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -1645,7 +1661,7 @@ const LinearAlgebraLearning = () => {
             <p className="text-muted-foreground">{(course as any).vectorSpaces.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["vec-section1"]} className="space-y-4">
             {/* Section 1: What is a Vector Space? */}
             <AccordionItem value="vec-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="text-lg font-semibold hover:no-underline py-4">
@@ -2047,7 +2063,7 @@ const LinearAlgebraLearning = () => {
           </div>
           
           
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section6-1"]} className="space-y-4">
             {/* Section 1: What are Eigenvalues and Eigenvectors */}
             <AccordionItem value="section6-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">

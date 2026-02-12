@@ -1,4 +1,4 @@
-import { ArrowLeft, CheckCircle } from "lucide-react";
+import { ArrowLeft, ArrowDown, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -37,6 +37,13 @@ const CalculusLearning = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth'
+    });
   };
 
   const renderMath = (latex: string, displayMode: boolean = true) => {
@@ -401,6 +408,15 @@ const CalculusLearning = () => {
           </p>
         </div>
 
+        {/* Floating Scroll to Bottom Button */}
+        <button
+          onClick={scrollToBottom}
+          className="hidden md:block fixed right-6 bottom-6 z-50 p-4 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+          aria-label="Scroll to bottom"
+        >
+          <ArrowDown className="w-6 h-6" />
+        </button>
+
         {/* Lesson 1: Limits & Continuity */}
         <div id="lesson-limits" className="max-w-4xl mx-auto mb-12">
           <div className="mb-6">
@@ -409,7 +425,7 @@ const CalculusLearning = () => {
             <p className="text-muted-foreground">{course.limits.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section1"]} className="space-y-4">
             {/* Section 1: Introduction to Limits */}
             <AccordionItem value="section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -641,7 +657,7 @@ const CalculusLearning = () => {
             <p className="text-muted-foreground">{(course as any).derivatives.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["der-section1"]} className="space-y-4">
             {/* Section 1: The Definition of the Derivative */}
             <AccordionItem value="der-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -981,7 +997,7 @@ const CalculusLearning = () => {
             <p className="text-muted-foreground">{(course as any).applications_derivatives.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["app-section1"]} className="space-y-4">
             {/* Section 1: MVT & L'Hôpital's Rule */}
             <AccordionItem value="app-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -1495,7 +1511,7 @@ const CalculusLearning = () => {
             <h2 className="text-2xl sm:text-3xl font-bold">{(course as any).integration.lessons.lesson4_title}</h2>
           </div>
           
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section4-1"]} className="space-y-4">
             {/* Section 1: Antiderivatives */}
             <AccordionItem value="section4-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -1977,7 +1993,7 @@ const CalculusLearning = () => {
             <h2 className="text-2xl sm:text-3xl font-bold">{(course as any).sequences_series.lessons.lesson5_title}</h2>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section5-1"]} className="space-y-4">
             {/* Section 1: Sequences */}
             <AccordionItem value="section5-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -2332,7 +2348,7 @@ const CalculusLearning = () => {
             <h2 className="text-2xl sm:text-3xl font-bold">{(course as any).differential_equations.lessons.lesson1_title}</h2>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section6-1"]} className="space-y-4">
             {/* Section 1: Introduction & Separable Equations */}
             <AccordionItem value="section6-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">

@@ -1,4 +1,4 @@
-import { ArrowLeft, CheckCircle } from "lucide-react";
+import { ArrowLeft, ArrowDown, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -36,6 +36,13 @@ const PolynomialsLearning = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth'
+    });
   };
 
   const renderMath = (latex: string, displayMode: boolean = true) => {
@@ -135,6 +142,15 @@ const PolynomialsLearning = () => {
           </p>
         </div>
 
+        {/* Floating Scroll to Bottom Button */}
+        <button
+          onClick={scrollToBottom}
+          className="hidden md:block fixed right-6 bottom-6 z-50 p-4 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+          aria-label="Scroll to bottom"
+        >
+          <ArrowDown className="w-6 h-6" />
+        </button>
+
         {/* Lesson 1: Polynomial Basics - Structure & Terminology */}
         <div id="lesson-basics" className="max-w-4xl mx-auto mb-12">
           <div className="mb-6">
@@ -143,7 +159,7 @@ const PolynomialsLearning = () => {
             <p className="text-muted-foreground">{course.polynomial_basics.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section1-1"]} className="space-y-4">
             {/* Section 1: Definition & Terminology */}
             <AccordionItem value="section1-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -467,7 +483,7 @@ const PolynomialsLearning = () => {
             <p className="text-muted-foreground">{course.polynomial_operations.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section2-1"]} className="space-y-4">
             {/* Section 1: Addition & Subtraction */}
             <AccordionItem value="section2-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -745,7 +761,7 @@ const PolynomialsLearning = () => {
             <p className="text-muted-foreground">{(course as any).factorization_techniques?.description || polynomialCourse.en.factorization_techniques.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section3-1"]} className="space-y-4">
             {/* Section 1: GCF */}
             <AccordionItem value="section3-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -1094,7 +1110,7 @@ const PolynomialsLearning = () => {
             <p className="text-muted-foreground">{(course as any).roots_zeros?.description || polynomialCourse.en.roots_zeros.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section4-1"]} className="space-y-4">
             {/* Section 1: Fundamental & Factor Theorems */}
             <AccordionItem value="section4-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -1366,7 +1382,7 @@ const PolynomialsLearning = () => {
             <p className="text-muted-foreground">{(course as any).polynomial_equations?.description || polynomialCourse.en.polynomial_equations.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section5-1"]} className="space-y-4">
             {/* Section 1: Linear Equations */}
             <AccordionItem value="section5-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -1743,7 +1759,7 @@ const PolynomialsLearning = () => {
             <p className="text-muted-foreground">{(course as any).real_world_applications?.description || polynomialCourse.en.real_world_applications.description}</p>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" defaultValue={["section6-1"]} className="space-y-4">
             {/* Section 1: Area & Volume */}
             <AccordionItem value="section6-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
