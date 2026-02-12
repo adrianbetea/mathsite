@@ -1,4 +1,5 @@
 import { sign } from "crypto";
+import { max } from "date-fns";
 import { text } from "stream/consumers";
 
 export const polynomialCourse = {
@@ -482,7 +483,7 @@ export const polynomialCourse = {
                             function: "(x-2)(x+1)(x-4)", // Cubic passing through 2
                             domain: [-2, 5]
                         },
-
+                        plot1_description: "- factor",
                         def1_2: "The Factor Theorem:",
                         math1_1: `P(c) = 0 \\iff (x - c) \\text{ is a factor of } P(x)`,
                         text1_2: "This provides a direct link between algebraic factors and geometric x-intercepts."
@@ -751,6 +752,167 @@ export const polynomialCourse = {
                             step3_desc: "$W = -8$ or $W = 5$. Width cannot be negative, so $W = 5$.",
                             result_title: "Final Answer",
                             result: "Width = 5m, Length = 8m."
+                        }
+                    }
+                }
+            }
+        },
+        real_world_applications: {
+            title: "Real-World Applications",
+            description: "Seeing polynomials in action: modeling physical space, analyzing motion, optimizing business profits, and fitting data trends.",
+            lessons: {
+                lesson6_title: "Modeling & Problem Solving",
+                lesson6: {
+                    section1: {
+                        title1: "Area & Volume (Geometry)",
+                        def1_1: "Polynomials describe the dimensions of geometric shapes when variables are involved.",
+                        text1_1: "Common Scenario: Creating a box from a flat sheet by cutting out corners of size 'x'.",
+                        math1_1: `V(x) = x(L - 2x)(W - 2x)`,
+
+                        // Plot: Box Problem Diagram
+                        plot1_title: "Visualizing the Cut",
+                        plot1_desc: "A flat sheet of cardboard with corners cut out. Folding up the flaps creates a 3D box.",
+                        plot1_type: "box_cut_visual",
+                        plot1_data: {
+                            sheet_width: 12,
+                            sheet_height: 12,
+                            cut_size: "x",
+                            folded_dim: "(12-2x) by (12-2x) by x"
+                        },
+                        caption: "Cut corners → Fold up → Box!",
+                        text1_2: "Here, $V(x)$ becomes a cubic polynomial (degree 3). Finding the maximum volume requires finding the vertex of this polynomial curve."
+                    },
+                    section2: {
+                        title2: "Motion Problems (Physics)",
+                        def2_1: "Projectile Motion: The height of an object thrown into the air is modeled by a quadratic polynomial due to gravity.",
+                        math2_1: `h(t) = -16t^2 + v_0t + h_0 \\quad (\\text{Imperial units})`,
+                        math2_2: `h(t) = -4.9t^2 + v_0t + h_0 \\quad (\\text{Metric units})`,
+                        list2_1: "$t$: Time in seconds.",
+                        list2_2: "$v_0$: Initial velocity.",
+                        list2_3: "$h_0$: Initial height.",
+
+                        // Plot: Projectile Trajectory
+                        plot2_title: "Parabolic Trajectory",
+                        plot2_desc: "Height over time. The vertex is the peak height; the positive x-intercept is when it hits the ground.",
+                        plot2_type: "projectile_motion_visual",
+                        plot2_data: {
+                            function: "-16*t^2 + 64*t + 5",
+                            domain: [0, 4.1],
+                            points: [
+                                { x: 0, y: 5, label: "Start (h0)" },
+                                { x: 2, y: 69, label: "Max Height" },
+                                { x: 4.08, y: 0, label: "Impact" }
+                            ]
+                        },
+                        max_height: "Max Height (Vertex)",
+                        impact: "Impact",
+                        gravity: "gravity",
+                        text2_1: "Solving $h(t) = 0$ tells you when the object hits the ground."
+                    },
+                    section3: {
+                        title3: "Business Applications (Economics)",
+                        def3_1: "Polynomials model financial health.",
+                        math3_1: `P(x) = R(x) - C(x)`,
+                        list3_1: "Revenue $R(x)$: Price $\\times$ Quantity sold.",
+                        list3_2: "Cost $C(x)$: Fixed costs + Variable costs.",
+                        list3_3: "Profit $P(x)$: The difference between Revenue and Cost.",
+
+                        // Plot: Profit Analysis
+                        plot3_title: "Visualizing Profit",
+                        plot3_desc: "The green region is Profit (where Revenue > Cost). The peak of the Profit curve is the Maximum Profit. The points where Revenue equals Cost are Break-Even points.",
+                        plot3_type: "profit_loss_visual",
+                        plot3_data: {
+                            revenue: "-0.5*x^2 + 50*x", // Parabolic Revenue
+                            cost: "10*x + 200",       // Linear Cost
+                            profit: "-0.5*x^2 + 40*x - 200", // P(x)
+                            domain: [0, 100],
+                            break_even_points: [5.36, 74.64] // Roots of P(x)
+                        },
+                        revenue: "Revenue",
+                        cost: "Cost",
+                        profit: "Profit",
+                        break_even: "Break-Even",
+                        text3_1: "Break-Even Points: The roots of $P(x)$ (where Profit = 0).",
+                        text3_2: "To maximize profit, we find the vertex of the Profit parabola (for quadratic models).",
+
+                        // Example: Max Profit
+                        ex3_1_title: "Example (Maximizing Profit)",
+                        ex3_1_problem: "Revenue is $R(x) = 50x - 0.5x^2$ and Cost is $C(x) = 10x + 200$. Find the production level $x$ for maximum profit.",
+                        ex3_1_step1: "Profit Equation: $P(x) = (50x - 0.5x^2) - (10x + 200)$.",
+                        ex3_1_step2: "Simplify: $P(x) = -0.5x^2 + 40x - 200$.",
+                        ex3_1_step3: "Find Vertex ($x = -b/2a$): $x = -40 / (2 \\cdot -0.5) = -40 / -1 = 40$.",
+                        ex3_1_solution: "Maximize profit by producing 40 units."
+                    },
+                    section4: {
+                        title4: "Engineering & Data Modeling",
+                        def4_1: "Curve Fitting (Regression): Engineers use polynomials to approximate complex real-world data points.",
+
+                        // Plot: Curve Fitting
+                        plot4_title: "Fitting a Trend",
+                        plot4_desc: "The red dots are real-world data (scatter plot). The blue line is a polynomial model (Regression) used to predict future trends.",
+                        plot4_type: "scatter_plot_fit",
+                        plot4_data: {
+                            points: [{ x: 1, y: 2 }, { x: 2, y: 5 }, { x: 3, y: 10 }, { x: 4, y: 17 }],
+                            model: "x^2 + 1", // Fits 1, 4, 9, 16 (+1) pattern
+                            prediction_point: { x: 5, y: 26 },
+                            label: "Quadratic Fit"
+                        },
+                        data: "Data",
+                        prediction: "Prediction",
+                        text4_1: "A set of scattered data points can often be modeled by a 'Line of Best Fit' (Linear) or a curve (Quadratic/Cubic) to predict future outcomes.",
+                        warning4_1: "Overfitting: Using a polynomial with too high of a degree might fit the noise rather than the trend.",
+
+                        // Example: Modeling
+                        ex4_1_title: "Example (Pattern Recognition)",
+                        ex4_1_problem: "Find a polynomial model for the sequence: 2, 5, 10, 17...",
+                        ex4_1_step1: "First Differences: $5-2=3, 10-5=5, 17-10=7$ (Not linear).",
+                        ex4_1_step2: "Second Differences: $5-3=2, 7-5=2$ (Constant).",
+                        ex4_1_step3: "Constant second difference implies a Quadratic model ($n^2 + 1$).",
+                        ex4_1_solution: "Model: $y = x^2 + 1$."
+                    },
+                    example_section: {
+                        title_ex: "Examples with Step-by-Step Solutions",
+                        ex1: {
+                            title: "1. Projectile Motion",
+                            problem: "A rocket is launched from the ground ($h_0=0$) with initial velocity $v_0 = 98$ m/s. When does it return to earth?",
+                            problem_math: `h(t) = -4.9t^2 + 98t + 0`,
+                            step1_title: "Step 1: Set Height to Zero",
+                            step1_desc: "We want to find $t$ when $h(t) = 0$.",
+                            step1_math: `-4.9t^2 + 98t = 0`,
+                            step2_title: "Step 2: Factor",
+                            step2_desc: "Factor out $t$ (or $-4.9t$).",
+                            step2_math: `t(-4.9t + 98) = 0`,
+                            step3_title: "Step 3: Solve for t",
+                            step3_desc: "Two solutions: $t = 0$ (launch) and $-4.9t + 98 = 0$.",
+                            step3_math: `4.9t = 98 \\implies t = 20`,
+                            result_title: "Final Answer",
+                            result: "The rocket hits the ground after 20 seconds."
+                        },
+                        ex2: {
+                            title: "2. Maximizing Profit",
+                            problem: "A company's profit is modeled by $P(x) = -x^2 + 100x - 900$. How many units ($x$) should be sold to maximize profit?",
+                            step1_title: "Step 1: Identify Function Type",
+                            step1_desc: "This is a downward-opening parabola (Quadratic). The maximum is at the Vertex.",
+                            step2_title: "Step 2: Vertex Formula",
+                            step2_math: `x = \\frac{-b}{2a}`,
+                            step3_title: "Step 3: Substitute Coefficients",
+                            step3_desc: "$a = -1, b = 100$.",
+                            step3_math: `x = \\frac{-100}{2(-1)} = \\frac{-100}{-2} = 50`,
+                            result_title: "Final Answer",
+                            result: "Selling 50 units yields the maximum profit."
+                        },
+                        ex3: {
+                            title: "3. Volume Construction",
+                            problem: "A box is made from a 10x8 sheet by cutting squares of side $x$. Express the Volume polynomial.",
+                            problem_math: `V = L \\cdot W \\cdot H`,
+                            step1_title: "Step 1: Define Dimensions",
+                            step1_desc: "Height = $x$. Length = $10 - 2x$. Width = $8 - 2x$.",
+                            step2_title: "Step 2: Set up Equation",
+                            step2_math: `V(x) = x(10 - 2x)(8 - 2x)`,
+                            step3_title: "Step 3: Expand (Standard Form)",
+                            step3_desc: "Multiply binomials first: $(80 - 20x - 16x + 4x^2)$. Then multiply by $x$.",
+                            result_title: "Final Answer",
+                            result: `V(x) = 4x^3 - 36x^2 + 80x`
                         }
                     }
                 }
@@ -1237,7 +1399,7 @@ export const polynomialCourse = {
                             function: "(x-2)(x+1)(x-4)",
                             domain: [-2, 5]
                         },
-
+                        plot1_description: "- factor",
                         def1_2: "El Teorema del Factor:",
                         math1_1: `P(c) = 0 \\iff (x - c) \\text{ es un factor de } P(x)`,
                         text1_2: "Esto proporciona un vínculo directo entre los factores algebraicos y las intersecciones geométricas con el eje x."
@@ -1506,6 +1668,167 @@ export const polynomialCourse = {
                             step3_desc: "$W = -8$ o $W = 5$. El ancho no puede ser negativo, así que $W = 5$.",
                             result_title: "Respuesta Final",
                             result: "Ancho = 5m, Largo = 8m."
+                        }
+                    }
+                }
+            }
+        },
+        real_world_applications: {
+            title: "Aplicaciones en el Mundo Real",
+            description: "Viendo polinomios en acción: modelando el espacio físico, analizando el movimiento, optimizando ganancias comerciales y ajustando tendencias de datos.",
+            lessons: {
+                lesson6_title: "Modelado y Resolución de Problemas",
+                lesson6: {
+                    section1: {
+                        title1: "Área y Volumen (Geometría)",
+                        def1_1: "Los polinomios describen las dimensiones de formas geométricas cuando hay variables involucradas.",
+                        text1_1: "Escenario Común: Crear una caja a partir de una hoja plana cortando esquinas de tamaño 'x'.",
+                        math1_1: `V(x) = x(L - 2x)(W - 2x)`,
+
+                        // Plot: Diagrama Problema de Caja
+                        plot1_title: "Visualizando el Corte",
+                        plot1_desc: "Una hoja plana de cartón con esquinas cortadas. Doblar las solapas crea una caja 3D.",
+                        plot1_type: "box_cut_visual",
+                        plot1_data: {
+                            sheet_width: 12,
+                            sheet_height: 12,
+                            cut_size: "x",
+                            folded_dim: "(12-2x) by (12-2x) by x"
+                        },
+                        caption: "¡Cortar esquinas → Doblar → Caja!",
+                        text1_2: "Aquí, $V(x)$ se convierte en un polinomio cúbico (grado 3). Encontrar el volumen máximo requiere encontrar el vértice de esta curva polinómica."
+                    },
+                    section2: {
+                        title2: "Problemas de Movimiento (Física)",
+                        def2_1: "Movimiento de Proyectil: La altura de un objeto lanzado al aire es modelada por un polinomio cuadrático debido a la gravedad.",
+                        math2_1: `h(t) = -16t^2 + v_0t + h_0 \\quad (\\text{Unidades imperiales})`,
+                        math2_2: `h(t) = -4.9t^2 + v_0t + h_0 \\quad (\\text{Unidades métricas})`,
+                        list2_1: "$t$: Tiempo en segundos.",
+                        list2_2: "$v_0$: Velocidad inicial.",
+                        list2_3: "$h_0$: Altura inicial.",
+
+                        // Plot: Trayectoria de Proyectil
+                        plot2_title: "Trayectoria Parabólica",
+                        plot2_desc: "Altura sobre el tiempo. El vértice es la altura máxima; la intersección positiva con x es cuando golpea el suelo.",
+                        plot2_type: "projectile_motion_visual",
+                        plot2_data: {
+                            function: "-16*t^2 + 64*t + 5",
+                            domain: [0, 4.1],
+                            points: [
+                                { x: 0, y: 5, label: "Inicio (h0)" },
+                                { x: 2, y: 69, label: "Altura Máx" },
+                                { x: 4.08, y: 0, label: "Impacto" }
+                            ]
+                        },
+                        max_height: "Altura Máx (Vértice)",
+                        impact: "Impacto",
+                        gravity: "gravedad",
+                        text2_1: "Resolver $h(t) = 0$ te dice cuándo el objeto golpea el suelo."
+                    },
+                    section3: {
+                        title3: "Aplicaciones Comerciales (Economía)",
+                        def3_1: "Los polinomios modelan la salud financiera.",
+                        math3_1: `P(x) = R(x) - C(x)`,
+                        list3_1: "Ingresos $R(x)$: Precio $\\times$ Cantidad vendida.",
+                        list3_2: "Costo $C(x)$: Costos fijos + Costos variables.",
+                        list3_3: "Beneficio $P(x)$: La diferencia entre Ingresos y Costo.",
+
+                        // Plot: Análisis de Beneficios
+                        plot3_title: "Visualizando Beneficios",
+                        plot3_desc: "La región verde es Beneficio (donde Ingresos > Costo). El pico de la curva de Beneficio es el Beneficio Máximo. Los puntos donde Ingresos igualan Costo son puntos de Equilibrio.",
+                        plot3_type: "profit_loss_visual",
+                        plot3_data: {
+                            revenue: "-0.5*x^2 + 50*x", // Ingreso Parabólico
+                            cost: "10*x + 200",       // Costo Lineal
+                            profit: "-0.5*x^2 + 40*x - 200", // P(x)
+                            domain: [0, 100],
+                            break_even_points: [5.36, 74.64] // Raíces de P(x)
+                        },
+                        revenue: "Ingresos",
+                        cost: "Costo",
+                        profit: "Beneficio",
+                        break_even: "Punto de Equilibrio",
+                        text3_1: "Puntos de Equilibrio: Las raíces de $P(x)$ (donde Beneficio = 0).",
+                        text3_2: "Para maximizar el beneficio, encontramos el vértice de la parábola de Beneficio (para modelos cuadráticos).",
+
+                        // Ejemplo: Max Beneficio
+                        ex3_1_title: "Ejemplo (Maximizando Beneficio)",
+                        ex3_1_problem: "Ingresos es $R(x) = 50x - 0.5x^2$ y Costo es $C(x) = 10x + 200$. Encuentra el nivel de producción $x$ para beneficio máximo.",
+                        ex3_1_step1: "Ecuación de Beneficio: $P(x) = (50x - 0.5x^2) - (10x + 200)$.",
+                        ex3_1_step2: "Simplifica: $P(x) = -0.5x^2 + 40x - 200$.",
+                        ex3_1_step3: "Encuentra Vértice ($x = -b/2a$): $x = -40 / (2 \\cdot -0.5) = -40 / -1 = 40$.",
+                        ex3_1_solution: "Maximiza beneficio produciendo 40 unidades."
+                    },
+                    section4: {
+                        title4: "Ingeniería y Modelado de Datos",
+                        def4_1: "Ajuste de Curvas (Regresión): Los ingenieros usan polinomios para aproximar puntos de datos complejos del mundo real.",
+
+                        // Plot: Ajuste de Curvas
+                        plot4_title: "Ajustando una Tendencia",
+                        plot4_desc: "Los puntos rojos son datos del mundo real (gráfico de dispersión). La línea azul es un modelo polinómico (Regresión) usado para predecir tendencias futuras.",
+                        plot4_type: "scatter_plot_fit",
+                        plot4_data: {
+                            points: [{ x: 1, y: 2 }, { x: 2, y: 5 }, { x: 3, y: 10 }, { x: 4, y: 17 }],
+                            model: "x^2 + 1", // Ajusta patrón 1, 4, 9, 16 (+1)
+                            prediction_point: { x: 5, y: 26 },
+                            label: "Ajuste Cuadrático"
+                        },
+                        data: "Datos",
+                        prediction: "Predicción",
+                        text4_1: "Un conjunto de puntos de datos dispersos a menudo se puede modelar mediante una 'Línea de Mejor Ajuste' (Lineal) o una curva (Cuadrática/Cúbica) para predecir resultados futuros.",
+                        warning4_1: "Sobreajuste: Usar un polinomio con un grado demasiado alto podría ajustarse al ruido en lugar de a la tendencia.",
+
+                        // Ejemplo: Modelado
+                        ex4_1_title: "Ejemplo (Reconocimiento de Patrones)",
+                        ex4_1_problem: "Encuentra un modelo polinómico para la secuencia: 2, 5, 10, 17...",
+                        ex4_1_step1: "Primeras Diferencias: $5-2=3, 10-5=5, 17-10=7$ (No lineal).",
+                        ex4_1_step2: "Segundas Diferencias: $5-3=2, 7-5=2$ (Constante).",
+                        ex4_1_step3: "Segunda diferencia constante implica un modelo Cuadrático ($n^2 + 1$).",
+                        ex4_1_solution: "Modelo: $y = x^2 + 1$."
+                    },
+                    example_section: {
+                        title_ex: "Ejemplos con Soluciones Paso a Paso",
+                        ex1: {
+                            title: "1. Movimiento de Proyectil",
+                            problem: "Un cohete se lanza desde el suelo ($h_0=0$) con velocidad inicial $v_0 = 98$ m/s. ¿Cuándo regresa a la tierra?",
+                            problem_math: `h(t) = -4.9t^2 + 98t + 0`,
+                            step1_title: "Paso 1: Establecer Altura a Cero",
+                            step1_desc: "Queremos encontrar $t$ cuando $h(t) = 0$.",
+                            step1_math: `-4.9t^2 + 98t = 0`,
+                            step2_title: "Paso 2: Factorizar",
+                            step2_desc: "Factoriza $t$ (o $-4.9t$).",
+                            step2_math: `t(-4.9t + 98) = 0`,
+                            step3_title: "Paso 3: Resolver para t",
+                            step3_desc: "Dos soluciones: $t = 0$ (lanzamiento) y $-4.9t + 98 = 0$.",
+                            step3_math: `4.9t = 98 \\implies t = 20`,
+                            result_title: "Respuesta Final",
+                            result: "El cohete golpea el suelo después de 20 segundos."
+                        },
+                        ex2: {
+                            title: "2. Maximizando Beneficio",
+                            problem: "El beneficio de una empresa es modelado por $P(x) = -x^2 + 100x - 900$. ¿Cuántas unidades ($x$) deben venderse para maximizar el beneficio?",
+                            step1_title: "Paso 1: Identificar Tipo de Función",
+                            step1_desc: "Esta es una parábola que se abre hacia abajo (Cuadrática). El máximo está en el Vértice.",
+                            step2_title: "Paso 2: Fórmula del Vértice",
+                            step2_math: `x = \\frac{-b}{2a}`,
+                            step3_title: "Paso 3: Sustituir Coeficientes",
+                            step3_desc: "$a = -1, b = 100$.",
+                            step3_math: `x = \\frac{-100}{2(-1)} = \\frac{-100}{-2} = 50`,
+                            result_title: "Respuesta Final",
+                            result: "Vender 50 unidades produce el beneficio máximo."
+                        },
+                        ex3: {
+                            title: "3. Construcción de Volumen",
+                            problem: "Una caja se hace de una hoja de 10x8 cortando cuadrados de lado $x$. Expresa el polinomio de Volumen.",
+                            problem_math: `V = L \\cdot W \\cdot H`,
+                            step1_title: "Paso 1: Definir Dimensiones",
+                            step1_desc: "Altura = $x$. Largo = $10 - 2x$. Ancho = $8 - 2x$.",
+                            step2_title: "Paso 2: Establecer Ecuación",
+                            step2_math: `V(x) = x(10 - 2x)(8 - 2x)`,
+                            step3_title: "Paso 3: Expandir (Forma Estándar)",
+                            step3_desc: "Multiplica binomios primero: $(80 - 20x - 16x + 4x^2)$. Luego multiplica por $x$.",
+                            result_title: "Respuesta Final",
+                            result: `V(x) = 4x^3 - 36x^2 + 80x`
                         }
                     }
                 }
@@ -1992,7 +2315,7 @@ export const polynomialCourse = {
                             function: "(x-2)(x+1)(x-4)",
                             domain: [-2, 5]
                         },
-
+                        plot1_description: "- facteur",
                         def1_2: "Le Théorème du Facteur :",
                         math1_1: `P(c) = 0 \\iff (x - c) \\text{ est un facteur de } P(x)`,
                         text1_2: "Ceci fournit un lien direct entre les facteurs algébriques et les abscisses à l'origine géométriques."
@@ -2261,6 +2584,167 @@ export const polynomialCourse = {
                             step3_desc: "$W = -8$ ou $W = 5$. La largeur ne peut pas être négative, donc $W = 5$.",
                             result_title: "Réponse Finale",
                             result: "Largeur = 5m, Longueur = 8m."
+                        }
+                    }
+                }
+            }
+        },
+        real_world_applications: {
+            title: "Applications dans le Monde Réel",
+            description: "Voir les polynômes en action : modélisation de l'espace physique, analyse du mouvement, optimisation des profits commerciaux et ajustement des tendances de données.",
+            lessons: {
+                lesson6_title: "Modélisation et Résolution de Problèmes",
+                lesson6: {
+                    section1: {
+                        title1: "Aire et Volume (Géométrie)",
+                        def1_1: "Les polynômes décrivent les dimensions des formes géométriques lorsque des variables sont impliquées.",
+                        text1_1: "Scénario Courant : Créer une boîte à partir d'une feuille plate en découpant des coins de taille 'x'.",
+                        math1_1: `V(x) = x(L - 2x)(W - 2x)`,
+
+                        // Plot : Diagramme Problème de Boîte
+                        plot1_title: "Visualisation de la Découpe",
+                        plot1_desc: "Une feuille de carton plate avec des coins découpés. Replier les rabats crée une boîte 3D.",
+                        plot1_type: "box_cut_visual",
+                        plot1_data: {
+                            sheet_width: 12,
+                            sheet_height: 12,
+                            cut_size: "x",
+                            folded_dim: "(12-2x) by (12-2x) by x"
+                        },
+                        caption: "Couper les coins → Plier → Boîte !",
+                        text1_2: "Ici, $V(x)$ devient un polynôme cubique (degré 3). Trouver le volume maximal nécessite de trouver le sommet de cette courbe polynomiale."
+                    },
+                    section2: {
+                        title2: "Problèmes de Mouvement (Physique)",
+                        def2_1: "Mouvement de Projectile : La hauteur d'un objet lancé en l'air est modélisée par un polynôme quadratique dû à la gravité.",
+                        math2_1: `h(t) = -16t^2 + v_0t + h_0 \\quad (\\text{Unités impériales})`,
+                        math2_2: `h(t) = -4.9t^2 + v_0t + h_0 \\quad (\\text{Unités métriques})`,
+                        list2_1: "$t$ : Temps en secondes.",
+                        list2_2: "$v_0$ : Vitesse initiale.",
+                        list2_3: "$h_0$ : Hauteur initiale.",
+
+                        // Plot : Trajectoire de Projectile
+                        plot2_title: "Trajectoire Parabolique",
+                        plot2_desc: "Hauteur en fonction du temps. Le sommet est la hauteur maximale ; l'intersection positive avec x est le moment où il touche le sol.",
+                        plot2_type: "projectile_motion_visual",
+                        plot2_data: {
+                            function: "-16*t^2 + 64*t + 5",
+                            domain: [0, 4.1],
+                            points: [
+                                { x: 0, y: 5, label: "Début (h0)" },
+                                { x: 2, y: 69, label: "Hauteur Max" },
+                                { x: 4.08, y: 0, label: "Impact" }
+                            ]
+                        },
+                        max_height: "Hauteur Max (Sommet)",
+                        impact: "Impact",
+                        gravity: "gravité",
+                        text2_1: "Résoudre $h(t) = 0$ vous dit quand l'objet touche le sol."
+                    },
+                    section3: {
+                        title3: "Applications Commerciales (Économie)",
+                        def3_1: "Les polynômes modélisent la santé financière.",
+                        math3_1: `P(x) = R(x) - C(x)`,
+                        list3_1: "Revenus $R(x)$ : Prix $\\times$ Quantité vendue.",
+                        list3_2: "Coût $C(x)$ : Coûts fixes + Coûts variables.",
+                        list3_3: "Profit $P(x)$ : La différence entre Revenus et Coût.",
+
+                        // Plot : Analyse de Profit
+                        plot3_title: "Visualisation du Profit",
+                        plot3_desc: "La région verte est le Profit (où Revenus > Coût). Le pic de la courbe de Profit est le Profit Maximum. Les points où Revenus égalent Coût sont les points Morts.",
+                        plot3_type: "profit_loss_visual",
+                        plot3_data: {
+                            revenue: "-0.5*x^2 + 50*x", // Revenu Parabolique
+                            cost: "10*x + 200",       // Coût Linéaire
+                            profit: "-0.5*x^2 + 40*x - 200", // P(x)
+                            domain: [0, 100],
+                            break_even_points: [5.36, 74.64] // Racines de P(x)
+                        },
+                        revenue: "Revenus",
+                        cost: "Coût",
+                        profit: "Profit",
+                        break_even: "Point Mort",
+                        text3_1: "Points Morts : Les racines de $P(x)$ (où Profit = 0).",
+                        text3_2: "Pour maximiser le profit, nous trouvons le sommet de la parabole de Profit (pour les modèles quadratiques).",
+
+                        // Exemple : Max Profit
+                        ex3_1_title: "Exemple (Maximiser le Profit)",
+                        ex3_1_problem: "Le revenu est $R(x) = 50x - 0.5x^2$ et le coût est $C(x) = 10x + 200$. Trouvez le niveau de production $x$ pour un profit maximum.",
+                        ex3_1_step1: "Équation de Profit : $P(x) = (50x - 0.5x^2) - (10x + 200)$.",
+                        ex3_1_step2: "Simplifier : $P(x) = -0.5x^2 + 40x - 200$.",
+                        ex3_1_step3: "Trouver Sommet ($x = -b/2a$) : $x = -40 / (2 \\cdot -0.5) = -40 / -1 = 40$.",
+                        ex3_1_solution: "Maximisez le profit en produisant 40 unités."
+                    },
+                    section4: {
+                        title4: "Ingénierie et Modélisation de Données",
+                        def4_1: "Ajustement de Courbes (Régression) : Les ingénieurs utilisent des polynômes pour approximer des points de données complexes du monde réel.",
+
+                        // Plot : Ajustement de Courbes
+                        plot4_title: "Ajustement d'une Tendance",
+                        plot4_desc: "Les points rouges sont des données réelles (nuage de points). La ligne bleue est un modèle polynomial (Régression) utilisé pour prédire les tendances futures.",
+                        plot4_type: "scatter_plot_fit",
+                        plot4_data: {
+                            points: [{ x: 1, y: 2 }, { x: 2, y: 5 }, { x: 3, y: 10 }, { x: 4, y: 17 }],
+                            model: "x^2 + 1", // Ajuste motif 1, 4, 9, 16 (+1)
+                            prediction_point: { x: 5, y: 26 },
+                            label: "Ajustement Quadratique"
+                        },
+                        data: "Données",
+                        prediction: "Prédiction",
+                        text4_1: "Un ensemble de points de données dispersés peut souvent être modélisé par une 'Ligne de Meilleur Ajustement' (Linéaire) ou une courbe (Quadratique/Cubique) pour prédire les résultats futurs.",
+                        warning4_1: "Surajustement : Utiliser un polynôme avec un degré trop élevé pourrait ajuster le bruit plutôt que la tendance.",
+
+                        // Exemple : Modélisation
+                        ex4_1_title: "Exemple (Reconnaissance de Motifs)",
+                        ex4_1_problem: "Trouvez un modèle polynomial pour la suite : 2, 5, 10, 17...",
+                        ex4_1_step1: "Premières Différences : $5-2=3, 10-5=5, 17-10=7$ (Pas linéaire).",
+                        ex4_1_step2: "Secondes Différences : $5-3=2, 7-5=2$ (Constant).",
+                        ex4_1_step3: "Seconde différence constante implique un modèle Quadratique ($n^2 + 1$).",
+                        ex4_1_solution: "Modèle : $y = x^2 + 1$."
+                    },
+                    example_section: {
+                        title_ex: "Exemples avec Solutions Étape par Étape",
+                        ex1: {
+                            title: "1. Mouvement de Projectile",
+                            problem: "Une fusée est lancée du sol ($h_0=0$) avec une vitesse initiale $v_0 = 98$ m/s. Quand revient-elle sur terre ?",
+                            problem_math: `h(t) = -4.9t^2 + 98t + 0`,
+                            step1_title: "Étape 1 : Mettre la Hauteur à Zéro",
+                            step1_desc: "Nous voulons trouver $t$ quand $h(t) = 0$.",
+                            step1_math: `-4.9t^2 + 98t = 0`,
+                            step2_title: "Étape 2 : Factoriser",
+                            step2_desc: "Factoriser $t$ (ou $-4.9t$).",
+                            step2_math: `t(-4.9t + 98) = 0`,
+                            step3_title: "Étape 3 : Résoudre pour t",
+                            step3_desc: "Deux solutions : $t = 0$ (lancement) et $-4.9t + 98 = 0$.",
+                            step3_math: `4.9t = 98 \\implies t = 20`,
+                            result_title: "Réponse Finale",
+                            result: "La fusée touche le sol après 20 secondes."
+                        },
+                        ex2: {
+                            title: "2. Maximiser le Profit",
+                            problem: "Le profit d'une entreprise est modélisé par $P(x) = -x^2 + 100x - 900$. Combien d'unités ($x$) doivent être vendues pour maximiser le profit ?",
+                            step1_title: "Étape 1 : Identifier le Type de Fonction",
+                            step1_desc: "C'est une parabole s'ouvrant vers le bas (Quadratique). Le maximum est au Sommet.",
+                            step2_title: "Étape 2 : Formule du Sommet",
+                            step2_math: `x = \\frac{-b}{2a}`,
+                            step3_title: "Étape 3 : Substituer les Coefficients",
+                            step3_desc: "$a = -1, b = 100$.",
+                            step3_math: `x = \\frac{-100}{2(-1)} = \\frac{-100}{-2} = 50`,
+                            result_title: "Réponse Finale",
+                            result: "Vendre 50 unités produit le profit maximum."
+                        },
+                        ex3: {
+                            title: "3. Construction de Volume",
+                            problem: "Une boîte est faite à partir d'une feuille de 10x8 en coupant des carrés de côté $x$. Exprimez le polynôme de Volume.",
+                            problem_math: `V = L \\cdot W \\cdot H`,
+                            step1_title: "Étape 1 : Définir les Dimensions",
+                            step1_desc: "Hauteur = $x$. Longueur = $10 - 2x$. Largeur = $8 - 2x$.",
+                            step2_title: "Étape 2 : Poser l'Équation",
+                            step2_math: `V(x) = x(10 - 2x)(8 - 2x)`,
+                            step3_title: "Étape 3 : Développer (Forme Standard)",
+                            step3_desc: "Multipliez les binômes d'abord : $(80 - 20x - 16x + 4x^2)$. Ensuite multipliez par $x$.",
+                            result_title: "Réponse Finale",
+                            result: `V(x) = 4x^3 - 36x^2 + 80x`
                         }
                     }
                 }
@@ -2747,7 +3231,7 @@ export const polynomialCourse = {
                             function: "(x-2)(x+1)(x-4)",
                             domain: [-2, 5]
                         },
-
+                        plot1_description: "- faktor",
                         def1_2: "Der Faktorsatz:",
                         math1_1: `P(c) = 0 \\iff (x - c) \\text{ ist ein Faktor von } P(x)`,
                         text1_2: "Dies liefert eine direkte Verbindung zwischen algebraischen Faktoren und geometrischen x-Achsenabschnitten."
@@ -3016,6 +3500,167 @@ export const polynomialCourse = {
                             step3_desc: "$W = -8$ oder $W = 5$. Breite kann nicht negativ sein, also $W = 5$.",
                             result_title: "Endergebnis",
                             result: "Breite = 5m, Länge = 8m."
+                        }
+                    }
+                }
+            }
+        },
+        real_world_applications: {
+            title: "Anwendungen in der realen Welt",
+            description: "Polynome in Aktion sehen: Modellierung des physischen Raums, Analyse von Bewegung, Optimierung von Geschäftsgewinnen und Anpassung von Datentrends.",
+            lessons: {
+                lesson6_title: "Modellierung & Problemlösung",
+                lesson6: {
+                    section1: {
+                        title1: "Fläche & Volumen (Geometrie)",
+                        def1_1: "Polynome beschreiben die Dimensionen geometrischer Formen, wenn Variablen involviert sind.",
+                        text1_1: "Häufiges Szenario: Erstellen einer Box aus einem flachen Blatt durch Ausschneiden von Ecken der Größe 'x'.",
+                        math1_1: `V(x) = x(L - 2x)(W - 2x)`,
+
+                        // Plot: Box-Problem Diagramm
+                        plot1_title: "Visualisierung des Schnitts",
+                        plot1_desc: "Ein flaches Stück Pappe mit ausgeschnittenen Ecken. Das Hochklappen der Laschen erzeugt eine 3D-Box.",
+                        plot1_type: "box_cut_visual",
+                        plot1_data: {
+                            sheet_width: 12,
+                            sheet_height: 12,
+                            cut_size: "x",
+                            folded_dim: "(12-2x) by (12-2x) by x"
+                        },
+                        caption: "Ecken schneiden → Falten → Box!",
+                        text1_2: "Hier wird $V(x)$ zu einem kubischen Polynom (Grad 3). Das Finden des maximalen Volumens erfordert das Finden des Scheitelpunkts dieser Polynomkurve."
+                    },
+                    section2: {
+                        title2: "Bewegungsprobleme (Physik)",
+                        def2_1: "Wurfbewegung: Die Höhe eines in die Luft geworfenen Objekts wird durch ein quadratisches Polynom aufgrund der Schwerkraft modelliert.",
+                        math2_1: `h(t) = -16t^2 + v_0t + h_0 \\quad (\\text{Imperiale Einheiten})`,
+                        math2_2: `h(t) = -4.9t^2 + v_0t + h_0 \\quad (\\text{Metrische Einheiten})`,
+                        list2_1: "$t$: Zeit in Sekunden.",
+                        list2_2: "$v_0$: Anfangsgeschwindigkeit.",
+                        list2_3: "$h_0$: Anfangshöhe.",
+
+                        // Plot: Wurfparabel
+                        plot2_title: "Parabolische Flugbahn",
+                        plot2_desc: "Höhe über Zeit. Der Scheitelpunkt ist die maximale Höhe; der positive x-Achsenabschnitt ist der Aufprall.",
+                        plot2_type: "projectile_motion_visual",
+                        plot2_data: {
+                            function: "-16*t^2 + 64*t + 5",
+                            domain: [0, 4.1],
+                            points: [
+                                { x: 0, y: 5, label: "Start (h0)" },
+                                { x: 2, y: 69, label: "Max Höhe" },
+                                { x: 4.08, y: 0, label: "Aufprall" }
+                            ]
+                        },
+                        max_height: "Max Höhe (Scheitelpunkt)",
+                        impact: "Aufprall",
+                        gravity: "Schwerkraft",
+                        text2_1: "Das Lösen von $h(t) = 0$ sagt dir, wann das Objekt auf den Boden trifft."
+                    },
+                    section3: {
+                        title3: "Geschäftsanwendungen (Wirtschaft)",
+                        def3_1: "Polynome modellieren die finanzielle Gesundheit.",
+                        math3_1: `P(x) = R(x) - C(x)`,
+                        list3_1: "Umsatz $R(x)$: Preis $\\times$ Verkaufte Menge.",
+                        list3_2: "Kosten $C(x)$: Fixkosten + Variable Kosten.",
+                        list3_3: "Gewinn $P(x)$: Die Differenz zwischen Umsatz und Kosten.",
+
+                        // Plot: Gewinnanalyse
+                        plot3_title: "Visualisierung des Gewinns",
+                        plot3_desc: "Der grüne Bereich ist Gewinn (wo Umsatz > Kosten). Die Spitze der Gewinnkurve ist der maximale Gewinn. Die Punkte, an denen Umsatz gleich Kosten ist, sind Break-Even-Punkte.",
+                        plot3_type: "profit_loss_visual",
+                        plot3_data: {
+                            revenue: "-0.5*x^2 + 50*x", // Parabolischer Umsatz
+                            cost: "10*x + 200",       // Lineare Kosten
+                            profit: "-0.5*x^2 + 40*x - 200", // P(x)
+                            domain: [0, 100],
+                            break_even_points: [5.36, 74.64] // Wurzeln von P(x)
+                        },
+                        revenue: "Umsatz",
+                        cost: "Kosten",
+                        profit: "Gewinn",
+                        break_even: "Break-Even",
+                        text3_1: "Break-Even-Punkte: Die Wurzeln von $P(x)$ (wo Gewinn = 0).",
+                        text3_2: "Um den Gewinn zu maximieren, finden wir den Scheitelpunkt der Gewinnparabel (für quadratische Modelle).",
+
+                        // Beispiel: Max Gewinn
+                        ex3_1_title: "Beispiel (Gewinn Maximieren)",
+                        ex3_1_problem: "Umsatz ist $R(x) = 50x - 0.5x^2$ und Kosten sind $C(x) = 10x + 200$. Finde das Produktionsniveau $x$ für maximalen Gewinn.",
+                        ex3_1_step1: "Gewinngleichung: $P(x) = (50x - 0.5x^2) - (10x + 200)$.",
+                        ex3_1_step2: "Vereinfachen: $P(x) = -0.5x^2 + 40x - 200$.",
+                        ex3_1_step3: "Finde Scheitelpunkt ($x = -b/2a$): $x = -40 / (2 \\cdot -0.5) = -40 / -1 = 40$.",
+                        ex3_1_solution: "Maximiere Gewinn durch Produktion von 40 Einheiten."
+                    },
+                    section4: {
+                        title4: "Ingenieurwesen & Datenmodellierung",
+                        def4_1: "Kurvenanpassung (Regression): Ingenieure verwenden Polynome, um komplexe reale Datenpunkte anzunähern.",
+
+                        // Plot: Kurvenanpassung
+                        plot4_title: "Anpassung eines Trends",
+                        plot4_desc: "Die roten Punkte sind reale Daten (Streudiagramm). Die blaue Linie ist ein Polynommodell (Regression), das zur Vorhersage zukünftiger Trends verwendet wird.",
+                        plot4_type: "scatter_plot_fit",
+                        plot4_data: {
+                            points: [{ x: 1, y: 2 }, { x: 2, y: 5 }, { x: 3, y: 10 }, { x: 4, y: 17 }],
+                            model: "x^2 + 1", // Passt Muster 1, 4, 9, 16 (+1)
+                            prediction_point: { x: 5, y: 26 },
+                            label: "Quadratische Anpassung"
+                        },
+                        data: "Daten",
+                        prediction: "Vorhersage",
+                        text4_1: "Ein Satz verstreuter Datenpunkte kann oft durch eine 'Linie der besten Anpassung' (Linear) oder eine Kurve (Quadratisch/Kubisch) modelliert werden, um zukünftige Ergebnisse vorherzusagen.",
+                        warning4_1: "Overfitting: Die Verwendung eines Polynoms mit zu hohem Grad könnte eher das Rauschen als den Trend anpassen.",
+
+                        // Beispiel: Modellierung
+                        ex4_1_title: "Beispiel (Mustererkennung)",
+                        ex4_1_problem: "Finde ein Polynommodell für die Sequenz: 2, 5, 10, 17...",
+                        ex4_1_step1: "Erste Differenzen: $5-2=3, 10-5=5, 17-10=7$ (Nicht linear).",
+                        ex4_1_step2: "Zweite Differenzen: $5-3=2, 7-5=2$ (Konstant).",
+                        ex4_1_step3: "Konstante zweite Differenz impliziert ein quadratisches Modell ($n^2 + 1$).",
+                        ex4_1_solution: "Modell: $y = x^2 + 1$."
+                    },
+                    example_section: {
+                        title_ex: "Beispiele mit Schritt-für-Schritt-Lösungen",
+                        ex1: {
+                            title: "1. Wurfbewegung",
+                            problem: "Eine Rakete wird vom Boden ($h_0=0$) mit einer Anfangsgeschwindigkeit $v_0 = 98$ m/s gestartet. Wann kehrt sie zur Erde zurück?",
+                            problem_math: `h(t) = -4.9t^2 + 98t + 0`,
+                            step1_title: "Schritt 1: Höhe auf Null setzen",
+                            step1_desc: "Wir wollen $t$ finden, wenn $h(t) = 0$.",
+                            step1_math: `-4.9t^2 + 98t = 0`,
+                            step2_title: "Schritt 2: Faktorisieren",
+                            step2_desc: "Klammere $t$ (oder $-4.9t$) aus.",
+                            step2_math: `t(-4.9t + 98) = 0`,
+                            step3_title: "Schritt 3: Nach t auflösen",
+                            step3_desc: "Zwei Lösungen: $t = 0$ (Start) und $-4.9t + 98 = 0$.",
+                            step3_math: `4.9t = 98 \\implies t = 20`,
+                            result_title: "Endergebnis",
+                            result: "Die Rakete trifft nach 20 Sekunden auf den Boden."
+                        },
+                        ex2: {
+                            title: "2. Gewinn Maximieren",
+                            problem: "Der Gewinn eines Unternehmens wird durch $P(x) = -x^2 + 100x - 900$ modelliert. Wie viele Einheiten ($x$) sollten verkauft werden, um den Gewinn zu maximieren?",
+                            step1_title: "Schritt 1: Funktionstyp identifizieren",
+                            step1_desc: "Dies ist eine nach unten geöffnete Parabel (Quadratisch). Das Maximum liegt beim Scheitelpunkt.",
+                            step2_title: "Schritt 2: Scheitelpunktformel",
+                            step2_math: `x = \\frac{-b}{2a}`,
+                            step3_title: "Schritt 3: Koeffizienten einsetzen",
+                            step3_desc: "$a = -1, b = 100$.",
+                            step3_math: `x = \\frac{-100}{2(-1)} = \\frac{-100}{-2} = 50`,
+                            result_title: "Endergebnis",
+                            result: "Der Verkauf von 50 Einheiten bringt den maximalen Gewinn."
+                        },
+                        ex3: {
+                            title: "3. Volumenkonstruktion",
+                            problem: "Eine Box wird aus einem 10x8 Blatt hergestellt, indem Quadrate der Seite $x$ ausgeschnitten werden. Drücke das Volumenpolynom aus.",
+                            problem_math: `V = L \\cdot W \\cdot H`,
+                            step1_title: "Schritt 1: Dimensionen definieren",
+                            step1_desc: "Höhe = $x$. Länge = $10 - 2x$. Breite = $8 - 2x$.",
+                            step2_title: "Schritt 2: Gleichung aufstellen",
+                            step2_math: `V(x) = x(10 - 2x)(8 - 2x)`,
+                            step3_title: "Schritt 3: Ausmultiplizieren (Standardform)",
+                            step3_desc: "Multipliziere zuerst Binome: $(80 - 20x - 16x + 4x^2)$. Dann multipliziere mit $x$.",
+                            result_title: "Endergebnis",
+                            result: `V(x) = 4x^3 - 36x^2 + 80x`
                         }
                     }
                 }
@@ -3502,6 +4147,7 @@ export const polynomialCourse = {
                             function: "(x-2)(x+1)(x-4)",
                             domain: [-2, 5]
                         },
+                        plot1_description: "- czynnikiem",
 
                         def1_2: "Twierdzenie o Czynniku:",
                         math1_1: `P(c) = 0 \\iff (x - c) \\text{ jest czynnikiem } P(x)`,
@@ -3707,7 +4353,7 @@ export const polynomialCourse = {
                         plot4_desc: "Tor obiektu wyrzuconego w powietrze podąża za krzywą paraboliczną ($h(t) = -16t^2 + vt + h$). Maksymalna wysokość to wierzchołek; uderzenie w ziemię to pierwiastek.",
                         plot4_type: "projectile_motion_visual",
                         plot4_data: {
-                            function: "-16*t^2 + 64*t", 
+                            function: "-16*t^2 + 64*t",
                             domain: [0, 4],
                             points: [
                                 { x: 2, y: 64, label: "Maks Wysokość" },
@@ -3771,6 +4417,167 @@ export const polynomialCourse = {
                             step3_desc: "$W = -8$ lub $W = 5$. Szerokość nie może być ujemna, więc $W = 5$.",
                             result_title: "Odpowiedź Końcowa",
                             result: "Szerokość = 5m, Długość = 8m."
+                        }
+                    }
+                }
+            }
+        },
+        real_world_applications: {
+            title: "Zastosowania w Świecie Rzeczywistym",
+            description: "Poliniomy w akcji: modelowanie przestrzeni fizycznej, analiza ruchu, optymalizacja zysków biznesowych i dopasowywanie trendów danych.",
+            lessons: {
+                lesson6_title: "Modelowanie i Rozwiązywanie Problemów",
+                lesson6: {
+                    section1: {
+                        title1: "Powierzchnia i Objętość (Geometria)",
+                        def1_1: "Wielomiany opisują wymiary kształtów geometrycznych, gdy zaangażowane są zmienne.",
+                        text1_1: "Typowy Scenariusz: Tworzenie pudełka z płaskiego arkusza przez wycięcie rogów o rozmiarze 'x'.",
+                        math1_1: `V(x) = x(L - 2x)(W - 2x)`,
+
+                        // Plot: Diagram Problemu Pudełka
+                        plot1_title: "Wizualizacja Cięcia",
+                        plot1_desc: "Płaski arkusz tektury z wyciętymi rogami. Złożenie klap tworzy pudełko 3D.",
+                        plot1_type: "box_cut_visual",
+                        plot1_data: {
+                            sheet_width: 12,
+                            sheet_height: 12,
+                            cut_size: "x",
+                            folded_dim: "(12-2x) by (12-2x) by x"
+                        },
+                        caption: "Wytnij rogi → Złóż → Pudełko!",
+                        text1_2: "Tutaj $V(x)$ staje się wielomianem sześciennym (stopnia 3). Znalezienie maksymalnej objętości wymaga znalezienia wierzchołka tej krzywej wielomianowej."
+                    },
+                    section2: {
+                        title2: "Problemy Ruchu (Fizyka)",
+                        def2_1: "Rzut Ukośny: Wysokość obiektu wyrzuconego w powietrze jest modelowana przez wielomian kwadratowy ze względu na grawitację.",
+                        math2_1: `h(t) = -16t^2 + v_0t + h_0 \\quad (\\text{Jednostki imperialne})`,
+                        math2_2: `h(t) = -4.9t^2 + v_0t + h_0 \\quad (\\text{Jednostki metryczne})`,
+                        list2_1: "$t$: Czas w sekundach.",
+                        list2_2: "$v_0$: Prędkość początkowa.",
+                        list2_3: "$h_0$: Wysokość początkowa.",
+
+                        // Plot: Trajektoria Rzutu
+                        plot2_title: "Trajektoria Paraboliczna",
+                        plot2_desc: "Wysokość w czasie. Wierzchołek to maksymalna wysokość; dodatnie przecięcie z osią x to moment uderzenia w ziemię.",
+                        plot2_type: "projectile_motion_visual",
+                        plot2_data: {
+                            function: "-16*t^2 + 64*t + 5",
+                            domain: [0, 4.1],
+                            points: [
+                                { x: 0, y: 5, label: "Start (h0)" },
+                                { x: 2, y: 69, label: "Maks Wysokość" },
+                                { x: 4.08, y: 0, label: "Uderzenie" }
+                            ]
+                        },
+                        max_height: "Maks Wysokość (Wierzchołek)",
+                        impact: "Uderzenie",
+                        gravity: "grawitacja",
+                        text2_1: "Rozwiązanie $h(t) = 0$ mówi, kiedy obiekt uderzy w ziemię."
+                    },
+                    section3: {
+                        title3: "Zastosowania Biznesowe (Ekonomia)",
+                        def3_1: "Wielomiany modelują kondycję finansową.",
+                        math3_1: `P(x) = R(x) - C(x)`,
+                        list3_1: "Przychód $R(x)$: Cena $\\times$ Ilość sprzedana.",
+                        list3_2: "Koszt $C(x)$: Koszty stałe + Koszty zmienne.",
+                        list3_3: "Zysk $P(x)$: Różnica między Przychodem a Kosztem.",
+
+                        // Plot: Analiza Zysku
+                        plot3_title: "Wizualizacja Zysku",
+                        plot3_desc: "Zielony obszar to Zysk (gdzie Przychód > Koszt). Szczyt krzywej Zysku to Maksymalny Zysk. Punkty, gdzie Przychód równa się Kosztowi, to punkty Progu Rentowności.",
+                        plot3_type: "profit_loss_visual",
+                        plot3_data: {
+                            revenue: "-0.5*x^2 + 50*x", // Przychód Paraboliczny
+                            cost: "10*x + 200",       // Koszt Liniowy
+                            profit: "-0.5*x^2 + 40*x - 200", // P(x)
+                            domain: [0, 100],
+                            break_even_points: [5.36, 74.64] // Pierwiastki P(x)
+                        },
+                        revenue: "Przychód",
+                        cost: "Koszt",
+                        profit: "Zysk",
+                        break_even: "Próg Rentowności",
+                        text3_1: "Punkty Progu Rentowności: Pierwiastki $P(x)$ (gdzie Zysk = 0).",
+                        text3_2: "Aby zmaksymalizować zysk, znajdujemy wierzchołek paraboli Zysku (dla modeli kwadratowych).",
+
+                        // Przykład: Maks Zysk
+                        ex3_1_title: "Przykład (Maksymalizacja Zysku)",
+                        ex3_1_problem: "Przychód to $R(x) = 50x - 0.5x^2$, a Koszt to $C(x) = 10x + 200$. Znajdź poziom produkcji $x$ dla maksymalnego zysku.",
+                        ex3_1_step1: "Równanie Zysku: $P(x) = (50x - 0.5x^2) - (10x + 200)$.",
+                        ex3_1_step2: "Uprość: $P(x) = -0.5x^2 + 40x - 200$.",
+                        ex3_1_step3: "Znajdź Wierzchołek ($x = -b/2a$): $x = -40 / (2 \\cdot -0.5) = -40 / -1 = 40$.",
+                        ex3_1_solution: "Zmaksymalizuj zysk produkując 40 jednostek."
+                    },
+                    section4: {
+                        title4: "Inżynieria i Modelowanie Danych",
+                        def4_1: "Dopasowywanie Krzywych (Regresja): Inżynierowie używają wielomianów do aproksymacji złożonych punktów danych ze świata rzeczywistego.",
+
+                        // Plot: Dopasowywanie Krzywych
+                        plot4_title: "Dopasowywanie Trendu",
+                        plot4_desc: "Czerwone kropki to dane rzeczywiste (wykres punktowy). Niebieska linia to model wielomianowy (Regresja) używany do przewidywania przyszłych trendów.",
+                        plot4_type: "scatter_plot_fit",
+                        plot4_data: {
+                            points: [{ x: 1, y: 2 }, { x: 2, y: 5 }, { x: 3, y: 10 }, { x: 4, y: 17 }],
+                            model: "x^2 + 1", // Pasuje do wzoru 1, 4, 9, 16 (+1)
+                            prediction_point: { x: 5, y: 26 },
+                            label: "Dopasowanie Kwadratowe"
+                        },
+                        data: "Dane",
+                        prediction: "Przewidywanie",
+                        text4_1: "Zbiór rozproszonych punktów danych często można zamodelować za pomocą 'Linii Najlepszego Dopasowania' (Liniowa) lub krzywej (Kwadratowa/Sześcienna), aby przewidzieć przyszłe wyniki.",
+                        warning4_1: "Przeuczenie: Użycie wielomianu o zbyt wysokim stopniu może dopasować szum zamiast trendu.",
+
+                        // Przykład: Modelowanie
+                        ex4_1_title: "Przykład (Rozpoznawanie Wzorców)",
+                        ex4_1_problem: "Znajdź model wielomianowy dla ciągu: 2, 5, 10, 17...",
+                        ex4_1_step1: "Pierwsze Różnice: $5-2=3, 10-5=5, 17-10=7$ (Nie liniowe).",
+                        ex4_1_step2: "Drugie Różnice: $5-3=2, 7-5=2$ (Stałe).",
+                        ex4_1_step3: "Stała druga różnica implikuje model Kwadratowy ($n^2 + 1$).",
+                        ex4_1_solution: "Model: $y = x^2 + 1$."
+                    },
+                    example_section: {
+                        title_ex: "Przykłady z Rozwiązaniami Krok po Kroku",
+                        ex1: {
+                            title: "1. Rzut Ukośny",
+                            problem: "Rakieta jest wystrzelona z ziemi ($h_0=0$) z prędkością początkową $v_0 = 98$ m/s. Kiedy wróci na ziemię?",
+                            problem_math: `h(t) = -4.9t^2 + 98t + 0`,
+                            step1_title: "Krok 1: Ustaw Wysokość na Zero",
+                            step1_desc: "Chcemy znaleźć $t$, gdy $h(t) = 0$.",
+                            step1_math: `-4.9t^2 + 98t = 0`,
+                            step2_title: "Krok 2: Faktoryzuj",
+                            step2_desc: "Wyciągnij przed nawias $t$ (lub $-4.9t$).",
+                            step2_math: `t(-4.9t + 98) = 0`,
+                            step3_title: "Krok 3: Rozwiąż dla t",
+                            step3_desc: "Dwa rozwiązania: $t = 0$ (start) i $-4.9t + 98 = 0$.",
+                            step3_math: `4.9t = 98 \\implies t = 20`,
+                            result_title: "Odpowiedź Końcowa",
+                            result: "Rakieta uderza w ziemię po 20 sekundach."
+                        },
+                        ex2: {
+                            title: "2. Maksymalizacja Zysku",
+                            problem: "Zysk firmy jest modelowany przez $P(x) = -x^2 + 100x - 900$. Ile jednostek ($x$) należy sprzedać, aby zmaksymalizować zysk?",
+                            step1_title: "Krok 1: Zidentyfikuj Typ Funkcji",
+                            step1_desc: "To jest parabola otwierająca się w dół (Kwadratowa). Maksimum jest w Wierzchołku.",
+                            step2_title: "Krok 2: Wzór na Wierzchołek",
+                            step2_math: `x = \\frac{-b}{2a}`,
+                            step3_title: "Krok 3: Podstaw Współczynniki",
+                            step3_desc: "$a = -1, b = 100$.",
+                            step3_math: `x = \\frac{-100}{2(-1)} = \\frac{-100}{-2} = 50`,
+                            result_title: "Odpowiedź Końcowa",
+                            result: "Sprzedaż 50 jednostek daje maksymalny zysk."
+                        },
+                        ex3: {
+                            title: "3. Konstrukcja Objętości",
+                            problem: "Pudełko jest zrobione z arkusza 10x8 przez wycięcie kwadratów o boku $x$. Wyraź wielomian Objętości.",
+                            problem_math: `V = L \\cdot W \\cdot H`,
+                            step1_title: "Krok 1: Zdefiniuj Wymiary",
+                            step1_desc: "Wysokość = $x$. Długość = $10 - 2x$. Szerokość = $8 - 2x$.",
+                            step2_title: "Krok 2: Ustaw Równanie",
+                            step2_math: `V(x) = x(10 - 2x)(8 - 2x)`,
+                            step3_title: "Krok 3: Rozwiń (Postać Ogólna)",
+                            step3_desc: "Najpierw pomnóż dwumiany: $(80 - 20x - 16x + 4x^2)$. Następnie pomnóż przez $x$.",
+                            result_title: "Odpowiedź Końcowa",
+                            result: `V(x) = 4x^3 - 36x^2 + 80x`
                         }
                     }
                 }
@@ -4257,7 +5064,7 @@ export const polynomialCourse = {
                             function: "(x-2)(x+1)(x-4)",
                             domain: [-2, 5]
                         },
-
+                        plot1_description: "- factor",
                         def1_2: "Teorema Factorului:",
                         math1_1: `P(c) = 0 \\iff (x - c) \\text{ este un factor al lui } P(x)`,
                         text1_2: "Aceasta oferă o legătură directă între factorii algebrici și intersecțiile geometrice cu axa x."
@@ -4462,7 +5269,7 @@ export const polynomialCourse = {
                         plot4_desc: "Calea unui obiect aruncat în aer urmează o curbă parabolică ($h(t) = -16t^2 + vt + h$). Înălțimea maximă este vârful; lovirea solului este rădăcina.",
                         plot4_type: "projectile_motion_visual",
                         plot4_data: {
-                            function: "-16*t^2 + 64*t", 
+                            function: "-16*t^2 + 64*t",
                             domain: [0, 4],
                             points: [
                                 { x: 2, y: 64, label: "Înălțime Max" },
@@ -4526,6 +5333,167 @@ export const polynomialCourse = {
                             step3_desc: "$W = -8$ sau $W = 5$. Lățimea nu poate fi negativă, deci $W = 5$.",
                             result_title: "Răspuns Final",
                             result: "Lățime = 5m, Lungime = 8m."
+                        }
+                    }
+                }
+            }
+        },
+        real_world_applications: {
+            title: "Aplicații în Lumea Reală",
+            description: "Văzând polinoamele în acțiune: modelarea spațiului fizic, analiza mișcării, optimizarea profiturilor afacerilor și ajustarea tendințelor datelor.",
+            lessons: {
+                lesson6_title: "Modelare și Rezolvarea Problemelor",
+                lesson6: {
+                    section1: {
+                        title1: "Arie și Volum (Geometrie)",
+                        def1_1: "Polinoamele descriu dimensiunile formelor geometrice atunci când sunt implicate variabile.",
+                        text1_1: "Scenariu Comun: Crearea unei cutii dintr-o foaie plată prin tăierea colțurilor de dimensiune 'x'.",
+                        math1_1: `V(x) = x(L - 2x)(W - 2x)`,
+
+                        // Plot: Diagramă Problemă Cutie
+                        plot1_title: "Vizualizarea Tăieturii",
+                        plot1_desc: "O foaie plată de carton cu colțuri tăiate. Îndoirea clapetelor creează o cutie 3D.",
+                        plot1_type: "box_cut_visual",
+                        plot1_data: {
+                            sheet_width: 12,
+                            sheet_height: 12,
+                            cut_size: "x",
+                            folded_dim: "(12-2x) by (12-2x) by x"
+                        },
+                        caption: "Taie colțuri → Îndoaie → Cutie!",
+                        text1_2: "Aici, $V(x)$ devine un polinom cubic (grad 3). Găsirea volumului maxim necesită găsirea vârfului acestei curbe polinomiale."
+                    },
+                    section2: {
+                        title2: "Probleme de Mișcare (Fizică)",
+                        def2_1: "Mișcare Proiectil: Înălțimea unui obiect aruncat în aer este modelată de un polinom pătratic datorită gravitației.",
+                        math2_1: `h(t) = -16t^2 + v_0t + h_0 \\quad (\\text{Unități imperiale})`,
+                        math2_2: `h(t) = -4.9t^2 + v_0t + h_0 \\quad (\\text{Unități metrice})`,
+                        list2_1: "$t$: Timp în secunde.",
+                        list2_2: "$v_0$: Viteza inițială.",
+                        list2_3: "$h_0$: Înălțimea inițială.",
+
+                        // Plot: Traiectorie Proiectil
+                        plot2_title: "Traiectorie Parabolică",
+                        plot2_desc: "Înălțime în timp. Vârful este înălțimea maximă; intersecția pozitivă cu x este impactul.",
+                        plot2_type: "projectile_motion_visual",
+                        plot2_data: {
+                            function: "-16*t^2 + 64*t + 5",
+                            domain: [0, 4.1],
+                            points: [
+                                { x: 0, y: 5, label: "Start (h0)" },
+                                { x: 2, y: 69, label: "Înălțime Max" },
+                                { x: 4.08, y: 0, label: "Impact" }
+                            ]
+                        },
+                        max_height: "Înălțime Max (Vârf)",
+                        impact: "Impact",
+                        gravity: "gravitație",
+                        text2_1: "Rezolvarea $h(t) = 0$ îți spune când obiectul atinge solul."
+                    },
+                    section3: {
+                        title3: "Aplicații de Afaceri (Economie)",
+                        def3_1: "Polinoamele modelează sănătatea financiară.",
+                        math3_1: `P(x) = R(x) - C(x)`,
+                        list3_1: "Venit $R(x)$: Preț $\\times$ Cantitate vândută.",
+                        list3_2: "Cost $C(x)$: Costuri fixe + Costuri variabile.",
+                        list3_3: "Profit $P(x)$: Diferența dintre Venit și Cost.",
+
+                        // Plot: Analiză Profit
+                        plot3_title: "Vizualizarea Profitului",
+                        plot3_desc: "Regiunea verde este Profit (unde Venit > Cost). Vârful curbei de Profit este Profitul Maxim. Punctele unde Venitul egalează Costul sunt puncte de Break-Even.",
+                        plot3_type: "profit_loss_visual",
+                        plot3_data: {
+                            revenue: "-0.5*x^2 + 50*x", // Venit Parabolic
+                            cost: "10*x + 200",       // Cost Liniar
+                            profit: "-0.5*x^2 + 40*x - 200", // P(x)
+                            domain: [0, 100],
+                            break_even_points: [5.36, 74.64] // Rădăcinile lui P(x)
+                        },
+                        revenue: "Venit",
+                        cost: "Cost",
+                        profit: "Profit",
+                        break_even: "Punct Break-Even",
+                        text3_1: "Puncte Break-Even: Rădăcinile lui $P(x)$ (unde Profit = 0).",
+                        text3_2: "Pentru a maximiza profitul, găsim vârful parabolei de Profit (pentru modele pătratice).",
+
+                        // Exemplu: Max Profit
+                        ex3_1_title: "Exemplu (Maximizarea Profitului)",
+                        ex3_1_problem: "Venitul este $R(x) = 50x - 0.5x^2$ și Costul este $C(x) = 10x + 200$. Găsește nivelul de producție $x$ pentru profit maxim.",
+                        ex3_1_step1: "Ecuația Profitului: $P(x) = (50x - 0.5x^2) - (10x + 200)$.",
+                        ex3_1_step2: "Simplifică: $P(x) = -0.5x^2 + 40x - 200$.",
+                        ex3_1_step3: "Găsește Vârf ($x = -b/2a$): $x = -40 / (2 \\cdot -0.5) = -40 / -1 = 40$.",
+                        ex3_1_solution: "Maximizează profitul producând 40 de unități."
+                    },
+                    section4: {
+                        title4: "Inginerie și Modelarea Datelor",
+                        def4_1: "Ajustarea Curbelor (Regresie): Inginerii folosesc polinoame pentru a aproxima puncte de date complexe din lumea reală.",
+
+                        // Plot: Ajustarea Curbelor
+                        plot4_title: "Ajustarea unei Tendințe",
+                        plot4_desc: "Punctele roșii sunt date din lumea reală (grafic de dispersie). Linia albastră este un model polinomial (Regresie) folosit pentru a prezice tendințe viitoare.",
+                        plot4_type: "scatter_plot_fit",
+                        plot4_data: {
+                            points: [{ x: 1, y: 2 }, { x: 2, y: 5 }, { x: 3, y: 10 }, { x: 4, y: 17 }],
+                            model: "x^2 + 1", // Se potrivește modelului 1, 4, 9, 16 (+1)
+                            prediction_point: { x: 5, y: 26 },
+                            label: "Ajustare Pătratică"
+                        },
+                        data: "Date",
+                        prediction: "Predicție",
+                        text4_1: "Un set de puncte de date împrăștiate poate fi adesea modelat de o 'Linie de cea mai bună potrivire' (Liniară) sau o curbă (Pătratică/Cubică) pentru a prezice rezultate viitoare.",
+                        warning4_1: "Supra-ajustare: Folosirea unui polinom cu un grad prea mare ar putea ajusta zgomotul mai degrabă decât tendința.",
+
+                        // Exemplu: Modelare
+                        ex4_1_title: "Exemplu (Recunoașterea Modelelor)",
+                        ex4_1_problem: "Găsește un model polinomial pentru secvența: 2, 5, 10, 17...",
+                        ex4_1_step1: "Primele Diferențe: $5-2=3, 10-5=5, 17-10=7$ (Nu liniar).",
+                        ex4_1_step2: "A doua Diferențe: $5-3=2, 7-5=2$ (Constant).",
+                        ex4_1_step3: "A doua diferență constantă implică un model Pătratic ($n^2 + 1$).",
+                        ex4_1_solution: "Model: $y = x^2 + 1$."
+                    },
+                    example_section: {
+                        title_ex: "Exemple cu Soluții Pas cu Pas",
+                        ex1: {
+                            title: "1. Mișcare Proiectil",
+                            problem: "O rachetă este lansată de la sol ($h_0=0$) cu viteza inițială $v_0 = 98$ m/s. Când se întoarce pe pământ?",
+                            problem_math: `h(t) = -4.9t^2 + 98t + 0`,
+                            step1_title: "Pasul 1: Setează Înălțimea la Zero",
+                            step1_desc: "Vrem să găsim $t$ când $h(t) = 0$.",
+                            step1_math: `-4.9t^2 + 98t = 0`,
+                            step2_title: "Pasul 2: Factorizează",
+                            step2_desc: "Factorizează $t$ (sau $-4.9t$).",
+                            step2_math: `t(-4.9t + 98) = 0`,
+                            step3_title: "Pasul 3: Rezolvă pentru t",
+                            step3_desc: "Două soluții: $t = 0$ (lansare) și $-4.9t + 98 = 0$.",
+                            step3_math: `4.9t = 98 \\implies t = 20`,
+                            result_title: "Răspuns Final",
+                            result: "Racheta lovește solul după 20 de secunde."
+                        },
+                        ex2: {
+                            title: "2. Maximizarea Profitului",
+                            problem: "Profitul unei companii este modelat de $P(x) = -x^2 + 100x - 900$. Câte unități ($x$) ar trebui vândute pentru a maximiza profitul?",
+                            step1_title: "Pasul 1: Identifică Tipul Funcției",
+                            step1_desc: "Aceasta este o parabolă care se deschide în jos (Pătratică). Maximul este la Vârf.",
+                            step2_title: "Pasul 2: Formula Vârfului",
+                            step2_math: `x = \\frac{-b}{2a}`,
+                            step3_title: "Pasul 3: Înlocuiește Coeficienții",
+                            step3_desc: "$a = -1, b = 100$.",
+                            step3_math: `x = \\frac{-100}{2(-1)} = \\frac{-100}{-2} = 50`,
+                            result_title: "Răspuns Final",
+                            result: "Vânzarea a 50 de unități produce profitul maxim."
+                        },
+                        ex3: {
+                            title: "3. Construcția Volumului",
+                            problem: "O cutie este făcută dintr-o foaie de 10x8 prin tăierea unor pătrate de latură $x$. Exprimă polinomul Volumului.",
+                            problem_math: `V = L \\cdot W \\cdot H`,
+                            step1_title: "Pasul 1: Definește Dimensiunile",
+                            step1_desc: "Înălțime = $x$. Lungime = $10 - 2x$. Lățime = $8 - 2x$.",
+                            step2_title: "Pasul 2: Setează Ecuația",
+                            step2_math: `V(x) = x(10 - 2x)(8 - 2x)`,
+                            step3_title: "Pasul 3: Extinde (Forma Standard)",
+                            step3_desc: "Înmulțește binoamele mai întâi: $(80 - 20x - 16x + 4x^2)$. Apoi înmulțește cu $x$.",
+                            result_title: "Răspuns Final",
+                            result: `V(x) = 4x^3 - 36x^2 + 80x`
                         }
                     }
                 }
