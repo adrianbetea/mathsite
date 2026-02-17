@@ -1,17 +1,12 @@
 import { Helmet } from "react-helmet-async";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
-// 1. Define your supported URL language codes explicitly
+// 1. Define supported languages exactly as they appear in your URLs
 const SUPPORTED_LANGUAGES = ['en-us', 'es', 'de', 'fr', 'pl', 'ro'];
 
-// 2. Dictionary of Titles & Descriptions
-// Note: Added 'en-us' mapping to ensure it finds the data correctly
+// 2. SEO Dictionary
 const LOCALIZED_METADATA: Record<string, { title: string; description: string }> = {
   'en-us': {
-    title: "MathHub - Step-by-Step Math Calculator",
-    description: "Free step-by-step calculator for matrices, derivatives, integrals. Solve complex math problems instantly.",
-  },
-  'en': { // Fallback just in case
     title: "MathHub - Step-by-Step Math Calculator",
     description: "Free step-by-step calculator for matrices, derivatives, integrals. Solve complex math problems instantly.",
   },
@@ -38,40 +33,40 @@ const LOCALIZED_METADATA: Record<string, { title: string; description: string }>
 };
 
 export const DynamicMeta = () => {
-  const { lang } = useParams<{ lang: string }>();
+  const { lang } = useParams<{ lang?: string }>();
   const location = useLocation();
 
-  // Handle the language fallback safely
-  const urlLang = lang || 'en-us';
-  const currentMetadata = LOCALIZED_METADATA[urlLang] || LOCALIZED_METADATA['en-us'];
+  // Safety check: if lang is missing or invalid, default to en-us
+  const urlLang = (lang && SUPPORTED_LANGUAGES.includes(lang)) ? lang : 'en-us';
+  const metadata = LOCALIZED_METADATA[urlLang] || LOCALIZED_METADATA['en-us'];
 
-  // --- LOGIC FOR HREFLANG TAGS ---
-  
-  // 1. Get the "clean path" (The part of the URL after the language)
-  // Example: if URL is "/ro/matrix", cleanPath is "/matrix"
+  // --- PATH CLEANING LOGIC ---
+  // We need to strip the current language from the path to generate links for OTHER languages.
+  // Example: "/ro/matrix" -> "/matrix"
+  // Example: "/en-us" -> ""
   const currentPath = location.pathname;
-  const cleanPath = currentPath.replace(/^\/(en-us|en|es|fr|de|pl|ro)/, '') || '';
   
-  // 2. Define Base URL
+  // Regex explanation: Match a leading slash, followed by one of the languages, 
+  // followed by optional trailing slash or end of string.
+  const langRegex = new RegExp(`^/(${SUPPORTED_LANGUAGES.join('|')})`);
+  const cleanPath = currentPath.replace(langRegex, '') || '';
+
   const baseUrl = 'https://mathhub.me';
 
   return (
     <Helmet>
-      {/* --- Basic Metadata --- */}
-      <title>{currentMetadata.title}</title>
-      <meta name="description" content={currentMetadata.description} />
-      <meta property="og:title" content={currentMetadata.title} />
-      <meta property="og:description" content={currentMetadata.description} />
+      {/* 1. Basic Meta Tags */}
+      <title>{metadata.title}</title>
+      <meta name="description" content={metadata.description} />
+      <meta property="og:title" content={metadata.title} />
+      <meta property="og:description" content={metadata.description} />
+      <meta property="og:url" content={`${baseUrl}${currentPath}`} />
       
-      {/* Set the document language (e.g., <html lang="ro">) */}
-      <html lang={urlLang} /> 
+      {/* 2. Canonical Tag (Self-referencing) */}
+      <link rel="canonical" href={`${baseUrl}${currentPath}`} />
 
-      {/* --- Canonical Tag --- */}
-      {/* Points to the current page itself */}
-      <link rel="canonical" href={`${baseUrl}${location.pathname}`} />
-
-      {/* --- Hreflang Tags (THE MISSING PIECE) --- */}
-      {/* This loop generates the links that connect all your languages together */}
+      {/* 3. Hreflang Tags (The Critical Part) */}
+      {/* This loop generates a link for EVERY supported language for the CURRENT page */}
       {SUPPORTED_LANGUAGES.map((code) => (
         <link 
           key={code}
@@ -81,8 +76,7 @@ export const DynamicMeta = () => {
         />
       ))}
 
-      {/* --- x-default Tag --- */}
-      {/* Points to the generic version (usually English) for users with unsupported languages */}
+      {/* 4. x-default Tag (Fallback for unsupported languages, pointing to English) */}
       <link 
         rel="alternate" 
         hrefLang="x-default" 

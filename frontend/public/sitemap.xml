@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
     <loc>https://mathhub.me/</loc>
@@ -11,276 +11,657 @@
     <loc>https://mathhub.me/en-us</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us"/>
   </url>
-  <url>
-    <loc>https://mathhub.me/en-us/matrix</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/en-us/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/en-us/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/en-us/learning</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/en-us/learning/linear-algebra</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/en-us/learning/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/en-us/learning/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/en-us/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
   <url>
     <loc>https://mathhub.me/ro</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/es</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us"/>
+  </url>
+
+  <url>
+    <loc>https://mathhub.me/en-us/matrix</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/matrix"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/matrix"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/matrix"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/matrix"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/matrix"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/matrix"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/matrix"/>
   </url>
   <url>
     <loc>https://mathhub.me/ro/matrix</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/ro/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/ro/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/ro/learning</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/ro/learning/linear-algebra</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/ro/learning/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/ro/learning/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/ro/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://mathhub.me/de</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/matrix"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/matrix"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/matrix"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/matrix"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/matrix"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/matrix"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/matrix"/>
   </url>
   <url>
     <loc>https://mathhub.me/de/matrix</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/de/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/de/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/de/learning</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/de/learning/linear-algebra</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/de/learning/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/de/learning/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/de/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://mathhub.me/pl</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/matrix"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/matrix"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/matrix"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/matrix"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/matrix"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/matrix"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/matrix"/>
   </url>
   <url>
     <loc>https://mathhub.me/pl/matrix</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/pl/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/pl/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/pl/learning</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/pl/learning/linear-algebra</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/pl/learning/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/pl/learning/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/pl/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://mathhub.me/fr</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/matrix"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/matrix"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/matrix"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/matrix"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/matrix"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/matrix"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/matrix"/>
   </url>
   <url>
     <loc>https://mathhub.me/fr/matrix</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/fr/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/fr/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/fr/learning</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/fr/learning/linear-algebra</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/fr/learning/calculus</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/fr/learning/polynomials</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mathhub.me/fr/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://mathhub.me/es</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/matrix"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/matrix"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/matrix"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/matrix"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/matrix"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/matrix"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/matrix"/>
   </url>
   <url>
     <loc>https://mathhub.me/es/matrix</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/matrix"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/matrix"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/matrix"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/matrix"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/matrix"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/matrix"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/matrix"/>
+  </url>
+
+  <url>
+    <loc>https://mathhub.me/en-us/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/calculus"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/calculus"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/calculus"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/calculus"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/calculus"/>
   </url>
   <url>
     <loc>https://mathhub.me/es/calculus</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/calculus"/>
+  </url>
+
+  <url>
+    <loc>https://mathhub.me/en-us/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/polynomials"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/polynomials"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/polynomials"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/polynomials"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/polynomials"/>
   </url>
   <url>
     <loc>https://mathhub.me/es/polynomials</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/polynomials"/>
+  </url>
+
+  <url>
+    <loc>https://mathhub.me/en-us/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/learning</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning"/>
   </url>
   <url>
     <loc>https://mathhub.me/es/learning</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning"/>
+  </url>
+
+  <url>
+    <loc>https://mathhub.me/en-us/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/learning/linear-algebra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/linear-algebra"/>
   </url>
   <url>
     <loc>https://mathhub.me/es/learning/linear-algebra</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/linear-algebra"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/linear-algebra"/>
+  </url>
+
+  <url>
+    <loc>https://mathhub.me/en-us/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/calculus"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/calculus"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/calculus"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/calculus"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/learning/calculus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/calculus"/>
   </url>
   <url>
     <loc>https://mathhub.me/es/learning/calculus</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/calculus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/calculus"/>
+  </url>
+
+  <url>
+    <loc>https://mathhub.me/en-us/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/polynomials"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/polynomials"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/polynomials"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/polynomials"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/learning/polynomials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/polynomials"/>
   </url>
   <url>
     <loc>https://mathhub.me/es/learning/polynomials</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/learning/polynomials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/learning/polynomials"/>
+  </url>
+
+  <url>
+    <loc>https://mathhub.me/en-us/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/privacy"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/privacy"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/privacy"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/privacy"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/privacy"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/privacy"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/privacy"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/privacy"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/privacy"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/privacy"/>
   </url>
   <url>
     <loc>https://mathhub.me/es/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/privacy"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/privacy"/>
   </url>
 
 </urlset>

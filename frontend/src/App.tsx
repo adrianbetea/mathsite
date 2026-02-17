@@ -4,6 +4,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Outlet, useParams } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async"; // <--- 1. IMPORT THIS
+
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -23,13 +25,12 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// 1. DEFINE YOUR VALID LANGUAGES HERE
 const VALID_LANGUAGES = ["en-us", "ro", "es", "fr", "de", "pl"]; 
 
 const LanguageLayout = () => {
   const { lang } = useParams<{ lang?: string }>();
 
-  // 2. CRITICAL FIX: If the URL is something like /random_garbage, show 404!
+  // If the URL is something like /random_garbage, show 404!
   if (lang && !VALID_LANGUAGES.includes(lang)) {
     return <NotFound />;
   }
@@ -44,41 +45,44 @@ const LanguageLayout = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <TooltipProvider>
-        <div className="min-h-screen bg-background">
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            {/* Redirect root / to default language */}
-            <Route path="/" element={<LanguageRedirect />} />
-            
-            {/* Language Routes */}
-            <Route path="/:lang" element={<LanguageLayout />}>
-              <Route index element={<Index />} />
-              <Route path="matrix" element={<MatrixCalculator />} />
-              <Route path="calculus" element={<CalculusCalculator />} />
-              <Route path="polynomials" element={<PolynomialCalculator />} />
-              <Route path="learning" element={<LearningMaterials />} />
-              <Route path="learning/linear-algebra" element={<LinearAlgebraLearning />} />
-              <Route path="learning/calculus" element={<CalculusLearning />} />
-              <Route path="learning/polynomials" element={<PolynomialsLearning />} />
-              <Route path="privacy" element={<PrivacyPolicy />} />
-              
-              {/* Catch /en-us/garbage */}
-              <Route path="*" element={<NotFound />} />
-            </Route>
+  // 2. WRAP EVERYTHING WITH HELMET PROVIDER
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <TooltipProvider>
+          <div className="min-h-screen bg-background">
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                {/* Redirect root / to default language */}
+                <Route path="/" element={<LanguageRedirect />} />
+                
+                {/* Language Routes */}
+                <Route path="/:lang" element={<LanguageLayout />}>
+                  <Route index element={<Index />} />
+                  <Route path="matrix" element={<MatrixCalculator />} />
+                  <Route path="calculus" element={<CalculusCalculator />} />
+                  <Route path="polynomials" element={<PolynomialCalculator />} />
+                  <Route path="learning" element={<LearningMaterials />} />
+                  <Route path="learning/linear-algebra" element={<LinearAlgebraLearning />} />
+                  <Route path="learning/calculus" element={<CalculusLearning />} />
+                  <Route path="learning/polynomials" element={<PolynomialsLearning />} />
+                  <Route path="privacy" element={<PrivacyPolicy />} />
+                  
+                  {/* Catch /en-us/garbage */}
+                  <Route path="*" element={<NotFound />} />
+                </Route>
 
-            {/* Catch /garbage (This catches URLs that don't match the language pattern) */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          </BrowserRouter>
-        </div>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+                {/* Catch /garbage */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </div>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;
