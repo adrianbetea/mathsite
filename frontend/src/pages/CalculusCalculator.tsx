@@ -58,18 +58,23 @@ const CalculusCalculator = () => {
 
   const mathSolverSchema = {
     "@context": "https://schema.org",
-    "@type": "MathSolver",
+    "@type": "WebApplication",
     "name": "Calculus Calculator - Derivatives, Integrals, Limits",
     "description": "Free online calculus calculator for derivatives, definite integrals, indefinite integrals, and limits.",
     "url": `https://mathhub.me/${languageCode}/calculus`,
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
     "inLanguage": languageCode,
-    "learningResourceType": "Math solver",
-    "eduQuestionType": "Calculus",
-    "usageInfo": `https://mathhub.me/${languageCode}/privacy`,
+    "featureList": "Calculate derivatives, integrals, limits, series with step-by-step solutions",
     "potentialAction": [{
-      "@type": "SolveMathAction",
+      "@type": "SearchAction",
       "target": `https://mathhub.me/${languageCode}/calculus?expr={math_expression}`,
-      "mathExpression-input": "required name=math_expression"
+      "query-input": "required name=math_expression"
     }]
   };
 

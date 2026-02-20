@@ -54,18 +54,23 @@ const PolynomialCalculator = () => {
 
   const mathSolverSchema = {
     "@context": "https://schema.org",
-    "@type": "MathSolver",
+    "@type": "WebApplication",
     "name": "Polynomial Calculator",
     "description": "Free online polynomial calculator for roots, factoring, and graphs.",
     "url": `https://mathhub.me/${languageCode}/polynomials`,
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
     "inLanguage": languageCode,
-    "learningResourceType": "Math solver",
-    "eduQuestionType": "Polynomial equation",
-    "usageInfo": `https://mathhub.me/${languageCode}/privacy`,
+    "featureList": "Find polynomial roots, factor polynomials, polynomial arithmetic, graphing",
     "potentialAction": [{
-      "@type": "SolveMathAction",
+      "@type": "SearchAction",
       "target": `https://mathhub.me/${languageCode}/polynomials?expr={math_expression}`,
-      "mathExpression-input": "required name=math_expression"
+      "query-input": "required name=math_expression"
     }]
   };
 

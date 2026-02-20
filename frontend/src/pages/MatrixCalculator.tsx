@@ -235,18 +235,23 @@ const MatrixCalculator = () => {
 
   const mathSolverSchema = {
     "@context": "https://schema.org",
-    "@type": "MathSolver",
+    "@type": "WebApplication",
     "name": "Matrix Calculator",
     "description": "Free online matrix calculator for determinants, inverses, eigenvalues, and more.",
     "url": `https://mathhub.me/${languageCode}/matrix`,
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
     "inLanguage": languageCode,
-    "learningResourceType": "Math solver",
-    "eduQuestionType": "Linear Algebra",
-    "usageInfo": `https://mathhub.me/${languageCode}/privacy`,
+    "featureList": "Calculate matrix determinant, inverse, multiplication, rank, transpose, and step-by-step solutions",
     "potentialAction": [{
-      "@type": "SolveMathAction",
+      "@type": "SearchAction",
       "target": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
-      "mathExpression-input": "required name=math_expression"
+      "query-input": "required name=math_expression"
     }]
   };
 
