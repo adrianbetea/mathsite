@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import MathKeyboard from "@/components/MathKeyboard";
 import { advancedDerivative, definiteIntegral, symbolicIntegral, sympySteps } from "@/lib/calculusUtils";
@@ -53,7 +54,7 @@ const expressionToLatex = (expr: string): string => {
 };
 
 const CalculusCalculator = () => {
-  const { t } = useLanguage();
+  const { t, languageCode } = useLanguage();
   const [expression, setExpression] = useState("x^3 + 2x^2 - 5x + 3");
   const [result, setResult] = useState<{ type: string; value: string } | null>(null);
   const [showSteps, setShowSteps] = useState(false);
@@ -63,6 +64,16 @@ const CalculusCalculator = () => {
   const [stepsLoading, setStepsLoading] = useState(false);
   const [lowerLimit, setLowerLimit] = useState(0);
   const [upperLimit, setUpperLimit] = useState(1);
+
+  // Handle URL parameters from Google Search (MathSolver Schema)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const exprParam = params.get('expr');
+    if (exprParam) {
+      const decodedExpr = decodeURIComponent(exprParam);
+      setExpression(decodedExpr);
+    }
+  }, []);
 
   const generateSteps = async (type: 'derivative' | 'integral' | 'definiteIntegral', expr: string, lower?: number, upper?: number): Promise<string[]> => {
     const cleaned = expr.replace(/\s/g, '');
@@ -208,6 +219,23 @@ const CalculusCalculator = () => {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MathSolver",
+            "name": "Calculus Calculator - Derivatives, Integrals, Limits",
+            "description": "Free online calculus calculator for derivatives, definite integrals, indefinite integrals, and limits. Get step-by-step solutions with symbolic computation.",
+            "url": `https://mathhub.me/${languageCode}/calculus`,
+            "eduQuestionType": ["Calculus", "Derivative", "Integral", "Limit"],
+            "potentialAction": {
+              "@type": "SolveMathAction",
+              "target": `https://mathhub.me/${languageCode}/calculus?expr={math_expression}`,
+              "mathExpression-input": "required name=math_expression"
+            }
+          })}
+        </script>
+      </Helmet>
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-12">
