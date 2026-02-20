@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowDown, BookOpen, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { linearAlgebraLearningTranslations } from "@/lib/translations/linear_algebra_learning_translations";
@@ -376,8 +377,69 @@ const LinearAlgebraLearning = () => {
     }
   ];
 
+  // FAQ Schema for Google Rich Results
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a matrix?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A matrix is a rectangular array of numbers, symbols, or expressions arranged in rows and columns. Matrices are fundamental tools in linear algebra used to represent linear transformations, solve systems of linear equations, and perform various mathematical operations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate a matrix determinant?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a 2x2 matrix [[a,b],[c,d]], the determinant is ad - bc. For larger matrices, use cofactor expansion: expand along any row or column, multiplying each element by its cofactor (the determinant of the submatrix with alternating signs). The determinant determines if a matrix is invertible (non-zero determinant) and represents the scaling factor of the linear transformation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the inverse of a matrix?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The inverse of a square matrix A, denoted A⁻¹, is a matrix that when multiplied by A gives the identity matrix: AA⁻¹ = A⁻¹A = I. A matrix has an inverse only if its determinant is non-zero. The inverse is calculated using the formula A⁻¹ = (1/det(A)) × adj(A), where adj(A) is the adjugate matrix."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are eigenvalues and eigenvectors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An eigenvector of a matrix A is a non-zero vector v that, when A is applied to it, results in a scalar multiple of itself: Av = λv. The scalar λ is called the eigenvalue. Eigenvalues are found by solving det(A - λI) = 0, called the characteristic equation. They reveal important properties about linear transformations and are used in many applications including stability analysis and data compression."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you solve systems of linear equations using matrices?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Systems of linear equations can be written as Ax = b, where A is the coefficient matrix, x is the variable vector, and b is the constant vector. Solutions can be found using: (1) Gaussian elimination to reduce the augmented matrix to row echelon form, (2) Matrix inversion: x = A⁻¹b (if A is invertible), or (3) Cramer's rule using determinants for small systems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a vector space?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A vector space is a set of vectors that can be added together and multiplied by scalars, satisfying specific axioms (closure, associativity, commutativity of addition, identity elements, inverses, and distributivity). Examples include Rⁿ (n-dimensional real space), polynomial spaces, and function spaces. Vector spaces provide the foundational structure for linear algebra."
+        }
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen relative">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+      </Helmet>
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-12">

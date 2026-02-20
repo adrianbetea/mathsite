@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowDown, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { calculusFundamentalsLearningTranslations } from "@/lib/translations/calculus_fundamentals_learning_translations";
@@ -376,8 +377,69 @@ const CalculusLearning = () => {
     }
   ];
 
+  // FAQ Schema for Google Rich Results
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a limit in calculus?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A limit describes the value that a function approaches as the input approaches a certain point. Written as lim(x→a) f(x) = L, it means f(x) gets arbitrarily close to L as x gets close to a. Limits are fundamental to defining derivatives and integrals, and understanding continuity of functions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate a derivative?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The derivative measures the rate of change of a function. It's defined as f'(x) = lim(h→0) [f(x+h) - f(x)]/h. Common rules include: Power rule: d/dx(xⁿ) = nxⁿ⁻¹, Product rule: (uv)' = u'v + uv', Quotient rule: (u/v)' = (u'v - uv')/v², and Chain rule: (f(g(x)))' = f'(g(x)) × g'(x)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Chain Rule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Chain Rule is used to differentiate composite functions. If y = f(g(x)), then dy/dx = f'(g(x)) × g'(x). In Leibniz notation: dy/dx = (dy/du) × (du/dx) where u = g(x). For example, to differentiate (x² + 1)³, let u = x² + 1, then d/dx[(x²+1)³] = 3(x²+1)² × 2x = 6x(x²+1)²."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is an integral?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An integral represents the accumulation of quantities, often visualized as the area under a curve. The definite integral ∫ᵃᵇ f(x)dx gives the signed area between f(x) and the x-axis from a to b. The indefinite integral ∫f(x)dx = F(x) + C is the antiderivative (a function whose derivative is f(x)), where C is an arbitrary constant."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Fundamental Theorem of Calculus?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Fundamental Theorem of Calculus links differentiation and integration. Part 1: If F(x) = ∫ᵃˣ f(t)dt, then F'(x) = f(x). Part 2: ∫ᵃᵇ f(x)dx = F(b) - F(a), where F is any antiderivative of f. This means we can evaluate definite integrals by finding antiderivatives, connecting the two main operations of calculus."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are differential equations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A differential equation is an equation involving derivatives of a function. First-order equations involve dy/dx, while higher-order equations involve d²y/dx² and beyond. Solutions describe functions that satisfy the equation. Differential equations model many real-world phenomena including population growth, radioactive decay, oscillations, and heat transfer. Common types include separable equations, linear equations, and exact equations."
+        }
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen relative">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+      </Helmet>
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-12">

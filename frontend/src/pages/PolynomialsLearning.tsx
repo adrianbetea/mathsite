@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowDown, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { polynomialsLearningTranslations } from "@/lib/translations/polynomials_learning_translations";
@@ -110,8 +111,69 @@ const PolynomialsLearning = () => {
     }
   ];
 
+  // FAQ Schema for Google Rich Results
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a polynomial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A polynomial is a mathematical expression consisting of variables and coefficients combined using addition, subtraction, and multiplication. The general form is a_n*x^n + a_(n-1)*x^(n-1) + ... + a_1*x + a_0, where n is a non-negative integer and a_n ≠ 0."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you find the roots of a polynomial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Finding polynomial roots depends on the degree: Linear equations (degree 1) use simple algebra: x = -b/a. Quadratic equations (degree 2) use the quadratic formula: x = (-b ± √(b²-4ac))/(2a). Higher-degree polynomials may require factoring, the Rational Root Theorem, or numerical methods like Newton-Raphson."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Rational Root Theorem?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Rational Root Theorem states that if a polynomial with integer coefficients has a rational root p/q (in lowest terms), then p must divide the constant term and q must divide the leading coefficient. This theorem helps narrow down the possible rational roots to test."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you add and subtract polynomials?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To add or subtract polynomials, combine like terms (terms with the same variable and power). Align terms by degree, then add or subtract their coefficients. For example: (3x² + 2x + 1) + (x² - x + 4) = 4x² + x + 5."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is polynomial factoring?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Polynomial factoring is the process of expressing a polynomial as a product of simpler polynomials. Common techniques include: factoring out the GCF (Greatest Common Factor), using special patterns like difference of squares (a² - b² = (a+b)(a-b)), grouping terms, and applying the quadratic formula to find linear factors."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are complex roots of polynomials?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Complex roots are solutions involving imaginary numbers (multiples of i = √(-1)). According to the Fundamental Theorem of Algebra, every polynomial of degree n has exactly n complex roots (counting multiplicities). Complex roots always come in conjugate pairs: if a + bi is a root, then a - bi is also a root."
+        }
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen relative">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+      </Helmet>
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-12">

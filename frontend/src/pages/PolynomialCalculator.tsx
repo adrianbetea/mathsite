@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import MathKeyboard from "@/components/MathKeyboard";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -49,7 +50,30 @@ const formatNumber = (num: number, maxDecimals: number = 4): string => {
 };
 
 const PolynomialCalculator = () => {
-  const { t } = useLanguage();
+  const { t, languageCode } = useLanguage();
+
+  // MathSolver Schema for Google Rich Results
+  const mathSolverSchema = {
+    "@context": "https://schema.org",
+    "@type": "MathSolver",
+    "name": "Polynomial Calculator",
+    "description": "Free online polynomial calculator for roots, factoring, and graphs.",
+    "url": `https://mathhub.me/${languageCode}/polynomials`,
+    "inLanguage": languageCode,
+    "eduQuestionType": "Polynomial equation",
+    "potentialAction": {
+      "@type": "SolveMathAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `https://mathhub.me/${languageCode}/polynomials?expr={math_expression}`,
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform"
+        ]
+      },
+      "mathExpression-input": "required name=math_expression"
+    }
+  };
   const [polyA, setPolyA] = useState("x^2 - 5x + 6");
   const [polyB, setPolyB] = useState("x + 2");
   const [evalX, setEvalX] = useState("");
@@ -72,6 +96,16 @@ const PolynomialCalculator = () => {
   const lastTouchDistance = useRef<number | null>(null);
 
   const plotContainerRef = useRef<HTMLDivElement>(null);
+
+  // Handle URL parameters from Google Search (MathSolver Schema)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const exprParam = params.get('expr');
+    if (exprParam) {
+      const decodedExpr = decodeURIComponent(exprParam);
+      setPolyA(decodedExpr);
+    }
+  }, []);
   const [plotContainerEl, setPlotContainerEl] = useState<HTMLDivElement | null>(null);
 
   // Prevent sticky dragging
@@ -1115,6 +1149,11 @@ const PolynomialCalculator = () => {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(mathSolverSchema)}
+        </script>
+      </Helmet>
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 pt-0 pb-4">

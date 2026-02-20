@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import MatrixInput from "@/components/MatrixInput";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -230,7 +231,30 @@ const parseAndRenderResult = (text: string): JSX.Element[] => {
 };
 
 const MatrixCalculator = () => {
-  const { t } = useLanguage();
+  const { t, languageCode } = useLanguage();
+
+  // MathSolver Schema for Google Rich Results
+  const mathSolverSchema = {
+    "@context": "https://schema.org",
+    "@type": "MathSolver",
+    "name": "Matrix Calculator",
+    "description": "Free online matrix calculator for determinants, inverses, eigenvalues, and more.",
+    "url": `https://mathhub.me/${languageCode}/matrix`,
+    "inLanguage": languageCode,
+    "eduQuestionType": "Linear Algebra",
+    "potentialAction": {
+      "@type": "SolveMathAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform"
+        ]
+      },
+      "mathExpression-input": "required name=math_expression"
+    }
+  };
   const [rowsA, setRowsA] = useState(3);
   const [colsA, setColsA] = useState(3);
   const [rowsB, setRowsB] = useState(3);
@@ -261,6 +285,31 @@ const MatrixCalculator = () => {
   const [error, setError] = useState<string>("");
   const [isComputing, setIsComputing] = useState(false);
   const [computingOp, setComputingOp] = useState<string | null>(null);
+
+  // Handle URL parameters from Google Search (MathSolver Schema)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const operationParam = params.get('operation');
+    if (operationParam) {
+      try {
+        const decoded = decodeURIComponent(operationParam);
+        // Check if it matches array-like structure
+        const arrayMatch = decoded.match(/\[\[/);
+        if (arrayMatch) {
+          const parsedMatrix = JSON.parse(decoded);
+          // Verify it's a 2D array
+          if (Array.isArray(parsedMatrix) && Array.isArray(parsedMatrix[0])) {
+            setRowsA(parsedMatrix.length);
+            setColsA(parsedMatrix[0].length);
+            setMatrixA(parsedMatrix);
+          }
+        }
+      } catch (e) {
+        // Silently fail if parsing fails
+        console.error('Failed to parse matrix from URL:', e);
+      }
+    }
+  }, []);
 
   const updateMatrixASize = (rows: number, cols: number) => {
     setRowsA(rows);
@@ -692,6 +741,11 @@ const MatrixCalculator = () => {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(mathSolverSchema)}
+        </script>
+      </Helmet>
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-12">
