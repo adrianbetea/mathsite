@@ -66,18 +66,11 @@ const CalculusCalculator = () => {
     "learningResourceType": "Math solver",
     "eduQuestionType": "Calculus",
     "usageInfo": `https://mathhub.me/${languageCode}/privacy`,
-    "potentialAction": {
+    "potentialAction": [{
       "@type": "SolveMathAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `https://mathhub.me/${languageCode}/calculus?expr={math_expression}`,
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform"
-        ]
-      },
+      "target": `https://mathhub.me/${languageCode}/calculus?expr={math_expression}`,
       "mathExpression-input": "required name=math_expression"
-    }
+    }]
   };
 
   const [expression, setExpression] = useState("x^3 + 2x^2 - 5x + 3");

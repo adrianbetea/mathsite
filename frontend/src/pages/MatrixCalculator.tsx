@@ -243,18 +243,11 @@ const MatrixCalculator = () => {
     "learningResourceType": "Math solver",
     "eduQuestionType": "Linear Algebra",
     "usageInfo": `https://mathhub.me/${languageCode}/privacy`,
-    "potentialAction": {
+    "potentialAction": [{
       "@type": "SolveMathAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform"
-        ]
-      },
+      "target": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
       "mathExpression-input": "required name=math_expression"
-    }
+    }]
   };
 
   const [rowsA, setRowsA] = useState(3);
