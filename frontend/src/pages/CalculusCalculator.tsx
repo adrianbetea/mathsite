@@ -55,7 +55,7 @@ const expressionToLatex = (expr: string): string => {
 
 const CalculusCalculator = () => {
   const { t, languageCode } = useLanguage();
-  
+
   const mathSolverSchema = {
     "@context": "https://schema.org",
     "@type": "MathSolver",
@@ -63,20 +63,13 @@ const CalculusCalculator = () => {
     "description": "Free online calculus calculator for derivatives, definite integrals, indefinite integrals, and limits.",
     "url": `https://mathhub.me/${languageCode}/calculus`,
     "inLanguage": languageCode,
-    "learningResourceType": "Math solver", 
-    "eduQuestionType": "Calculus",
-    "potentialAction": {
+    "usageInfo": `https://mathhub.me/${languageCode}/privacy`,
+    "potentialAction": [{
       "@type": "SolveMathAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `https://mathhub.me/${languageCode}/calculus?expr={math_expression}`,
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform"
-        ]
-      },
-      "mathExpression-input": "required name=math_expression"
-    }
+      "target": `https://mathhub.me/${languageCode}/calculus?expr={math_expression}`,
+      "mathExpression-input": "required name=math_expression",
+      "eduQuestionType": "Calculus"
+    }]
   };
 
   const [expression, setExpression] = useState("x^3 + 2x^2 - 5x + 3");

@@ -240,21 +240,15 @@ const MatrixCalculator = () => {
     "description": "Free online matrix calculator for determinants, inverses, eigenvalues, and more.",
     "url": `https://mathhub.me/${languageCode}/matrix`,
     "inLanguage": languageCode,
-    "learningResourceType": "Math solver",
-    "eduQuestionType": "Linear Algebra", 
-    "potentialAction": {
+    "usageInfo": `https://mathhub.me/${languageCode}/privacy`,
+    "potentialAction": [{
       "@type": "SolveMathAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform"
-        ]
-      },
-      "mathExpression-input": "required name=math_expression"
-    }
+      "target": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
+      "mathExpression-input": "required name=math_expression",
+      "eduQuestionType": "Linear Algebra"
+    }]
   };
+
   const [rowsA, setRowsA] = useState(3);
   const [colsA, setColsA] = useState(3);
   const [rowsB, setRowsB] = useState(3);
