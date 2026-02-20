@@ -59,10 +59,18 @@ const PolynomialCalculator = () => {
     "description": "Free online polynomial calculator for roots, factoring, and graphs.",
     "url": `https://mathhub.me/${languageCode}/polynomials`,
     "inLanguage": languageCode,
+    "learningResourceType": "Math solver",
     "eduQuestionType": "Polynomial equation",
     "potentialAction": {
       "@type": "SolveMathAction",
-      "target": `https://mathhub.me/${languageCode}/polynomials?expr={math_expression}`,
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `https://mathhub.me/${languageCode}/polynomials?expr={math_expression}`,
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform"
+        ]
+      },
       "mathExpression-input": "required name=math_expression"
     }
   };

@@ -240,10 +240,18 @@ const MatrixCalculator = () => {
     "description": "Free online matrix calculator for determinants, inverses, eigenvalues, and more.",
     "url": `https://mathhub.me/${languageCode}/matrix`,
     "inLanguage": languageCode,
+    "learningResourceType": "Math solver",
     "eduQuestionType": "Linear Algebra", 
     "potentialAction": {
       "@type": "SolveMathAction",
-      "target": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform"
+        ]
+      },
       "mathExpression-input": "required name=math_expression"
     }
   };
