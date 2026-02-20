@@ -233,7 +233,6 @@ const parseAndRenderResult = (text: string): JSX.Element[] => {
 const MatrixCalculator = () => {
   const { t, languageCode } = useLanguage();
 
-  // MathSolver Schema for Google Rich Results
   const mathSolverSchema = {
     "@context": "https://schema.org",
     "@type": "MathSolver",
@@ -241,17 +240,10 @@ const MatrixCalculator = () => {
     "description": "Free online matrix calculator for determinants, inverses, eigenvalues, and more.",
     "url": `https://mathhub.me/${languageCode}/matrix`,
     "inLanguage": languageCode,
-    "eduQuestionType": "Linear Algebra",
+    "eduQuestionType": "Linear Algebra", 
     "potentialAction": {
       "@type": "SolveMathAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform"
-        ]
-      },
+      "target": `https://mathhub.me/${languageCode}/matrix?operation={math_expression}`,
       "mathExpression-input": "required name=math_expression"
     }
   };

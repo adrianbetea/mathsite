@@ -52,7 +52,6 @@ const formatNumber = (num: number, maxDecimals: number = 4): string => {
 const PolynomialCalculator = () => {
   const { t, languageCode } = useLanguage();
 
-  // MathSolver Schema for Google Rich Results
   const mathSolverSchema = {
     "@context": "https://schema.org",
     "@type": "MathSolver",
@@ -63,14 +62,7 @@ const PolynomialCalculator = () => {
     "eduQuestionType": "Polynomial equation",
     "potentialAction": {
       "@type": "SolveMathAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `https://mathhub.me/${languageCode}/polynomials?expr={math_expression}`,
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform"
-        ]
-      },
+      "target": `https://mathhub.me/${languageCode}/polynomials?expr={math_expression}`,
       "mathExpression-input": "required name=math_expression"
     }
   };
