@@ -42,6 +42,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/privacy': {
       title: "Privacy Policy | MathHub",
       description: "Read the MathHub privacy policy to understand how we protect your data."
+    },
+    '/about': {
+      title: "About Us - Our Mission for Free Math Education | MathHub",
+      description: "MathHub is a free, indie-built math platform providing step-by-step solutions for matrices, calculus, and polynomials. Learn about our mission to keep math education accessible."
     }
   },
   
@@ -81,6 +85,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/privacy': {
       title: "Política de Privacidad | MathHub",
       description: "Lee la política de privacidad de MathHub para entender cómo protegemos tus datos personales."
+    },
+    '/about': {
+      title: "Sobre Nosotros - Nuestra Misión por la Educación Matemática Gratuita | MathHub",
+      description: "MathHub es una plataforma matemática gratuita creada por un desarrollador independiente con soluciones paso a paso para matrices, cálculo y polinomios. Conoce nuestra misión."
     }
   },
 
@@ -120,6 +128,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/privacy': {
       title: "Politica de Confidențialitate | MathHub",
       description: "Citește politica de confidențialitate MathHub pentru a înțelege cum îți protejăm datele."
+    },
+    '/about': {
+      title: "Despre Noi - Misiunea Noastră pentru Educația Matematică Gratuită | MathHub",
+      description: "MathHub este o platformă matematică gratuită creată de un dezvoltator independent cu soluții pas cu pas pentru matrici, analiză și polinoame. Află despre misiunea noastră."
     }
   },
 
@@ -159,6 +171,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/privacy': {
       title: "Datenschutzbestimmungen | MathHub",
       description: "Lesen Sie die MathHub-Datenschutzrichtlinie, um zu verstehen, wie wir Ihre Daten schützen."
+    },
+    '/about': {
+      title: "Über Uns - Unsere Mission für Kostenlose Mathematik-Bildung | MathHub",
+      description: "MathHub ist eine kostenlose, unabhängig entwickelte Mathe-Plattform mit Schritt-für-Schritt-Lösungen für Matrizen, Analysis und Polynome. Erfahren Sie mehr über unsere Mission."
     }
   },
 
@@ -198,6 +214,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/privacy': {
       title: "Politique de Confidentialité | MathHub",
       description: "Lisez la politique de confidentialité de MathHub pour comprendre comment nous protégeons vos données."
+    },
+    '/about': {
+      title: "À Propos - Notre Mission pour l'Éducation Mathématique Gratuite | MathHub",
+      description: "MathHub est une plateforme mathématique gratuite créée par un développeur indépendant avec des solutions étape par étape pour matrices, calcul et polynômes. Découvrez notre mission."
     }
   },
 
@@ -237,6 +257,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/privacy': {
       title: "Polityka Prywatności | MathHub",
       description: "Przeczytaj politykę prywatności MathHub, aby zrozumieć, jak chronimy Twoje dane."
+    },
+    '/about': {
+      title: "O Nas - Nasza Misja na Rzecz Darmowej Edukacji Matematycznej | MathHub",
+      description: "MathHub to darmowa platforma matematyczna stworzona przez niezależnego programistę z rozwiązaniami krok po kroku dla macierzy, analizy i wielomianów. Poznaj naszą misję."
     }
   }
 };

@@ -7,12 +7,21 @@ const Footer = () => {
   return (
     <footer className="border-t border-border mt-10">
       <div className="container mx-auto px-4 py-6 flex flex-col items-center justify-center gap-2">
-        <Link
-          to={`/${languageCode}/privacy`}
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          {t.footer.privacyPolicy}
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            to={`/${languageCode}/privacy`}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {t.footer.privacyPolicy}
+          </Link>
+          <span className="text-muted-foreground">|</span>
+          <Link
+            to={`/${languageCode}/about`}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {t.footer.aboutUs}
+          </Link>
+        </div>
         <div className="text-xs text-muted-foreground">
           Contact us at{" "}
           <a 

@@ -15,6 +15,7 @@ export const translations = {
     },
     footer: {
       privacyPolicy: "Privacy Policy",
+      aboutUs: "About Us",
     },
     matrixDescriptionSection: {
       title: "Understanding Matrix Operations",
@@ -617,6 +618,7 @@ export const translations = {
     },
     footer: {
       privacyPolicy: "Política de privacidad",
+      aboutUs: "Sobre Nosotros",
     },
     matrixDescriptionSection: {
       title: "Entendiendo las Operaciones Matriciales",
@@ -1219,6 +1221,7 @@ export const translations = {
     },
     footer: {
       privacyPolicy: "Politique de confidentialité",
+      aboutUs: "À Propos",
     },
     matrixDescriptionSection: {
       title: "Comprendre les Opérations Matricielles",
@@ -1820,6 +1823,7 @@ export const translations = {
     },
     footer: {
       privacyPolicy: "Datenschutzerklärung",
+      aboutUs: "Über Uns",
     },
     matrixDescriptionSection: {
       title: "Matrizenoperationen Verstehen",
@@ -2422,6 +2426,7 @@ export const translations = {
     },
     footer: {
       privacyPolicy: "Polityka prywatności",
+      aboutUs: "O Nas",
     },
     matrixDescriptionSection: {
       title: "Zrozumienie Operacji na Macierzach",
@@ -3024,6 +3029,7 @@ export const translations = {
     },
     footer: {
       privacyPolicy: "Politica de confidențialitate",
+      aboutUs: "Despre Noi",
     },
     matrixDescriptionSection: {
       title: "Înțelegerea Operațiilor cu Matrice",
