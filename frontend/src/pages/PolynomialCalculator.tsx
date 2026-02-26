@@ -1156,8 +1156,12 @@ const PolynomialCalculator = () => {
       </Helmet>
       <Navbar />
 
-      <main className="container mx-auto px-3 sm:px-4 pt-0 pb-4">
+      <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-12">
         <div className="max-w-7xl mx-auto">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2 animate-fade-in text-center">{t.polynomialCalculator.title}</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 animate-fade-in text-center">
+            {t.polynomialCalculator.subtitle}
+          </p>
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
             {/* Left Side - Controls and Results */}
