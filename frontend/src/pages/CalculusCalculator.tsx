@@ -99,46 +99,14 @@ const CalculusCalculator = () => {
   }, []);
 
   const generateSteps = async (type: 'derivative' | 'integral' | 'definiteIntegral', expr: string, lower?: number, upper?: number): Promise<string[]> => {
-    const cleaned = expr.replace(/\s/g, '');
-    const hasSum = /.+[+-].+/.test(cleaned.slice(1));
-    const parts = cleaned.split('*');
-    const hasProduct = parts.length > 1 && parts.filter((p) => p.includes('x')).length >= 2;
-    const divParts = cleaned.split('/');
-    const hasQuotient = divParts.length > 1 && divParts[0]?.includes('x') && divParts[1]?.includes('x');
-    const hasChain = (() => {
-      const fnRegex = /(sin|cos|tan|ln|log|exp|sqrt)\(([^()]+)\)/gi;
-      let match: RegExpExecArray | null;
-      while ((match = fnRegex.exec(cleaned))) {
-        const arg = match[2];
-        if (arg.includes('x') && arg !== 'x') return true;
-      }
-      return /\([^)]+x[^)]*\)\^\(?[^)]+\)?/.test(cleaned);
-    })();
-
-    const rules = t.calculusCalculator.steps;
-    const steps: string[] = [];
-
-    steps.push(type === 'derivative' ? rules.diffHeader : rules.intHeader);
-    steps.push(
-      type === 'derivative'
-        ? `\\underline{\\text{${t.calculusCalculator.diffRules}}}`
-        : `\\underline{\\text{${t.calculusCalculator.intRules}}}`
-    );
-
-    if (hasSum) steps.push(rules.linearity);
-    steps.push(type === 'derivative' ? rules.powerRule : rules.powerRuleInt);
-    if (hasProduct && type === 'derivative') steps.push(rules.productRule);
-    if (hasQuotient && type === 'derivative') steps.push(rules.quotientRule);
-    if (hasChain) steps.push(type === 'derivative' ? rules.chainRule : rules.substitution);
-    steps.push(rules.termByTerm);
-
-    const sympy = await sympySteps(expr, 'x', type === 'derivative' ? 'derivative' : 'integral');
-    const combined = [...steps, ...sympy];
+    const sympyOp = type === 'derivative' ? 'derivative' : 'integral';
+    const steps = await sympySteps(expr, 'x', sympyOp, languageCode);
     if (type === 'definiteIntegral' && typeof lower === 'number' && typeof upper === 'number') {
       const definite = await definiteIntegral(expr, lower, upper);
-      combined.push(`\\boxed{\\int_{${lower}}^{${upper}} f(x) \, dx = ${definite.latex}}`);
+      steps.push(`\\textbf{Definite integral result:}`);
+      steps.push(`\\boxed{\\int_{${lower}}^{${upper}} \\left(${expressionToLatex(expr)}\\right) dx = ${definite.latex}}`);
     }
-    return combined;
+    return steps;
   };
 
   const handleDerivative = async () => {
@@ -230,7 +198,7 @@ const CalculusCalculator = () => {
     return () => {
       cancelled = true;
     };
-  }, [showSteps, currentOperation, t]);
+  }, [showSteps, currentOperation, languageCode]);
 
   const examples = [
     { expr: "x^3 + 2x^2 - 5x + 3", labelKey: "polynomial" },
@@ -355,19 +323,21 @@ const CalculusCalculator = () => {
               {/* Steps Dropdown */}
               {showSteps && (
                 <div className="mt-4 p-3 sm:p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up overflow-x-auto">
-                  <h3 className="text-sm font-semibold text-foreground mb-2">{t.calculusCalculator.detailedSteps}</h3>
-                  <div className="space-y-2">
-                    {stepsLoading && (
-                      <div className="text-xs sm:text-sm text-muted-foreground">Loading...</div>
-                    )}
-                    {!stepsLoading && steps.map((step, i) => (
-                      <div 
-                        key={i} 
-                        className="text-xs sm:text-sm bg-secondary/30 px-2 sm:px-3 py-2 rounded-lg overflow-x-auto"
-                        dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
-                      />
-                    ))}
-                  </div>
+                  <h3 className="text-sm font-semibold text-foreground mb-3">{t.calculusCalculator.detailedSteps}</h3>
+                  {stepsLoading && (
+                    <div className="text-xs sm:text-sm text-muted-foreground">Loading...</div>
+                  )}
+                  {!stepsLoading && (
+                    <div className="text-xs sm:text-sm text-foreground space-y-3">
+                      {steps.map((step, i) => (
+                        <div
+                          key={i}
+                          className={step.startsWith('\\textbf') ? 'font-semibold text-foreground pt-2' : 'pl-2 border-l-2 border-primary/30'}
+                          dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
