@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import MathKeyboard from "@/components/MathKeyboard";
@@ -78,6 +79,9 @@ const CalculusCalculator = () => {
     }]
   };
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlSyncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const [expression, setExpression] = useState("x^3 + 2x^2 - 5x + 3");
   const [result, setResult] = useState<{ type: string; value: string } | null>(null);
   const [showSteps, setShowSteps] = useState(false);
@@ -88,15 +92,36 @@ const CalculusCalculator = () => {
   const [lowerLimit, setLowerLimit] = useState(0);
   const [upperLimit, setUpperLimit] = useState(1);
 
-  // Handle URL parameters from Google Search (MathSolver Schema)
+  // Init from URL — pre-fill inputs and auto-trigger the last operation
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const exprParam = params.get('expr');
-    if (exprParam) {
-      const decodedExpr = decodeURIComponent(exprParam);
-      setExpression(decodedExpr);
+    const expr  = searchParams.get("expr");
+    const op    = searchParams.get("op");
+    const lower = searchParams.get("a");
+    const upper = searchParams.get("b");
+    if (expr)  setExpression(expr);
+    if (lower !== null) setLowerLimit(Number(lower));
+    if (upper !== null) setUpperLimit(Number(upper));
+    if (op && expr) {
+      if (op === "derivative")         handleDerivative(expr);
+      else if (op === "integral")      handleIntegral(expr);
+      else if (op === "definiteIntegral") handleDefiniteIntegral(expr, Number(lower ?? 0), Number(upper ?? 1));
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Debounced URL sync — keeps the URL in sync as the user types
+  useEffect(() => {
+    if (urlSyncTimerRef.current) clearTimeout(urlSyncTimerRef.current);
+    urlSyncTimerRef.current = setTimeout(() => {
+      setSearchParams(prev => {
+        const next = new URLSearchParams(prev);
+        next.set("expr", expression);
+        next.set("a", String(lowerLimit));
+        next.set("b", String(upperLimit));
+        return next;
+      }, { replace: true });
+    }, 600);
+    return () => { if (urlSyncTimerRef.current) clearTimeout(urlSyncTimerRef.current); };
+  }, [expression, lowerLimit, upperLimit]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const generateSteps = async (type: 'derivative' | 'integral' | 'definiteIntegral', expr: string, lower?: number, upper?: number): Promise<string[]> => {
     const sympyOp = type === 'derivative' ? 'derivative' : 'integral';
@@ -109,51 +134,56 @@ const CalculusCalculator = () => {
     return steps;
   };
 
-  const handleDerivative = async () => {
-    if (!expression.trim()) {
+  const handleDerivative = async (exprOverride?: string) => {
+    const expr = exprOverride ?? expression;
+    if (!expr.trim()) {
       setResult({ type: "Error", value: `\\text{${t.calculusCalculator.noExpression}}` });
       setCurrentOperation(null);
       setShowSteps(false);
       return;
     }
     setIsComputing(true);
+    setSearchParams({ op: "derivative", expr }, { replace: true });
     try {
-      const deriv = await advancedDerivative(expression);
-      setResult({ type: "Derivative", value: `\\frac{d}{dx}\\left(${expressionToLatex(expression)}\\right) = ${deriv.latex}` });
-      setCurrentOperation({ type: 'derivative', expr: expression });
+      const deriv = await advancedDerivative(expr);
+      setResult({ type: "Derivative", value: `\\frac{d}{dx}\\left(${expressionToLatex(expr)}\\right) = ${deriv.latex}` });
+      setCurrentOperation({ type: 'derivative', expr });
       setShowSteps(false);
     } finally {
       setIsComputing(false);
     }
   };
 
-  const handleIntegral = async () => {
-    if (!expression.trim()) {
+  const handleIntegral = async (exprOverride?: string) => {
+    const expr = exprOverride ?? expression;
+    if (!expr.trim()) {
       setResult({ type: "Error", value: `\\text{${t.calculusCalculator.noExpression}}` });
       setCurrentOperation(null);
       setShowSteps(false);
       return;
     }
     setIsComputing(true);
+    setSearchParams({ op: "integral", expr }, { replace: true });
     try {
-      const integ = await symbolicIntegral(expression);
-      setResult({ type: "Integral", value: `\\int \\left(${expressionToLatex(expression)}\\right) dx = ${integ.latex}` });
-      setCurrentOperation({ type: 'integral', expr: expression });
+      const integ = await symbolicIntegral(expr);
+      setResult({ type: "Integral", value: `\\int \\left(${expressionToLatex(expr)}\\right) dx = ${integ.latex}` });
+      setCurrentOperation({ type: 'integral', expr });
       setShowSteps(false);
     } finally {
       setIsComputing(false);
     }
   };
 
-  const handleDefiniteIntegral = async () => {
-    if (!expression.trim()) {
+  const handleDefiniteIntegral = async (exprOverride?: string, lowerOverride?: number, upperOverride?: number) => {
+    const expr  = exprOverride  ?? expression;
+    const lower = lowerOverride ?? lowerLimit;
+    const upper = upperOverride ?? upperLimit;
+    if (!expr.trim()) {
       setResult({ type: "Error", value: `\\text{${t.calculusCalculator.noExpression}}` });
       setCurrentOperation(null);
       setShowSteps(false);
       return;
     }
-    const lower = Number(lowerLimit);
-    const upper = Number(upperLimit);
     if (!Number.isFinite(lower) || !Number.isFinite(upper)) {
       setResult({ type: "Integral", value: `\\text{${t.calculusCalculator.invalidLimits}}` });
       setCurrentOperation(null);
@@ -161,10 +191,11 @@ const CalculusCalculator = () => {
       return;
     }
     setIsComputing(true);
+    setSearchParams({ op: "definiteIntegral", expr, a: String(lower), b: String(upper) }, { replace: true });
     try {
-      const integ = await definiteIntegral(expression, lower, upper);
-      setResult({ type: "Integral", value: `\\int_{${lower}}^{${upper}} \\left(${expressionToLatex(expression)}\\right) dx = ${integ.latex}` });
-      setCurrentOperation({ type: 'definiteIntegral', expr: expression, lower, upper });
+      const integ = await definiteIntegral(expr, lower, upper);
+      setResult({ type: "Integral", value: `\\int_{${lower}}^{${upper}} \\left(${expressionToLatex(expr)}\\right) dx = ${integ.latex}` });
+      setCurrentOperation({ type: 'definiteIntegral', expr, lower, upper });
       setShowSteps(false);
     } finally {
       setIsComputing(false);
@@ -211,6 +242,7 @@ const CalculusCalculator = () => {
   return (
     <div className="min-h-screen">
       <Helmet>
+        <link rel="canonical" href={`https://mathhub.me/${languageCode}/calculus`} />
         <script type="application/ld+json">
           {JSON.stringify(mathSolverSchema)}
         </script>
@@ -238,10 +270,10 @@ const CalculusCalculator = () => {
             />
 
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4">
-              <button onClick={handleDerivative} className="btn-primary flex-1 py-3 sm:py-2" disabled={isComputing}>
+              <button onClick={() => handleDerivative()} className="btn-primary flex-1 py-3 sm:py-2" disabled={isComputing}>
                 {t.calculusCalculator.derivative}
               </button>
-              <button onClick={handleIntegral} className="btn-accent flex-1 py-3 sm:py-2" disabled={isComputing}>
+              <button onClick={() => handleIntegral()} className="btn-accent flex-1 py-3 sm:py-2" disabled={isComputing}>
                 {t.calculusCalculator.integral}
               </button>
             </div>
@@ -261,7 +293,7 @@ const CalculusCalculator = () => {
                 className="math-input w-full text-xs sm:text-sm h-9"
                 placeholder={t.calculusCalculator.upperLimit}
               />
-              <button onClick={handleDefiniteIntegral} className="btn-accent w-full sm:w-auto py-3 sm:py-2 text-sm sm:text-base text-white" disabled={isComputing}>
+              <button onClick={() => handleDefiniteIntegral()} className="btn-accent w-full sm:w-auto py-3 sm:py-2 text-sm sm:text-base text-white" disabled={isComputing}>
                 ∫ {t.calculusCalculator.definiteIntegral}
               </button>
             </div>
@@ -322,22 +354,53 @@ const CalculusCalculator = () => {
               
               {/* Steps Dropdown */}
               {showSteps && (
-                <div className="mt-4 p-3 sm:p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up overflow-x-auto">
-                  <h3 className="text-sm font-semibold text-foreground mb-3">{t.calculusCalculator.detailedSteps}</h3>
-                  {stepsLoading && (
-                    <div className="text-xs sm:text-sm text-muted-foreground">Loading...</div>
-                  )}
-                  {!stepsLoading && (
-                    <div className="text-xs sm:text-sm text-foreground space-y-3">
-                      {steps.map((step, i) => (
-                        <div
-                          key={i}
-                          className={step.startsWith('\\textbf') ? 'font-semibold text-foreground pt-2' : 'pl-2 border-l-2 border-primary/30'}
-                          dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
-                        />
-                      ))}
-                    </div>
-                  )}
+                <div className="mt-4 bg-secondary/50 border border-border rounded-xl animate-slide-up">
+                  <div className="px-4 py-3 border-b border-border/60">
+                    <h3 className="text-sm font-semibold text-foreground">{t.calculusCalculator.detailedSteps}</h3>
+                  </div>
+                  <div className="p-4 space-y-3">
+                    {stepsLoading && (
+                      <div className="flex items-center gap-3 py-2">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                        </div>
+                        <span className="text-muted-foreground text-sm">Loading...</span>
+                      </div>
+                    )}
+                    {!stepsLoading && (() => {
+                      let stepNum = 0;
+                      return steps.map((step, i) => {
+                        const isHeader = step.startsWith('\\textbf') || step.startsWith('\\text{');
+                        if (isHeader) {
+                          return (
+                            <div key={i} className="pt-1 pb-0.5">
+                              <div
+                                className="text-xs font-semibold text-muted-foreground uppercase tracking-wide"
+                                dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
+                              />
+                            </div>
+                          );
+                        }
+                        stepNum++;
+                        const num = stepNum;
+                        return (
+                          <div key={i} className="flex gap-3">
+                            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold mt-0.5">
+                              {num}
+                            </div>
+                            <div className="flex-1 bg-background/70 rounded-lg p-3 border border-border/50 min-w-0">
+                              <div
+                                className="text-sm overflow-x-auto"
+                                dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      });
+                    })()}
+                  </div>
                 </div>
               )}
             </div>

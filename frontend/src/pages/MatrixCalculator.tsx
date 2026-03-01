@@ -1,4 +1,5 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import MatrixInput from "@/components/MatrixInput";
@@ -255,6 +256,10 @@ const MatrixCalculator = () => {
     }]
   };
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeOp, setActiveOp] = useState<string>("");
+  const urlSyncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const [rowsA, setRowsA] = useState(3);
   const [colsA, setColsA] = useState(3);
   const [rowsB, setRowsB] = useState(3);
@@ -286,30 +291,70 @@ const MatrixCalculator = () => {
   const [isComputing, setIsComputing] = useState(false);
   const [computingOp, setComputingOp] = useState<string | null>(null);
 
-  // Handle URL parameters from Google Search (MathSolver Schema)
+  // Init from URL — pre-fill state for UI, then fire the operation with explicit
+  // values so we never depend on React state having settled (no stale-closure risk).
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const operationParam = params.get('operation');
-    if (operationParam) {
-      try {
-        const decoded = decodeURIComponent(operationParam);
-        // Check if it matches array-like structure
-        const arrayMatch = decoded.match(/\[\[/);
-        if (arrayMatch) {
-          const parsedMatrix = JSON.parse(decoded);
-          // Verify it's a 2D array
-          if (Array.isArray(parsedMatrix) && Array.isArray(parsedMatrix[0])) {
-            setRowsA(parsedMatrix.length);
-            setColsA(parsedMatrix[0].length);
-            setMatrixA(parsedMatrix);
-          }
+    const aParam = searchParams.get("a");
+    const bParam = searchParams.get("b");
+    const op     = searchParams.get("op");
+    const sc     = searchParams.get("sc");
+    const ra = Number(searchParams.get("ra") || 3);
+    const ca = Number(searchParams.get("ca") || 3);
+    const rb = Number(searchParams.get("rb") || 3);
+    const cb = Number(searchParams.get("cb") || 3);
+
+    let parsedA: number[][] | null = null;
+    let parsedB: number[][] | null = null;
+    let parsedSc: number | null = null;
+
+    try {
+      if (aParam) {
+        const p: number[][] = JSON.parse(aParam);
+        if (Array.isArray(p) && Array.isArray(p[0])) {
+          parsedA = p;
+          setRowsA(ra); setColsA(ca); setMatrixA(p);
         }
-      } catch (e) {
-        // Silently fail if parsing fails
-        console.error('Failed to parse matrix from URL:', e);
       }
+      if (bParam) {
+        const p: number[][] = JSON.parse(bParam);
+        if (Array.isArray(p) && Array.isArray(p[0])) {
+          parsedB = p;
+          setRowsB(rb); setColsB(cb); setMatrixB(p);
+        }
+      }
+      if (sc) { parsedSc = Number(sc); setScalar(parsedSc); }
+    } catch (e) {
+      console.error("Failed to parse matrix URL params:", e);
     }
-  }, []);
+
+    // Fire the operation with explicitly-parsed values — bypasses any stale-closure
+    // or state-timing issue entirely.
+    if (op && parsedA) {
+      calculate(op, parsedA, parsedB ?? undefined, parsedSc ?? undefined);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Debounced URL sync — keeps URL in sync as the user edits cells
+  useEffect(() => {
+    if (urlSyncTimerRef.current) clearTimeout(urlSyncTimerRef.current);
+    urlSyncTimerRef.current = setTimeout(() => {
+      // Skip until the user (or auto-trigger) has performed at least one operation.
+      // Without this guard the init effect mutates matrixA which fires this sync at
+      // 1000ms with activeOp="" — overwriting the original URL and dropping op/b.
+      if (!activeOp) return;
+      const needsB = ["add","subtract","multiply","hadamard","addThree","multiplyThree"].includes(activeOp);
+      const params: Record<string, string> = {
+        a:  JSON.stringify(matrixA),
+        ra: String(rowsA),
+        ca: String(colsA),
+      };
+      if (activeOp)  params.op = activeOp;
+      if (needsB)  { params.b = JSON.stringify(matrixB); params.rb = String(rowsB); params.cb = String(colsB); }
+      if (activeOp === "scalar")  params.sc = String(scalar);
+      setSearchParams(params, { replace: true });
+    }, 1000);
+    return () => { if (urlSyncTimerRef.current) clearTimeout(urlSyncTimerRef.current); };
+  }, [matrixA, matrixB, scalar, rowsA, colsA, rowsB, colsB, activeOp]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const updateMatrixASize = (rows: number, cols: number) => {
     setRowsA(rows);
@@ -351,25 +396,51 @@ const MatrixCalculator = () => {
     setError("");
   };
 
-  const calculate = (operation: string) => {
+  const calculate = (
+    operation: string,
+    _mA?: number[][],
+    _mB?: number[][],
+    _sc?: number
+  ) => {
+    // Use explicitly-passed values when available (init-from-URL path),
+    // otherwise fall back to the current React state.
+    const mA = _mA ?? matrixA;
+    const mB = _mB ?? matrixB;
+    const sc = _sc ?? scalar;
+
     setError("");
     setResult("");
     setCurrentOperation(null);
     setShowSteps(false);
     setIsComputing(true);
     setComputingOp(operation);
+    setActiveOp(operation);
+
+    // Immediately sync URL so the link is shareable right away
+    {
+      const needsB = ["add","subtract","multiply","hadamard","addThree","multiplyThree"].includes(operation);
+      const p: Record<string, string> = {
+        op: operation,
+        a:  JSON.stringify(mA),
+        ra: String(mA.length),
+        ca: String(mA[0]?.length ?? 3),
+      };
+      if (needsB) { p.b = JSON.stringify(mB); p.rb = String(mB.length); p.cb = String(mB[0]?.length ?? 3); }
+      if (operation === "scalar") p.sc = String(sc);
+      setSearchParams(p, { replace: true });
+    }
 
     // Use setTimeout to allow UI to update before computation
     setTimeout(() => {
     try {
       switch (operation) {
         case "add": {
-          const sum = add(matrixA, matrixB);
+          const sum = add(mA, mB);
           if (sum) {
             setResult(`${t.matrixCalculator.matrixAdditionDescription}\n\nA + B =\n${formatMatrix(sum)}`);
             setCurrentOperation({
               type: "add",
-              matrices: [matrixA, matrixB],
+              matrices: [mA, mB],
               result: sum
             });
           } else {
@@ -378,12 +449,12 @@ const MatrixCalculator = () => {
           break;
         }
         case "subtract": {
-          const diff = subtract(matrixA, matrixB);
+          const diff = subtract(mA, mB);
           if (diff) {
             setResult(`${t.matrixCalculator.matrixSubtractionDescription}\n\nA - B =\n${formatMatrix(diff)}`);
             setCurrentOperation({
               type: "subtract",
-              matrices: [matrixA, matrixB],
+              matrices: [mA, mB],
               result: diff
             });
           } else {
@@ -392,23 +463,23 @@ const MatrixCalculator = () => {
           break;
         }
         case "scalar": {
-          const scaled = scalarMultiply(matrixA, scalar);
-          setResult(`${t.matrixCalculator.matrixScalarMultiplicationDescription}\n\n${scalar} × A =\n${formatMatrix(scaled)}`);
+          const scaled = scalarMultiply(mA, sc);
+          setResult(`${t.matrixCalculator.matrixScalarMultiplicationDescription}\n\n${sc} × A =\n${formatMatrix(scaled)}`);
           setCurrentOperation({
             type: "scalar",
-            matrices: [matrixA],
+            matrices: [mA],
             result: scaled,
-            scalar: scalar
+            scalar: sc
           });
           break;
         }
         case "multiply": {
-          const mult = multiply(matrixA, matrixB);
+          const mult = multiply(mA, mB);
           if (mult) {
             setResult(`${t.matrixCalculator.matrixMultiplicationDescription}\n\nA × B =\n${formatMatrix(mult)}`);
             setCurrentOperation({
               type: "multiply",
-              matrices: [matrixA, matrixB],
+              matrices: [mA, mB],
               result: mult
             });
           } else {
@@ -417,12 +488,12 @@ const MatrixCalculator = () => {
           break;
         }
         case "hadamard": {
-          const had = hadamardProduct(matrixA, matrixB);
+          const had = hadamardProduct(mA, mB);
           if (had) {
             setResult(`${t.matrixCalculator.matrixElementWiseMultiplicationDescription}\n\nA ⊙ B =\n${formatMatrix(had)}`);
             setCurrentOperation({
               type: "hadamard",
-              matrices: [matrixA, matrixB],
+              matrices: [mA, mB],
               result: had
             });
           } else {
@@ -431,22 +502,22 @@ const MatrixCalculator = () => {
           break;
         }
         case "transpose": {
-          const trans = transpose(matrixA);
+          const trans = transpose(mA);
           setResult(`${t.matrixCalculator.matrixTransposeDescription}\n\nAᵀ =\n${formatMatrix(trans)}`);
           setCurrentOperation({
             type: "transpose",
-            matrices: [matrixA],
+            matrices: [mA],
             result: trans
           });
           break;
         }
         case "determinant": {
-          const det = determinant(matrixA);
+          const det = determinant(mA);
           if (det !== null) {
             setResult(`${t.matrixCalculator.matrixDeterminantDescription}\nIf det = 0, the matrix is singular (not invertible).\n\ndet(A) = ${formatNumberDisplay(det)}`);
             setCurrentOperation({
               type: "determinant",
-              matrices: [matrixA],
+              matrices: [mA],
               scalar: det,
               method: determinantMethod
             });
@@ -456,18 +527,16 @@ const MatrixCalculator = () => {
           break;
         }
         case "inverse": {
-          // Check if matrix is square first
-          if (matrixA.length !== matrixA[0].length) {
+          if (mA.length !== mA[0].length) {
             setError(t.matrixCalculator.matrixInverseDescription + " is only defined for square matrices (n×n).");
             break;
           }
-          
-          const inv = inverse(matrixA);
+          const inv = inverse(mA);
           if (inv) {
             setResult(`${t.matrixCalculator.matrixInverseDescription}\nUsed to solve linear equations: if AX = B, then X = A⁻¹B.\n\nA⁻¹ =\n${formatMatrix(inv)}`);
             setCurrentOperation({
               type: "inverse",
-              matrices: [matrixA],
+              matrices: [mA],
               result: inv
             });
           } else {
@@ -476,12 +545,12 @@ const MatrixCalculator = () => {
           break;
         }
         case "trace": {
-          const tr = trace(matrixA);
+          const tr = trace(mA);
           if (tr !== null) {
             setResult(`${t.matrixCalculator.matrixTraceDescription}\nEquals the sum of eigenvalues and is invariant under similarity transformations.\n\ntr(A) = ${formatNumberDisplay(tr)}`);
             setCurrentOperation({
               type: "trace",
-              matrices: [matrixA],
+              matrices: [mA],
               scalar: tr
             });
           } else {
@@ -490,22 +559,22 @@ const MatrixCalculator = () => {
           break;
         }
         case "rank": {
-          const r = rank(matrixA);
+          const r = rank(mA);
           setResult(`${t.matrixCalculator.matrixRankDescription}\nRepresents the number of linearly independent rows/columns.\n\nrank(A) = ${r}`);
           setCurrentOperation({
             type: "rank",
-            matrices: [matrixA],
+            matrices: [mA],
             scalar: r
           });
           break;
         }
         case "eigenvalue": {
-          const eigen = powerIteration(matrixA);
+          const eigen = powerIteration(mA);
           if (eigen) {
             setResult(`${t.matrixCalculator.matrixEigenvalueDescription}\nShows the scaling factor and direction that remain unchanged by the transformation.\n\nDominant Eigenvalue: λ = ${formatNumberDisplay(eigen.eigenvalue)}\nCorresponding Eigenvector: v = [${eigen.eigenvector.map(v => formatNumberDisplay(v)).join(", ")}]`);
             setCurrentOperation({
               type: "eigenvalue",
-              matrices: [matrixA],
+              matrices: [mA],
               eigenvalue: eigen.eigenvalue,
               eigenvector: eigen.eigenvector
             });
@@ -515,52 +584,52 @@ const MatrixCalculator = () => {
           break;
         }
         case "frobenius": {
-          const norm = frobeniusNorm(matrixA);
+          const norm = frobeniusNorm(mA);
           setResult(`${t.matrixCalculator.matrixForbeniusNormDescription}\n\n$||A||_F = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "frobenius",
-            matrices: [matrixA],
+            matrices: [mA],
             scalar: norm
           });
           break;
         }
         case "max": {
-          const norm = maxNorm(matrixA);
+          const norm = maxNorm(mA);
           setResult(`${t.matrixCalculator.matrixMaxNormDescription}\n\n\n$||A||_{\\text{max}} = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "max",
-            matrices: [matrixA],
+            matrices: [mA],
             scalar: norm
           });
           break;
         }
         case "one": {
-          const norm = oneNorm(matrixA);
+          const norm = oneNorm(mA);
           setResult(`${t.matrixCalculator.matrixOneNormDescription}\n\n$||A||_1 = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "one",
-            matrices: [matrixA],
+            matrices: [mA],
             scalar: norm
           });
           break;
         }
         case "infinity": {
-          const norm = infinityNorm(matrixA);
+          const norm = infinityNorm(mA);
           setResult(`${t.matrixCalculator.matrixInfinityNormDescription}\n\n$||A||_{\\infty} = ${formatNumberDisplay(norm)}$`);
           setCurrentOperation({
             type: "infinity",
-            matrices: [matrixA],
+            matrices: [mA],
             scalar: norm
           });
           break;
         }
         case "lu": {
-          const lu = luDecomposition(matrixA);
+          const lu = luDecomposition(mA);
           if (lu) {
             setResult(`${t.matrixCalculator.matrixLUDecompositionDescription}\n\nL (Lower Triangular) =\n${formatMatrix(lu.L)}\n\nU (Upper Triangular) =\n${formatMatrix(lu.U)}`);
             setCurrentOperation({
               type: "lu",
-              matrices: [matrixA],
+              matrices: [mA],
               result: lu.L,
               result2: lu.U
             });
@@ -570,12 +639,12 @@ const MatrixCalculator = () => {
           break;
         }
         case "qr": {
-          const qr = qrDecomposition(matrixA);
+          const qr = qrDecomposition(mA);
           if (qr) {
             setResult(`${t.matrixCalculator.matrixQRDecompositionDescription}\n\nQ (Orthogonal) =\n${formatMatrix(qr.Q)}\n\nR (Upper Triangular) =\n${formatMatrix(qr.R)}`);
             setCurrentOperation({
               type: "qr",
-              matrices: [matrixA],
+              matrices: [mA],
               result: qr.Q,
               result2: qr.R
             });
@@ -585,12 +654,12 @@ const MatrixCalculator = () => {
           break;
         }
         case "svd": {
-          const svdResult = svd(matrixA);
+          const svdResult = svd(mA);
           if (svdResult) {
             setResult(`${t.matrixCalculator.matrixSVDDescription}\n\nU =\n${formatMatrix(svdResult.U)}\n\nS (Singular Values) =\n${formatMatrix(svdResult.S)}\n\nV =\n${formatMatrix(svdResult.V)}\n\nNote: This is a simplified implementation.`);
             setCurrentOperation({
               type: "svd",
-              matrices: [matrixA],
+              matrices: [mA],
               result: svdResult.U,
               result2: svdResult.S,
               result3: svdResult.V
@@ -601,12 +670,12 @@ const MatrixCalculator = () => {
           break;
         }
         case "exponential": {
-          const exp = matrixExponential(matrixA, 15);
+          const exp = matrixExponential(mA, 15);
           if (exp) {
             setResult(`${t.matrixCalculator.matrixExponentialDescription}\n\nexp(A) =\n${formatMatrix(exp)}\n\n(Computed using 15 terms of Taylor series)`);
             setCurrentOperation({
               type: "exponential",
-              matrices: [matrixA],
+              matrices: [mA],
               result: exp,
               scalar: 15
             });
@@ -616,18 +685,18 @@ const MatrixCalculator = () => {
           break;
         }
         case "gaussian": {
-          const gauss = gaussianElimination(matrixA);
+          const gauss = gaussianElimination(mA);
           setResult(`${t.matrixCalculator.matrixGaussianEliminationDescription}\n\nRow Echelon Form:\n${formatMatrix(gauss.result)}`);
           setCurrentOperation({
             type: "gaussian",
-            matrices: [matrixA],
+            matrices: [mA],
             result: gauss.result,
             gaussSteps: gauss.steps
           });
           break;
         }
         case "addThree": {
-          const sumAB = add(matrixA, matrixB);
+          const sumAB = add(mA, mB);
           if (!sumAB) {
             setError("Matrix A and B dimensions don't match for addition.");
             break;
@@ -637,7 +706,7 @@ const MatrixCalculator = () => {
             setResult(`${t.matrixCalculator.matrixAddThreeDescription}\n\nA + B + C =\n${formatMatrix(sumABC)}`);
             setCurrentOperation({
               type: "addThree",
-              matrices: [matrixA, matrixB, matrixC],
+              matrices: [mA, mB, matrixC],
               result: sumABC
             });
           } else {
@@ -646,7 +715,7 @@ const MatrixCalculator = () => {
           break;
         }
         case "multiplyThree": {
-          const multAB = multiply(matrixA, matrixB);
+          const multAB = multiply(mA, mB);
           if (!multAB) {
             setError("Matrix A and B dimensions don't match for multiplication.");
             break;
@@ -656,7 +725,7 @@ const MatrixCalculator = () => {
             setResult(`${t.matrixCalculator.matrixMultiplyThreeDescription}\n\nA × B × C =\n${formatMatrix(multABC)}`);
             setCurrentOperation({
               type: "multiplyThree",
-              matrices: [matrixA, matrixB, matrixC],
+              matrices: [mA, mB, matrixC],
               result: multABC,
               result2: multAB
             });
@@ -742,6 +811,7 @@ const MatrixCalculator = () => {
   return (
     <div className="min-h-screen">
       <Helmet>
+        <link rel="canonical" href={`https://mathhub.me/${languageCode}/matrix`} />
         <script type="application/ld+json">
           {JSON.stringify(mathSolverSchema)}
         </script>
@@ -1067,16 +1137,20 @@ const MatrixCalculator = () => {
                 <div className="mt-4">
                   <button
                     onClick={() => setShowSteps(!showSteps)}
-                    className="btn-primary text-sm px-4 py-2"
+                    className="btn-primary text-sm px-4 py-2 w-full sm:w-auto"
                   >
                     {showSteps ? t.matrixCalculator.hideSteps : t.matrixCalculator.showSteps}
                   </button>
                   
                   {/* Steps Dropdown */}
                   {showSteps && (
-                    <div className="mt-4 p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up">
-                      <h3 className="text-sm font-semibold text-foreground mb-2">{t.matrixCalculator.detailedStepsLabel}</h3>
-                      <div className="text-sm" dangerouslySetInnerHTML={{ __html: steps }} />
+                    <div className="mt-4 bg-secondary/50 border border-border rounded-xl animate-slide-up">
+                      <div className="px-4 py-3 border-b border-border/60">
+                        <h3 className="text-sm font-semibold text-foreground">{t.matrixCalculator.detailedStepsLabel}</h3>
+                      </div>
+                      <div className="p-4">
+                        <div className="text-sm" dangerouslySetInnerHTML={{ __html: steps }} />
+                      </div>
                     </div>
                   )}
                 </div>

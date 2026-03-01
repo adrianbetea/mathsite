@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import MathKeyboard from "@/components/MathKeyboard";
@@ -74,6 +75,10 @@ const PolynomialCalculator = () => {
     }]
   };
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeOp, setActiveOp] = useState<string>("");
+  const urlSyncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const [polyA, setPolyA] = useState("x^2 - 5x + 6");
   const [polyB, setPolyB] = useState("x + 2");
   const [evalX, setEvalX] = useState("");
@@ -97,15 +102,36 @@ const PolynomialCalculator = () => {
 
   const plotContainerRef = useRef<HTMLDivElement>(null);
 
-  // Handle URL parameters from Google Search (MathSolver Schema)
+  // Init from URL — pre-fill inputs and auto-trigger the last operation
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const exprParam = params.get('expr');
-    if (exprParam) {
-      const decodedExpr = decodeURIComponent(exprParam);
-      setPolyA(decodedExpr);
+    const p  = searchParams.get("p");
+    const q  = searchParams.get("q");
+    const op = searchParams.get("op");
+    const x  = searchParams.get("x");
+    if (p) setPolyA(p);
+    if (q) setPolyB(q);
+    if (x) setEvalX(x);
+    if (op && p) {
+      // Pass URL values directly to avoid stale-closure on state
+      handleOperation(op, p, q ?? undefined, x ?? undefined);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Debounced URL sync — keeps the URL in sync as the user types
+  useEffect(() => {
+    if (urlSyncTimerRef.current) clearTimeout(urlSyncTimerRef.current);
+    urlSyncTimerRef.current = setTimeout(() => {
+      setSearchParams(prev => {
+        const next = new URLSearchParams(prev);
+        next.set("p", polyA);
+        if (polyB !== "x + 2") next.set("q", polyB); else next.delete("q");
+        if (evalX) next.set("x", evalX); else next.delete("x");
+        return next;
+      }, { replace: true });
+    }, 600);
+    return () => { if (urlSyncTimerRef.current) clearTimeout(urlSyncTimerRef.current); };
+  }, [polyA, polyB, evalX]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const [plotContainerEl, setPlotContainerEl] = useState<HTMLDivElement | null>(null);
 
   // Prevent sticky dragging
@@ -883,177 +909,385 @@ const PolynomialCalculator = () => {
     };
   };
 
-  const generateSteps = (op: string, termsA: Term[], termsB?: Term[], x?: number): string[] => {
-    const steps: string[] = [];
+  interface StepEntry {
+    title: string;
+    why: string;
+    latex?: string;
+  }
+
+  const generateSteps = (op: string, termsA: Term[], termsB?: Term[], x?: number): StepEntry[] => {
+    const steps: StepEntry[] = [];
+    const tc = t.polynomialCalculator;
 
     if (op === "roots") {
-      const maxPower = Math.max(...termsA.map(t => t.power));
-      steps.push(`\\text{${t.polynomialCalculator.givenPolynomial}} P(x) = ${formatTermsLatex(termsA)}`);
-      
+      const maxPower = Math.max(...termsA.map(term => term.power));
+
+      steps.push({
+        title: tc.stepWritePolynomial,
+        why: tc.stepWhyWritePolynomial,
+        latex: `P(x) = ${formatTermsLatex(termsA)}`,
+      });
+
+      steps.push({
+        title: tc.stepSetupEquation,
+        why: tc.stepWhySetupEquation,
+        latex: `${formatTermsLatex(termsA)} = 0`,
+      });
+
       if (maxPower === 1) {
-        const a = termsA.find(t => t.power === 1)?.coefficient || 0;
-        const b = termsA.find(t => t.power === 0)?.coefficient || 0;
-        steps.push(`\\text{${t.polynomialCalculator.linearEquation}}\\ ${a}x + ${b} = 0`);
-        steps.push(`\\text{${t.polynomialCalculator.solveFor}}\\ x: x = -\\frac{${b}}{${a}} = ${formatNumber(-b/a)}`);
+        const a = termsA.find(term => term.power === 1)?.coefficient || 0;
+        const b = termsA.find(term => term.power === 0)?.coefficient || 0;
+        steps.push({
+          title: tc.stepSolveDirect,
+          why: tc.stepWhySolveDirect,
+          latex: `${a}x + (${b}) = 0 \\Rightarrow x = -\\frac{${b}}{${a}} = ${formatNumber(-b / a)}`,
+        });
       } else if (maxPower === 2) {
-        const a = termsA.find(t => t.power === 2)?.coefficient || 0;
-        const b = termsA.find(t => t.power === 1)?.coefficient || 0;
-        const c = termsA.find(t => t.power === 0)?.coefficient || 0;
-        steps.push(`\\text{${t.polynomialCalculator.quadraticEquation}}\\ ${a}x^{2} + ${b}x + ${c} = 0`);
-        steps.push(`\\text{${t.polynomialCalculator.usingQuadraticFormula}}\\ x = \\frac{-b \\pm \\sqrt{b^{2} - 4ac}}{2a}`);
-        steps.push(`\\text{${t.polynomialCalculator.coefficients}}\\ a = ${a}, b = ${b}, c = ${c}`);
+        const a = termsA.find(term => term.power === 2)?.coefficient || 0;
+        const b = termsA.find(term => term.power === 1)?.coefficient || 0;
+        const c = termsA.find(term => term.power === 0)?.coefficient || 0;
+
+        steps.push({
+          title: tc.stepIdentifyCoefficients,
+          why: tc.stepWhyIdentifyCoefficients,
+          latex: `a = ${a}, \\quad b = ${b}, \\quad c = ${c}`,
+        });
+
         const discriminant = b * b - 4 * a * c;
-        steps.push(`\\text{${t.polynomialCalculator.discriminant}}\\ \\Delta = b^{2} - 4ac = (${b})^{2} - 4(${a})(${c}) = ${discriminant}`);
-        
+        steps.push({
+          title: tc.stepCalculateDiscriminant,
+          why: tc.stepWhyDiscriminant,
+          latex: `\\Delta = b^2 - 4ac = (${b})^2 - 4(${a})(${c}) = ${formatNumber(discriminant)}`,
+        });
+
+        let discInterpretLatex = "";
         if (discriminant > 0) {
-          steps.push(`\\text{${t.polynomialCalculator.since}}\\ \\Delta > 0\\text{, ${t.polynomialCalculator.weHaveTwoRealRoots}}`);
+          discInterpretLatex = `\\Delta = ${formatNumber(discriminant)} > 0 \\;\\Rightarrow\\; \\text{${tc.weHaveTwoRealRoots}}`;
+        } else if (discriminant === 0) {
+          discInterpretLatex = `\\Delta = 0 \\;\\Rightarrow\\; \\text{${tc.weHaveOneRepeatedRoot}}`;
+        } else {
+          discInterpretLatex = `\\Delta = ${formatNumber(discriminant)} < 0 \\;\\Rightarrow\\; \\text{${tc.weHaveComplexRoots}}`;
+        }
+        steps.push({
+          title: tc.stepInterpretDiscriminant,
+          why: tc.stepWhyInterpretDiscriminant,
+          latex: discInterpretLatex,
+        });
+
+        steps.push({
+          title: tc.stepApplyFormula,
+          why: tc.stepWhyApplyFormula,
+          latex: `x = \\frac{-b \\pm \\sqrt{\\Delta}}{2a} = \\frac{-(${b}) \\pm \\sqrt{${formatNumber(discriminant)}}}{2(${a})}`,
+        });
+
+        if (discriminant >= 0) {
           const sqrtD = Math.sqrt(discriminant);
-          steps.push(`\\sqrt{\\Delta} = \\sqrt{${discriminant}} = ${formatNumber(sqrtD)}`);
           const x1 = (-b + sqrtD) / (2 * a);
           const x2 = (-b - sqrtD) / (2 * a);
-          steps.push(`x_1 = \\frac{-${b} + ${formatNumber(sqrtD)}}{2(${a})} = ${formatNumber(x1)}`);
-          steps.push(`x_2 = \\frac{-${b} - ${formatNumber(sqrtD)}}{2(${a})} = ${formatNumber(x2)}`);
-        } else if (discriminant === 0) {
-          steps.push(`\\text{${t.polynomialCalculator.since}} \\Delta = 0\\text{, ${t.polynomialCalculator.weHaveOneRepeatedRoot}}`);
-          const x1 = -b / (2 * a);
-          steps.push(`x = \\frac{-${b}}{2(${a})} = ${formatNumber(x1)}`);
+          steps.push({
+            title: tc.stepCalculateRoots,
+            why: tc.stepWhyCalculateRoots,
+            latex: Math.abs(x1 - x2) < 1e-10
+              ? `x = ${formatNumber(x1)}`
+              : `x_1 = ${formatNumber(x1)}, \\quad x_2 = ${formatNumber(x2)}`,
+          });
         } else {
-          steps.push(`\\text{${t.polynomialCalculator.since}}\\ \\Delta < 0\\text{, ${t.polynomialCalculator.weHaveComplexRoots}}`);
           const realPart = -b / (2 * a);
           const imagPart = Math.sqrt(-discriminant) / (2 * a);
-          steps.push(`\\text{${t.polynomialCalculator.realPart}}\\ \\frac{-b}{2a} = \\frac{-${b}}{2(${a})} = ${formatNumber(realPart)}`);
-          steps.push(`\\text{${t.polynomialCalculator.imaginaryPart}}\\ \\frac{\\sqrt{|\\Delta|}}{2a} = \\frac{\\sqrt{${-discriminant}}}{2(${a})} = ${formatNumber(imagPart)}`);
-          steps.push(`x_1 = ${formatNumber(realPart)} + ${formatNumber(imagPart)}i`);
-          steps.push(`x_2 = ${formatNumber(realPart)} - ${formatNumber(imagPart)}i`);
+          steps.push({
+            title: tc.stepCalculateRoots,
+            why: tc.stepWhyCalculateRoots,
+            latex: `x_1 = ${formatNumber(realPart)} + ${formatNumber(imagPart)}i, \\quad x_2 = ${formatNumber(realPart)} - ${formatNumber(imagPart)}i`,
+          });
         }
       } else {
-        steps.push(`\\text{${t.polynomialCalculator.polynomialOfDegree}}\\ ${maxPower}`);
-        steps.push(`\\text{${t.polynomialCalculator.usingNewtonRaphson}}`);
-        steps.push(`\\text{${t.polynomialCalculator.algorithm}}\\ x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}`);
+        steps.push({
+          title: tc.stepIdentifyDegree,
+          why: tc.stepWhyIdentifyDegree,
+          latex: `\\deg(P) = ${maxPower}`,
+        });
+
+        steps.push({
+          title: tc.stepApplyNumerical,
+          why: tc.stepWhyApplyNumerical,
+          latex: `x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}`,
+        });
+
         const roots = findRoots(termsA);
         if (Array.isArray(roots)) {
-          steps.push(`\\text{${t.polynomialCalculator.found} ${roots.length} ${t.polynomialCalculator.roots}}`);
           roots.forEach((r, i) => {
             if (!r.isComplex) {
-              steps.push(`\\text{${t.polynomialCalculator.root} ${i+1}:}\\ x = ${formatNumber(r.real)}`);
-              steps.push(`\\text{${t.polynomialCalculator.verification}}\\ P(${formatNumber(r.real)}) = ${formatNumber(evaluatePolynomial(termsA, r.real), 6)} \\approx 0`);
+              steps.push({
+                title: `${tc.stepVerifyRoots} (${tc.root} ${i + 1})`,
+                why: tc.stepWhyVerifyRoots,
+                latex: `P(${formatNumber(r.real)}) = ${formatNumber(evaluatePolynomial(termsA, r.real), 6)} \\approx 0 \\checkmark`,
+              });
             }
           });
         }
       }
     } else if (op === "evaluate" && x !== undefined) {
-      steps.push(`\\text{${t.polynomialCalculator.given}}\\ P(x) = ${formatTermsLatex(termsA)}`);
-      steps.push(`\\text{${t.polynomialCalculator.evaluateAt}}\\ x = ${x}`);
-      
-      const expandedTerms = termsA.map(t => {
-        if (t.power === 0) return `${t.coefficient}`;
-        const coeff = t.coefficient === 1 ? "" : (t.coefficient === -1 ? "-" : `${t.coefficient}`);
-        const xPart = t.power === 1 ? `(${x})` : `(${x})^{${t.power}}`;
-        return `${coeff}${xPart}`;
-      }).join(" + ").replace(/\+ -/g, "- ");
-      
-      steps.push(`P(${x}) = ${expandedTerms}`);
-      
-      const evaluatedTerms = termsA.map(t => {
-        const value = t.coefficient * Math.pow(x, t.power);
-        return value;
+      steps.push({
+        title: tc.stepWritePolynomial,
+        why: tc.stepWhyWritePolynomial,
+        latex: `P(x) = ${formatTermsLatex(termsA)}`,
       });
-      
-      const termsStr = evaluatedTerms.map((v, i) => v.toFixed(4)).join(" + ").replace(/\+ -/g, "- ");
-      steps.push(`P(${x}) = ${termsStr}`);
-      
-      const result = evaluatePolynomial(termsA, x);
-      steps.push(`P(${x}) = ${result.toFixed(4)}`);
+
+      const substituted = termsA
+        .map(term => {
+          if (term.power === 0) return `${term.coefficient}`;
+          const coeff = term.coefficient === 1 ? "" : term.coefficient === -1 ? "-" : `${term.coefficient} \\cdot`;
+          const xPart = term.power === 1 ? `(${x})` : `(${x})^{${term.power}}`;
+          return `${coeff}${xPart}`;
+        })
+        .join(" + ")
+        .replace(/\+ -/g, "- ");
+      steps.push({
+        title: tc.stepSubstituteX,
+        why: tc.stepWhySubstituteX,
+        latex: `P(${x}) = ${substituted}`,
+      });
+
+      const evaluatedTerms = termsA.map(term => term.coefficient * Math.pow(x, term.power));
+      const termsStr = evaluatedTerms
+        .map(v => formatNumber(v, 4))
+        .join(" + ")
+        .replace(/\+ -/g, "- ");
+      steps.push({
+        title: tc.stepExpandTerms,
+        why: tc.stepWhyExpandTerms,
+        latex: `P(${x}) = ${termsStr}`,
+      });
+
+      const resultVal = evaluatePolynomial(termsA, x);
+      steps.push({
+        title: tc.stepSumTerms,
+        why: tc.stepWhySumTerms,
+        latex: `P(${x}) = ${formatNumber(resultVal)}`,
+      });
     } else if (op === "add" && termsB) {
-      steps.push(`\\text{${t.polynomialCalculator.given}}\\ P(x) = ${formatTermsLatex(termsA)}`);
-      steps.push(`\\text{${t.polynomialCalculator.and}}\\ Q(x) = ${formatTermsLatex(termsB)}`);
-      steps.push(`\\text{${t.polynomialCalculator.calculate}}\\ P(x) + Q(x)`);
-      steps.push(`\\text{${t.polynomialCalculator.combineLikeTerms}}`);
-      
-      const result = addPolynomials(termsA, termsB);
-      const maxPower = Math.max(...[...termsA, ...termsB].map(t => t.power));
-      
-      for (let power = maxPower; power >= 0; power--) {
-        const coeffA = termsA.find(t => t.power === power)?.coefficient || 0;
-        const coeffB = termsB.find(t => t.power === power)?.coefficient || 0;
-        const sum = coeffA + coeffB;
-        
-        if (coeffA !== 0 || coeffB !== 0) {
-          const xPart = power === 0 ? "" : (power === 1 ? "x" : `x^{${power}}`);
-          steps.push(`\\text{${t.polynomialCalculator.degree} ${power}:}\\ (${coeffA}) + (${coeffB}) = ${sum}${xPart}`);
+      steps.push({
+        title: tc.stepWritePolynomial,
+        why: tc.stepWhyWritePolynomial,
+        latex: `P(x) = ${formatTermsLatex(termsA)}`,
+      });
+      steps.push({
+        title: tc.stepWriteQ,
+        why: tc.stepWhyWriteQ,
+        latex: `Q(x) = ${formatTermsLatex(termsB)}`,
+      });
+      steps.push({
+        title: tc.stepGroupDegrees,
+        why: tc.stepWhyGroupDegrees,
+      });
+
+      const maxPow = Math.max(...[...termsA, ...termsB].map(term => term.power));
+      const degreeLines: string[] = [];
+      for (let power = maxPow; power >= 0; power--) {
+        const cA = termsA.find(term => term.power === power)?.coefficient || 0;
+        const cB = termsB.find(term => term.power === power)?.coefficient || 0;
+        if (cA !== 0 || cB !== 0) {
+          const xPart = power === 0 ? "" : power === 1 ? "x" : `x^{${power}}`;
+          degreeLines.push(`(${cA}) + (${cB}) = ${cA + cB}${xPart}`);
         }
       }
-      
-      steps.push(`\\text{${t.polynomialCalculator.result}}\\ ${formatTermsLatex(result)}`);
+      steps.push({
+        title: tc.stepCombineCoeffs,
+        why: tc.stepWhyCombineCoeffs,
+        latex: degreeLines.join(" \\\\[4pt] "),
+      });
+
+      const sum = addPolynomials(termsA, termsB);
+      steps.push({
+        title: tc.stepWriteFinalResult,
+        why: tc.stepWhyWriteFinalResult,
+        latex: `P(x) + Q(x) = ${formatTermsLatex(sum)}`,
+      });
     } else if (op === "subtract" && termsB) {
-      steps.push(`\\text{${t.polynomialCalculator.given}}\\ P(x) = ${formatTermsLatex(termsA)}`);
-      steps.push(`\\text{${t.polynomialCalculator.and}}\\ Q(x) = ${formatTermsLatex(termsB)}`);
-      steps.push(`\\text{${t.polynomialCalculator.calculate}}\\ P(x) - Q(x)`);
-      steps.push(`\\text{${t.polynomialCalculator.combineLikeTerms}}`);
-      
-      const result = subtractPolynomials(termsA, termsB);
-      const maxPower = Math.max(...[...termsA, ...termsB].map(t => t.power));
-      
-      for (let power = maxPower; power >= 0; power--) {
-        const coeffA = termsA.find(t => t.power === power)?.coefficient || 0;
-        const coeffB = termsB.find(t => t.power === power)?.coefficient || 0;
-        const diff = coeffA - coeffB;
-        
-        if (coeffA !== 0 || coeffB !== 0) {
-          const xPart = power === 0 ? "" : (power === 1 ? "x" : `x^{${power}}`);
-          steps.push(`\\text{${t.polynomialCalculator.degree} ${power}:}\\ (${coeffA}) - (${coeffB}) = ${diff}${xPart}`);
+      steps.push({
+        title: tc.stepWritePolynomial,
+        why: tc.stepWhyWritePolynomial,
+        latex: `P(x) = ${formatTermsLatex(termsA)}`,
+      });
+      steps.push({
+        title: tc.stepWriteQ,
+        why: tc.stepWhyWriteQ,
+        latex: `Q(x) = ${formatTermsLatex(termsB)}`,
+      });
+      steps.push({
+        title: tc.stepGroupDegrees,
+        why: tc.stepWhyGroupDegrees,
+      });
+
+      const maxPow = Math.max(...[...termsA, ...termsB].map(term => term.power));
+      const degreeLines: string[] = [];
+      for (let power = maxPow; power >= 0; power--) {
+        const cA = termsA.find(term => term.power === power)?.coefficient || 0;
+        const cB = termsB.find(term => term.power === power)?.coefficient || 0;
+        if (cA !== 0 || cB !== 0) {
+          const xPart = power === 0 ? "" : power === 1 ? "x" : `x^{${power}}`;
+          degreeLines.push(`(${cA}) - (${cB}) = ${cA - cB}${xPart}`);
         }
       }
-      
-      steps.push(`\\text{${t.polynomialCalculator.result}}\\ ${formatTermsLatex(result)}`);
+      steps.push({
+        title: tc.stepCombineCoeffs,
+        why: tc.stepWhyCombineCoeffs,
+        latex: degreeLines.join(" \\\\[4pt] "),
+      });
+
+      const diff = subtractPolynomials(termsA, termsB);
+      steps.push({
+        title: tc.stepWriteFinalResult,
+        why: tc.stepWhyWriteFinalResult,
+        latex: `P(x) - Q(x) = ${formatTermsLatex(diff)}`,
+      });
     } else if (op === "multiply" && termsB) {
-      steps.push(`\\text{${t.polynomialCalculator.given}}\\ P(x) = ${formatTermsLatex(termsA)}`);
-      steps.push(`\\text{${t.polynomialCalculator.and}}\\ Q(x) = ${formatTermsLatex(termsB)}`);
-      steps.push(`\\text{${t.polynomialCalculator.calculate}}\\ P(x) \\times Q(x)`);
-      steps.push(`\\text{${t.polynomialCalculator.usingDistribution}}`);
-      
-      const products: string[] = [];
+      steps.push({
+        title: tc.stepWritePolynomial,
+        why: tc.stepWhyWritePolynomial,
+        latex: `P(x) = ${formatTermsLatex(termsA)}`,
+      });
+      steps.push({
+        title: tc.stepWriteQ,
+        why: tc.stepWhyWriteQ,
+        latex: `Q(x) = ${formatTermsLatex(termsB)}`,
+      });
+
+      const distLines: string[] = [];
       for (const termA of termsA) {
         for (const termB of termsB) {
           const coeff = termA.coefficient * termB.coefficient;
           const power = termA.power + termB.power;
-          const coeffStr = coeff === 1 ? "" : (coeff === -1 ? "-" : `${coeff}`);
-          const xPart = power === 0 ? "1" : (power === 1 ? "x" : `x^{${power}}`);
-          products.push(`${coeffStr}${xPart}`);
-          
-          const termAStr = termA.power === 0 ? `${termA.coefficient}` : 
-                           (termA.power === 1 ? `${termA.coefficient}x` : `${termA.coefficient}x^{${termA.power}}`);
-          const termBStr = termB.power === 0 ? `${termB.coefficient}` : 
-                           (termB.power === 1 ? `${termB.coefficient}x` : `${termB.coefficient}x^{${termB.power}}`);
-          steps.push(`(${termAStr})(${termBStr}) = ${coeff}x^{${power}}`);
+          const tAStr = termA.power === 0 ? `${termA.coefficient}` : termA.power === 1 ? `${termA.coefficient}x` : `${termA.coefficient}x^{${termA.power}}`;
+          const tBStr = termB.power === 0 ? `${termB.coefficient}` : termB.power === 1 ? `${termB.coefficient}x` : `${termB.coefficient}x^{${termB.power}}`;
+          const xPart = power === 0 ? "" : power === 1 ? "x" : `x^{${power}}`;
+          distLines.push(`(${tAStr})(${tBStr}) = ${coeff}${xPart}`);
         }
       }
-      
-      const result = multiplyPolynomials(termsA, termsB);
-      steps.push(`\\text{${t.polynomialCalculator.combineLikeTerms}}`);
-      steps.push(`\\text{${t.polynomialCalculator.result}}\\ ${formatTermsLatex(result)}`);
+      steps.push({
+        title: tc.stepDistribute,
+        why: tc.stepWhyDistribute,
+        latex: distLines.slice(0, 8).join(" \\\\[4pt] ") + (distLines.length > 8 ? " \\\\[4pt] \\cdots" : ""),
+      });
+
+      steps.push({
+        title: tc.stepCollectLike,
+        why: tc.stepWhyCollectLike,
+      });
+
+      const product = multiplyPolynomials(termsA, termsB);
+      steps.push({
+        title: tc.stepWriteFinalResult,
+        why: tc.stepWhyWriteFinalResult,
+        latex: `P(x) \\times Q(x) = ${formatTermsLatex(product)}`,
+      });
     } else if (op === "factor") {
-      steps.push(`\text{${t.polynomialCalculator.givenPolynomial}}\ P(x) = ${formatTermsLatex(termsA)}`);
-      steps.push(`\text{${t.polynomialCalculator.factorPolynomial}}`);
-      const factoring = factorPolynomial(termsA);
-      steps.push(...factoring.steps);
+      steps.push({
+        title: tc.stepWritePolynomial,
+        why: tc.stepWhyWritePolynomial,
+        latex: `P(x) = ${formatTermsLatex(termsA)}`,
+      });
+
+      const simplified = simplifyTerms(termsA);
+      const maxPower = simplified[0]?.power || 0;
+      steps.push({
+        title: tc.stepIdentifyDegree,
+        why: tc.stepWhyIdentifyDegree,
+        latex: `\\deg(P) = ${maxPower}`,
+      });
+
+      if (maxPower === 1) {
+        const a = simplified.find(term => term.power === 1)?.coefficient || 0;
+        const b = simplified.find(term => term.power === 0)?.coefficient || 0;
+        const root = -b / a;
+        steps.push({
+          title: tc.stepComputeRoot,
+          why: tc.stepWhyComputeRoot,
+          latex: `${a}x + (${b}) = 0 \\Rightarrow x = ${formatNumber(root)}`,
+        });
+        steps.push({
+          title: tc.stepWriteFactored,
+          why: tc.stepWhyWriteFactored,
+          latex: `P(x) = ${formatNumber(a)}${formatFactorBinomial(root)}`,
+        });
+      } else if (maxPower === 2) {
+        const a = simplified.find(term => term.power === 2)?.coefficient || 0;
+        const b = simplified.find(term => term.power === 1)?.coefficient || 0;
+        const c = simplified.find(term => term.power === 0)?.coefficient || 0;
+        const discriminant = b * b - 4 * a * c;
+
+        steps.push({
+          title: tc.stepIdentifyCoefficients,
+          why: tc.stepWhyIdentifyCoefficients,
+          latex: `a = ${a}, \\quad b = ${b}, \\quad c = ${c}`,
+        });
+        steps.push({
+          title: tc.stepCalculateDiscriminant,
+          why: tc.stepWhyDiscriminant,
+          latex: `\\Delta = b^2 - 4ac = (${b})^2 - 4(${a})(${c}) = ${formatNumber(discriminant)}`,
+        });
+
+        if (discriminant < 0) {
+          steps.push({
+            title: tc.stepInterpretDiscriminant,
+            why: tc.stepWhyInterpretDiscriminant,
+            latex: `\\Delta = ${formatNumber(discriminant)} < 0 \\;\\Rightarrow\\; \\text{${tc.cannotFactor}}`,
+          });
+        } else {
+          const sqrtD = Math.sqrt(discriminant);
+          const r1 = (-b + sqrtD) / (2 * a);
+          const r2 = (-b - sqrtD) / (2 * a);
+          steps.push({
+            title: tc.stepComputeRoot,
+            why: tc.stepWhyComputeRoot,
+            latex: Math.abs(r1 - r2) < 1e-10
+              ? `x = ${formatNumber(r1)}`
+              : `x_1 = ${formatNumber(r1)}, \\quad x_2 = ${formatNumber(r2)}`,
+          });
+          const factorLatex = Math.abs(r1 - r2) < 1e-10
+            ? `${formatNumber(a)}${formatFactorBinomial(r1)}^{2}`
+            : `${formatNumber(a)}${formatFactorBinomial(r1)}${formatFactorBinomial(r2)}`;
+          steps.push({
+            title: tc.stepWriteFactored,
+            why: tc.stepWhyWriteFactored,
+            latex: `P(x) = ${factorLatex}`,
+          });
+        }
+      } else {
+        steps.push({
+          title: tc.stepInterpretDiscriminant,
+          why: tc.stepWhyInterpretDiscriminant,
+          latex: `\\text{${tc.cannotFactor}}`,
+        });
+      }
     }
 
     return steps;
   };
 
-  const handleOperation = (op: string) => {
+  const handleOperation = (op: string, _pA?: string, _pB?: string, _xStr?: string) => {
+    const pA   = _pA   ?? polyA;
+    const pB   = _pB   ?? polyB;
+    const xStr = _xStr ?? evalX;
+
     setError("");
     setResult(null);
     setShowSteps(false);
     setIsComputing(true);
     setComputingOp(op);
+    setActiveOp(op);
+
+    // Immediately update URL so the link is shareable right away
+    const urlParams: Record<string, string> = { op, p: pA };
+    if (["add", "subtract", "multiply"].includes(op)) urlParams.q = pB;
+    if (op === "evaluate" && xStr) urlParams.x = xStr;
+    setSearchParams(urlParams, { replace: true });
 
     // Use setTimeout to allow UI to update before computation
     setTimeout(() => {
     try {
-      const termsA = parsePolynomial(polyA);
-      const termsB = parsePolynomial(polyB);
+      const termsA = parsePolynomial(pA);
+      const termsB = parsePolynomial(pB);
 
       if (termsA.length === 0) {
         setError("Invalid polynomial A. Use format: x^2 + 3x - 5");
@@ -1081,7 +1315,7 @@ const PolynomialCalculator = () => {
           break;
         }
         case "evaluate": {
-          const x = parseFloat(evalX);
+          const x = parseFloat(xStr);
           if (isNaN(x)) {
             setError("Invalid x value");
             return;
@@ -1150,6 +1384,7 @@ const PolynomialCalculator = () => {
   return (
     <div className="min-h-screen">
       <Helmet>
+        <link rel="canonical" href={`https://mathhub.me/${languageCode}/polynomials`} />
         <script type="application/ld+json">
           {JSON.stringify(mathSolverSchema)}
         </script>
@@ -1306,20 +1541,32 @@ const PolynomialCalculator = () => {
                   
                   {/* Steps Dropdown */}
                   {showSteps && (
-                    <div className="mt-4 p-3 sm:p-4 bg-secondary/50 border border-border rounded-lg animate-slide-up overflow-x-auto">
-                      <h3 className="text-sm font-semibold text-foreground mb-2">{t.polynomialCalculator.detailedSteps}</h3>
-                      <div className="space-y-2">
+                    <div className="mt-4 bg-secondary/50 border border-border rounded-xl animate-slide-up">
+                      <div className="px-4 py-3 border-b border-border/60">
+                        <h3 className="text-sm font-semibold text-foreground">{t.polynomialCalculator.detailedSteps}</h3>
+                      </div>
+                      <div className="p-4 space-y-3">
                         {generateSteps(
-                          currentOperation.op, 
-                          currentOperation.termsA, 
+                          currentOperation.op,
+                          currentOperation.termsA,
                           currentOperation.termsB,
                           currentOperation.x
                         ).map((step, i) => (
-                          <div 
-                            key={i} 
-                            className="text-xs sm:text-sm bg-secondary/30 px-2 sm:px-3 py-2 rounded-lg overflow-x-auto"
-                            dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
-                          />
+                          <div key={i} className="flex gap-3">
+                            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold mt-0.5">
+                              {i + 1}
+                            </div>
+                            <div className="flex-1 bg-background/70 rounded-lg p-3 border border-border/50 min-w-0">
+                              <div className="font-semibold text-sm text-foreground leading-tight">{step.title}</div>
+                              <div className="text-xs text-muted-foreground mt-1 mb-2 leading-relaxed">{step.why}</div>
+                              {step.latex && (
+                                <div
+                                  className="text-sm bg-secondary/50 rounded-md px-3 py-2 overflow-x-auto border border-border/30"
+                                  dangerouslySetInnerHTML={{ __html: renderLatex(step.latex) }}
+                                />
+                              )}
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </div>
