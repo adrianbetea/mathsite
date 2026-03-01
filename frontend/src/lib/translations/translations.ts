@@ -2,6 +2,16 @@ import { matrix } from "mathjs";
 
 export const translations = {
   en: {
+    common: {
+      shareSolution: "Share Solution",
+      shareText: "Check out this math solution on MathHub",
+      copiedToClipboard: "Copied to clipboard!",
+      shareVia: "Share via",
+      shareWhatsApp: "WhatsApp",
+      shareMessenger: "Messenger",
+      shareEmail: "Email",
+      shareCopyLink: "Copy Link",
+    },
     nav: {
       home: "Home",
       matrix: "Matrix",
@@ -650,6 +660,16 @@ export const translations = {
     },
   },
   es: {
+    common: {
+      shareSolution: "Compartir solución",
+      shareText: "Mira esta solución matemática en MathHub",
+      copiedToClipboard: "¡Copiado al portapapeles!",
+      shareVia: "Compartir vía",
+      shareWhatsApp: "WhatsApp",
+      shareMessenger: "Messenger",
+      shareEmail: "Correo electrónico",
+      shareCopyLink: "Copiar enlace",
+    },
     nav: {
       home: "Inicio",
       matrix: "Matriz",
@@ -1298,6 +1318,16 @@ export const translations = {
     },
   },
   fr: {
+    common: {
+      shareSolution: "Partager la solution",
+      shareText: "Découvrez cette solution mathématique sur MathHub",
+      copiedToClipboard: "Copié dans le presse-papiers !",
+      shareVia: "Partager via",
+      shareWhatsApp: "WhatsApp",
+      shareMessenger: "Messenger",
+      shareEmail: "E-mail",
+      shareCopyLink: "Copier le lien",
+    },
     nav: {
       home: "Accueil",
       matrix: "Matrice",
@@ -1945,6 +1975,16 @@ export const translations = {
     },
   },
   de: {
+    common: {
+      shareSolution: "Lösung teilen",
+      shareText: "Schau dir diese Mathematiklösung auf MathHub an",
+      copiedToClipboard: "In die Zwischenablage kopiert!",
+      shareVia: "Teilen über",
+      shareWhatsApp: "WhatsApp",
+      shareMessenger: "Messenger",
+      shareEmail: "E-Mail",
+      shareCopyLink: "Link kopieren",
+    },
     nav: {
       home: "Startseite",
       matrix: "Matrix",
@@ -2593,6 +2633,16 @@ export const translations = {
     },
   },
   pl: {
+    common: {
+      shareSolution: "Udostępnij rozwiązanie",
+      shareText: "Sprawdź to rozwiązanie matematyczne na MathHub",
+      copiedToClipboard: "Skopiowano do schowka!",
+      shareVia: "Udostępnij przez",
+      shareWhatsApp: "WhatsApp",
+      shareMessenger: "Messenger",
+      shareEmail: "E-mail",
+      shareCopyLink: "Kopiuj link",
+    },
     nav: {
       home: "Strona główna",
       matrix: "Macierz",
@@ -3241,6 +3291,16 @@ export const translations = {
     },
   },
   ro: {
+    common: {
+      shareSolution: "Distribuie soluția",
+      shareText: "Verifică această soluție matematică pe MathHub",
+      copiedToClipboard: "Copiat în clipboard!",
+      shareVia: "Distribuie prin",
+      shareWhatsApp: "WhatsApp",
+      shareMessenger: "Messenger",
+      shareEmail: "E-mail",
+      shareCopyLink: "Copiază link-ul",
+    },
     nav: {
       home: "Acasă",
       matrix: "Matrice",

@@ -20,6 +20,7 @@ import {
 import katex from "katex";
 import "katex/dist/katex.min.css";
 import PolynomialsInfoSection from "@/components/PolynomialsInfoSection";
+import ShareButton from "@/components/ShareButton";
 
 // Helper function to format numbers intelligently
 const formatNumber = (num: number, maxDecimals: number = 4): string => {
@@ -1532,13 +1533,16 @@ const PolynomialCalculator = () => {
               {/* Show Steps Button */}
               {!isComputing && result && currentOperation && (
                 <div className="mt-4">
-                  <button
-                    onClick={() => setShowSteps(!showSteps)}
-                    className="btn-primary text-sm px-4 py-2 w-full sm:w-auto"
-                  >
-                    {showSteps ? t.polynomialCalculator.hideSteps : t.polynomialCalculator.showSteps}
-                  </button>
-                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <button
+                      onClick={() => setShowSteps(!showSteps)}
+                      className="btn-primary text-sm px-4 py-2"
+                    >
+                      {showSteps ? t.polynomialCalculator.hideSteps : t.polynomialCalculator.showSteps}
+                    </button>
+                    <ShareButton />
+                  </div>
+
                   {/* Steps Dropdown */}
                   {showSteps && (
                     <div className="mt-4 bg-secondary/50 border border-border rounded-xl animate-slide-up">

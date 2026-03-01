@@ -56,6 +56,7 @@ import {
   formatNumberDisplay,
 } from "@/lib/matrixUtils";
 import MatrixInfoSection from "@/components/MatrixInfoSection";
+import ShareButton from "@/components/ShareButton";
 
 // Convert matrix to LaTeX format for KaTeX rendering
 const matrixToLatex = (matrix: number[][]): string => {
@@ -1135,13 +1136,16 @@ const MatrixCalculator = () => {
               {/* Show Steps Button */}
               {!error && steps && (
                 <div className="mt-4">
-                  <button
-                    onClick={() => setShowSteps(!showSteps)}
-                    className="btn-primary text-sm px-4 py-2 w-full sm:w-auto"
-                  >
-                    {showSteps ? t.matrixCalculator.hideSteps : t.matrixCalculator.showSteps}
-                  </button>
-                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <button
+                      onClick={() => setShowSteps(!showSteps)}
+                      className="btn-primary text-sm px-4 py-2"
+                    >
+                      {showSteps ? t.matrixCalculator.hideSteps : t.matrixCalculator.showSteps}
+                    </button>
+                    <ShareButton />
+                  </div>
+
                   {/* Steps Dropdown */}
                   {showSteps && (
                     <div className="mt-4 bg-secondary/50 border border-border rounded-xl animate-slide-up">

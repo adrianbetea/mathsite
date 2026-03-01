@@ -8,6 +8,7 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import katex from "katex";
 import CalculusInfoSection from "@/components/CalculusInfoSection";
+import ShareButton from "@/components/ShareButton";
 
 // Helper function to render LaTeX directly
 const renderLatex = (latex: string, displayMode: boolean = false): string => {
@@ -345,13 +346,15 @@ const CalculusCalculator = () => {
           {/* Show Steps Button */}
           {!isComputing && result && currentOperation && (
             <div className="mt-4">
-              <button
-                onClick={() => setShowSteps(!showSteps)}
-                className="btn-primary text-sm px-4 py-2 w-full sm:w-auto"
-              >
-                {showSteps ? t.calculusCalculator.hideSteps : t.calculusCalculator.showSteps}
-              </button>
-              
+              <div className="flex flex-wrap gap-2 mb-4">
+                <button
+                  onClick={() => setShowSteps(!showSteps)}
+                  className="btn-primary text-sm px-4 py-2"
+                >
+                  {showSteps ? t.calculusCalculator.hideSteps : t.calculusCalculator.showSteps}
+                </button>
+                <ShareButton />
+              </div>
               {/* Steps Dropdown */}
               {showSteps && (
                 <div className="mt-4 bg-secondary/50 border border-border rounded-xl animate-slide-up">
