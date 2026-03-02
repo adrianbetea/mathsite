@@ -198,6 +198,14 @@
   .result-error {
     @apply bg-destructive/10 text-destructive border border-destructive/20 rounded-lg p-4;
   }
+
+  /* Prevent KaTeX from adding a horizontal scrollbar inside step cards.
+     Formulas are rendered in display mode with enough padding, so no scroll is needed. */
+  .steps-card .katex-display {
+    overflow-x: visible;
+    overflow-y: visible;
+    margin: 0.5rem 0;
+  }
 }
 
 @layer utilities {

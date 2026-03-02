@@ -368,7 +368,7 @@ const CalculusCalculator = () => {
               </div>
               {/* Steps Dropdown */}
               {showSteps && (
-                <div className="mt-4 bg-secondary/50 border border-border rounded-xl animate-slide-up">
+                <div className="mt-4 steps-card bg-secondary/50 border border-border rounded-xl animate-slide-up">
                   <div className="px-4 py-3 border-b border-border/60">
                     <h3 className="text-sm font-semibold text-foreground">{t.calculusCalculator.detailedSteps}</h3>
                   </div>
@@ -389,9 +389,9 @@ const CalculusCalculator = () => {
                         const isHeader = step.startsWith('\\textbf') || step.startsWith('\\text{');
                         if (isHeader) {
                           return (
-                            <div key={i} className="pt-1 pb-0.5">
+                            <div key={i} className="pt-2 pb-1">
                               <div
-                                className="text-xs font-semibold text-muted-foreground uppercase tracking-wide"
+                                className="text-sm font-semibold text-foreground"
                                 dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
                               />
                             </div>
@@ -401,13 +401,13 @@ const CalculusCalculator = () => {
                         const num = stepNum;
                         return (
                           <div key={i} className="flex gap-3">
-                            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold mt-0.5">
+                            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold mt-1">
                               {num}
                             </div>
-                            <div className="flex-1 bg-background/70 rounded-lg p-3 border border-border/50 min-w-0">
+                            <div className="flex-1 bg-background/70 rounded-lg px-4 py-4 border border-border/50 min-w-0">
                               <div
-                                className="text-sm overflow-x-auto"
-                                dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
+                                className="text-sm"
+                                dangerouslySetInnerHTML={{ __html: renderLatex(step, true) }}
                               />
                             </div>
                           </div>
