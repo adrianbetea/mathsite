@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowDown, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useHashScroll } from "@/hooks/useHashScroll";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { calculusFundamentalsLearningTranslations } from "@/lib/translations/calculus_fundamentals_learning_translations";
@@ -27,16 +28,21 @@ const CalculusLearning = () => {
   const lesson5 = (course as any).sequences_series.lessons.lesson5;
   const lesson6 = (course as any).differential_equations.lessons.lesson1;
 
+  const { openSections, setOpenSections } = useHashScroll({
+    "lesson-limits":       "section1",
+    "lesson-derivatives":  "der-section1",
+    "lesson-applications": "app-section1",
+    "lesson-integration":  "section4-1",
+    "lesson-series":       "section5-1",
+    "lesson-differential": "section6-1",
+  });
+
   const scrollToLesson = (lessonId: string) => {
     const element = document.getElementById(lessonId);
     if (element) {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - 100;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   };
 
@@ -487,7 +493,7 @@ const CalculusLearning = () => {
             <p className="text-muted-foreground">{course.limits.description}</p>
           </div>
 
-          <Accordion type="multiple" defaultValue={["section1"]} className="space-y-4">
+          <Accordion type="multiple" value={openSections["lesson-limits"] ?? ["section1"]} onValueChange={v => setOpenSections("lesson-limits", v)} className="space-y-4">
             {/* Section 1: Introduction to Limits */}
             <AccordionItem value="section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -719,7 +725,7 @@ const CalculusLearning = () => {
             <p className="text-muted-foreground">{(course as any).derivatives.description}</p>
           </div>
 
-          <Accordion type="multiple" defaultValue={["der-section1"]} className="space-y-4">
+          <Accordion type="multiple" value={openSections["lesson-derivatives"] ?? ["der-section1"]} onValueChange={v => setOpenSections("lesson-derivatives", v)} className="space-y-4">
             {/* Section 1: The Definition of the Derivative */}
             <AccordionItem value="der-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -1059,7 +1065,7 @@ const CalculusLearning = () => {
             <p className="text-muted-foreground">{(course as any).applications_derivatives.description}</p>
           </div>
 
-          <Accordion type="multiple" defaultValue={["app-section1"]} className="space-y-4">
+          <Accordion type="multiple" value={openSections["lesson-applications"] ?? ["app-section1"]} onValueChange={v => setOpenSections("lesson-applications", v)} className="space-y-4">
             {/* Section 1: MVT & L'Hôpital's Rule */}
             <AccordionItem value="app-section1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -1573,7 +1579,7 @@ const CalculusLearning = () => {
             <h2 className="text-2xl sm:text-3xl font-bold">{(course as any).integration.lessons.lesson4_title}</h2>
           </div>
           
-          <Accordion type="multiple" defaultValue={["section4-1"]} className="space-y-4">
+          <Accordion type="multiple" value={openSections["lesson-integration"] ?? ["section4-1"]} onValueChange={v => setOpenSections("lesson-integration", v)} className="space-y-4">
             {/* Section 1: Antiderivatives */}
             <AccordionItem value="section4-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -2055,7 +2061,7 @@ const CalculusLearning = () => {
             <h2 className="text-2xl sm:text-3xl font-bold">{(course as any).sequences_series.lessons.lesson5_title}</h2>
           </div>
 
-          <Accordion type="multiple" defaultValue={["section5-1"]} className="space-y-4">
+          <Accordion type="multiple" value={openSections["lesson-series"] ?? ["section5-1"]} onValueChange={v => setOpenSections("lesson-series", v)} className="space-y-4">
             {/* Section 1: Sequences */}
             <AccordionItem value="section5-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">
@@ -2410,7 +2416,7 @@ const CalculusLearning = () => {
             <h2 className="text-2xl sm:text-3xl font-bold">{(course as any).differential_equations.lessons.lesson1_title}</h2>
           </div>
 
-          <Accordion type="multiple" className="space-y-4">
+          <Accordion type="multiple" value={openSections["lesson-differential"] ?? []} onValueChange={v => setOpenSections("lesson-differential", v)} className="space-y-4">
             {/* Section 1: Introduction & Separable Equations */}
             <AccordionItem value="section6-1" className="border rounded-lg px-6 bg-card">
               <AccordionTrigger className="hover:no-underline">

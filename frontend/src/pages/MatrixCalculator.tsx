@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
+import ContextualCourseLink from "@/components/ContextualCourseLink";
 import MatrixInput from "@/components/MatrixInput";
 import { useLanguage } from "@/contexts/LanguageContext";
 import katex from "katex";
@@ -1133,6 +1134,16 @@ const MatrixCalculator = () => {
                 </div>
               )}
               
+              {/* Contextual Course Link */}
+              {!error && activeOp && (
+                <div className="mt-4">
+                  <ContextualCourseLink
+                    calculatorType="matrix"
+                    operation={activeOp as any}
+                  />
+                </div>
+              )}
+
               {/* Show Steps Button */}
               {!error && steps && (
                 <div className="mt-4">

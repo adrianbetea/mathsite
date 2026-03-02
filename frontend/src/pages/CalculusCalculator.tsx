@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
+import ContextualCourseLink from "@/components/ContextualCourseLink";
 import MathKeyboard from "@/components/MathKeyboard";
 import { advancedDerivative, definiteIntegral, symbolicIntegral, sympySteps } from "@/lib/calculusUtils";
 import { ArrowRight } from "lucide-react";
@@ -339,6 +340,16 @@ const CalculusCalculator = () => {
               <div 
                 className="text-lg sm:text-xl"
                 dangerouslySetInnerHTML={{ __html: renderLatex(result.value, true) }}
+              />
+            </div>
+          )}
+
+          {/* Contextual Course Link */}
+          {!isComputing && result && currentOperation && (
+            <div className="mt-3">
+              <ContextualCourseLink
+                calculatorType="calculus"
+                operation={currentOperation.type}
               />
             </div>
           )}

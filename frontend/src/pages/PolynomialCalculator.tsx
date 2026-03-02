@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
+import ContextualCourseLink from "@/components/ContextualCourseLink";
 import MathKeyboard from "@/components/MathKeyboard";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -1526,6 +1527,16 @@ const PolynomialCalculator = () => {
                   <div 
                     className="text-lg sm:text-xl font-mono mb-4"
                     dangerouslySetInnerHTML={{ __html: renderLatex(result.value) }}
+                  />
+                </div>
+              )}
+
+              {/* Contextual Course Link */}
+              {!isComputing && result && currentOperation && (
+                <div className="mt-3 mb-1">
+                  <ContextualCourseLink
+                    calculatorType="polynomials"
+                    operation={currentOperation.op as any}
                   />
                 </div>
               )}
