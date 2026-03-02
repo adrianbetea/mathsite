@@ -800,11 +800,11 @@ const PolynomialCalculator = () => {
   };
 
   // Helper to render LaTeX in results
-  const renderLatex = (latex: string) => {
+  const renderLatex = (latex: string, displayMode: boolean = false) => {
     try {
       return katex.renderToString(latex, {
         throwOnError: false,
-        displayMode: false,
+        displayMode,
       });
     } catch (e) {
       return latex;
@@ -1526,7 +1526,7 @@ const PolynomialCalculator = () => {
                   </div>
                   <div 
                     className="text-lg sm:text-xl font-mono mb-4"
-                    dangerouslySetInnerHTML={{ __html: renderLatex(result.value) }}
+                    dangerouslySetInnerHTML={{ __html: renderLatex(result.value, true) }}
                   />
                 </div>
               )}
@@ -1556,7 +1556,7 @@ const PolynomialCalculator = () => {
 
                   {/* Steps Dropdown */}
                   {showSteps && (
-                    <div className="mt-4 bg-secondary/50 border border-border rounded-xl animate-slide-up">
+                    <div className="mt-4 steps-card bg-secondary/50 border border-border rounded-xl animate-slide-up">
                       <div className="px-4 py-3 border-b border-border/60">
                         <h3 className="text-sm font-semibold text-foreground">{t.polynomialCalculator.detailedSteps}</h3>
                       </div>
@@ -1576,8 +1576,8 @@ const PolynomialCalculator = () => {
                               <div className="text-xs text-muted-foreground mt-1 mb-2 leading-relaxed">{step.why}</div>
                               {step.latex && (
                                 <div
-                                  className="text-sm bg-secondary/50 rounded-md px-3 py-2 overflow-x-auto border border-border/30"
-                                  dangerouslySetInnerHTML={{ __html: renderLatex(step.latex) }}
+                                  className="text-sm bg-secondary/50 rounded-md px-3 py-2 border border-border/30"
+                                  dangerouslySetInnerHTML={{ __html: renderLatex(step.latex, true) }}
                                 />
                               )}
                             </div>

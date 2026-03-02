@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import katex from "katex";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { convertDivisionToFrac } from "@/lib/mathLatex";
 
 interface MathKeyboardProps {
   value: string;
@@ -77,7 +78,14 @@ const expressionToLatex = (expr: string): string => {
   if (!expr.trim()) return "\\text{...}";
   
   let latex = expr;
-  
+
+  // ── Step 1: Division FIRST so that e^(x/2) → e^(\frac{x}{2})
+  //    The parser sees the raw parenthesised group (x/2) as denominator context
+  //    before any ^(…)→^{…} expansion collapses the parens into curly braces.
+  latex = convertDivisionToFrac(latex);
+
+  // ── Step 2: All other transformations ────────────────────────────────────
+
   // Handle nth root: root(x,n) -> \sqrt[n]{x}
   latex = latex.replace(/root\(([^,]*),\s*([^)]*)\)/gi, '\\sqrt[$2]{$1}');
   latex = latex.replace(/root\(([^,]*),\s*\)/gi, '\\sqrt[n]{$1}');
@@ -92,14 +100,14 @@ const expressionToLatex = (expr: string): string => {
   // Handle factorial
   latex = latex.replace(/factorial\(([^)]*)\)/gi, '$1!');
   
-  // Handle exp
+  // Handle exp — convert to e^{…} BEFORE the generic ^(…) rule
   latex = latex.replace(/exp\(([^)]*)\)/gi, 'e^{$1}');
   
   // Handle log with base
   latex = latex.replace(/log\(([^,)]*),\s*(\d+)\)/gi, '\\log_{$2}($1)');
   
-  // Handle powers: ^(expr) -> ^{expr} and ^n -> ^{n}
-  latex = latex.replace(/\^\(([^)]+)\)/g, '^{$1}');
+  // Handle powers: ^(expr) -> ^{expr}  (use paren-aware helper to handle nested parens)
+  latex = expandCaretParens(latex);
   latex = latex.replace(/\^(\d+)/g, '^{$1}');
   latex = latex.replace(/\^\(\)/g, '^{}');
   
@@ -126,11 +134,38 @@ const expressionToLatex = (expr: string): string => {
   latex = latex.replace(/\bE\b/g, 'e');
   latex = latex.replace(/\boo\b/gi, '\\infty');
   
-  // Multiplication and division
+  // Multiplication
   latex = latex.replace(/\*/g, ' \\cdot ');
-  latex = latex.replace(/\//g, ' \\div ');
-  
+
   return latex;
+};
+
+/**
+ * Replaces ^(…) with ^{…} using a paren-depth walk so that nested parens
+ * (e.g. ^(\frac{x}{2})) are handled correctly — unlike a simple [^)]+ regex.
+ */
+const expandCaretParens = (s: string): string => {
+  let result = '';
+  let i = 0;
+  while (i < s.length) {
+    if (s[i] === '^' && i + 1 < s.length && s[i + 1] === '(') {
+      result += '^{';
+      i += 2; // skip ^(
+      let depth = 1;
+      while (i < s.length && depth > 0) {
+        if (s[i] === '(') depth++;
+        else if (s[i] === ')') {
+          depth--;
+          if (depth === 0) { i++; break; } // skip closing )
+        }
+        result += s[i++];
+      }
+      result += '}';
+    } else {
+      result += s[i++];
+    }
+  }
+  return result;
 };
 
 const MathKeyboard: React.FC<MathKeyboardProps> = ({ value, onChange, placeholder }) => {

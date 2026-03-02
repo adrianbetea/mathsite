@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import ContextualCourseLink from "@/components/ContextualCourseLink";
 import MathKeyboard from "@/components/MathKeyboard";
 import { advancedDerivative, definiteIntegral, symbolicIntegral, sympySteps } from "@/lib/calculusUtils";
+import { convertDivisionToFrac, fixLatexFractions } from "@/lib/mathLatex";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import katex from "katex";
@@ -27,13 +28,14 @@ const renderLatex = (latex: string, displayMode: boolean = false): string => {
 const expressionToLatex = (expr: string): string => {
   let latex = expr
     .replace(/\s+/g, '')
-    // Add implicit multiplication for display: 2x -> 2x (keep as is for display)
     .replace(/(\d)([a-zA-Z])/g, '$1$2');
-  
-  // Handle powers: ^n -> ^{n} and ^(expr) -> ^{expr}
-  latex = latex.replace(/\^\(([^)]+)\)/gi, '^{$1}');
-  latex = latex.replace(/\^(-?\d+\.?\d*)/gi, '^{$1}');
-  
+
+  // ── Step 1: Division FIRST so that e^(x/2) → e^(\frac{x}{2})
+  //    before ^(…)→^{…} collapses the outer parens into curly braces.
+  latex = convertDivisionToFrac(latex);
+
+  // ── Step 2: All other transformations ──────────────────────────────
+
   // Trig and log functions
   latex = latex.replace(/sin\(/gi, '\\sin(');
   latex = latex.replace(/cos\(/gi, '\\cos(');
@@ -49,11 +51,43 @@ const expressionToLatex = (expr: string): string => {
   // Handle root(expr, n) -> nth root
   latex = latex.replace(/root\(([^,]+),\s*2\)/gi, '\\sqrt{$1}');
   latex = latex.replace(/root\(([^,]+),\s*(\d+)\)/gi, '\\sqrt[$2]{$1}');
+
+  // Handle powers: ^(expr) -> ^{expr}  (paren-depth aware so nested parens work)
+  latex = expandCaretParens(latex);
+  latex = latex.replace(/\^(-?\d+\.?\d*)/gi, '^{$1}');
   
   // Handle multiplication
   latex = latex.replace(/\*/g, ' \\cdot ');
-  
+
   return latex;
+};
+
+/**
+ * Replaces ^(…) with ^{…} using a paren-depth walk so that nested parens
+ * (e.g. ^(\frac{x}{2})) are handled correctly — unlike a simple [^)]+ regex.
+ */
+const expandCaretParens = (s: string): string => {
+  let result = '';
+  let i = 0;
+  while (i < s.length) {
+    if (s[i] === '^' && i + 1 < s.length && s[i + 1] === '(') {
+      result += '^{';
+      i += 2; // skip ^(
+      let depth = 1;
+      while (i < s.length && depth > 0) {
+        if (s[i] === '(') depth++;
+        else if (s[i] === ')') {
+          depth--;
+          if (depth === 0) { i++; break; } // skip closing )
+        }
+        result += s[i++];
+      }
+      result += '}';
+    } else {
+      result += s[i++];
+    }
+  }
+  return result;
 };
 
 const CalculusCalculator = () => {
@@ -339,7 +373,7 @@ const CalculusCalculator = () => {
               <div className="text-sm text-muted-foreground mb-2">{result.type}</div>
               <div 
                 className="text-lg sm:text-xl"
-                dangerouslySetInnerHTML={{ __html: renderLatex(result.value, true) }}
+                dangerouslySetInnerHTML={{ __html: renderLatex(fixLatexFractions(result.value), true) }}
               />
             </div>
           )}
@@ -392,7 +426,7 @@ const CalculusCalculator = () => {
                             <div key={i} className="pt-2 pb-1">
                               <div
                                 className="text-sm font-semibold text-foreground"
-                                dangerouslySetInnerHTML={{ __html: renderLatex(step) }}
+                                dangerouslySetInnerHTML={{ __html: renderLatex(fixLatexFractions(step)) }}
                               />
                             </div>
                           );
@@ -407,7 +441,7 @@ const CalculusCalculator = () => {
                             <div className="flex-1 bg-background/70 rounded-lg px-4 py-4 border border-border/50 min-w-0">
                               <div
                                 className="text-sm"
-                                dangerouslySetInnerHTML={{ __html: renderLatex(step, true) }}
+                                dangerouslySetInnerHTML={{ __html: renderLatex(fixLatexFractions(step), true) }}
                               />
                             </div>
                           </div>
