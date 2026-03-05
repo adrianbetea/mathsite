@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Outlet, useParams, useLocation } from "re
 import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async"; // <--- 1. IMPORT THIS
 
+import { useCanonical } from "./hooks/useCanonical";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -27,12 +28,13 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Scroll to top on every route change
+// Scroll to top and update canonical tag on every route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
+  useCanonical();
   return null;
 };
 

@@ -16,6 +16,19 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       external: ["node-fetch", "fs", "fs/promises", "path", "vm"],
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+          "vendor-katex": ["katex"],
+          "vendor-ui": [
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-dropdown-menu",
+            "@radix-ui/react-tooltip",
+            "@radix-ui/react-accordion",
+            "@radix-ui/react-tabs",
+          ],
+        },
+      },
     },
   },
   resolve: {
