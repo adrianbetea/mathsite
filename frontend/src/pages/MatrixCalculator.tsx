@@ -261,6 +261,7 @@ const MatrixCalculator = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeOp, setActiveOp] = useState<string>("");
   const urlSyncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const [rowsA, setRowsA] = useState(3);
   const [colsA, setColsA] = useState(3);
@@ -417,6 +418,10 @@ const MatrixCalculator = () => {
     setIsComputing(true);
     setComputingOp(operation);
     setActiveOp(operation);
+    setTimeout(() => {
+      const el = resultRef.current;
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+    }, 50);
 
     // Immediately sync URL so the link is shareable right away
     {
@@ -999,6 +1004,9 @@ const MatrixCalculator = () => {
               </div>
             )}
           </div>
+
+          {/* Scroll anchor for result */}
+          <div ref={resultRef} />
 
           {/* Loading State */}
           {isComputing && (

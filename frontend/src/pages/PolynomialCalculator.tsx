@@ -80,6 +80,7 @@ const PolynomialCalculator = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeOp, setActiveOp] = useState<string>("");
   const urlSyncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const [polyA, setPolyA] = useState("x^2 - 5x + 6");
   const [polyB, setPolyB] = useState("x + 2");
@@ -1278,6 +1279,10 @@ const PolynomialCalculator = () => {
     setIsComputing(true);
     setComputingOp(op);
     setActiveOp(op);
+    setTimeout(() => {
+      const el = resultRef.current;
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 300, behavior: 'smooth' });
+    }, 50);
 
     // Immediately update URL so the link is shareable right away
     const urlParams: Record<string, string> = { op, p: pA };
@@ -1490,6 +1495,9 @@ const PolynomialCalculator = () => {
               </div>
 
               {/* Result */}
+              {/* Scroll anchor for result */}
+              <div ref={resultRef} />
+
               {error && <div className="result-error animate-scale-in text-sm">{error}</div>}
 
               {/* Loading State */}

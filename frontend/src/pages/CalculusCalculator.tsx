@@ -117,6 +117,7 @@ const CalculusCalculator = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const urlSyncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const [expression, setExpression] = useState("x^3 + 2x^2 - 5x + 3");
   const [result, setResult] = useState<{ type: string; value: string } | null>(null);
@@ -179,6 +180,10 @@ const CalculusCalculator = () => {
       return;
     }
     setIsComputing(true);
+    setTimeout(() => {
+      const el = resultRef.current;
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 250, behavior: 'smooth' });
+    }, 50);
     setSearchParams({ op: "derivative", expr }, { replace: true });
     try {
       const deriv = await advancedDerivative(expr);
@@ -199,6 +204,10 @@ const CalculusCalculator = () => {
       return;
     }
     setIsComputing(true);
+    setTimeout(() => {
+      const el = resultRef.current;
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 250, behavior: 'smooth' });
+    }, 50);
     setSearchParams({ op: "integral", expr }, { replace: true });
     try {
       const integ = await symbolicIntegral(expr);
@@ -227,6 +236,10 @@ const CalculusCalculator = () => {
       return;
     }
     setIsComputing(true);
+    setTimeout(() => {
+      const el = resultRef.current;
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 250, behavior: 'smooth' });
+    }, 50);
     setSearchParams({ op: "definiteIntegral", expr, a: String(lower), b: String(upper) }, { replace: true });
     try {
       const integ = await definiteIntegral(expr, lower, upper);
@@ -351,6 +364,9 @@ const CalculusCalculator = () => {
               ))}
             </div>
           </div>
+
+          {/* Scroll anchor for result */}
+          <div ref={resultRef} />
 
           {/* Loading State */}
           {isComputing && (
