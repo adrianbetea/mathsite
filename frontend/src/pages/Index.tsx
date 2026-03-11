@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Calculator, FunctionSquare, Grid3X3, ArrowRight, BookOpen } from "lucide-react";
+import { Calculator, FunctionSquare, Grid3X3, ArrowRight, BookOpen, ClipboardList } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import DailyChallenge from "@/components/DailyChallenge";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -38,6 +38,13 @@ const Index = () => {
       to: `/${languageCode}/learning`,
       color: "from-orange-500/10 to-orange-500/5",
     },
+    {
+      title: "Practice Problems",
+      description: "Sharpen your skills with step-by-step exercises across all topics",
+      icon: ClipboardList,
+      to: `/${languageCode}/problems`,
+      color: "from-purple-500/10 to-purple-500/5",
+    },
   ];
 
   return (
@@ -58,29 +65,56 @@ const Index = () => {
           <DailyChallenge />
         </div>
 
-        {/* Calculator Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
-          {calculators.map((calc, index) => {
-            const Icon = calc.icon;
-            return (
-              <Link
-                key={calc.to}
-                to={calc.to}
-                className="calculator-card group animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${calc.color} flex items-center justify-center mb-3 sm:mb-4`}>
-                  <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
-                </div>
-                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">{calc.title}</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">{calc.description}</p>
-                <div className="flex items-center text-xs sm:text-sm font-medium text-primary group-hover:gap-2 transition-all">
-                  <span>Open Calculator</span>
-                  <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            );
-          })}
+        {/* Calculator Cards — 3 on first row, 2 centred on second row (desktop) */}
+        <div className="max-w-6xl mx-auto">
+          {/* First row: 3 cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
+            {calculators.slice(0, 3).map((calc, index) => {
+              const Icon = calc.icon;
+              return (
+                <Link
+                  key={calc.to}
+                  to={calc.to}
+                  className="calculator-card group animate-slide-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${calc.color} flex items-center justify-center mb-3 sm:mb-4`}>
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
+                  </div>
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">{calc.title}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">{calc.description}</p>
+                  <div className="flex items-center text-xs sm:text-sm font-medium text-primary group-hover:gap-2 transition-all">
+                    <span>Open Calculator</span>
+                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+          {/* Second row: 2 cards centred */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:w-2/3 mx-auto">
+            {calculators.slice(3).map((calc, index) => {
+              const Icon = calc.icon;
+              return (
+                <Link
+                  key={calc.to}
+                  to={calc.to}
+                  className="calculator-card group animate-slide-up"
+                  style={{ animationDelay: `${(index + 3) * 100}ms` }}
+                >
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${calc.color} flex items-center justify-center mb-3 sm:mb-4`}>
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
+                  </div>
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">{calc.title}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">{calc.description}</p>
+                  <div className="flex items-center text-xs sm:text-sm font-medium text-primary group-hover:gap-2 transition-all">
+                    <span>Open Calculator</span>
+                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
 
         <IndexDescriptionSection />

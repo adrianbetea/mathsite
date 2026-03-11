@@ -737,4 +737,77 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/about"/>
   </url>
 
+  <url>
+    <loc>https://mathhub.me/en-us/problems</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/problems"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/problems"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/problems"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/problems"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/problems"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/problems"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/problems"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/ro/problems</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/problems"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/problems"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/problems"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/problems"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/problems"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/problems"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/problems"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/de/problems</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/problems"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/problems"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/problems"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/problems"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/problems"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/problems"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/problems"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/pl/problems</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/problems"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/problems"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/problems"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/problems"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/problems"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/problems"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/problems"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/fr/problems</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/problems"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/problems"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/problems"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/problems"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/problems"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/problems"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/problems"/>
+  </url>
+  <url>
+    <loc>https://mathhub.me/es/problems</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mathhub.me/en-us/problems"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://mathhub.me/ro/problems"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mathhub.me/de/problems"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://mathhub.me/pl/problems"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://mathhub.me/fr/problems"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mathhub.me/es/problems"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mathhub.me/en-us/problems"/>
+  </url>
+
 </urlset>

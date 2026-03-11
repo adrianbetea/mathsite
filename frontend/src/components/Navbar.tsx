@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Calculator, FunctionSquare, Grid3X3, Home, Globe, ChevronDown, Menu, X, Sun, Moon, BookOpen } from "lucide-react";
+import { Calculator, FunctionSquare, Grid3X3, Home, Globe, ChevronDown, Menu, X, Sun, Moon, BookOpen, PenLine } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useTheme } from "../contexts/ThemeContext";
 
@@ -43,6 +43,7 @@ const Navbar = () => {
     { to: `/${languageCode}/calculus`, label: t.nav.calculus, icon: FunctionSquare },
     { to: `/${languageCode}/polynomials`, label: t.nav.polynomials, icon: Calculator },
     { to: `/${languageCode}/learning`, label: t.nav.learning, icon: BookOpen },
+    { to: `/${languageCode}/problems`, label: t.nav.problems, icon: PenLine },
   ];
 
   const currentLanguage = languages.find((l) => l.code === language) || languages[0];

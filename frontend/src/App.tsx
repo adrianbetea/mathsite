@@ -25,6 +25,8 @@ import PolynomialsLearning from "./pages/PolynomialsLearning";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AboutUs from "./pages/AboutUs";
 import NotFound from "./pages/NotFound";
+import ProblemsIndex from "./pages/ProblemsIndex";
+import ProblemDetail from "./pages/ProblemDetail";
 
 const queryClient = new QueryClient();
 
@@ -82,6 +84,8 @@ const App = () => (
                   <Route path="learning/linear-algebra" element={<LinearAlgebraLearning />} />
                   <Route path="learning/calculus" element={<CalculusLearning />} />
                   <Route path="learning/polynomials" element={<PolynomialsLearning />} />
+                  <Route path="problems" element={<ProblemsIndex />} />
+                  <Route path="problems/:slug" element={<ProblemDetail />} />
                   <Route path="privacy" element={<PrivacyPolicy />} />
                   <Route path="about" element={<AboutUs />} />
                   
