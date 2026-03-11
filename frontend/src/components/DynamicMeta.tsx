@@ -46,6 +46,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/about': {
       title: "About Us - Our Mission for Free Math Education | MathHub",
       description: "MathHub is a free, indie-built math platform providing step-by-step solutions for matrices, calculus, and polynomials. Learn about our mission to keep math education accessible."
+    },
+    '/problems': {
+      title: "Math Practice Problems & Step-by-Step Exercises | MathHub",
+      description: "Practice math with free interactive exercises on matrices, derivatives, integrals, and polynomials. Get step-by-step hints and solutions to master linear algebra and calculus."
     }
   },
   
@@ -89,6 +93,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/about': {
       title: "Sobre Nosotros - Nuestra Misión por la Educación Matemática Gratuita | MathHub",
       description: "MathHub es una plataforma matemática gratuita creada por un desarrollador independiente con soluciones paso a paso para matrices, cálculo y polinomios. Conoce nuestra misión."
+    },
+    '/problems': {
+      title: "Problemas de Matemáticas y Ejercicios Paso a Paso | MathHub",
+      description: "Practica matemáticas con ejercicios interactivos gratuitos sobre matrices, derivadas, integrales y polinomios. Obtén pistas y soluciones detalladas para dominar el álgebra lineal y el cálculo."
     }
   },
 
@@ -132,6 +140,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/about': {
       title: "Despre Noi - Misiunea Noastră pentru Educația Matematică Gratuită | MathHub",
       description: "MathHub este o platformă matematică gratuită creată de un dezvoltator independent cu soluții pas cu pas pentru matrici, analiză și polinoame. Află despre misiunea noastră."
+    },
+    '/problems': {
+      title: "Probleme de Matematică și Exerciții Pas cu Pas | MathHub",
+      description: "Exersează matematica cu exerciții interactive gratuite despre matrice, derivate, integrale și polinoame. Obține indicii și soluții detaliate pas cu pas pentru a stăpâni algebra liniară și analiza matematică."
     }
   },
 
@@ -175,6 +187,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/about': {
       title: "Über Uns - Unsere Mission für Kostenlose Mathematik-Bildung | MathHub",
       description: "MathHub ist eine kostenlose, unabhängig entwickelte Mathe-Plattform mit Schritt-für-Schritt-Lösungen für Matrizen, Analysis und Polynome. Erfahren Sie mehr über unsere Mission."
+    },
+    '/problems': {
+      title: "Mathe-Übungsaufgaben & Schritt-für-Schritt-Übungen | MathHub",
+      description: "Üben Sie Mathematik mit kostenlosen interaktiven Aufgaben zu Matrizen, Ableitungen, Integralen und Polynomen. Erhalten Sie schrittweise Hinweise und Lösungen zur Beherrschung der linearen Algebra und Analysis."
     }
   },
 
@@ -218,6 +234,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/about': {
       title: "À Propos - Notre Mission pour l'Éducation Mathématique Gratuite | MathHub",
       description: "MathHub est une plateforme mathématique gratuite créée par un développeur indépendant avec des solutions étape par étape pour matrices, calcul et polynômes. Découvrez notre mission."
+    },
+    '/problems': {
+      title: "Problèmes de Maths et Exercices Étape par Étape | MathHub",
+      description: "Entraînez-vous aux mathématiques avec des exercices interactifs gratuits sur les matrices, les dérivées, les intégrales et les polyômes. Obtenez des indices et des solutions détaillées pour maîtriser l'algèbre linéaire et le calcul."
     }
   },
 
@@ -261,6 +281,10 @@ const LOCALIZED_METADATA: Record<string, Record<string, { title: string; descrip
     '/about': {
       title: "O Nas - Nasza Misja na Rzecz Darmowej Edukacji Matematycznej | MathHub",
       description: "MathHub to darmowa platforma matematyczna stworzona przez niezależnego programistę z rozwiązaniami krok po kroku dla macierzy, analizy i wielomianów. Poznaj naszą misję."
+    },
+    '/problems': {
+      title: "Zadania Matematyczne i Ćwiczenia Krok po Kroku | MathHub",
+      description: "Ćwicz matematykę z darmowymi interaktywnymi zadaniami z macierzy, pochodnych, całek i wielomianów. Uzyskaj wskazówki i szczegółowe rozwiązania krok po kroku, aby opanować algebrę liniową i analizę matematyczną."
     }
   }
 };

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { DynamicMeta } from "@/components/DynamicMeta";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { problemsTranslations } from "@/lib/translations/translations_problems";
 import { problemsByCategory, ProblemCategory } from "@/lib/problemsDatabase";
@@ -18,6 +19,7 @@ const ProblemsIndex = () => {
 
   return (
     <div className="min-h-screen relative">
+      <DynamicMeta />
       <Navbar />
 
       <main className="container mx-auto px-3 sm:px-4 pt-6 sm:pt-8 pb-12">
