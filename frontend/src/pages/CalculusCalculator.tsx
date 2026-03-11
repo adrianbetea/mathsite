@@ -454,9 +454,9 @@ const CalculusCalculator = () => {
                             <div className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold mt-1">
                               {num}
                             </div>
-                            <div className="flex-1 bg-background/70 rounded-lg px-4 py-4 border border-border/50 min-w-0">
+                            <div className="flex-1 bg-background/70 rounded-lg px-4 py-4 border border-border/50 min-w-0 overflow-x-auto">
                               <div
-                                className="text-sm"
+                                className="text-sm min-w-0"
                                 dangerouslySetInnerHTML={{ __html: renderLatex(fixLatexFractions(step), true) }}
                               />
                             </div>

@@ -1579,12 +1579,12 @@ const PolynomialCalculator = () => {
                             <div className="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold mt-0.5">
                               {i + 1}
                             </div>
-                            <div className="flex-1 bg-background/70 rounded-lg p-3 border border-border/50 min-w-0">
+                            <div className="flex-1 bg-background/70 rounded-lg p-3 border border-border/50 min-w-0 overflow-x-auto">
                               <div className="font-semibold text-sm text-foreground leading-tight">{step.title}</div>
                               <div className="text-xs text-muted-foreground mt-1 mb-2 leading-relaxed">{step.why}</div>
                               {step.latex && (
                                 <div
-                                  className="text-sm bg-secondary/50 rounded-md px-3 py-2 border border-border/30"
+                                  className="text-sm bg-secondary/50 rounded-md px-3 py-2 border border-border/30 overflow-x-auto"
                                   dangerouslySetInnerHTML={{ __html: renderLatex(step.latex, true) }}
                                 />
                               )}
